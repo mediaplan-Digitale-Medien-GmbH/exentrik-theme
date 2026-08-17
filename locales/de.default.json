@@ -1,0 +1,126 @@
+{
+  "accessibility": {
+    "skip_to_content": "Direkt zum Inhalt",
+    "refresh_page": "Bei Auswahl einer Option wird die gesamte Seite aktualisiert.",
+    "close": "Schließen",
+    "menu": "Menü",
+    "cart": "Warenkorb",
+    "search": "Suche",
+    "previous": "Zurück",
+    "next": "Weiter",
+    "loading": "Wird geladen"
+  },
+  "general": {
+    "meta": {
+      "tags": "Schlagworte: {{ tags }}",
+      "page": "Seite {{ page }}"
+    },
+    "search": {
+      "search": "Suchen",
+      "placeholder": "Wonach suchen Sie?",
+      "results_with_count": "{{ count }} Ergebnis",
+      "results_with_count_plural": "{{ count }} Ergebnisse",
+      "no_results": "Keine Ergebnisse für \"{{ terms }}\". Bitte versuchen Sie einen anderen Suchbegriff.",
+      "results_for": "Ergebnisse für \"{{ terms }}\""
+    },
+    "pagination": {
+      "label": "Seitennummerierung",
+      "previous": "Vorherige Seite",
+      "next": "Nächste Seite"
+    },
+    "newsletter": {
+      "success": "Vielen Dank für Ihre Anmeldung.",
+      "email": "E-Mail-Adresse",
+      "submit": "Abonnieren"
+    },
+    "social": {
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "youtube": "YouTube",
+      "tiktok": "TikTok"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "In den Warenkorb",
+      "sold_out": "Ausverkauft",
+      "unavailable": "Nicht verfügbar",
+      "on_sale": "Reduziert",
+      "from_price": "ab {{ price }}",
+      "regular_price": "Normalpreis",
+      "sale_price": "Angebotspreis",
+      "quantity": "Menge",
+      "vendor": "Marke",
+      "sku": "Artikelnummer",
+      "description": "Produktbeschreibung",
+      "specifications": "Technische Daten",
+      "choose_options": "Optionen wählen",
+      "view_details": "Details ansehen",
+      "save_amount": "Sie sparen {{ amount }}",
+      "incl_tax": "inkl. MwSt.",
+      "plus_shipping": "zzgl. Versand",
+      "in_stock": "Auf Lager",
+      "low_stock": "Nur noch wenige verfügbar",
+      "out_of_stock": "Derzeit nicht verfügbar",
+      "quick_add": "Schnellkauf",
+      "media_gallery": "Produktgalerie"
+    },
+    "facets": {
+      "filter_and_sort": "Filtern und sortieren",
+      "filter_by_label": "Filtern",
+      "sort_by_label": "Sortieren nach",
+      "clear": "Zurücksetzen",
+      "clear_all": "Alle entfernen",
+      "apply": "Anwenden",
+      "from": "von",
+      "to": "bis",
+      "max_price": "Höchstpreis: {{ price }}",
+      "filter_and_operator_subtitle": "Zeigt nur Produkte, auf die alle gewählten Werte zutreffen.",
+      "product_count": "{{ product_count }} von {{ count }} Produkten",
+      "product_count_simple": "{{ count }} Produkte"
+    }
+  },
+  "cart": {
+    "title": "Warenkorb",
+    "empty": "Ihr Warenkorb ist leer.",
+    "continue_shopping": "Weiter einkaufen",
+    "subtotal": "Zwischensumme",
+    "checkout": "Zur Kasse",
+    "remove": "Entfernen",
+    "product": "Produkt",
+    "quantity": "Menge",
+    "total": "Gesamt",
+    "taxes_included": "inkl. MwSt., zzgl. Versand",
+    "note": "Anmerkung zur Bestellung",
+    "update": "Aktualisieren"
+  },
+  "sections": {
+    "header": {
+      "announcement": "Ankündigung",
+      "account": "Konto",
+      "login": "Anmelden"
+    },
+    "footer": {
+      "newsletter_title": "Newsletter",
+      "copyright": "Alle Rechte vorbehalten."
+    }
+  },
+  "customer": {
+    "account": "Konto",
+    "log_in": "Anmelden",
+    "log_out": "Abmelden",
+    "register": "Registrieren"
+  },
+  "blogs": {
+    "article": {
+      "read_more": "Weiterlesen",
+      "posted_in": "Kategorie",
+      "back_to_blog": "Zurück zur Übersicht"
+    }
+  },
+  "404": {
+    "title": "Seite nicht gefunden",
+    "subtext": "Die von Ihnen gesuchte Seite existiert leider nicht.",
+    "link": "Zurück zur Startseite"
+  }
+}

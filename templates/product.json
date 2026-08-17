@@ -1,0 +1,125 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "sku": {
+          "type": "sku",
+          "settings": {}
+        },
+        "trust": {
+          "type": "trust",
+          "settings": {
+            "line_1": "Kauf auf Rechnung möglich",
+            "line_2": "Versandkostenfrei ab 50 Euro",
+            "line_3": "3 Prozent Rabatt bei Vorkasse",
+            "line_4": "Persönliche Beratung per Telefon"
+          }
+        },
+        "shipping": {
+          "type": "collapsible",
+          "settings": {
+            "title": "Versand und Lieferung",
+            "content": "<p>Lieferung innerhalb von 2 bis 3 Tagen mit DHL. Ab einem Bestellwert von 50 Euro liefern wir versandkostenfrei innerhalb Deutschlands.</p>"
+          }
+        },
+        "payment": {
+          "type": "collapsible",
+          "settings": {
+            "title": "Zahlungsarten",
+            "content": "<p>Sie zahlen bequem per Rechnung, PayPal, Kreditkarte, Lastschrift oder Vorkasse. Bei Vorkasse erhalten Sie 3 Prozent Rabatt.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "sku",
+        "trust",
+        "shipping",
+        "payment"
+      ],
+      "settings": {
+        "show_vendor": false,
+        "show_dynamic_checkout": true
+      }
+    },
+    "produktdetails": {
+      "type": "product-details",
+      "blocks": {
+        "mf_brenndauer": {
+          "type": "variant_metafield",
+          "settings": {
+            "label": "Brenndauer",
+            "namespace": "custom",
+            "key": "brenndauer"
+          }
+        },
+        "mf_koernung": {
+          "type": "variant_metafield",
+          "settings": {
+            "label": "Körnung",
+            "namespace": "custom",
+            "key": "koernung"
+          }
+        },
+        "mf_asche": {
+          "type": "variant_metafield",
+          "settings": {
+            "label": "Aschegehalt",
+            "namespace": "custom",
+            "key": "aschegehalt"
+          }
+        },
+        "mf_herkunft": {
+          "type": "variant_metafield",
+          "settings": {
+            "label": "Herkunft",
+            "namespace": "custom",
+            "key": "herkunft"
+          }
+        },
+        "mf_rohstoff": {
+          "type": "variant_metafield",
+          "settings": {
+            "label": "Rohstoff",
+            "namespace": "custom",
+            "key": "rohstoff"
+          }
+        }
+      },
+      "block_order": [
+        "mf_brenndauer",
+        "mf_koernung",
+        "mf_asche",
+        "mf_herkunft",
+        "mf_rohstoff"
+      ],
+      "settings": {
+        "product_metafields_title": "Technische Daten"
+      }
+    },
+    "zubehoer": {
+      "type": "product-recommendations",
+      "settings": {
+        "eyebrow": "Dazu passend",
+        "heading": "Passend dazu",
+        "intent": "complementary",
+        "products_to_show": 4,
+        "columns": 4
+      }
+    },
+    "aehnliche": {
+      "type": "related-products",
+      "settings": {
+        "heading": "Weitere Produkte aus dem Sortiment",
+        "products_to_show": 4,
+        "columns": 4
+      }
+    }
+  },
+  "order": [
+    "main",
+    "produktdetails",
+    "zubehoer",
+    "aehnliche"
+  ]
+}

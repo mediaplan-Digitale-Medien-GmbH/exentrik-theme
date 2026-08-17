@@ -1,0 +1,13 @@
+{%- comment -%}
+  Renders the base price per unit (Grundpreis), required for goods sold by weight or volume.
+  Accepts:
+  - variant: {Object} variant with unit_price_measurement
+{%- endcomment -%}
+{%- if variant.unit_price_measurement -%}
+  {{- variant.unit_price | money -}}
+  {{- ' / ' -}}
+  {%- unless variant.unit_price_measurement.reference_value == 1 -%}
+    {{- variant.unit_price_measurement.reference_value }}&nbsp;
+  {%- endunless -%}
+  {{- variant.unit_price_measurement.reference_unit -}}
+{%- endif -%}

@@ -1,0 +1,99 @@
+{%- liquid
+  assign sort_by = search.sort_by | default: search.default_sort_by
+  assign show_facets = false
+  if section.settings.show_filters and search.filters.size > 0
+    assign show_facets = true
+  endif
+  assign search_types = search.types | join: ','
+  capture search_url
+    echo routes.search_url
+    echo '?q='
+    echo search.terms | url_encode
+    echo '&amp;options[prefix]=last'
+    if search_types != blank
+      echo '&amp;type='
+      echo search_types
+    endif
+  endcapture
+  capture count_text
+    echo 'general.search.results_with_count' | t: count: search.results_count
+  endcapture
+-%}
+
+<div class="page-width section" data-facets-section="{{ section.id }}">
+  <header class="section-header" reveal>
+    <h1>{{ 'general.search.search' | t }}</h1>
+    <form action="{{ routes.search_url }}" method="get" role="search" class="search-modal__form" style="max-width:560px;">
+      <input type="hidden" name="options[prefix]" value="last">
+      {%- if search_types != blank -%}
+        <input type="hidden" name="type" value="{{ search_types }}">
+      {%- endif -%}
+      <span aria-hidden="true">{% render 'icon', name: 'search' %}</span>
+      <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.search' | t }}">
+      <button type="submit" class="btn btn--primary">{{ 'general.search.search' | t }}</button>
+    </form>
+  </header>
+
+  {%- if search.performed -%}
+    {%- if search.results_count > 0 or search.filters.size > 0 -%}
+      <p class="text-muted" style="margin-bottom:1.5rem;">{{ 'general.search.results_for' | t: terms: search.terms }}</p>
+
+      <div class="collection-layout{% if show_facets %} collection-layout--with-filters{% endif %}">
+        {%- if section.settings.show_filters -%}
+          {% render 'facets', results: search, results_url: search_url, terms: search.terms, types: search_types, sort_by: sort_by %}
+        {%- endif -%}
+
+        <div data-facets-results>
+          {% render 'facets-toolbar', results: search, count: search.results_count, count_text: count_text, terms: search.terms, types: search_types, sort_by: sort_by %}
+
+          {%- if search.results_count > 0 -%}
+            {%- paginate search.results by section.settings.results_per_page -%}
+              <div class="grid grid--{{ section.settings.columns }} grid--1-mobile">
+                {%- for item in search.results -%}
+                  {%- if item.object_type == 'product' -%}
+                    {% render 'product-card', product: item %}
+                  {%- else -%}
+                    <a href="{{ item.url }}" class="card" style="padding:1.25rem;">
+                      <h3 class="h4">{{ item.title }}</h3>
+                      <p class="text-muted" style="font-size:0.9rem;">{{ item.content | strip_html | truncate: 120 }}</p>
+                    </a>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+
+              {%- if paginate.pages > 1 -%}
+                <nav class="pagination" aria-label="{{ 'general.pagination.label' | t }}">
+                  {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}" data-facets-link aria-label="{{ 'general.pagination.previous' | t }}">{% render 'icon', name: 'chevron-down' %}</a>{%- endif -%}
+                  {%- for part in paginate.parts -%}
+                    {%- if part.is_link -%}
+                      <a href="{{ part.url }}" data-facets-link>{{ part.title }}</a>
+                    {%- else -%}
+                      <span class="{% if part.title == paginate.current_page %}is-current{% endif %}">{{ part.title }}</span>
+                    {%- endif -%}
+                  {%- endfor -%}
+                  {%- if paginate.next -%}<a href="{{ paginate.next.url }}" data-facets-link aria-label="{{ 'general.pagination.next' | t }}">{% render 'icon', name: 'chevron-right' %}</a>{%- endif -%}
+                </nav>
+              {%- endif -%}
+            {%- endpaginate -%}
+          {%- else -%}
+            <p class="text-muted" style="padding:2rem 0;">{{ 'general.search.no_results' | t: terms: search.terms }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- else -%}
+      <p class="text-muted" style="padding:2rem 0;">{{ 'general.search.no_results' | t: terms: search.terms }}</p>
+    {%- endif -%}
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Suche",
+  "tag": "section",
+  "settings": [
+    { "type": "checkbox", "id": "show_filters", "label": "Filter anzeigen", "default": true, "info": "Filter kommen aus der kostenlosen Shopify App Search & Discovery. Sobald Filter angewendet werden, zeigt die Suche nur noch Produkte." },
+    { "type": "range", "id": "columns", "min": 2, "max": 4, "step": 1, "label": "Spalten", "default": 4 },
+    { "type": "range", "id": "results_per_page", "min": 8, "max": 48, "step": 4, "label": "Ergebnisse pro Seite", "default": 24 }
+  ]
+}
+{% endschema %}

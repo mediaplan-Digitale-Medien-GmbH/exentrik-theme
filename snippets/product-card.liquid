@@ -1,0 +1,84 @@
+{%- comment -%}
+  Renders a product card.
+  Accepts:
+  - product: {Object} product
+  - ratio: {String} image ratio override
+{%- endcomment -%}
+{%- liquid
+  assign ratio_setting = ratio | default: settings.card_image_ratio
+  case ratio_setting
+    when 'portrait'
+      assign ratio_class = 'ratio-portrait'
+    when 'natural'
+      assign ratio_class = ''
+    else
+      assign ratio_class = 'ratio-square'
+  endcase
+  assign second_image = product.images[1]
+  assign on_sale = false
+  if product.compare_at_price > product.price
+    assign on_sale = true
+  endif
+-%}
+<div class="product-card">
+  <a href="{{ product.url }}" class="product-card__media {{ ratio_class }}" aria-label="{{ product.title | escape }}">
+    <div class="product-card__badges">
+      {%- if on_sale -%}
+        {%- assign saved = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
+        <span class="badge badge--sale">-{{ saved }}%</span>
+      {%- endif -%}
+      {%- unless product.available -%}
+        <span class="badge badge--soldout">{{ 'products.product.sold_out' | t }}</span>
+      {%- endunless -%}
+    </div>
+
+    {%- if product.featured_media -%}
+      <img
+        class="product-card__img product-card__img--main"
+        src="{{ product.featured_media | image_url: width: 600 }}"
+        srcset="{{ product.featured_media | image_url: width: 400 }} 400w, {{ product.featured_media | image_url: width: 600 }} 600w, {{ product.featured_media | image_url: width: 800 }} 800w"
+        sizes="(max-width: 749px) 45vw, 300px"
+        alt="{{ product.featured_media.alt | escape | default: product.title | escape }}"
+        width="{{ product.featured_media.width }}"
+        height="{{ product.featured_media.height }}"
+        loading="lazy">
+      {%- if settings.card_show_second_image and second_image -%}
+        <img
+          class="product-card__img product-card__img--hover"
+          src="{{ second_image | image_url: width: 600 }}"
+          alt=""
+          loading="lazy"
+          aria-hidden="true">
+      {%- endif -%}
+    {%- else -%}
+      {{ 'product-1' | placeholder_svg_tag: 'product-card__img product-card__img--main' }}
+    {%- endif -%}
+
+    {%- if settings.card_show_quick_add and product.available -%}
+      <div class="product-card__quick js-only">
+        {%- if product.variants.size == 1 -%}
+          <form method="post" action="/cart/add" data-ajax-cart>
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            <button type="submit" class="btn btn--primary btn--full">
+              <span data-btn-text>{{ 'products.product.add_to_cart' | t }}</span>
+            </button>
+          </form>
+        {%- else -%}
+          <span class="btn btn--primary btn--full">{{ 'products.product.choose_options' | t }}</span>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </a>
+
+  <div class="product-card__body">
+    {%- if settings.card_show_vendor and product.vendor != blank -%}
+      <span class="product-card__vendor">{{ product.vendor }}</span>
+    {%- endif -%}
+    <h3 class="product-card__title">
+      <a href="{{ product.url }}">{{ product.title }}</a>
+    </h3>
+    <div class="product-card__price">
+      {% render 'price', product: product, show_from: true %}
+    </div>
+  </div>
+</div>

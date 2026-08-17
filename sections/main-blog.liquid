@@ -1,0 +1,34 @@
+<div class="page-width section">
+  <header class="section-header" reveal>
+    <h1>{{ blog.title }}</h1>
+  </header>
+  <div class="grid grid--3 grid--1-mobile">
+    {%- for article in blog.articles -%}
+      <a href="{{ article.url }}" class="card" reveal>
+        {%- if article.image -%}
+          <div class="media ratio-landscape"><img src="{{ article.image | image_url: width: 800 }}" alt="{{ article.title | escape }}" loading="lazy"></div>
+        {%- endif -%}
+        <div style="padding:1.25rem;">
+          <div class="text-muted" style="font-size:0.8rem;">{{ article.published_at | date: '%d.%m.%Y' }}</div>
+          <h2 class="h4" style="margin:0.4rem 0;">{{ article.title }}</h2>
+          <p class="text-muted" style="font-size:0.92rem;">{{ article.excerpt_or_content | strip_html | truncate: 120 }}</p>
+          <span style="color:var(--color-accent);font-weight:600;font-size:0.9rem;">{{ 'blogs.article.read_more' | t }}</span>
+        </div>
+      </a>
+    {%- endfor -%}
+  </div>
+
+  {%- paginate blog.articles by 9 -%}
+    {%- if paginate.pages > 1 -%}
+      <nav class="pagination">
+        {%- for part in paginate.parts -%}
+          {%- if part.is_link -%}<a href="{{ part.url }}">{{ part.title }}</a>{%- else -%}<span class="{% if part.title == paginate.current_page %}is-current{% endif %}">{{ part.title }}</span>{%- endif -%}
+        {%- endfor -%}
+      </nav>
+    {%- endif -%}
+  {%- endpaginate -%}
+</div>
+
+{% schema %}
+{ "name": "Blog", "tag": "section", "settings": [] }
+{% endschema %}

@@ -1,0 +1,26 @@
+<div class="page-width page-width--narrow section" style="max-width:460px;">
+  <h1 style="text-align:center;">{{ 'customer.register' | t }}</h1>
+  {%- form 'create_customer' -%}
+    {{ form.errors | default_errors }}
+    <div class="product-form__option">
+      <label class="product-form__label" for="first">Vorname</label>
+      <input class="select" style="width:100%;" type="text" name="customer[first_name]" id="first" autocomplete="given-name">
+    </div>
+    <div class="product-form__option">
+      <label class="product-form__label" for="last">Nachname</label>
+      <input class="select" style="width:100%;" type="text" name="customer[last_name]" id="last" autocomplete="family-name">
+    </div>
+    <div class="product-form__option">
+      <label class="product-form__label" for="reg_email">{{ 'general.newsletter.email' | t }}</label>
+      <input class="select" style="width:100%;" type="email" name="customer[email]" id="reg_email" autocomplete="email" required>
+    </div>
+    <div class="product-form__option">
+      <label class="product-form__label" for="reg_pw">Passwort</label>
+      <input class="select" style="width:100%;" type="password" name="customer[password]" id="reg_pw" autocomplete="new-password" required>
+    </div>
+    <button type="submit" class="btn btn--primary btn--full btn--large">{{ 'customer.register' | t }}</button>
+  {%- endform -%}
+  <p style="text-align:center;margin-top:1.5rem;" class="text-muted">
+    Bereits registriert? <a href="{{ routes.account_login_url }}" style="color:var(--color-accent);font-weight:600;">{{ 'customer.log_in' | t }}</a>
+  </p>
+</div>

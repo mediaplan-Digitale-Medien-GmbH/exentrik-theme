@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "contact-form",
+      "settings": {
+        "heading": "Kontakt",
+        "text": "Sie haben Fragen zu einem Produkt? Wir beraten Sie gerne persönlich."
+      }
+    }
+  },
+  "order": ["main"]
+}

@@ -1,0 +1,159 @@
+<script>
+  window.THEME = window.THEME || {};
+  window.THEME.currency = {{ cart.currency.iso_code | json }};
+  window.THEME.strings = {
+    addToCart: {{ 'products.product.add_to_cart' | t | json }},
+    soldOut: {{ 'products.product.sold_out' | t | json }},
+    unavailable: {{ 'products.product.unavailable' | t | json }},
+    inStock: {{ 'products.product.in_stock' | t | json }},
+    outOfStock: {{ 'products.product.out_of_stock' | t | json }},
+    added: "Hinzugefügt"
+  };
+</script>
+
+<header class="site-header" id="site-header" role="banner">
+  <div class="page-width">
+    <div class="site-header__inner">
+      <button class="site-header__burger" type="button" data-open-menu aria-label="{{ 'accessibility.menu' | t }}" aria-controls="MobileDrawer">
+        {% render 'icon', name: 'menu' %}
+      </button>
+
+      <a href="{{ routes.root_url }}" class="brand" aria-label="{{ shop.name | escape }}">
+        {%- if settings.logo != blank -%}
+          <img
+            class="brand__logo"
+            src="{{ settings.logo | image_url: width: 440 }}"
+            alt="{{ shop.name | escape }}"
+            width="{{ settings.logo.width }}"
+            height="{{ settings.logo.height }}"
+            loading="eager">
+        {%- else -%}
+          <span class="brand__text">{{ shop.name }}</span>
+        {%- endif -%}
+      </a>
+
+      {%- if section.settings.menu != blank -%}
+        <nav class="site-header__nav" aria-label="{{ 'accessibility.menu' | t }}">
+          <ul class="site-header__menu">
+            {%- for link in section.settings.menu.links -%}
+              <li{% if link.links != blank %} class="has-submenu"{% endif %}>
+                <a href="{{ link.url }}" {% if link.active %}aria-current="page"{% endif %}>
+                  {{ link.title }}
+                  {%- if link.links != blank %}{% render 'icon', name: 'chevron-down' %}{% endif -%}
+                </a>
+                {%- if link.links != blank -%}
+                  <ul class="site-header__submenu">
+                    {%- for child in link.links -%}
+                      <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+                    {%- endfor -%}
+                  </ul>
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+          </ul>
+        </nav>
+      {%- endif -%}
+
+      <div class="site-header__actions">
+        {%- if section.settings.cta_label != blank and section.settings.cta_link != blank -%}
+          <a href="{{ section.settings.cta_link }}" class="btn btn--primary site-header__cta">{{ section.settings.cta_label }}</a>
+        {%- endif -%}
+
+        <button class="header__action" type="button" data-open-search aria-label="{{ 'accessibility.search' | t }}" aria-controls="SearchModal">
+          {% render 'icon', name: 'search' %}
+        </button>
+        <a href="{{ routes.account_url }}" class="header__action" aria-label="{{ 'customer.account' | t }}">
+          {% render 'icon', name: 'user' %}
+        </a>
+        <button class="cart-btn" type="button" data-open-cart aria-label="{{ 'accessibility.cart' | t }}">
+          {% render 'icon', name: 'cart' %}
+          <span class="cart-btn__count" data-cart-count {% if cart.item_count == 0 %}hidden{% endif %}>{{ cart.item_count }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="MobileDrawer" aria-hidden="true">
+  <div class="drawer__overlay" data-close></div>
+  <div class="drawer__panel" role="dialog" aria-modal="true" aria-label="{{ 'accessibility.menu' | t }}">
+    <div class="drawer__header">
+      <a href="{{ routes.root_url }}" class="brand">
+        {%- if settings.logo != blank -%}
+          <img class="brand__logo" src="{{ settings.logo | image_url: width: 320 }}" alt="{{ shop.name | escape }}" width="{{ settings.logo.width }}" height="{{ settings.logo.height }}">
+        {%- else -%}
+          {{ shop.name }}
+        {%- endif -%}
+      </a>
+      <button class="header__action" type="button" data-close aria-label="{{ 'accessibility.close' | t }}">{% render 'icon', name: 'close' %}</button>
+    </div>
+
+    {%- if section.settings.menu != blank -%}
+      <nav class="drawer__nav">
+        <ul>
+          {%- for link in section.settings.menu.links -%}
+            <li>
+              {%- if link.links != blank -%}
+                <a href="{{ link.url }}">
+                  {{ link.title }}
+                  <button type="button" data-submenu-toggle aria-label="{{ link.title }}" style="background:none;border:0;float:right;color:inherit;">{% render 'icon', name: 'chevron-down' %}</button>
+                </a>
+                <ul class="sub">
+                  {%- for child in link.links -%}
+                    <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+                  {%- endfor -%}
+                </ul>
+              {%- else -%}
+                <a href="{{ link.url }}" {% if link.active %}aria-current="page"{% endif %}>{{ link.title }}</a>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+    {%- endif -%}
+
+    <div class="drawer__footer">
+      <a href="{{ routes.account_url }}" class="btn btn--secondary btn--full" style="margin-bottom:0.75rem;">{% render 'icon', name: 'user' %} {{ 'customer.account' | t }}</a>
+      {%- if section.settings.cta_label != blank and section.settings.cta_link != blank -%}
+        <a href="{{ section.settings.cta_link }}" class="btn btn--primary btn--full">{{ section.settings.cta_label }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<div class="search-modal" id="SearchModal" aria-hidden="true">
+  <div class="search-modal__overlay" data-close></div>
+  <div class="search-modal__panel" role="dialog" aria-modal="true" aria-label="{{ 'accessibility.search' | t }}">
+    <form action="{{ routes.search_url }}" method="get" role="search" class="search-modal__form">
+      <input type="hidden" name="options[prefix]" value="last">
+      <span aria-hidden="true">{% render 'icon', name: 'search' %}</span>
+      <input type="search" name="q" placeholder="{{ 'general.search.placeholder' | t }}" autocomplete="off" aria-label="{{ 'general.search.search' | t }}">
+      <button type="button" class="header__action" data-close aria-label="{{ 'accessibility.close' | t }}">{% render 'icon', name: 'close' %}</button>
+    </form>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Kopfzeile",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Hauptmenü",
+      "default": "main-menu"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA Button Text",
+      "default": "Jetzt kaufen"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Button Link"
+    }
+  ]
+}
+{% endschema %}

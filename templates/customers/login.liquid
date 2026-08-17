@@ -1,0 +1,35 @@
+<div class="page-width page-width--narrow section" style="max-width:460px;">
+  <h1 style="text-align:center;">{{ 'customer.log_in' | t }}</h1>
+
+  {%- form 'customer_login' -%}
+    {{ form.errors | default_errors }}
+    <div class="product-form__option">
+      <label class="product-form__label" for="customer_email">{{ 'general.newsletter.email' | t }}</label>
+      <input class="select" style="width:100%;" type="email" name="customer[email]" id="customer_email" autocomplete="email" required>
+    </div>
+    {%- if form.password_needed -%}
+      <div class="product-form__option">
+        <label class="product-form__label" for="customer_password">Passwort</label>
+        <input class="select" style="width:100%;" type="password" name="customer[password]" id="customer_password" autocomplete="current-password" required>
+      </div>
+      <a href="#recover" onclick="document.getElementById('RecoverForm').hidden=false;this.hidden=true;return false;" class="text-muted" style="font-size:0.9rem;">Passwort vergessen?</a>
+    {%- endif -%}
+    <button type="submit" class="btn btn--primary btn--full btn--large" style="margin-top:1rem;">{{ 'customer.log_in' | t }}</button>
+  {%- endform -%}
+
+  <div id="RecoverForm" hidden style="margin-top:1.5rem;">
+    <h2 class="h4">Passwort zurücksetzen</h2>
+    {%- form 'recover_customer_password' -%}
+      {{ form.errors | default_errors }}
+      {%- if form.posted_successfully? -%}
+        <p>Wir haben Ihnen eine E-Mail zum Zurücksetzen gesendet.</p>
+      {%- endif -%}
+      <input class="select" style="width:100%;" type="email" name="email" placeholder="{{ 'general.newsletter.email' | t }}" required>
+      <button type="submit" class="btn btn--secondary btn--full" style="margin-top:0.75rem;">Senden</button>
+    {%- endform -%}
+  </div>
+
+  <p style="text-align:center;margin-top:1.5rem;" class="text-muted">
+    Noch kein Konto? <a href="{{ routes.account_register_url }}" style="color:var(--color-accent);font-weight:600;">{{ 'customer.register' | t }}</a>
+  </p>
+</div>

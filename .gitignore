@@ -1,0 +1,9 @@
+.DS_Store
+**/.DS_Store
+.shopify/
+node_modules/
+.venv/
+*.log
+.idea/
+.vscode/
+*.zip

@@ -1,0 +1,126 @@
+{
+  "accessibility": {
+    "skip_to_content": "Skip to content",
+    "refresh_page": "Choosing a selection results in a full page refresh.",
+    "close": "Close",
+    "menu": "Menu",
+    "cart": "Cart",
+    "search": "Search",
+    "previous": "Previous",
+    "next": "Next",
+    "loading": "Loading"
+  },
+  "general": {
+    "meta": {
+      "tags": "Tagged: {{ tags }}",
+      "page": "Page {{ page }}"
+    },
+    "search": {
+      "search": "Search",
+      "placeholder": "What are you looking for?",
+      "results_with_count": "{{ count }} result",
+      "results_with_count_plural": "{{ count }} results",
+      "no_results": "No results for \"{{ terms }}\". Please try another search.",
+      "results_for": "Results for \"{{ terms }}\""
+    },
+    "pagination": {
+      "label": "Pagination",
+      "previous": "Previous page",
+      "next": "Next page"
+    },
+    "newsletter": {
+      "success": "Thanks for subscribing.",
+      "email": "Email address",
+      "submit": "Subscribe"
+    },
+    "social": {
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "youtube": "YouTube",
+      "tiktok": "TikTok"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to cart",
+      "sold_out": "Sold out",
+      "unavailable": "Unavailable",
+      "on_sale": "Sale",
+      "from_price": "from {{ price }}",
+      "regular_price": "Regular price",
+      "sale_price": "Sale price",
+      "quantity": "Quantity",
+      "vendor": "Brand",
+      "sku": "SKU",
+      "description": "Description",
+      "specifications": "Specifications",
+      "choose_options": "Choose options",
+      "view_details": "View details",
+      "save_amount": "Save {{ amount }}",
+      "incl_tax": "incl. VAT",
+      "plus_shipping": "plus shipping",
+      "in_stock": "In stock",
+      "low_stock": "Low stock",
+      "out_of_stock": "Out of stock",
+      "quick_add": "Quick add",
+      "media_gallery": "Product gallery"
+    },
+    "facets": {
+      "filter_and_sort": "Filter and sort",
+      "filter_by_label": "Filter",
+      "sort_by_label": "Sort by",
+      "clear": "Clear",
+      "clear_all": "Clear all",
+      "apply": "Apply",
+      "from": "From",
+      "to": "To",
+      "max_price": "Highest price: {{ price }}",
+      "filter_and_operator_subtitle": "Shows only products matching all selected values.",
+      "product_count": "{{ product_count }} of {{ count }} products",
+      "product_count_simple": "{{ count }} products"
+    }
+  },
+  "cart": {
+    "title": "Cart",
+    "empty": "Your cart is empty.",
+    "continue_shopping": "Continue shopping",
+    "subtotal": "Subtotal",
+    "checkout": "Checkout",
+    "remove": "Remove",
+    "product": "Product",
+    "quantity": "Quantity",
+    "total": "Total",
+    "taxes_included": "Taxes included, shipping calculated at checkout",
+    "note": "Order note",
+    "update": "Update"
+  },
+  "sections": {
+    "header": {
+      "announcement": "Announcement",
+      "account": "Account",
+      "login": "Log in"
+    },
+    "footer": {
+      "newsletter_title": "Newsletter",
+      "copyright": "All rights reserved."
+    }
+  },
+  "customer": {
+    "account": "Account",
+    "log_in": "Log in",
+    "log_out": "Log out",
+    "register": "Register"
+  },
+  "blogs": {
+    "article": {
+      "read_more": "Read more",
+      "posted_in": "Posted in",
+      "back_to_blog": "Back to blog"
+    }
+  },
+  "404": {
+    "title": "Page not found",
+    "subtext": "The page you were looking for does not exist.",
+    "link": "Back to home"
+  }
+}

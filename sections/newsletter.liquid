@@ -1,0 +1,33 @@
+<div class="section">
+  <div class="page-width">
+    <div class="newsletter" reveal>
+      {%- if section.settings.eyebrow != blank -%}<span class="section-header__eyebrow" style="color:var(--color-accent);">{{ section.settings.eyebrow }}</span>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 class="newsletter__title">{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.text != blank -%}<p class="newsletter__text">{{ section.settings.text }}</p>{%- endif -%}
+
+      {%- form 'customer', class: 'newsletter-form' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        {%- if form.posted_successfully? -%}
+          <p style="width:100%;text-align:center;">{{ 'general.newsletter.success' | t }}</p>
+        {%- else -%}
+          <input type="email" name="contact[email]" placeholder="{{ 'general.newsletter.email' | t }}" required aria-label="{{ 'general.newsletter.email' | t }}">
+          <button type="submit" class="btn btn--primary">{{ section.settings.button_label | default: 'Abonnieren' }}</button>
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Kleiner Titel", "default": "Newsletter" },
+    { "type": "text", "id": "heading", "label": "Überschrift", "default": "Neuheiten und Angebote sichern" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Melden Sie sich an und verpassen Sie keine Produktneuheiten oder Aktionen mehr." },
+    { "type": "text", "id": "button_label", "label": "Button Text", "default": "Abonnieren" }
+  ],
+  "presets": [{ "name": "Newsletter" }]
+}
+{% endschema %}

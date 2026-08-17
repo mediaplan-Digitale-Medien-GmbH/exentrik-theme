@@ -1,0 +1,52 @@
+{
+  "current": {
+    "logo_width": 160,
+    "color_background": "#f3f1ee",
+    "color_surface": "#ebe7e1",
+    "color_text": "#0a0a0a",
+    "color_text_muted": "#5a5752",
+    "color_border": "#ddd7ce",
+    "color_accent": "#e3341e",
+    "color_accent_text": "#ffffff",
+    "color_sale": "#e3341e",
+    "color_dark": "#000000",
+    "color_dark_text": "#f5f2ec",
+    "color_ember": "#e3341e",
+    "color_flame": "#ffeb00",
+    "heading_font": "archivo",
+    "body_font": "outfit",
+    "font_size_base": 16,
+    "heading_scale": 115,
+    "heading_transform": "uppercase",
+    "page_width": 1180,
+    "spacing_sections": 64,
+    "corner_style": "rounded",
+    "corner_radius": 10,
+    "card_image_ratio": "square",
+    "card_show_vendor": false,
+    "card_show_second_image": true,
+    "card_show_quick_add": true,
+    "product_sticky_info": true,
+    "product_enable_zoom": true,
+    "organization_name": "Shop",
+    "support_phone": "",
+    "support_hours": "",
+    "support_email": "",
+    "social_facebook": "",
+    "social_instagram": "",
+    "social_youtube": "",
+    "social_tiktok": "",
+    "animations_enabled": true
+  },
+  "presets": {
+    "mediaplan Starter": {
+      "color_background": "#f3f1ee",
+      "color_accent": "#e3341e",
+      "color_ember": "#e3341e",
+      "color_flame": "#ffeb00",
+      "color_dark": "#000000",
+      "heading_transform": "uppercase",
+      "corner_style": "rounded"
+    }
+  }
+}

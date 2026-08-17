@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="theme-color" content="{{ settings.color_ember | default: '#e3341e' }}">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+
+    {%- comment -%}
+      Das Favicon kommt aus den Theme-Einstellungen. Fehlt es, zeigt der Browser
+      sein Standardsymbol, deshalb gehoert es in die Startcheckliste.
+    {%- endcomment -%}
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 48, height: 48 }}">
+      <link rel="apple-touch-icon" href="{{ settings.favicon | image_url: width: 180, height: 180 }}">
+    {%- endif -%}
+
+    <title>
+      {{ page_title }}
+      {%- if current_tags %} &ndash; {{ 'general.meta.tags' | t: tags: current_tags | join: ', ' }}{% endif -%}
+      {%- if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &middot; {{ shop.name }}{% endunless -%}
+    </title>
+
+    {%- if page_description -%}
+      <meta name="description" content="{{ page_description | escape }}">
+    {%- endif -%}
+
+    {%- comment -%}
+      Social-Meta bewusst inline: ein Snippet an dieser Stelle kam beim
+      GitHub-Sync nicht im Shop an. Strukturierte Daten stehen in den
+      Sektionen main-product, main-article und footer.
+    {%- endcomment -%}
+    <meta property="og:site_name" content="{{ shop.name }}">
+    <meta property="og:url" content="{{ canonical_url | default: request.origin }}">
+    <meta property="og:title" content="{{ page_title | default: shop.name | escape }}">
+    <meta property="og:description" content="{{ page_description | default: shop.description | default: shop.name | escape }}">
+    <meta property="og:type" content="{% if request.page_type == 'product' %}product{% elsif request.page_type == 'article' %}article{% else %}website{% endif %}">
+    <meta property="og:locale" content="{{ request.locale.iso_code }}">
+    {%- if request.page_type == 'product' and product.featured_media -%}
+      <meta property="og:image" content="https:{{ product.featured_media | image_url: width: 1200 }}">
+      <meta property="og:image:width" content="1200">
+    {%- elsif request.page_type == 'article' and article.image -%}
+      <meta property="og:image" content="https:{{ article.image | image_url: width: 1200 }}">
+    {%- elsif settings.logo -%}
+      <meta property="og:image" content="https:{{ settings.logo | image_url: width: 1200 }}">
+    {%- endif -%}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ page_title | default: shop.name | escape }}">
+    <meta name="twitter:description" content="{{ page_description | default: shop.description | default: shop.name | escape }}">
+
+    {{ content_for_header }}
+
+    {%- liquid
+      assign heading_font = settings.heading_font | default: 'archivo'
+      assign body_font = settings.body_font | default: 'outfit'
+
+      case heading_font
+        when 'outfit'
+          assign heading_stack = "'Outfit', system-ui, sans-serif"
+          assign heading_preload = 'outfit-600.woff2'
+        when 'barlow'
+          assign heading_stack = "'Barlow Condensed', system-ui, sans-serif"
+          assign heading_preload = 'barlow-condensed-600.woff2'
+        when 'poppins'
+          assign heading_stack = "'Poppins', system-ui, sans-serif"
+          assign heading_preload = 'poppins-600.woff2'
+        when 'verdana'
+          assign heading_stack = "Verdana, Geneva, sans-serif"
+          assign heading_preload = ''
+        else
+          assign heading_stack = "'Archivo Black', system-ui, sans-serif"
+          assign heading_preload = 'archivo-black-400.woff2'
+      endcase
+
+      case body_font
+        when 'archivo'
+          assign body_stack = "'Archivo Black', system-ui, sans-serif"
+          assign body_preload = 'archivo-black-400.woff2'
+        when 'barlow'
+          assign body_stack = "'Barlow Condensed', system-ui, sans-serif"
+          assign body_preload = 'barlow-condensed-400.woff2'
+        when 'poppins'
+          assign body_stack = "'Poppins', system-ui, sans-serif"
+          assign body_preload = 'poppins-400.woff2'
+        when 'verdana'
+          assign body_stack = "Verdana, Geneva, sans-serif"
+          assign body_preload = ''
+        else
+          assign body_stack = "'Outfit', system-ui, sans-serif"
+          assign body_preload = 'outfit-400.woff2'
+      endcase
+
+      assign corner_style = settings.corner_style | default: 'rounded'
+      if corner_style == 'square'
+        assign radius_val = 0
+        assign btn_radius_val = 0
+      else
+        assign radius_val = settings.corner_radius | default: 10
+        assign btn_radius_val = 999
+      endif
+    -%}
+
+    {%- if body_preload != blank -%}
+      <link rel="preload" href="{{ body_preload | asset_url }}" as="font" type="font/woff2" crossorigin>
+    {%- endif -%}
+    {%- if heading_preload != blank and heading_preload != body_preload -%}
+      <link rel="preload" href="{{ heading_preload | asset_url }}" as="font" type="font/woff2" crossorigin>
+    {%- endif -%}
+
+    {%- comment -%}
+      base.css zuerst: darin stehen die Fallback-Werte in :root. Der Block danach
+      traegt die Theme-Editor-Werte und muss gewinnen, sonst ueberschreiben die
+      Fallbacks Farben, Schriften und Radien wieder.
+    {%- endcomment -%}
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+
+    {% style %}
+      :root {
+        --color-bg: {{ settings.color_background | default: '#f3f1ee' }};
+        --color-bg-elevated: #ffffff;
+        --color-ink: {{ settings.color_text | default: '#0a0a0a' }};
+        --color-ink-soft: {{ settings.color_text_muted | default: '#5a5752' }};
+        --color-line: {{ settings.color_border | default: '#ddd7ce' | color_modify: 'alpha', 0.12 }};
+        --color-charcoal: {{ settings.color_dark | default: '#000000' }};
+        --color-charcoal-soft: {{ settings.color_dark | default: '#000000' | color_darken: 5 }};
+        --color-ember: {{ settings.color_ember | default: '#e3341e' }};
+        --color-ember-deep: {{ settings.color_ember | default: '#e3341e' | color_darken: 8 }};
+        --color-flame: {{ settings.color_flame | default: '#ffeb00' }};
+        --color-ash: #c9c2b8;
+        --color-on-dark: {{ settings.color_dark_text | default: '#f5f2ec' }};
+        --color-on-dark-muted: {{ settings.color_dark_text | default: '#f5f2ec' | color_modify: 'alpha', 0.68 }};
+
+        --color-surface: {{ settings.color_surface | default: '#ebe7e1' }};
+        --color-text: {{ settings.color_text | default: '#0a0a0a' }};
+        --color-text-muted: {{ settings.color_text_muted | default: '#5a5752' }};
+        --color-border: {{ settings.color_border | default: '#ddd7ce' }};
+        --color-accent: {{ settings.color_accent | default: '#e3341e' }};
+        --color-accent-text: {{ settings.color_accent_text | default: '#ffffff' }};
+        --color-sale: {{ settings.color_sale | default: '#e3341e' }};
+        --color-dark: {{ settings.color_dark | default: '#000000' }};
+        --color-dark-text: {{ settings.color_dark_text | default: '#f5f2ec' }};
+
+        --font-display: {{ heading_stack }};
+        --font-body: {{ body_stack }};
+        --font-heading: var(--font-display);
+        --font-weight-body: 400;
+        --font-weight-bold: 700;
+        --font-weight-heading: 400;
+
+        --font-size-base: {{ settings.font_size_base | default: 16 }}px;
+        --heading-scale: {{ settings.heading_scale | default: 115 | divided_by: 100.0 }};
+        --heading-transform: {{ settings.heading_transform | default: 'uppercase' }};
+
+        --logo-width: {{ settings.logo_width | default: 160 }}px;
+        --page-width: {{ settings.page_width | default: 1180 }}px;
+        --section-spacing: {{ settings.spacing_sections | default: 64 }}px;
+        --section-y: clamp(4.5rem, 10vw, 8rem);
+        --radius: {{ radius_val }}px;
+        --btn-radius: {{ btn_radius_val }}px;
+      }
+    {% endstyle %}
+
+    <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
+    {%- if settings.animations_enabled -%}
+      <script>document.documentElement.classList.add('anim-on');</script>
+    {%- endif -%}
+  </head>
+
+  <body class="template-{{ request.page_type | handle }}">
+    <a class="skip-link" href="#MainContent">{{ 'accessibility.skip_to_content' | t }}</a>
+
+    {% sections 'header-group' %}
+
+    <main id="MainContent" class="main-content" role="main" tabindex="-1">
+      {{ content_for_layout }}
+    </main>
+
+    {% sections 'footer-group' %}
+
+    <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
+
+    <ul hidden>
+      <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
+    </ul>
+  </body>
+</html>

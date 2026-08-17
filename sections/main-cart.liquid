@@ -1,0 +1,77 @@
+<div class="page-width cart-page">
+  <h1 style="margin-bottom:1.5rem;">{{ 'cart.title' | t }}</h1>
+
+  {%- if cart.item_count == 0 -%}
+    <div style="padding:3rem 0;text-align:center;">
+      <p class="text-muted" style="font-size:1.1rem;">{{ 'cart.empty' | t }}</p>
+      <a href="{{ routes.all_products_collection_url }}" class="btn btn--primary btn--large" style="margin-top:1rem;">{{ 'cart.continue_shopping' | t }}</a>
+    </div>
+  {%- else -%}
+    <form action="{{ routes.cart_url }}" method="post" class="cart-layout">
+      <div>
+        {%- for item in cart.items -%}
+          <div class="cart-item">
+            <a href="{{ item.url }}" class="cart-item__media">
+              {%- if item.image -%}
+                <img src="{{ item.image | image_url: width: 176 }}" alt="{{ item.title | escape }}" width="88" height="88" loading="lazy">
+              {%- endif -%}
+            </a>
+            <div>
+              <a href="{{ item.url }}" class="cart-item__title">{{ item.product.title }}</a>
+              {%- unless item.variant.title contains 'Default' -%}
+                <div class="cart-item__meta">{{ item.variant.title }}</div>
+              {%- endunless -%}
+              {%- if item.product.vendor != blank -%}<div class="cart-item__meta">{{ item.product.vendor }}</div>{%- endif -%}
+              {%- if item.variant.unit_price_measurement -%}
+                <div class="cart-item__meta">{% render 'unit-price', variant: item.variant %}</div>
+              {%- endif -%}
+              <div style="display:flex;gap:1rem;align-items:center;margin-top:0.5rem;">
+                <div class="quantity-selector" data-quantity style="transform:scale(0.9);transform-origin:left;">
+                  <button type="button" data-qty-step="-1" aria-label="weniger">&minus;</button>
+                  <input type="number" value="{{ item.quantity }}" min="0" data-cart-qty="{{ item.key }}" aria-label="{{ 'cart.quantity' | t }}">
+                  <button type="button" data-qty-step="1" aria-label="mehr">+</button>
+                </div>
+                <a href="{{ item.url_to_remove }}" class="text-muted" style="font-size:0.85rem;text-decoration:underline;">{{ 'cart.remove' | t }}</a>
+              </div>
+            </div>
+            <div style="text-align:right;font-weight:600;">
+              {{ item.final_line_price | money }}
+              {%- if item.original_line_price != item.final_line_price -%}
+                <div class="text-muted" style="font-weight:400;font-size:0.85rem;text-decoration:line-through;">{{ item.original_line_price | money }}</div>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      <aside class="cart-summary">
+        <h2 class="h3">{{ 'cart.total' | t }}</h2>
+        <div style="display:flex;justify-content:space-between;margin:1rem 0;">
+          <span>{{ 'cart.subtotal' | t }}</span>
+          <strong style="font-size:1.3rem;">{{ cart.total_price | money }}</strong>
+        </div>
+        <p class="text-muted" style="font-size:0.82rem;">{{ 'cart.taxes_included' | t }}</p>
+
+        {%- if section.settings.show_note -%}
+          <label class="product-form__label" style="margin-top:1rem;">{{ 'cart.note' | t }}</label>
+          <textarea name="note" class="select" rows="3" style="width:100%;resize:vertical;">{{ cart.note }}</textarea>
+        {%- endif -%}
+
+        <button type="submit" name="checkout" class="btn btn--primary btn--large btn--full" style="margin-top:1rem;">
+          {% render 'icon', name: 'lock' %} {{ 'cart.checkout' | t }}
+        </button>
+        <a href="{{ routes.all_products_collection_url }}" class="btn btn--secondary btn--full" style="margin-top:0.5rem;">{{ 'cart.continue_shopping' | t }}</a>
+      </aside>
+    </form>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Warenkorb",
+  "tag": "section",
+  "settings": [
+    { "type": "checkbox", "id": "show_note", "label": "Bestellnotiz anzeigen", "default": true }
+  ]
+}
+{% endschema %}

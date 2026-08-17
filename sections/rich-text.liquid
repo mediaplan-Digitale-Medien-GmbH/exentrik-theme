@@ -1,0 +1,52 @@
+<div class="section" style="{% if section.settings.background %}background:{{ section.settings.background }};padding-block:var(--section-spacing);{% endif %}">
+  <div class="page-width page-width--narrow" style="text-align: {{ section.settings.align }};">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'eyebrow' -%}
+          <span class="section-header__eyebrow" reveal {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+        {%- when 'heading' -%}
+          <h2 reveal {{ block.shopify_attributes }}>{{ block.settings.text }}</h2>
+        {%- when 'text' -%}
+          <div class="rte" reveal style="color:var(--color-text-muted);font-size:1.05rem;" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+        {%- when 'button' -%}
+          <div reveal style="margin-top:1.5rem;" {{ block.shopify_attributes }}>
+            <a href="{{ block.settings.link }}" class="btn btn--primary btn--large">{{ block.settings.label }}</a>
+          </div>
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Textabschnitt",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "select", "id": "align", "label": "Ausrichtung",
+      "options": [
+        { "value": "left", "label": "Links" },
+        { "value": "center", "label": "Zentriert" }
+      ],
+      "default": "center"
+    },
+    { "type": "color", "id": "background", "label": "Hintergrundfarbe" }
+  ],
+  "blocks": [
+    { "type": "eyebrow", "name": "Kleiner Titel", "settings": [ { "type": "text", "id": "text", "label": "Text", "default": "Über uns" } ] },
+    { "type": "heading", "name": "Überschrift", "settings": [ { "type": "text", "id": "text", "label": "Text", "default": "Deine Markengeschichte" } ] },
+    { "type": "text", "name": "Text", "settings": [ { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Erzähle hier kurz, wofür dein Shop steht. Ersetze diesen Platzhalter im Theme-Editor.</p>" } ] },
+    { "type": "button", "name": "Button", "settings": [ { "type": "text", "id": "label", "label": "Text", "default": "Mehr erfahren" }, { "type": "url", "id": "link", "label": "Link" } ] }
+  ],
+  "presets": [
+    {
+      "name": "Textabschnitt",
+      "blocks": [
+        { "type": "eyebrow" },
+        { "type": "heading" },
+        { "type": "text" }
+      ]
+    }
+  ]
+}
+{% endschema %}

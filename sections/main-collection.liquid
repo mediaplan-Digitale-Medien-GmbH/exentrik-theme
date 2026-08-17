@@ -1,0 +1,68 @@
+{%- liquid
+  assign sort_by = collection.sort_by | default: collection.default_sort_by
+  assign show_facets = false
+  if section.settings.show_filters and collection.filters.size > 0
+    assign show_facets = true
+  endif
+-%}
+
+<div class="page-width" data-facets-section="{{ section.id }}">
+  {%- if section.settings.show_hero -%}
+    <div class="collection-hero" reveal>
+      <h1 style="margin-bottom:0.5rem;">{{ collection.title }}</h1>
+      {%- if collection.description != blank and section.settings.show_description -%}
+        <div class="rte text-muted" style="max-width:70ch;">{{ collection.description }}</div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div class="collection-layout{% if show_facets %} collection-layout--with-filters{% endif %}">
+    {%- if section.settings.show_filters -%}
+      {% render 'facets', results: collection, results_url: collection.url, sort_by: sort_by %}
+    {%- endif -%}
+
+    <div data-facets-results>
+      {% render 'facets-toolbar', results: collection, count: collection.products_count, sort_by: sort_by %}
+
+      {%- paginate collection.products by section.settings.products_per_page -%}
+        {%- if collection.products.size > 0 -%}
+          <div class="grid grid--{{ section.settings.columns }} grid--1-mobile">
+            {%- for product in collection.products -%}
+              {% render 'product-card', product: product %}
+            {%- endfor -%}
+          </div>
+
+          {%- if paginate.pages > 1 -%}
+            <nav class="pagination" aria-label="{{ 'general.pagination.label' | t }}">
+              {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}" data-facets-link aria-label="{{ 'general.pagination.previous' | t }}">{% render 'icon', name: 'chevron-down' %}</a>{%- endif -%}
+              {%- for part in paginate.parts -%}
+                {%- if part.is_link -%}
+                  <a href="{{ part.url }}" data-facets-link>{{ part.title }}</a>
+                {%- else -%}
+                  <span class="{% if part.title == paginate.current_page %}is-current{% endif %}">{{ part.title }}</span>
+                {%- endif -%}
+              {%- endfor -%}
+              {%- if paginate.next -%}<a href="{{ paginate.next.url }}" data-facets-link aria-label="{{ 'general.pagination.next' | t }}">{% render 'icon', name: 'chevron-right' %}</a>{%- endif -%}
+            </nav>
+          {%- endif -%}
+        {%- else -%}
+          <p class="text-muted" style="padding:3rem 0;text-align:center;">Keine Produkte gefunden.</p>
+        {%- endif -%}
+      {%- endpaginate -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Kollektion",
+  "tag": "section",
+  "settings": [
+    { "type": "checkbox", "id": "show_hero", "label": "Titel anzeigen", "default": true },
+    { "type": "checkbox", "id": "show_description", "label": "Beschreibung anzeigen", "default": true },
+    { "type": "checkbox", "id": "show_filters", "label": "Filter anzeigen", "default": true, "info": "Filter kommen aus der kostenlosen Shopify App Search & Discovery. Dort legen Sie fest, welche Optionen und Metafelder filterbar sind." },
+    { "type": "range", "id": "columns", "min": 2, "max": 4, "step": 1, "label": "Spalten", "default": 3 },
+    { "type": "range", "id": "products_per_page", "min": 8, "max": 48, "step": 4, "label": "Produkte pro Seite", "default": 24 }
+  ]
+}
+{% endschema %}

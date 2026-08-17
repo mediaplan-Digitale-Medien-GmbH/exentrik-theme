@@ -1,0 +1,107 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "layout": "left",
+        "eyebrow": "",
+        "heading": "Willkommen in deinem Shop",
+        "text": "Ersetze diesen Text, lade ein Hero-Bild oder -Video hoch und verknüpfe deine CTAs.",
+        "button_label": "Jetzt entdecken",
+        "button_link": "shopify://collections/all",
+        "button_label_2": "",
+        "button_link_2": "",
+        "text_color": "#ffffff",
+        "overlay_gradient": "linear-gradient(90deg, rgba(13,17,23,0.75) 0%, rgba(13,17,23,0.2) 100%)"
+      }
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "Beliebte Produkte",
+        "products_to_show": 4,
+        "columns": 4,
+        "show_view_all": true,
+        "view_all_label": "Alle ansehen"
+      }
+    },
+    "usp-bar": {
+      "type": "usp-bar",
+      "blocks": {
+        "u1": {
+          "type": "usp",
+          "settings": {
+            "icon": "truck",
+            "title": "Schneller Versand",
+            "text": "Lieferung mit DHL"
+          }
+        },
+        "u2": {
+          "type": "usp",
+          "settings": {
+            "icon": "shield",
+            "title": "Sicher bezahlen",
+            "text": "Verschlüsselte Zahlung"
+          }
+        },
+        "u3": {
+          "type": "usp",
+          "settings": {
+            "icon": "return",
+            "title": "Einfache Rückgabe",
+            "text": "Unkomplizierter Service"
+          }
+        },
+        "u4": {
+          "type": "usp",
+          "settings": {
+            "icon": "check",
+            "title": "Geprüfte Qualität",
+            "text": "Sorgfältig ausgewählt"
+          }
+        }
+      },
+      "block_order": ["u1", "u2", "u3", "u4"],
+      "settings": {}
+    },
+    "rich-text": {
+      "type": "rich-text",
+      "blocks": {
+        "eyebrow": {
+          "type": "eyebrow",
+          "settings": { "text": "Über uns" }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": { "text": "Deine Markengeschichte" }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Erzähle hier kurz, wofür dein Shop steht. Ersetze diesen Platzhalter im Theme-Editor.</p>"
+          }
+        }
+      },
+      "block_order": ["eyebrow", "heading", "text"],
+      "settings": {
+        "alignment": "center"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "eyebrow": "Newsletter",
+        "heading": "Neuheiten und Angebote sichern",
+        "text": "Melde dich an und verpasse keine Produktneuheiten oder Aktionen.",
+        "button_label": "Abonnieren"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "featured-collection",
+    "usp-bar",
+    "rich-text",
+    "newsletter"
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "type": "header",
+  "name": "Kopfbereich",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "disabled": true,
+      "blocks": {
+        "b1": {
+          "type": "item",
+          "settings": {
+            "text": "Versandkostenfrei ab 59 Euro innerhalb Deutschlands",
+            "icon": "truck"
+          }
+        },
+        "b2": {
+          "type": "item",
+          "settings": {
+            "text": "3 Prozent Rabatt bei Vorkasse",
+            "icon": "credit-card"
+          }
+        }
+      },
+      "block_order": ["b1", "b2"],
+      "settings": {
+        "bg_color": "#000000",
+        "text_color": "#f5f2ec"
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "menu": "main-menu",
+        "cta_label": "Jetzt kaufen",
+        "cta_link": "shopify://collections/all"
+      }
+    },
+    "cart-drawer": {
+      "type": "cart-drawer"
+    }
+  },
+  "order": ["announcement-bar", "header", "cart-drawer"]
+}

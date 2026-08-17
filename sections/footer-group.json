@@ -1,0 +1,35 @@
+{
+  "type": "footer",
+  "name": "Fußbereich",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "shop": {
+          "type": "menu",
+          "settings": { "title": "Shop", "menu": "footer" }
+        },
+        "service": {
+          "type": "menu",
+          "settings": { "title": "Service", "menu": "footer" }
+        },
+        "contact": {
+          "type": "contact",
+          "settings": { "title": "Kontakt" }
+        }
+      },
+      "block_order": ["shop", "service", "contact"],
+      "settings": {
+        "show_logo": true,
+        "brand_name": "Shop",
+        "about_text": "",
+        "tax_note": "Alle Preise inkl. MwSt. zzgl. Versand.",
+        "payment_note": "",
+        "cancel_enabled": false,
+        "cancel_label": "Vertrag kündigen",
+        "cancel_link": ""
+      }
+    }
+  },
+  "order": ["footer"]
+}

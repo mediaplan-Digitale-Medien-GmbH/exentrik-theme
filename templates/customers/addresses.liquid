@@ -1,0 +1,28 @@
+<div class="page-width section" style="max-width:720px;">
+  <a href="{{ routes.account_url }}" class="text-muted">&larr; {{ 'customer.account' | t }}</a>
+  <h1 style="margin-top:1rem;">Adressen</h1>
+
+  {%- form 'customer_address', customer.new_address -%}
+    <h2 class="h4">Neue Adresse</h2>
+    <div class="grid grid--2 grid--1-mobile">
+      <input class="select" name="address[first_name]" placeholder="Vorname" value="{{ form.first_name }}">
+      <input class="select" name="address[last_name]" placeholder="Nachname" value="{{ form.last_name }}">
+    </div>
+    <input class="select" style="width:100%;margin-top:0.75rem;" name="address[address1]" placeholder="Straße und Hausnummer" value="{{ form.address1 }}">
+    <div class="grid grid--2 grid--1-mobile" style="margin-top:0.75rem;">
+      <input class="select" name="address[zip]" placeholder="PLZ" value="{{ form.zip }}">
+      <input class="select" name="address[city]" placeholder="Ort" value="{{ form.city }}">
+    </div>
+    <button type="submit" class="btn btn--primary" style="margin-top:1rem;">Adresse speichern</button>
+  {%- endform -%}
+
+  <hr class="divider" style="margin:2rem 0;">
+
+  {%- for address in customer.addresses -%}
+    <div class="card" style="padding:1.25rem;margin-bottom:1rem;">
+      <strong>{{ address.name }}</strong>
+      <p class="text-muted" style="margin-top:0.5rem;">{{ address.street }}, {{ address.zip }} {{ address.city }}, {{ address.country }}</p>
+      <a href="{{ address.url }}" class="text-muted" style="text-decoration:underline;">Bearbeiten</a>
+    </div>
+  {%- endfor -%}
+</div>

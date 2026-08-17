@@ -1,0 +1,81 @@
+{%- comment -%}
+  Ergebniszahl und Sortierung für Kollektions- und Suchergebnisseiten.
+
+  Die aktiven Filter werden als Hidden-Inputs mitgeschickt, damit das
+  Sortieren die Filterauswahl nicht verwirft (und umgekehrt).
+
+  Parameter:
+    results    - collection- oder search-Objekt
+    count      - Anzahl der Ergebnisse
+    count_text - fertiger Text statt der Standard-Produktzahl (optional)
+    terms      - Suchbegriff, nur auf der Suchseite gesetzt
+    types      - durchsuchte Objekttypen, nur auf der Suchseite gesetzt
+    sort_by    - aktive Sortierung
+{%- endcomment -%}
+
+<div class="collection-toolbar">
+  <span class="text-muted">
+    {%- if count_text != blank -%}
+      {{ count_text }}
+    {%- else -%}
+      {{ 'products.facets.product_count_simple' | t: count: count }}
+    {%- endif -%}
+  </span>
+
+  {%- if results.sort_options.size > 0 -%}
+    <form method="get" data-facets-form>
+      {%- if terms != blank -%}
+        <input type="hidden" name="q" value="{{ terms | escape }}">
+        <input type="hidden" name="options[prefix]" value="last">
+        {%- if types != blank -%}
+          <input type="hidden" name="type" value="{{ types }}">
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- for filter in results.filters -%}
+        {%- if filter.type == 'price_range' -%}
+          {%- if filter.min_value.value != blank -%}
+            {%- liquid
+              # Werte kommen in Cent, die Filter-URL erwartet den Betrag
+              assign cents = filter.min_value.value | modulo: 100
+              if cents == 0
+                assign price_min = filter.min_value.value | divided_by: 100
+              else
+                assign price_min = filter.min_value.value | divided_by: 100.0
+              endif
+            -%}
+            <input type="hidden" name="{{ filter.min_value.param_name }}" value="{{ price_min }}">
+          {%- endif -%}
+          {%- if filter.max_value.value != blank -%}
+            {%- liquid
+              assign cents = filter.max_value.value | modulo: 100
+              if cents == 0
+                assign price_max = filter.max_value.value | divided_by: 100
+              else
+                assign price_max = filter.max_value.value | divided_by: 100.0
+              endif
+            -%}
+            <input type="hidden" name="{{ filter.max_value.param_name }}" value="{{ price_max }}">
+          {%- endif -%}
+        {%- else -%}
+          {%- for value in filter.active_values -%}
+            <input type="hidden" name="{{ value.param_name }}" value="{{ value.value }}">
+          {%- endfor -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      <label>
+        <span class="visually-hidden">{{ 'products.facets.sort_by_label' | t }}</span>
+        <select name="sort_by" class="select">
+          {%- for option in results.sort_options -%}
+            <option value="{{ option.value }}" {% if option.value == sort_by %}selected{% endif %}>{{ option.name }}</option>
+          {%- endfor -%}
+        </select>
+      </label>
+
+      <noscript>
+        <button type="submit" class="btn btn--secondary">{{ 'products.facets.apply' | t }}</button>
+      </noscript>
+    </form>
+  {%- endif -%}
+</div>

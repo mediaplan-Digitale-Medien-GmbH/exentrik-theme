@@ -1,0 +1,28 @@
+<article class="page-width page-width--narrow section">
+  <a href="{{ blog.url }}" class="text-muted" style="font-size:0.9rem;">&larr; {{ 'blogs.article.back_to_blog' | t }}</a>
+  <header class="section-header" style="margin-top:1rem;" reveal>
+    <div class="text-muted" style="font-size:0.85rem;">{{ article.published_at | date: '%d.%m.%Y' }} &middot; {{ article.author }}</div>
+    <h1>{{ article.title }}</h1>
+  </header>
+  {%- if article.image -%}
+    <div class="media ratio-landscape" style="border-radius:var(--radius);margin-bottom:2rem;" reveal>
+      <img src="{{ article.image | image_url: width: 1400 }}" alt="{{ article.title | escape }}">
+    </div>
+  {%- endif -%}
+  <div class="rte" reveal>{{ article.content }}</div>
+</article>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ article.title | json }},
+  {% if article.image %}"image": {{ article.image | image_url: width: 1200 | prepend: "https:" | json }},{% endif %}
+  "datePublished": {{ article.published_at | date: "%Y-%m-%d" | json }},
+  "author": { "@type": "Person", "name": {{ article.author | json }} }
+}
+</script>
+
+{% schema %}
+{ "name": "Blogbeitrag", "tag": "section", "settings": [] }
+{% endschema %}

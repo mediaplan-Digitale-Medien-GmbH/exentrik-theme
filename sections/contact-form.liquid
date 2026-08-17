@@ -1,0 +1,41 @@
+<div class="page-width page-width--narrow section" style="max-width:640px;">
+  <header class="section-header section-header--center" reveal>
+    {%- if section.settings.heading != blank -%}<h1>{{ section.settings.heading }}</h1>{%- endif -%}
+    {%- if section.settings.text != blank -%}<p class="section-header__text">{{ section.settings.text }}</p>{%- endif -%}
+  </header>
+
+  {%- if settings.support_phone != blank -%}
+    <div class="product-trust" style="margin-bottom:1.5rem;">
+      <div class="product-trust__item">{% render 'icon', name: 'phone' %}<span>{{ settings.support_phone }} &middot; {{ settings.support_hours }}</span></div>
+      {%- if settings.support_email != blank -%}
+        <div class="product-trust__item">{% render 'icon', name: 'mail' %}<span>{{ settings.support_email }}</span></div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  {%- form 'contact' -%}
+    {{ form.errors | default_errors }}
+    {%- if form.posted_successfully? -%}
+      <p style="padding:1rem;background:var(--color-surface);border-radius:var(--radius);">Vielen Dank für Ihre Nachricht. Wir melden uns schnellstmöglich.</p>
+    {%- endif -%}
+    <div class="grid grid--2 grid--1-mobile">
+      <input class="select" name="contact[name]" placeholder="Name" required>
+      <input class="select" type="email" name="contact[email]" placeholder="E-Mail" required>
+    </div>
+    <input class="select" style="width:100%;margin-top:0.75rem;" name="contact[phone]" placeholder="Telefon (optional)">
+    <textarea class="select" style="width:100%;margin-top:0.75rem;resize:vertical;" name="contact[body]" rows="5" placeholder="Ihre Nachricht" required></textarea>
+    <button type="submit" class="btn btn--primary btn--large" style="margin-top:1rem;">Nachricht senden</button>
+  {%- endform -%}
+</div>
+
+{% schema %}
+{
+  "name": "Kontaktformular",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Überschrift", "default": "Kontakt" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Sie haben Fragen zu einem Produkt? Wir beraten Sie gerne persönlich." }
+  ],
+  "presets": [{ "name": "Kontaktformular" }]
+}
+{% endschema %}

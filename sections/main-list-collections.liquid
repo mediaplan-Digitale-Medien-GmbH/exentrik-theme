@@ -1,0 +1,102 @@
+<div class="page-width section">
+  <header class="section-header section-header--center">
+    {%- if section.settings.eyebrow != blank -%}
+      <span class="section-header__eyebrow">{{ section.settings.eyebrow }}</span>
+    {%- endif -%}
+    <h1 class="section-title section-title--wide" style="max-width:18ch;margin-inline:auto;">
+      {{ section.settings.heading | default: 'Alle Kategorien' }}
+    </h1>
+    {%- if section.settings.text != blank -%}
+      <p class="section-header__text">{{ section.settings.text }}</p>
+    {%- endif -%}
+  </header>
+
+  <div class="grid grid--{{ section.settings.columns }} grid--1-mobile">
+    {%- assign shown = 0 -%}
+    {%- for collection in collections -%}
+      {%- if collection.handle == 'all' -%}{%- continue -%}{%- endif -%}
+      {%- if section.settings.hide_empty and collection.products_count == 0 -%}{%- continue -%}{%- endif -%}
+      {%- assign shown = shown | plus: 1 -%}
+      <a href="{{ collection.url }}" class="brand-card">
+        <div class="brand-card__media">
+          {%- if collection.featured_image -%}
+            <img
+              src="{{ collection.featured_image | image_url: width: 900 }}"
+              srcset="{{ collection.featured_image | image_url: width: 600 }} 600w, {{ collection.featured_image | image_url: width: 900 }} 900w"
+              sizes="(max-width: 749px) 100vw, 33vw"
+              alt="{{ collection.title | escape }}"
+              width="{{ collection.featured_image.width }}"
+              height="{{ collection.featured_image.height }}"
+              loading="lazy">
+          {%- else -%}
+            {{ 'collection-1' | placeholder_svg_tag }}
+          {%- endif -%}
+        </div>
+        <div class="brand-card__body">
+          <div class="brand-card__accent"></div>
+          <h2 class="brand-card__name">{{ collection.title }}</h2>
+          {%- if section.settings.show_count -%}
+            <span class="brand-card__meta">
+              {{ collection.products_count }}
+              {% if collection.products_count == 1 %}Produkt{% else %}Produkte{% endif %}
+            </span>
+          {%- endif -%}
+        </div>
+      </a>
+    {%- endfor -%}
+  </div>
+
+  {%- if shown == 0 -%}
+    <p class="text-muted" style="text-align:center;padding:2rem 0;">
+      Noch keine Kategorien angelegt. Legen Sie im Admin unter Produkte → Kategorien an und weisen Sie ein Kategoriebild zu.
+    </p>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Kollektionsliste",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Sortiment"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Überschrift",
+      "default": "Alle Kategorien"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Entdecken Sie unsere Kategorien: klar, fokussiert, bereit fürs Feuer."
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Spalten",
+      "default": 3
+    },
+    {
+      "type": "checkbox",
+      "id": "show_count",
+      "label": "Produktanzahl anzeigen",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_empty",
+      "label": "Leere Kategorien ausblenden",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

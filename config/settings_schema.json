@@ -1,0 +1,512 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Exentrik",
+    "theme_version": "1.0.0",
+    "theme_author": "mediaplan",
+    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
+    "theme_support_url": "https://help.shopify.com/manual/online-store/themes"
+  },
+  {
+    "name": "Marke & Logo",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo"
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "min": 80,
+        "max": 320,
+        "step": 10,
+        "unit": "px",
+        "label": "Logo Breite",
+        "default": 160
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_inverted",
+        "label": "Logo (helle Variante für dunkle Flächen)"
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "Quadratisch, am besten 512 x 512 Pixel als PNG mit transparentem Hintergrund. Gilt für den Browser-Tab und das Symbol auf dem Homescreen."
+      }
+    ]
+  },
+  {
+    "name": "Farben",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Basisfarben"
+      },
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Hintergrund",
+        "default": "#f3f1ee"
+      },
+      {
+        "type": "color",
+        "id": "color_surface",
+        "label": "Flächen / Karten",
+        "default": "#ebe7e1"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Text",
+        "default": "#0a0a0a"
+      },
+      {
+        "type": "color",
+        "id": "color_text_muted",
+        "label": "Text gedämpft",
+        "default": "#5a5752"
+      },
+      {
+        "type": "color",
+        "id": "color_border",
+        "label": "Linien / Rahmen",
+        "default": "#ddd7ce"
+      },
+      {
+        "type": "header",
+        "content": "Akzent"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Akzentfarbe",
+        "default": "#e3341e"
+      },
+      {
+        "type": "color",
+        "id": "color_accent_text",
+        "label": "Text auf Akzentfarbe",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "color_sale",
+        "label": "Sale / Reduziert",
+        "default": "#e3341e"
+      },
+      {
+        "type": "header",
+        "content": "Dunkle Flächen"
+      },
+      {
+        "type": "color",
+        "id": "color_dark",
+        "label": "Dunkler Hintergrund",
+        "default": "#000000"
+      },
+      {
+        "type": "color",
+        "id": "color_dark_text",
+        "label": "Text auf dunklem Hintergrund",
+        "default": "#f5f2ec"
+      },
+      {
+        "type": "header",
+        "content": "Markenfarben"
+      },
+      {
+        "type": "color",
+        "id": "color_ember",
+        "label": "Ember / Flammen-Rot",
+        "default": "#e3341e"
+      },
+      {
+        "type": "color",
+        "id": "color_flame",
+        "label": "Flame / Logo-Gelb",
+        "default": "#ffeb00"
+      }
+    ]
+  },
+  {
+    "name": "Typografie",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Alle Schriften sind lokal im Theme gehostet, also DSGVO-konform ohne Google-Fonts-Request. Verdana ist eine Systemschrift (keine Datei nötig)."
+      },
+      {
+        "type": "select",
+        "id": "heading_font",
+        "label": "Schrift Überschriften",
+        "options": [
+          {
+            "value": "archivo",
+            "label": "Archivo Black (Display, fett)"
+          },
+          {
+            "value": "barlow",
+            "label": "Barlow Condensed (schmal, kräftig)"
+          },
+          {
+            "value": "poppins",
+            "label": "Poppins (geometrisch)"
+          },
+          {
+            "value": "outfit",
+            "label": "Outfit (modern)"
+          },
+          {
+            "value": "verdana",
+            "label": "Verdana (System)"
+          }
+        ],
+        "default": "archivo"
+      },
+      {
+        "type": "select",
+        "id": "body_font",
+        "label": "Schrift Fließtext",
+        "options": [
+          {
+            "value": "outfit",
+            "label": "Outfit (modern)"
+          },
+          {
+            "value": "poppins",
+            "label": "Poppins (geometrisch)"
+          },
+          {
+            "value": "barlow",
+            "label": "Barlow Condensed (schmal)"
+          },
+          {
+            "value": "archivo",
+            "label": "Archivo Black (Display)"
+          },
+          {
+            "value": "verdana",
+            "label": "Verdana (System)"
+          }
+        ],
+        "default": "outfit"
+      },
+      {
+        "type": "range",
+        "id": "font_size_base",
+        "min": 14,
+        "max": 20,
+        "step": 1,
+        "unit": "px",
+        "label": "Basis Schriftgröße",
+        "default": 16
+      },
+      {
+        "type": "range",
+        "id": "heading_scale",
+        "min": 100,
+        "max": 150,
+        "step": 5,
+        "unit": "%",
+        "label": "Überschriften Skalierung",
+        "default": 115
+      },
+      {
+        "type": "select",
+        "id": "heading_transform",
+        "label": "Überschriften Schreibweise",
+        "options": [
+          {
+            "value": "none",
+            "label": "Normal"
+          },
+          {
+            "value": "uppercase",
+            "label": "GROSSBUCHSTABEN"
+          }
+        ],
+        "default": "uppercase"
+      }
+    ]
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      {
+        "type": "range",
+        "id": "page_width",
+        "min": 1100,
+        "max": 1600,
+        "step": 20,
+        "unit": "px",
+        "label": "Maximale Seitenbreite",
+        "default": 1180
+      },
+      {
+        "type": "range",
+        "id": "spacing_sections",
+        "min": 0,
+        "max": 120,
+        "step": 4,
+        "unit": "px",
+        "label": "Abstand zwischen Abschnitten",
+        "default": 64
+      },
+      {
+        "type": "header",
+        "content": "Ecken & Form"
+      },
+      {
+        "type": "select",
+        "id": "corner_style",
+        "label": "Grundform aller Kanten",
+        "info": "Grundlegender Modus. „Eckig\" setzt alle Radien (Karten, Buttons, Felder, Bilder) auf 0.",
+        "options": [
+          {
+            "value": "rounded",
+            "label": "Abgerundet"
+          },
+          {
+            "value": "square",
+            "label": "Eckig"
+          }
+        ],
+        "default": "rounded"
+      },
+      {
+        "type": "range",
+        "id": "corner_radius",
+        "min": 0,
+        "max": 28,
+        "step": 2,
+        "unit": "px",
+        "label": "Eckenradius (bei „Abgerundet\")",
+        "info": "Gilt für Karten, Felder und Bilder. Buttons sind bei „Abgerundet\" als Pille geformt, bei „Eckig\" kantig.",
+        "default": 10
+      }
+    ]
+  },
+  {
+    "name": "Produktkarten",
+    "settings": [
+      {
+        "type": "select",
+        "id": "card_image_ratio",
+        "label": "Bildformat",
+        "options": [
+          {
+            "value": "square",
+            "label": "Quadratisch (1:1)"
+          },
+          {
+            "value": "portrait",
+            "label": "Hochformat (3:4)"
+          },
+          {
+            "value": "natural",
+            "label": "Natürlich"
+          }
+        ],
+        "default": "square"
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_vendor",
+        "label": "Marke anzeigen",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_second_image",
+        "label": "Zweites Bild bei Hover",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_quick_add",
+        "label": "Schnellkauf-Button anzeigen",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Produktseite",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Variantenmetafelder werden direkt in der Produkt-Section konfiguriert (Abschnitt bearbeiten in der Produktvorlage)."
+      },
+      {
+        "type": "checkbox",
+        "id": "product_sticky_info",
+        "label": "Produktinfos beim Scrollen fixieren (Desktop)",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "product_enable_zoom",
+        "label": "Bild-Zoom aktivieren",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Variantenauswahl"
+      },
+      {
+        "type": "paragraph",
+        "content": "Gilt für alle Optionen, die Ihre Varianten unterscheiden, unabhängig vom Namen: Gewicht, Farbe, Größe, Jahrgang, Sorte und so weiter. Die Optionen legen Sie im Admin am Produkt an, das Theme übernimmt sie automatisch."
+      },
+      {
+        "type": "select",
+        "id": "variant_option_style",
+        "label": "Darstellung der Optionen",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Automatisch"
+          },
+          {
+            "value": "pills",
+            "label": "Kacheln"
+          },
+          {
+            "value": "swatches",
+            "label": "Farbfelder"
+          },
+          {
+            "value": "dropdown",
+            "label": "Auswahlliste"
+          }
+        ],
+        "default": "auto",
+        "info": "Automatisch heißt: Farbfelder, wenn Shopify für die Option Farben oder Muster hinterlegt hat, Auswahlliste bei vielen Werten, sonst Kacheln."
+      },
+      {
+        "type": "range",
+        "id": "variant_dropdown_threshold",
+        "min": 3,
+        "max": 20,
+        "step": 1,
+        "label": "Auswahlliste ab dieser Anzahl Werte",
+        "default": 8,
+        "info": "Nur bei Darstellung Automatisch."
+      },
+      {
+        "type": "select",
+        "id": "variant_swatch_shape",
+        "label": "Form der Farbfelder",
+        "options": [
+          {
+            "value": "auto",
+            "label": "Wie Ecken-Stil des Themes"
+          },
+          {
+            "value": "circle",
+            "label": "Rund"
+          },
+          {
+            "value": "rounded",
+            "label": "Abgerundet"
+          },
+          {
+            "value": "square",
+            "label": "Eckig"
+          }
+        ],
+        "default": "auto"
+      },
+      {
+        "type": "select",
+        "id": "variant_swatch_size",
+        "label": "Größe der Farbfelder",
+        "options": [
+          {
+            "value": "small",
+            "label": "Klein"
+          },
+          {
+            "value": "medium",
+            "label": "Mittel"
+          },
+          {
+            "value": "large",
+            "label": "Groß"
+          }
+        ],
+        "default": "medium"
+      },
+      {
+        "type": "checkbox",
+        "id": "variant_swatch_use_variant_image",
+        "label": "Variantenbild als Farbfeld nutzen",
+        "default": true,
+        "info": "Für Werte, für die im Admin kein Farbwert und kein Muster hinterlegt ist. Statt einer Textkachel erscheint dann das Bild der Variante."
+      }
+    ]
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "text",
+        "id": "social_facebook",
+        "label": "Facebook URL"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube",
+        "label": "YouTube URL"
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok",
+        "label": "TikTok URL"
+      }
+    ]
+  },
+  {
+    "name": "SEO & Vertrauen",
+    "settings": [
+      {
+        "type": "text",
+        "id": "organization_name",
+        "label": "Firmenname (strukturierte Daten)",
+        "default": "Shop"
+      },
+      {
+        "type": "text",
+        "id": "support_phone",
+        "label": "Service-Telefon"
+      },
+      {
+        "type": "text",
+        "id": "support_hours",
+        "label": "Servicezeiten"
+      },
+      {
+        "type": "text",
+        "id": "support_email",
+        "label": "Service E-Mail"
+      }
+    ]
+  },
+  {
+    "name": "Animationen",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "animations_enabled",
+        "label": "Sanfte Einblend-Animationen aktivieren",
+        "default": true
+      }
+    ]
+  }
+]

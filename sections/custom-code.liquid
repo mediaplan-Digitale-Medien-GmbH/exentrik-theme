@@ -1,0 +1,50 @@
+{%- comment -%}
+  Custom Code: HTML oder Liquid im Theme Editor einfügen.
+{%- endcomment -%}
+{%- if section.settings.custom_code != blank -%}
+  <div
+    class="custom-code{% if section.settings.full_width %} custom-code--full{% else %} section{% endif %}"
+    id="{{ section.settings.anchor_id | escape }}"
+    {{ section.shopify_attributes }}>
+    {%- unless section.settings.full_width -%}
+      <div class="page-width">
+        {{ section.settings.custom_code }}
+      </div>
+    {%- else -%}
+      {{ section.settings.custom_code }}
+    {%- endunless -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Custom Code",
+  "tag": "section",
+  "class": "custom-code-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anker-ID",
+      "info": "Optional, z. B. tracking"
+    },
+    {
+      "type": "liquid",
+      "id": "custom_code",
+      "label": "Custom Code (HTML / Liquid)",
+      "info": "HTML, Scripts oder Liquid. Vorsicht bei Fremd-Scripts (DSGVO)."
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Volle Breite (ohne Seitenrand)",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Code"
+    }
+  ]
+}
+{% endschema %}

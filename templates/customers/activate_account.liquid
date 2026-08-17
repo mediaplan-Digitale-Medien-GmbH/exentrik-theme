@@ -1,0 +1,16 @@
+<div class="page-width page-width--narrow section" style="max-width:460px;">
+  <h1 style="text-align:center;">Konto aktivieren</h1>
+  {%- form 'activate_customer_password' -%}
+    {{ form.errors | default_errors }}
+    <div class="product-form__option">
+      <label class="product-form__label" for="pw">Passwort</label>
+      <input class="select" style="width:100%;" type="password" name="customer[password]" id="pw" required>
+    </div>
+    <div class="product-form__option">
+      <label class="product-form__label" for="pw2">Passwort bestätigen</label>
+      <input class="select" style="width:100%;" type="password" name="customer[password_confirmation]" id="pw2" required>
+    </div>
+    <button type="submit" class="btn btn--primary btn--full">Konto aktivieren</button>
+    <button type="submit" name="decline" class="btn btn--secondary btn--full" style="margin-top:0.5rem;">Ablehnen</button>
+  {%- endform -%}
+</div>

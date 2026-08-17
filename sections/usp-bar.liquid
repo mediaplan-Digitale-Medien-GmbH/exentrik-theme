@@ -1,0 +1,58 @@
+<div class="usp-bar">
+  <div class="page-width">
+    <div class="usp-bar__grid" style="grid-template-columns: repeat({{ section.blocks.size }}, 1fr);">
+      {%- for block in section.blocks -%}
+        <div class="usp-item" {{ block.shopify_attributes }}>
+          {% render 'icon', name: block.settings.icon %}
+          <div>
+            <div class="usp-item__title">{{ block.settings.title }}</div>
+            {%- if block.settings.text != blank -%}<div class="usp-item__text">{{ block.settings.text }}</div>{%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Vorteile-Leiste",
+  "tag": "section",
+  "blocks": [
+    {
+      "type": "usp",
+      "name": "Vorteil",
+      "settings": [
+        {
+          "type": "select", "id": "icon", "label": "Symbol",
+          "options": [
+            { "value": "truck", "label": "Versand" },
+            { "value": "shield", "label": "Schutz" },
+            { "value": "return", "label": "Rückgabe" },
+            { "value": "headset", "label": "Support" },
+            { "value": "credit-card", "label": "Zahlung" },
+            { "value": "lock", "label": "Sicherheit" },
+            { "value": "star", "label": "Bewertung" },
+            { "value": "check", "label": "Haken" }
+          ],
+          "default": "truck"
+        },
+        { "type": "text", "id": "title", "label": "Titel", "default": "Schneller Versand" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Lieferung mit DHL" }
+      ]
+    }
+  ],
+  "max_blocks": 5,
+  "presets": [
+    {
+      "name": "Vorteile-Leiste",
+      "blocks": [
+        { "type": "usp", "settings": { "icon": "truck", "title": "Schneller Versand", "text": "Lieferung mit DHL in 2 bis 3 Tagen" } },
+        { "type": "usp", "settings": { "icon": "return", "title": "Rückgaberecht", "text": "1 Monat Widerrufsrecht" } },
+        { "type": "usp", "settings": { "icon": "credit-card", "title": "Kauf auf Rechnung", "text": "Sicher und bequem zahlen" } },
+        { "type": "usp", "settings": { "icon": "headset", "title": "Persönliche Beratung", "text": "Mo bis Fr per Telefon und E-Mail" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

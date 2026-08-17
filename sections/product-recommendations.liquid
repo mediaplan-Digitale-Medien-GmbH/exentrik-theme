@@ -1,0 +1,54 @@
+{%- comment -%}
+  Produktempfehlungen aus Shopify. "Passendes Zubehör" wird in der App Search & Discovery
+  je Produkt gepflegt und hier nachgeladen.
+{%- endcomment -%}
+<div
+  data-product-recommendations
+  data-url="{{ routes.product_recommendations_url }}"
+  data-section-id="{{ section.id }}"
+  data-product-id="{{ product.id }}"
+  data-intent="{{ section.settings.intent }}"
+  data-limit="{{ section.settings.products_to_show }}">
+  {%- if recommendations.performed and recommendations.products_count > 0 -%}
+    <div class="section">
+      <div class="page-width">
+        <div class="section-header" reveal>
+          {%- if section.settings.eyebrow != blank -%}
+            <span class="section-header__eyebrow">{{ section.settings.eyebrow }}</span>
+          {%- endif -%}
+          <h2>{{ section.settings.heading }}</h2>
+        </div>
+        <div class="grid grid--{{ section.settings.columns }} grid--1-mobile">
+          {%- for recommendation in recommendations.products -%}
+            {% render 'product-card', product: recommendation %}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Produktempfehlungen",
+  "tag": "section",
+  "settings": [
+    { "type": "paragraph", "content": "Welche Produkte hier erscheinen, steuern Sie in der kostenlosen Shopify App Search & Discovery unter Produktempfehlungen. Ohne Pflege bleibt der Bereich leer." },
+    { "type": "text", "id": "eyebrow", "label": "Kleiner Titel" },
+    { "type": "text", "id": "heading", "label": "Überschrift", "default": "Passendes Zubehör" },
+    {
+      "type": "select",
+      "id": "intent",
+      "label": "Art der Empfehlung",
+      "options": [
+        { "value": "complementary", "label": "Passendes Zubehör" },
+        { "value": "related", "label": "Ähnliche Produkte" }
+      ],
+      "default": "complementary"
+    },
+    { "type": "range", "id": "products_to_show", "min": 2, "max": 8, "step": 1, "label": "Anzahl Produkte", "default": 4 },
+    { "type": "range", "id": "columns", "min": 2, "max": 5, "step": 1, "label": "Spalten", "default": 4 }
+  ],
+  "presets": [{ "name": "Produktempfehlungen" }]
+}
+{% endschema %}

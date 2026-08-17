@@ -1,0 +1,57 @@
+<div class="drawer drawer--right" id="CartDrawer" aria-hidden="true">
+  <div class="drawer__overlay" data-close></div>
+  <div class="drawer__panel drawer__panel--right" role="dialog" aria-modal="true" aria-label="{{ 'cart.title' | t }}">
+    <div class="drawer__header">
+      <strong style="font-family:var(--font-heading);font-size:1.2rem;">{{ 'cart.title' | t }}</strong>
+      <button class="header__action" data-close aria-label="{{ 'accessibility.close' | t }}">{% render 'icon', name: 'close' %}</button>
+    </div>
+
+    <div data-cart-drawer-content>
+      {%- if cart.item_count == 0 -%}
+        <p class="text-muted" style="padding:2rem 0;">{{ 'cart.empty' | t }}</p>
+        <a href="{{ routes.all_products_collection_url }}" class="btn btn--primary btn--full">{{ 'cart.continue_shopping' | t }}</a>
+      {%- else -%}
+        <div class="cart-drawer__items">
+          {%- for item in cart.items -%}
+            <div class="cart-item" style="grid-template-columns:64px 1fr;">
+              <a href="{{ item.url }}" class="cart-item__media">
+                {%- if item.image -%}
+                  <img src="{{ item.image | image_url: width: 128 }}" alt="{{ item.title | escape }}" width="64" height="64" loading="lazy">
+                {%- endif -%}
+              </a>
+              <div>
+                <a href="{{ item.url }}" class="cart-item__title">{{ item.product.title }}</a>
+                {%- unless item.variant.title contains 'Default' -%}
+                  <div class="cart-item__meta">{{ item.variant.title }}</div>
+                {%- endunless -%}
+                <div class="cart-item__meta">{{ item.quantity }} &times; {{ item.final_price | money }}</div>
+                {%- if item.variant.unit_price_measurement -%}
+                  <div class="cart-item__meta">{% render 'unit-price', variant: item.variant %}</div>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        <div style="margin-top:1.25rem;padding-top:1rem;border-top:1px solid var(--color-border);">
+          <div style="display:flex;justify-content:space-between;margin-bottom:1rem;">
+            <span>{{ 'cart.subtotal' | t }}</span>
+            <strong>{{ cart.total_price | money }}</strong>
+          </div>
+          <p class="text-muted" style="font-size:0.8rem;margin-bottom:1rem;">{{ 'cart.taxes_included' | t }}</p>
+          <a href="{{ routes.cart_url }}" class="btn btn--secondary btn--full" style="margin-bottom:0.5rem;">{{ 'cart.title' | t }}</a>
+          <form action="{{ routes.cart_url }}" method="post">
+            <button type="submit" name="checkout" class="btn btn--primary btn--full">{{ 'cart.checkout' | t }}</button>
+          </form>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Warenkorb-Schublade",
+  "settings": []
+}
+{% endschema %}

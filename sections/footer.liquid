@@ -1,0 +1,213 @@
+<footer class="site-footer" role="contentinfo">
+  <div class="page-width">
+    <div class="site-footer__top">
+      <div>
+        <div class="site-footer__brand">
+          {%- if section.settings.show_logo and settings.logo_inverted != blank -%}
+            <img class="site-footer__logo" src="{{ settings.logo_inverted | image_url: width: 440 }}" alt="{{ shop.name | escape }}" width="220" height="60" loading="lazy">
+          {%- elsif section.settings.show_logo and settings.logo != blank -%}
+            <img class="site-footer__logo" src="{{ settings.logo | image_url: width: 440 }}" alt="{{ shop.name | escape }}" width="220" height="60" loading="lazy">
+          {%- else -%}
+            <span class="site-footer__brand-name">{{ section.settings.brand_name | default: shop.name }}</span>
+          {%- endif -%}
+        </div>
+        {%- if section.settings.about_text != blank -%}
+          <p class="site-footer__about">{{ section.settings.about_text }}</p>
+        {%- endif -%}
+      </div>
+
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'menu' -%}
+            <div {{ block.shopify_attributes }}>
+              <h3 class="site-footer__heading">{{ block.settings.title }}</h3>
+              {%- if block.settings.menu != blank -%}
+                <ul class="site-footer__links">
+                  {%- for link in block.settings.menu.links -%}
+                    <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+            </div>
+          {%- when 'contact' -%}
+            <div {{ block.shopify_attributes }}>
+              <h3 class="site-footer__heading">{{ block.settings.title }}</h3>
+              <div class="site-footer__links">
+                {%- if settings.support_phone != blank -%}
+                  <a href="tel:{{ settings.support_phone | remove: ' ' | remove: '-' }}">{{ settings.support_phone }}</a>
+                {%- endif -%}
+                {%- if settings.support_hours != blank -%}
+                  <span>{{ settings.support_hours }}</span>
+                {%- endif -%}
+                {%- if settings.support_email != blank -%}
+                  <a href="mailto:{{ settings.support_email }}">{{ settings.support_email }}</a>
+                {%- endif -%}
+              </div>
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="site-footer__bottom">
+      <span>&copy; {{ 'now' | date: '%Y' }} {{ settings.organization_name | default: shop.name }}. {{ section.settings.tax_note }}</span>
+      <div class="site-footer__bottom-actions">
+        {%- if section.settings.cancel_enabled -%}
+          {%- assign cancel_url = section.settings.cancel_link | default: '/pages/vertrag-kuendigen' -%}
+          <a class="site-footer__cancel-btn" href="{{ cancel_url }}">{{ section.settings.cancel_label | default: 'Vertrag kündigen' }}</a>
+        {%- endif -%}
+        {%- if section.settings.show_payment_icons -%}
+          {%- assign pay_custom = section.settings.payment_icons_custom | strip -%}
+          <span class="site-footer__payments">
+            {%- if pay_custom != blank -%}
+              {%- assign pay_list = pay_custom | split: ',' -%}
+              {%- for t in pay_list -%}{{ t | strip | downcase | payment_type_svg_tag }}{%- endfor -%}
+            {%- else -%}
+              {{ shop.enabled_payment_types | payment_type_svg_tag }}
+            {%- endif -%}
+          </span>
+        {%- endif -%}
+        {%- if section.settings.payment_note != blank -%}
+          <span>{{ section.settings.payment_note }}</span>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": {{ settings.organization_name | default: shop.name | json }},
+  "url": {{ request.origin | append: routes.root_url | json }},
+  {% if settings.logo %}"logo": {{ settings.logo | image_url: width: 400 | prepend: "https:" | json }},{% endif %}
+  {% if settings.support_phone != blank %}
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": {{ settings.support_phone | json }},
+    "contactType": "customer service",
+    "areaServed": "DE",
+    "availableLanguage": ["German"]
+  },
+  {% endif %}
+  "sameAs": [
+    {%- assign socials = '' -%}
+    {%- if settings.social_facebook != blank %}{% assign socials = socials | append: settings.social_facebook | append: '||' %}{% endif -%}
+    {%- if settings.social_instagram != blank %}{% assign socials = socials | append: settings.social_instagram | append: '||' %}{% endif -%}
+    {%- if settings.social_youtube != blank %}{% assign socials = socials | append: settings.social_youtube | append: '||' %}{% endif -%}
+    {%- if settings.social_tiktok != blank %}{% assign socials = socials | append: settings.social_tiktok | append: '||' %}{% endif -%}
+    {%- assign social_list = socials | split: '||' -%}
+    {%- for s in social_list -%}{{ s | json }}{%- unless forloop.last %},{% endunless -%}{%- endfor -%}
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": {{ shop.name | json }},
+  "url": {{ request.origin | append: routes.root_url | json }},
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {{ request.origin | append: routes.search_url | append: "?q={search_term_string}" | json }},
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+{% schema %}
+{
+  "name": "Fußzeile",
+  "settings": [
+    { "type": "checkbox", "id": "show_logo", "label": "Logo anzeigen", "default": true },
+    { "type": "text", "id": "brand_name", "label": "Markenname", "default": "Shop" },
+    {
+      "type": "textarea",
+      "id": "about_text",
+      "label": "Kurzbeschreibung",
+      "default": "Kurze Beschreibung deines Shops."
+    },
+    {
+      "type": "text",
+      "id": "tax_note",
+      "label": "Steuerhinweis",
+      "default": "Alle Preise inkl. MwSt. zzgl. Versand."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Zahlungs-Icons anzeigen",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "payment_icons_custom",
+      "label": "Zahlungs-Icons (manuell)",
+      "info": "Kommagetrennt. Leer = automatisch aus den aktiven Zahlungsarten. Verfügbar u. a.: visa, master, american_express, maestro, paypal, apple_pay, google_pay, shopify_pay, klarna, discover, diners_club, jcb, ideal, sofort, bitcoin",
+      "default": "visa,master,american_express,maestro,paypal,apple_pay,google_pay,shopify_pay,klarna"
+    },
+    {
+      "type": "text",
+      "id": "payment_note",
+      "label": "Zahlungsarten Hinweis (Text, optional)",
+      "info": "Ergänzt die Icons, z. B. für Vorkasse/Rechnung. Leer lassen, wenn nur Icons gewünscht sind.",
+      "default": ""
+    },
+    {
+      "type": "header",
+      "content": "Kündigungsbutton (§ 312k BGB)"
+    },
+    {
+      "type": "paragraph",
+      "content": "Pflicht für online abgeschlossene Dauerschuldverhältnisse (z. B. Abo). Der Button muss zu einem Kündigungsformular führen."
+    },
+    {
+      "type": "checkbox",
+      "id": "cancel_enabled",
+      "label": "Kündigungsbutton anzeigen",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "cancel_label",
+      "label": "Button-Text",
+      "default": "Vertrag kündigen"
+    },
+    {
+      "type": "url",
+      "id": "cancel_link",
+      "label": "Link zum Kündigungsformular",
+      "info": "Leer = /pages/vertrag-kuendigen. Lege dazu eine passende Seite an oder verlinke dein Formular."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Linkspalte",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Überschrift", "default": "Shop" },
+        { "type": "link_list", "id": "menu", "label": "Menü" }
+      ]
+    },
+    {
+      "type": "contact",
+      "name": "Kontakt",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Überschrift", "default": "Service" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fußzeile",
+      "blocks": [
+        { "type": "menu", "settings": { "title": "Shop" } },
+        { "type": "menu", "settings": { "title": "Service" } },
+        { "type": "contact", "settings": { "title": "Kontakt" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

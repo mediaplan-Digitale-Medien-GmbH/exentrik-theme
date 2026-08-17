@@ -1,0 +1,10 @@
+<div class="page-width page-width--narrow section" style="max-width:460px;text-align:center;">
+  <h1>{{ shop.name }}</h1>
+  <p class="text-muted">Geschenkgutschein im Wert von</p>
+  <div style="font-size:2.5rem;font-weight:700;font-family:var(--font-heading);color:var(--color-accent);">{{ gift_card.initial_value | money }}</div>
+  {%- if gift_card.qr_identifier -%}
+    <img src="{{ gift_card.qr_identifier | generate_qr_code }}" alt="QR Code" style="margin:1.5rem auto;">
+  {%- endif -%}
+  <div class="card" style="padding:1rem;font-family:monospace;font-size:1.1rem;letter-spacing:0.1em;">{{ gift_card.code | format_code }}</div>
+  <p class="text-muted" style="margin-top:1rem;">Aktuelles Guthaben: {{ gift_card.balance | money }}</p>
+</div>

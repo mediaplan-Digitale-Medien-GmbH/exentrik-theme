@@ -1,0 +1,49 @@
+<div class="page-width section">
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
+    <h1>{{ 'customer.account' | t }}</h1>
+    <a href="{{ routes.account_logout_url }}" class="btn btn--secondary">{{ 'customer.log_out' | t }}</a>
+  </div>
+
+  <div class="grid grid--2 grid--1-mobile" style="margin-top:1.5rem;">
+    <div>
+      <h2 class="h3">Bestellungen</h2>
+      {%- paginate customer.orders by 10 -%}
+        {%- if customer.orders.size > 0 -%}
+          <div style="overflow-x:auto;">
+            <table style="width:100%;border-collapse:collapse;">
+              <thead>
+                <tr style="text-align:left;border-bottom:1px solid var(--color-border);">
+                  <th style="padding:0.6rem 0;">Bestellung</th><th>Datum</th><th>Status</th><th>Summe</th>
+                </tr>
+              </thead>
+              <tbody>
+                {%- for order in customer.orders -%}
+                  <tr style="border-bottom:1px solid var(--color-border);">
+                    <td style="padding:0.6rem 0;"><a href="{{ order.customer_url }}" style="color:var(--color-accent);font-weight:600;">{{ order.name }}</a></td>
+                    <td>{{ order.created_at | date: '%d.%m.%Y' }}</td>
+                    <td>{{ order.financial_status_label }}</td>
+                    <td>{{ order.total_price | money }}</td>
+                  </tr>
+                {%- endfor -%}
+              </tbody>
+            </table>
+          </div>
+        {%- else -%}
+          <p class="text-muted">Sie haben noch keine Bestellungen.</p>
+        {%- endif -%}
+      {%- endpaginate -%}
+    </div>
+
+    <div>
+      <h2 class="h3">Adresse</h2>
+      {%- assign address = customer.default_address -%}
+      {%- if address -%}
+        <div class="card" style="padding:1.25rem;">
+          <strong>{{ address.name }}</strong>
+          <p class="text-muted" style="margin-top:0.5rem;">{{ address.street }}<br>{{ address.zip }} {{ address.city }}<br>{{ address.country }}</p>
+        </div>
+      {%- endif -%}
+      <a href="{{ routes.account_addresses_url }}" class="btn btn--secondary" style="margin-top:1rem;">Adressen verwalten</a>
+    </div>
+  </div>
+</div>

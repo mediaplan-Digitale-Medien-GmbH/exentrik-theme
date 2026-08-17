@@ -1,0 +1,151 @@
+{%- liquid
+  assign pd_auto = section.settings.product_metafields_auto
+  assign pd_ns = section.settings.product_metafields_namespace | default: 'custom'
+  assign cur = product.selected_or_first_available_variant
+  assign has_details = false
+  for block in section.blocks
+    if block.type == 'variant_metafield' or block.type == 'product_metafield'
+      assign has_details = true
+    endif
+  endfor
+  if pd_auto
+    assign has_details = true
+  endif
+-%}
+{%- if product and has_details -%}
+  <div class="section">
+    <div class="page-width">
+      <div class="product-details" data-product-details data-pd-section="{{ section.id }}">
+        {%- if section.settings.product_metafields_title != blank -%}
+          <div class="product-details__title">{{ section.settings.product_metafields_title }}</div>
+        {%- endif -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'variant_metafield' -%}
+            {%- assign mf = cur.metafields[block.settings.namespace][block.settings.key] -%}
+            {%- capture mfval -%}{{ mf }}{%- endcapture -%}{%- assign mfval = mfval | strip -%}
+            {%- assign mf_empty = false -%}
+            {%- if mfval == blank or mfval == 'null' -%}{%- assign mf_empty = true -%}{%- endif -%}
+            {%- assign mf_hide = false -%}
+            {%- if mf_empty and request.design_mode == false -%}{%- assign mf_hide = true -%}{%- endif -%}
+            <div class="product-details__row" data-vmf="{{ block.id }}"{% if mf_hide %} hidden{% endif %} {{ block.shopify_attributes }}>
+              <div class="product-details__key">{{ block.settings.label }}{% if request.design_mode %}<span class="product-details__ref">{{ block.settings.namespace }}.{{ block.settings.key }}</span>{% endif %}</div>
+              <div class="product-details__value" data-vmf-value>{% if mf_empty %}ohne Angabe{% else %}{{ mfval }}{% endif %}</div>
+            </div>
+          {%- elsif block.type == 'product_metafield' -%}
+            {%- assign pmf = product.metafields[block.settings.namespace][block.settings.key] -%}
+            {%- capture pmfval -%}{{ pmf }}{%- endcapture -%}{%- assign pmfval = pmfval | strip -%}
+            {%- assign pmf_empty = false -%}
+            {%- if pmfval == blank or pmfval == 'null' -%}{%- assign pmf_empty = true -%}{%- endif -%}
+            {%- if pmf_empty == false or request.design_mode -%}
+              <div class="product-details__row" {{ block.shopify_attributes }}>
+                <div class="product-details__key">{{ block.settings.label }}{% if request.design_mode %}<span class="product-details__ref">{{ block.settings.namespace }}.{{ block.settings.key }}</span>{% endif %}</div>
+                <div class="product-details__value">{% if pmf_empty %}ohne Angabe{% else %}{{ pmfval }}{% endif %}</div>
+              </div>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- if pd_auto -%}
+          {%- comment -%} Compliance-Felder (GPSR, DSGVO, EU-Verantwortlicher) immer ans Ende {%- endcomment -%}
+          {%- for pass in (1..2) -%}
+            {%- for field in product.metafields[pd_ns] -%}
+              {%- assign av = field.last -%}{%- capture av -%}{{ av }}{%- endcapture -%}{%- assign av = av | strip -%}
+              {%- if av != blank and av != 'null' -%}
+                {%- assign fk = field.first | downcase -%}
+                {%- assign is_compliance = false -%}
+                {%- if fk contains 'gpsr' or fk contains 'dsgvo' -%}{%- assign is_compliance = true -%}{%- endif -%}
+                {%- if fk contains 'antwort' or fk contains 'responsible' -%}{%- assign is_compliance = true -%}{%- endif -%}
+                {%- assign show_now = false -%}
+                {%- if pass == 1 and is_compliance == false -%}{%- assign show_now = true -%}{%- endif -%}
+                {%- if pass == 2 and is_compliance -%}{%- assign show_now = true -%}{%- endif -%}
+                {%- if show_now -%}
+                  <div class="product-details__row">
+                    <div class="product-details__key">{{ field.first | replace: '_', ' ' | capitalize }}</div>
+                    <div class="product-details__value">{{ av }}</div>
+                  </div>
+                {%- endif -%}
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  <script type="application/json" data-pd-variants="{{ section.id }}">
+    {
+      {%- assign first_v = true -%}
+      {%- for variant in product.variants -%}
+        {%- unless first_v %},{% endunless -%}{%- assign first_v = false -%}
+        {{ variant.id | json }}: {
+          {%- assign first_m = true -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'variant_metafield' -%}
+              {%- unless first_m %},{% endunless -%}{%- assign first_m = false -%}
+              {%- assign mv = variant.metafields[block.settings.namespace][block.settings.key] -%}
+              {%- capture mvs -%}{{ mv }}{%- endcapture -%}
+              {{ block.id | json }}: {{ mvs | strip | json }}
+            {%- endif -%}
+          {%- endfor -%}
+        }
+      {%- endfor -%}
+    }
+  </script>
+  <script>
+    (function () {
+      var root = document.querySelector('[data-pd-section="{{ section.id }}"]');
+      var dataEl = document.querySelector('[data-pd-variants="{{ section.id }}"]');
+      if (!root || !dataEl) return;
+      var data = {};
+      try { data = JSON.parse(dataEl.textContent); } catch (e) {}
+      var design = !!(window.Shopify && window.Shopify.designMode);
+      function apply(vid) {
+        var vals = data[vid] || {};
+        root.querySelectorAll('[data-vmf]').forEach(function (row) {
+          var key = row.getAttribute('data-vmf');
+          var val = vals[key];
+          var has = !(val === undefined || val === null || val === '');
+          var ve = row.querySelector('[data-vmf-value]');
+          if (ve) ve.innerHTML = has ? val : '\u2014';
+          row.hidden = !has && !design;
+        });
+      }
+      document.addEventListener('variant:change', function (e) {
+        if (e.detail && e.detail.variantId) apply(e.detail.variantId);
+      });
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Produktdetails",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "product_metafields_title", "label": "Titel", "default": "Produktdetails" },
+    { "type": "paragraph", "content": "Füge Blöcke hinzu: „Variantenmetafeld\" (aktualisiert sich beim Variantenwechsel) oder „Produktmetafeld\" (gilt fürs ganze Produkt). Reihenfolge per Drag & Drop. Diese Sektion kannst du frei auf der Produktseite platzieren. Im Editor werden leere Felder mit „ohne Angabe\" angezeigt, im Live-Shop bleiben sie verborgen." },
+    { "type": "checkbox", "id": "product_metafields_auto", "label": "Alle Produktmetafelder automatisch anzeigen", "default": false },
+    { "type": "text", "id": "product_metafields_namespace", "label": "Namespace für automatische Anzeige", "default": "custom", "info": "z. B. custom" }
+  ],
+  "blocks": [
+    {
+      "type": "variant_metafield",
+      "name": "Variantenmetafeld",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Anzeigename", "default": "Merkmal" },
+        { "type": "text", "id": "namespace", "label": "Namespace", "default": "custom", "info": "z. B. custom" },
+        { "type": "text", "id": "key", "label": "Key", "info": "Der Schlüssel des Metafelds, z. B. koernung" }
+      ]
+    },
+    {
+      "type": "product_metafield",
+      "name": "Produktmetafeld",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Anzeigename", "default": "Merkmal" },
+        { "type": "text", "id": "namespace", "label": "Namespace", "default": "custom", "info": "z. B. custom" },
+        { "type": "text", "id": "key", "label": "Key", "info": "Der Schlüssel des Produkt-Metafelds, z. B. herkunft" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Produktdetails" }]
+}
+{% endschema %}

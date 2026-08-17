@@ -1,0 +1,66 @@
+<div class="section">
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <div class="section-header" reveal>
+        {%- if section.settings.eyebrow != blank -%}<span class="section-header__eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+        <h2>{{ section.settings.heading }}</h2>
+      </div>
+    {%- endif -%}
+
+    <div class="faq" reveal>
+      {%- for block in section.blocks -%}
+        <details class="faq__item" {% if forloop.first and section.settings.open_first %}open{% endif %} {{ block.shopify_attributes }}>
+          <summary class="faq__summary">{{ block.settings.question }} {% render 'icon', name: 'plus' %}</summary>
+          <div class="faq__content rte">{{ block.settings.answer }}</div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{%- if section.settings.enable_schema and section.blocks.size > 0 -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {%- for block in section.blocks -%}
+      {
+        "@type": "Question",
+        "name": {{ block.settings.question | json }},
+        "acceptedAnswer": { "@type": "Answer", "text": {{ block.settings.answer | strip_html | json }} }
+      }{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ]
+  }
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "FAQ",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Kleiner Titel", "default": "Gut zu wissen" },
+    { "type": "text", "id": "heading", "label": "Überschrift", "default": "Häufige Fragen" },
+    { "type": "checkbox", "id": "open_first", "label": "Erste Frage geöffnet anzeigen", "default": true },
+    { "type": "checkbox", "id": "enable_schema", "label": "FAQ-Suchmaschinen-Markup (FAQPage) ausgeben", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "Frage",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Frage", "default": "Wie lange dauert der Versand?" },
+        { "type": "richtext", "id": "answer", "label": "Antwort", "default": "<p>Die Lieferung erfolgt in der Regel innerhalb weniger Werktage. Exacte Zeiten findest du in den Versandinformationen.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ",
+      "blocks": [{ "type": "faq" }, { "type": "faq" }, { "type": "faq" }]
+    }
+  ]
+}
+{% endschema %}

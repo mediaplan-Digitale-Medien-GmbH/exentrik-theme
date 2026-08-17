@@ -1,0 +1,135 @@
+{%- comment -%}
+  Variantenauswahl. Arbeitet mit beliebigen Optionsnamen (Gewicht, Farbe, Jahrgang,
+  Größe, Sorte ...) und beliebig vielen Optionen. Die Darstellung je Option kommt
+  entweder aus den Theme-Einstellungen oder wird automatisch bestimmt.
+
+  Accepts:
+  - product: {Object} product
+  - section_id: {String} section.id der aufrufenden Section (fuer eindeutige Feld-IDs)
+  - style: {String} theme | auto | pills | swatches | dropdown
+  - dropdown_threshold: {Number} ab wie vielen Werten eine Auswahlliste genutzt wird
+{%- endcomment -%}
+{%- unless product.has_only_default_variant -%}
+  {%- liquid
+    assign picker_style = style | default: 'theme'
+    if picker_style == 'theme'
+      assign picker_style = settings.variant_option_style | default: 'auto'
+    endif
+    assign picker_threshold = dropdown_threshold | default: settings.variant_dropdown_threshold | default: 8
+    assign swatch_shape = settings.variant_swatch_shape | default: 'auto'
+    assign swatch_size = settings.variant_swatch_size | default: 'medium'
+    assign use_variant_image = settings.variant_swatch_use_variant_image
+  -%}
+
+  {%- for option in product.options_with_values -%}
+    {%- liquid
+      assign mode = picker_style
+      # has_swatches steuert die automatische Erkennung und zaehlt nur echte
+      # Swatches aus dem Admin. has_visuals zaehlt auch Variantenbilder mit.
+      assign has_swatches = false
+      assign has_visuals = false
+      for value in option.values
+        if value.swatch.color or value.swatch.image
+          assign has_swatches = true
+          assign has_visuals = true
+          break
+        endif
+        if use_variant_image and value.variant.featured_image
+          assign has_visuals = true
+        endif
+      endfor
+
+      if mode == 'auto'
+        if has_swatches
+          assign mode = 'swatches'
+        elsif option.values.size > picker_threshold
+          assign mode = 'dropdown'
+        else
+          assign mode = 'pills'
+        endif
+      endif
+
+      if mode == 'swatches' and has_visuals == false
+        assign mode = 'pills'
+      endif
+
+      assign option_id = 'Option-' | append: section_id | append: '-' | append: option.position
+    -%}
+
+    <div class="product-form__option" data-option-position="{{ option.position }}" data-option-mode="{{ mode }}">
+      <label class="product-form__label" {% if mode == 'dropdown' %}for="{{ option_id }}"{% endif %}>
+        <span>{{ option.name }}</span>
+        {%- unless mode == 'dropdown' -%}
+          <span class="product-form__value" data-option-value>{{ option.selected_value }}</span>
+        {%- endunless -%}
+      </label>
+
+      {%- case mode -%}
+        {%- when 'dropdown' -%}
+          <select
+            class="select variant-dropdown"
+            id="{{ option_id }}"
+            name="option{{ option.position }}"
+            data-variant-input>
+            {%- for value in option.values -%}
+              <option value="{{ value | escape }}" {% if option.selected_value == value %}selected{% endif %}>{{ value }}</option>
+            {%- endfor -%}
+          </select>
+
+        {%- when 'swatches' -%}
+          <div class="variant-swatches{% unless swatch_shape == 'auto' %} variant-swatches--shape-{{ swatch_shape }}{% endunless %} variant-swatches--size-{{ swatch_size }}">
+            {%- for value in option.values -%}
+              {%- liquid
+                assign visual = 'text'
+                assign swatch_src = ''
+                if value.swatch.image
+                  assign visual = 'image'
+                  assign swatch_src = value.swatch.image | image_url: width: 200
+                elsif value.swatch.color
+                  assign visual = 'color'
+                elsif use_variant_image and value.variant.featured_image
+                  assign visual = 'image'
+                  assign swatch_src = value.variant.featured_image | image_url: width: 200
+                endif
+              -%}
+              <label
+                class="variant-swatch{% if option.selected_value == value %} is-active{% endif %}{% if visual == 'text' %} variant-swatch--text{% endif %}"
+                title="{{ value | escape }}">
+                <input
+                  type="radio"
+                  name="option{{ option.position }}"
+                  value="{{ value | escape }}"
+                  data-variant-input
+                  {% if option.selected_value == value %}checked{% endif %}>
+                {%- case visual -%}
+                  {%- when 'image' -%}
+                    <span class="variant-swatch__visual" style="background-image:url({{ swatch_src }});"></span>
+                    <span class="visually-hidden">{{ value }}</span>
+                  {%- when 'color' -%}
+                    <span class="variant-swatch__visual" style="background-color:{{ value.swatch.color }};"></span>
+                    <span class="visually-hidden">{{ value }}</span>
+                  {%- else -%}
+                    <span class="variant-swatch__text">{{ value }}</span>
+                {%- endcase -%}
+              </label>
+            {%- endfor -%}
+          </div>
+
+        {%- else -%}
+          <div class="variant-pills">
+            {%- for value in option.values -%}
+              <label class="variant-pill{% if option.selected_value == value %} is-active{% endif %}">
+                <input
+                  type="radio"
+                  name="option{{ option.position }}"
+                  value="{{ value | escape }}"
+                  data-variant-input
+                  {% if option.selected_value == value %}checked{% endif %}>
+                {{ value }}
+              </label>
+            {%- endfor -%}
+          </div>
+      {%- endcase -%}
+    </div>
+  {%- endfor -%}
+{%- endunless -%}

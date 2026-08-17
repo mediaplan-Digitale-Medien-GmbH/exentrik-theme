@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-list-collections",
+      "settings": {
+        "eyebrow": "Sortiment",
+        "heading": "Alle Kategorien",
+        "text": "Entdecken Sie unsere Kategorien: klar, fokussiert, bereit fürs Feuer.",
+        "columns": 3,
+        "show_count": true,
+        "hide_empty": true
+      }
+    }
+  },
+  "order": ["main"]
+}
