@@ -1,0 +1,177 @@
+{%- comment -%}
+  Kachel-Hero: ein oder mehrere Slides aus Kacheln.
+  Jede Kachel hat Bild, Text, Badge und CTA. Bilder sind optional.
+{%- endcomment -%}
+
+<section class="hero-tiles" data-hero-tiles aria-roledescription="Karussell">
+  <div class="page-width">
+    {%- if section.settings.heading != blank -%}
+      <div class="hero-tiles__intro">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="section-header__eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        <h1 class="hero-tiles__heading">{{ section.settings.heading }}</h1>
+      </div>
+    {%- endif -%}
+
+    <div class="hero-tiles__viewport">
+      <div class="hero-tiles__track" data-hero-tiles-track>
+        {%- assign slide_total = 0 -%}
+        {%- for i in (1..4) -%}
+          {%- assign slide_has = false -%}
+          {%- for block in section.blocks -%}
+            {%- if block.settings.slide == i -%}
+              {%- assign slide_has = true -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if slide_has -%}
+            {%- assign slide_total = slide_total | plus: 1 -%}
+            <div class="hero-tiles__slide" data-hero-tiles-slide {% if slide_total == 1 %}aria-hidden="false"{% else %}hidden aria-hidden="true"{% endif %}>
+              <div class="hero-tiles__grid">
+                {%- for block in section.blocks -%}
+                  {%- if block.settings.slide == i -%}
+                    {%- assign tile_tag = 'div' -%}
+                    {%- if block.settings.link != blank -%}
+                      {%- assign tile_tag = 'a' -%}
+                    {%- endif -%}
+                    <{{ tile_tag }}
+                      class="hero-tiles__tile hero-tiles__tile--{{ block.settings.size }}{% if block.settings.tone == 'dark' %} hero-tiles__tile--dark{% endif %}"
+                      {% if tile_tag == 'a' %}href="{{ block.settings.link }}"{% endif %}
+                      {{ block.shopify_attributes }}
+                    >
+                      <div class="hero-tiles__media" aria-hidden="true">
+                        {%- if block.settings.image != blank -%}
+                          <img
+                            src="{{ block.settings.image | image_url: width: 1200 }}"
+                            srcset="{{ block.settings.image | image_url: width: 600 }} 600w, {{ block.settings.image | image_url: width: 900 }} 900w, {{ block.settings.image | image_url: width: 1200 }} 1200w"
+                            sizes="{% if block.settings.size == 'featured' or block.settings.size == 'banner' or block.settings.size == 'wide' %}(max-width: 749px) 100vw, 50vw{% else %}(max-width: 749px) 100vw, 25vw{% endif %}"
+                            alt="{{ block.settings.image.alt | default: block.settings.heading | escape }}"
+                            width="{{ block.settings.image.width }}"
+                            height="{{ block.settings.image.height }}"
+                            loading="{% if slide_total == 1 %}eager{% else %}lazy{% endif %}"
+                            {% if slide_total == 1 %}fetchpriority="high"{% endif %}
+                          >
+                        {%- else -%}
+                          <div class="hero-tiles__placeholder"></div>
+                        {%- endif -%}
+                      </div>
+                      <div class="hero-tiles__veil"></div>
+                      <div class="hero-tiles__copy">
+                        {%- if block.settings.badge != blank -%}
+                          <span class="hero-tiles__badge">{{ block.settings.badge }}</span>
+                        {%- endif -%}
+                        {%- if block.settings.heading != blank -%}
+                          <h2 class="hero-tiles__title">{{ block.settings.heading }}</h2>
+                        {%- endif -%}
+                        {%- if block.settings.text != blank -%}
+                          <p class="hero-tiles__text">{{ block.settings.text }}</p>
+                        {%- endif -%}
+                        {%- if block.settings.button_label != blank -%}
+                          <span class="hero-tiles__cta{% if block.settings.cta_style == 'link' %} hero-tiles__cta--link{% endif %}">{{ block.settings.button_label }}</span>
+                        {%- endif -%}
+                      </div>
+                    </{{ tile_tag }}>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      {%- if slide_total > 1 -%}
+        <div class="hero-tiles__nav">
+          <button type="button" class="hero-tiles__arrow" data-hero-tiles-prev aria-label="Vorherige Kacheln">
+            {% render 'icon', name: 'chevron-left' %}
+          </button>
+          <button type="button" class="hero-tiles__arrow" data-hero-tiles-next aria-label="Nächste Kacheln">
+            {% render 'icon', name: 'chevron-right' %}
+          </button>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Kacheln",
+  "tag": "section",
+  "class": "section-hero-tiles",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Kleiner Titel" },
+    { "type": "text", "id": "heading", "label": "Überschrift (optional)" }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Kachel",
+      "settings": [
+        {
+          "type": "range",
+          "id": "slide",
+          "min": 1,
+          "max": 4,
+          "step": 1,
+          "label": "Slide",
+          "default": 1,
+          "info": "Kacheln mit derselben Slide-Nummer bilden ein Raster. Mehrere Slides werden zum Karussell."
+        },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Größe",
+          "options": [
+            { "value": "featured", "label": "Groß (hoch)" },
+            { "value": "banner", "label": "Banner (breit)" },
+            { "value": "square", "label": "Quadrat" },
+            { "value": "wide", "label": "Breit" }
+          ],
+          "default": "square"
+        },
+        { "type": "image_picker", "id": "image", "label": "Bild" },
+        { "type": "text", "id": "badge", "label": "Badge" },
+        { "type": "text", "id": "heading", "label": "Titel", "default": "Kategorie" },
+        { "type": "textarea", "id": "text", "label": "Text" },
+        { "type": "text", "id": "button_label", "label": "Button-Text", "default": "Jetzt shoppen" },
+        { "type": "url", "id": "link", "label": "Link" },
+        {
+          "type": "select",
+          "id": "cta_style",
+          "label": "CTA-Stil",
+          "options": [
+            { "value": "button", "label": "Button" },
+            { "value": "link", "label": "Textlink" }
+          ],
+          "default": "button"
+        },
+        {
+          "type": "select",
+          "id": "tone",
+          "label": "Textfarbe",
+          "options": [
+            { "value": "light", "label": "Hell auf dunklem Bild" },
+            { "value": "dark", "label": "Dunkel auf hellem Bild" }
+          ],
+          "default": "light"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 28,
+  "presets": [
+    {
+      "name": "Hero Kacheln",
+      "blocks": [
+        { "type": "tile", "settings": { "slide": 1, "size": "featured", "heading": "Neuheiten", "text": "Frische Drops und Limited Pieces.", "button_label": "Jetzt shoppen", "badge": "New" } },
+        { "type": "tile", "settings": { "slide": 1, "size": "banner", "heading": "Bestsellers", "text": "Die Stücke, die alle wollen.", "button_label": "Entdecken", "badge": "Hot" } },
+        { "type": "tile", "settings": { "slide": 1, "size": "square", "heading": "Sale", "button_label": "Zum Sale", "cta_style": "link" } },
+        { "type": "tile", "settings": { "slide": 1, "size": "square", "heading": "Accessoires", "button_label": "Shoppen", "cta_style": "link" } },
+        { "type": "tile", "settings": { "slide": 1, "size": "square", "heading": "Sneaker", "button_label": "Shoppen", "cta_style": "link" } },
+        { "type": "tile", "settings": { "slide": 1, "size": "square", "heading": "Lifestyle", "button_label": "Shoppen", "cta_style": "link" } },
+        { "type": "tile", "settings": { "slide": 1, "size": "wide", "heading": "Looks der Saison", "text": "Street, Stage, Everyday.", "button_label": "Jetzt ansehen", "badge": "Drop" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,28 +1,105 @@
 {
   "sections": {
-    "hero": {
-      "type": "hero",
+    "hero-tiles": {
+      "type": "hero-tiles",
+      "blocks": {
+        "t1": {
+          "type": "tile",
+          "settings": {
+            "slide": 1,
+            "size": "featured",
+            "badge": "New In",
+            "heading": "Street & Stage",
+            "text": "Looks, die laut sind – ohne Kompromiss.",
+            "button_label": "Jetzt shoppen",
+            "link": "shopify://collections/all",
+            "cta_style": "button",
+            "tone": "light"
+          }
+        },
+        "t2": {
+          "type": "tile",
+          "settings": {
+            "slide": 1,
+            "size": "banner",
+            "badge": "Hot",
+            "heading": "Bestsellers",
+            "text": "Die Pieces, die alle wollen.",
+            "button_label": "Entdecken",
+            "link": "shopify://collections/all",
+            "cta_style": "button",
+            "tone": "light"
+          }
+        },
+        "t3": {
+          "type": "tile",
+          "settings": {
+            "slide": 1,
+            "size": "square",
+            "badge": "Sale",
+            "heading": "Reduziert",
+            "text": "",
+            "button_label": "Zum Sale",
+            "link": "shopify://collections/all",
+            "cta_style": "link",
+            "tone": "light"
+          }
+        },
+        "t4": {
+          "type": "tile",
+          "settings": {
+            "slide": 1,
+            "size": "square",
+            "heading": "Accessoires",
+            "button_label": "Shoppen",
+            "link": "shopify://collections/all",
+            "cta_style": "link",
+            "tone": "dark"
+          }
+        },
+        "t5": {
+          "type": "tile",
+          "settings": {
+            "slide": 1,
+            "size": "square",
+            "heading": "Sneaker",
+            "button_label": "Shoppen",
+            "link": "shopify://collections/all",
+            "cta_style": "link",
+            "tone": "dark"
+          }
+        },
+        "t6": {
+          "type": "tile",
+          "settings": {
+            "slide": 1,
+            "size": "square",
+            "heading": "Lifestyle",
+            "button_label": "Shoppen",
+            "link": "shopify://collections/all",
+            "cta_style": "link",
+            "tone": "dark"
+          }
+        },
+        "t7": {
+          "type": "tile",
+          "settings": {
+            "slide": 1,
+            "size": "wide",
+            "badge": "Drop",
+            "heading": "Looks der Saison",
+            "text": "Street, Stage, Everyday.",
+            "button_label": "Jetzt ansehen",
+            "link": "shopify://collections/all",
+            "cta_style": "button",
+            "tone": "light"
+          }
+        }
+      },
+      "block_order": ["t1", "t2", "t3", "t4", "t5", "t6", "t7"],
       "settings": {
-        "layout": "left",
         "eyebrow": "",
-        "heading": "Willkommen in deinem Shop",
-        "text": "Ersetze diesen Text, lade ein Hero-Bild oder -Video hoch und verknüpfe deine CTAs.",
-        "button_label": "Jetzt entdecken",
-        "button_link": "shopify://collections/all",
-        "button_label_2": "",
-        "button_link_2": "",
-        "text_color": "#ffffff",
-        "overlay_gradient": "linear-gradient(90deg, rgba(13,17,23,0.75) 0%, rgba(13,17,23,0.2) 100%)"
-      }
-    },
-    "featured-collection": {
-      "type": "featured-collection",
-      "settings": {
-        "heading": "Beliebte Produkte",
-        "products_to_show": 4,
-        "columns": 4,
-        "show_view_all": true,
-        "view_all_label": "Alle ansehen"
+        "heading": ""
       }
     },
     "usp-bar": {
@@ -31,77 +108,63 @@
         "u1": {
           "type": "usp",
           "settings": {
-            "icon": "truck",
-            "title": "Schneller Versand",
-            "text": "Lieferung mit DHL"
+            "icon": "return",
+            "title": "30 Tage Rückgabe",
+            "text": "Unkompliziert und fair"
           }
         },
         "u2": {
           "type": "usp",
           "settings": {
-            "icon": "shield",
-            "title": "Sicher bezahlen",
-            "text": "Verschlüsselte Zahlung"
+            "icon": "truck",
+            "title": "Schneller Versand",
+            "text": "Direkt zu dir nach Hause"
           }
         },
         "u3": {
           "type": "usp",
           "settings": {
-            "icon": "return",
-            "title": "Einfache Rückgabe",
-            "text": "Unkomplizierter Service"
+            "icon": "shield",
+            "title": "Sicher bezahlen",
+            "text": "Verschlüsselter Checkout"
           }
         },
         "u4": {
           "type": "usp",
           "settings": {
-            "icon": "check",
-            "title": "Geprüfte Qualität",
-            "text": "Sorgfältig ausgewählt"
+            "icon": "headset",
+            "title": "Support mit Attitude",
+            "text": "Wir sind für dich da"
           }
         }
       },
       "block_order": ["u1", "u2", "u3", "u4"],
       "settings": {}
     },
-    "rich-text": {
-      "type": "rich-text",
-      "blocks": {
-        "eyebrow": {
-          "type": "eyebrow",
-          "settings": { "text": "Über uns" }
-        },
-        "heading": {
-          "type": "heading",
-          "settings": { "text": "Deine Markengeschichte" }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Erzähle hier kurz, wofür dein Shop steht. Ersetze diesen Platzhalter im Theme-Editor.</p>"
-          }
-        }
-      },
-      "block_order": ["eyebrow", "heading", "text"],
+    "featured-collection": {
+      "type": "featured-collection",
       "settings": {
-        "alignment": "center"
+        "heading": "Bestsellers",
+        "products_to_show": 8,
+        "columns": 4,
+        "show_view_all": true,
+        "view_all_label": "Alle ansehen"
       }
     },
     "newsletter": {
       "type": "newsletter",
       "settings": {
         "eyebrow": "Newsletter",
-        "heading": "Neuheiten und Angebote sichern",
-        "text": "Melde dich an und verpasse keine Produktneuheiten oder Aktionen.",
+        "heading": "Drops, Deals, Exentrik.",
+        "text": "Melde dich an und verpasse keine Neuheiten oder Aktionen.",
         "button_label": "Abonnieren"
       }
     }
   },
   "order": [
-    "hero",
-    "featured-collection",
+    "hero-tiles",
     "usp-bar",
-    "rich-text",
+    "featured-collection",
     "newsletter"
   ]
 }

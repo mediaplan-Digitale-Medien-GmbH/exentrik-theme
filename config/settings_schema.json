@@ -23,7 +23,7 @@
         "step": 10,
         "unit": "px",
         "label": "Logo Breite",
-        "default": 160
+        "default": 220
       },
       {
         "type": "image_picker",
@@ -49,31 +49,31 @@
         "type": "color",
         "id": "color_background",
         "label": "Hintergrund",
-        "default": "#f3f1ee"
+        "default": "#ffffff"
       },
       {
         "type": "color",
         "id": "color_surface",
         "label": "Flächen / Karten",
-        "default": "#ebe7e1"
+        "default": "#f3f3f3"
       },
       {
         "type": "color",
         "id": "color_text",
         "label": "Text",
-        "default": "#0a0a0a"
+        "default": "#0b1a3a"
       },
       {
         "type": "color",
         "id": "color_text_muted",
         "label": "Text gedämpft",
-        "default": "#5a5752"
+        "default": "#4a5168"
       },
       {
         "type": "color",
         "id": "color_border",
         "label": "Linien / Rahmen",
-        "default": "#ddd7ce"
+        "default": "#d9dbe3"
       },
       {
         "type": "header",
@@ -83,7 +83,7 @@
         "type": "color",
         "id": "color_accent",
         "label": "Akzentfarbe",
-        "default": "#e3341e"
+        "default": "#c52f3e"
       },
       {
         "type": "color",
@@ -95,7 +95,7 @@
         "type": "color",
         "id": "color_sale",
         "label": "Sale / Reduziert",
-        "default": "#e3341e"
+        "default": "#c52f3e"
       },
       {
         "type": "header",
@@ -105,13 +105,13 @@
         "type": "color",
         "id": "color_dark",
         "label": "Dunkler Hintergrund",
-        "default": "#000000"
+        "default": "#0b1a3a"
       },
       {
         "type": "color",
         "id": "color_dark_text",
         "label": "Text auf dunklem Hintergrund",
-        "default": "#f5f2ec"
+        "default": "#ffffff"
       },
       {
         "type": "header",
@@ -120,14 +120,14 @@
       {
         "type": "color",
         "id": "color_ember",
-        "label": "Ember / Flammen-Rot",
-        "default": "#e3341e"
+        "label": "Marken-Rot",
+        "default": "#c52f3e"
       },
       {
         "type": "color",
         "id": "color_flame",
-        "label": "Flame / Logo-Gelb",
-        "default": "#ffeb00"
+        "label": "Marken-Gelb",
+        "default": "#ffd100"
       }
     ]
   },
@@ -164,7 +164,7 @@
             "label": "Verdana (System)"
           }
         ],
-        "default": "archivo"
+        "default": "barlow"
       },
       {
         "type": "select",
@@ -212,7 +212,7 @@
         "step": 5,
         "unit": "%",
         "label": "Überschriften Skalierung",
-        "default": 115
+        "default": 125
       },
       {
         "type": "select",
@@ -243,7 +243,7 @@
         "step": 20,
         "unit": "px",
         "label": "Maximale Seitenbreite",
-        "default": 1180
+        "default": 1320
       },
       {
         "type": "range",
@@ -253,7 +253,7 @@
         "step": 4,
         "unit": "px",
         "label": "Abstand zwischen Abschnitten",
-        "default": 64
+        "default": 56
       },
       {
         "type": "header",
@@ -285,7 +285,7 @@
         "unit": "px",
         "label": "Eckenradius (bei „Abgerundet\")",
         "info": "Gilt für Karten, Felder und Bilder. Buttons sind bei „Abgerundet\" als Pille geformt, bei „Eckig\" kantig.",
-        "default": 10
+        "default": 8
       }
     ]
   },

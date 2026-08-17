@@ -2079,3 +2079,188 @@ body.template-index .main-content {
 .facets__price-field input { width: 100%; }
 .facets__apply { margin-top: 0.75rem; width: 100%; }
 .facets__clear-all { margin-top: 1rem; width: 100%; }
+
+/* ==========================================================================
+   Exentrik: merch-shop chrome (EMP-ähnlich, eigene Marke)
+   ========================================================================== */
+.site-header,
+.site-header.is-scrolled,
+.site-header.is-solid,
+body:not(.template-index) .site-header {
+  position: sticky;
+  inset: auto;
+  top: 0;
+  background: var(--color-dark, #0b1a3a);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+body.template-index .main-content,
+body:not(.template-index) .main-content {
+  padding-top: 0;
+}
+.site-header__menu > li > a {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+.brand__logo { max-height: 3.1rem; }
+.btn--primary {
+  background: var(--color-accent, var(--color-ember));
+  color: var(--color-accent-text, #fff);
+}
+.btn--primary:hover {
+  background: var(--color-ember-deep, #9e1f2c);
+  color: #fff;
+}
+
+/* ==========================================================================
+   Hero Kacheln (Bento-Slide)
+   ========================================================================== */
+.hero-tiles {
+  padding-block: clamp(1.25rem, 3vw, 2rem) var(--section-spacing, 64px);
+  background: var(--color-bg);
+}
+.hero-tiles__intro { margin-bottom: 1.25rem; }
+.hero-tiles__heading {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  margin: 0;
+}
+.hero-tiles__viewport { position: relative; }
+.hero-tiles__track { display: grid; }
+.hero-tiles__slide { min-width: 0; }
+.hero-tiles__slide[hidden] { display: none; }
+.hero-tiles__grid {
+  display: grid;
+  gap: 0.7rem;
+  grid-template-columns: 1fr;
+}
+.hero-tiles__tile {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: 14.5rem;
+  overflow: hidden;
+  border-radius: var(--radius);
+  color: #fff;
+  isolation: isolate;
+}
+.hero-tiles__tile--dark { color: var(--color-ink); }
+.hero-tiles__media,
+.hero-tiles__placeholder,
+.hero-tiles__veil {
+  position: absolute;
+  inset: 0;
+}
+.hero-tiles__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero-tiles__placeholder {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 209, 0, 0.45), transparent 42%),
+    radial-gradient(circle at 80% 70%, rgba(19, 154, 142, 0.4), transparent 46%),
+    linear-gradient(145deg, #1a1e35 0%, #c52f3e 55%, #0b1a3a 100%);
+}
+.hero-tiles__veil {
+  background: linear-gradient(180deg, rgba(11, 26, 58, 0.08) 20%, rgba(11, 26, 58, 0.78) 100%);
+  pointer-events: none;
+}
+.hero-tiles__tile--dark .hero-tiles__veil {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 10%, rgba(244, 244, 244, 0.92) 100%);
+}
+.hero-tiles__copy {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: 1.1rem 1.15rem 1.2rem;
+}
+.hero-tiles__badge {
+  display: inline-block;
+  margin-bottom: 0.45rem;
+  padding: 0.2rem 0.55rem;
+  background: var(--color-accent, #c52f3e);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: var(--btn-radius, 999px);
+}
+.hero-tiles__title {
+  font-size: clamp(1.05rem, 1.8vw, 1.55rem);
+  margin: 0 0 0.35rem;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+}
+.hero-tiles__tile--dark .hero-tiles__title { text-shadow: none; }
+.hero-tiles__text {
+  margin: 0 0 0.85rem;
+  max-width: 36ch;
+  font-size: 0.9rem;
+  opacity: 0.92;
+}
+.hero-tiles__cta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.35rem;
+  padding: 0.4rem 1rem;
+  background: var(--color-accent, #c52f3e);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: var(--btn-radius, 999px);
+}
+.hero-tiles__cta--link {
+  min-height: 0;
+  padding: 0;
+  background: none;
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  letter-spacing: 0.02em;
+}
+.hero-tiles__tile:hover .hero-tiles__media img {
+  transform: scale(1.04);
+  transition: transform 0.45s var(--ease, ease);
+}
+.hero-tiles__media img { transition: transform 0.45s var(--ease, ease); }
+.hero-tiles__nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.45rem;
+  margin-top: 0.85rem;
+}
+.hero-tiles__arrow {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--color-border, #ddd);
+  border-radius: 999px;
+  background: var(--color-bg-elevated, #fff);
+  color: var(--color-ink);
+}
+.hero-tiles__arrow:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+.hero-tiles__arrow .icon { width: 1.1rem; height: 1.1rem; }
+
+@media (min-width: 750px) {
+  .hero-tiles__grid {
+    grid-template-columns: 1.15fr 1fr 1fr 1.35fr;
+    grid-auto-rows: minmax(10.5rem, 18vh);
+    grid-auto-flow: dense;
+  }
+  .hero-tiles__tile { min-height: 0; }
+  .hero-tiles__tile--featured { grid-row: span 2; }
+  .hero-tiles__tile--banner { grid-column: span 3; }
+  .hero-tiles__tile--wide { grid-column: span 2; }
+}
+@media (max-width: 749px) {
+  .hero-tiles__tile--featured,
+  .hero-tiles__tile--banner { min-height: 18rem; }
+}

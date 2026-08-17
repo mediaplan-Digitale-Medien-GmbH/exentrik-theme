@@ -534,6 +534,38 @@
 
   $$('[data-variant-selector]').forEach((root) => new VariantSelector(root));
 
+  /* -------------------------------------------------------- Hero tiles */
+  function initHeroTiles(scope) {
+    const roots = [];
+    if (scope && scope.querySelectorAll) {
+      if (scope.matches && scope.matches('[data-hero-tiles]')) roots.push(scope);
+      $$('[data-hero-tiles]', scope).forEach((el) => roots.push(el));
+    } else {
+      $$('[data-hero-tiles]').forEach((el) => roots.push(el));
+    }
+    roots.forEach((root) => {
+      if (root.dataset.tilesReady === '1') return;
+      const slides = $$('[data-hero-tiles-slide]', root);
+      if (slides.length < 2) return;
+      root.dataset.tilesReady = '1';
+      let index = 0;
+      const show = (next) => {
+        index = (next + slides.length) % slides.length;
+        slides.forEach((slide, i) => {
+          const active = i === index;
+          slide.hidden = !active;
+          slide.setAttribute('aria-hidden', active ? 'false' : 'true');
+        });
+      };
+      on($('[data-hero-tiles-prev]', root), 'click', () => show(index - 1));
+      on($('[data-hero-tiles-next]', root), 'click', () => show(index + 1));
+    });
+  }
+  initHeroTiles();
+  document.addEventListener('shopify:section:load', (event) => {
+    initHeroTiles(event.target);
+  });
+
   /* -------------------------------------------------------- Header scroll */
   const siteHeader = $('#site-header');
   if (siteHeader) {

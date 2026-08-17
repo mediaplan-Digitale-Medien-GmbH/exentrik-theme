@@ -4,34 +4,34 @@
   "sections": {
     "announcement-bar": {
       "type": "announcement-bar",
-      "disabled": true,
+      "disabled": false,
       "blocks": {
         "b1": {
           "type": "item",
           "settings": {
-            "text": "Versandkostenfrei ab 59 Euro innerhalb Deutschlands",
-            "icon": "truck"
+            "text": "Neue Drops jede Woche – sei schneller als der Rest",
+            "icon": "check"
           }
         },
         "b2": {
           "type": "item",
           "settings": {
-            "text": "3 Prozent Rabatt bei Vorkasse",
-            "icon": "credit-card"
+            "text": "30 Tage Rückgaberecht",
+            "icon": "return"
           }
         }
       },
       "block_order": ["b1", "b2"],
       "settings": {
-        "bg_color": "#000000",
-        "text_color": "#f5f2ec"
+        "bg_color": "#c52f3e",
+        "text_color": "#ffffff"
       }
     },
     "header": {
       "type": "header",
       "settings": {
         "menu": "main-menu",
-        "cta_label": "Jetzt kaufen",
+        "cta_label": "Jetzt shoppen",
         "cta_link": "shopify://collections/all"
       }
     },

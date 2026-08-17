@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="theme-color" content="{{ settings.color_ember | default: '#e3341e' }}">
+    <meta name="theme-color" content="{{ settings.color_ember | default: '#c52f3e' }}">
     <link rel="canonical" href="{{ canonical_url }}">
     <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
 
@@ -54,7 +54,7 @@
     {{ content_for_header }}
 
     {%- liquid
-      assign heading_font = settings.heading_font | default: 'archivo'
+      assign heading_font = settings.heading_font | default: 'barlow'
       assign body_font = settings.body_font | default: 'outfit'
 
       case heading_font
@@ -119,29 +119,29 @@
 
     {% style %}
       :root {
-        --color-bg: {{ settings.color_background | default: '#f3f1ee' }};
+        --color-bg: {{ settings.color_background | default: '#ffffff' }};
         --color-bg-elevated: #ffffff;
-        --color-ink: {{ settings.color_text | default: '#0a0a0a' }};
-        --color-ink-soft: {{ settings.color_text_muted | default: '#5a5752' }};
-        --color-line: {{ settings.color_border | default: '#ddd7ce' | color_modify: 'alpha', 0.12 }};
-        --color-charcoal: {{ settings.color_dark | default: '#000000' }};
-        --color-charcoal-soft: {{ settings.color_dark | default: '#000000' | color_darken: 5 }};
-        --color-ember: {{ settings.color_ember | default: '#e3341e' }};
-        --color-ember-deep: {{ settings.color_ember | default: '#e3341e' | color_darken: 8 }};
-        --color-flame: {{ settings.color_flame | default: '#ffeb00' }};
+        --color-ink: {{ settings.color_text | default: '#0b1a3a' }};
+        --color-ink-soft: {{ settings.color_text_muted | default: '#4a5168' }};
+        --color-line: {{ settings.color_border | default: '#d9dbe3' | color_modify: 'alpha', 0.12 }};
+        --color-charcoal: {{ settings.color_dark | default: '#0b1a3a' }};
+        --color-charcoal-soft: {{ settings.color_dark | default: '#0b1a3a' | color_darken: 5 }};
+        --color-ember: {{ settings.color_ember | default: '#c52f3e' }};
+        --color-ember-deep: {{ settings.color_ember | default: '#c52f3e' | color_darken: 8 }};
+        --color-flame: {{ settings.color_flame | default: '#ffd100' }};
         --color-ash: #c9c2b8;
-        --color-on-dark: {{ settings.color_dark_text | default: '#f5f2ec' }};
-        --color-on-dark-muted: {{ settings.color_dark_text | default: '#f5f2ec' | color_modify: 'alpha', 0.68 }};
+        --color-on-dark: {{ settings.color_dark_text | default: '#ffffff' }};
+        --color-on-dark-muted: {{ settings.color_dark_text | default: '#ffffff' | color_modify: 'alpha', 0.68 }};
 
-        --color-surface: {{ settings.color_surface | default: '#ebe7e1' }};
-        --color-text: {{ settings.color_text | default: '#0a0a0a' }};
-        --color-text-muted: {{ settings.color_text_muted | default: '#5a5752' }};
-        --color-border: {{ settings.color_border | default: '#ddd7ce' }};
-        --color-accent: {{ settings.color_accent | default: '#e3341e' }};
+        --color-surface: {{ settings.color_surface | default: '#f3f3f3' }};
+        --color-text: {{ settings.color_text | default: '#0b1a3a' }};
+        --color-text-muted: {{ settings.color_text_muted | default: '#4a5168' }};
+        --color-border: {{ settings.color_border | default: '#d9dbe3' }};
+        --color-accent: {{ settings.color_accent | default: '#c52f3e' }};
         --color-accent-text: {{ settings.color_accent_text | default: '#ffffff' }};
-        --color-sale: {{ settings.color_sale | default: '#e3341e' }};
-        --color-dark: {{ settings.color_dark | default: '#000000' }};
-        --color-dark-text: {{ settings.color_dark_text | default: '#f5f2ec' }};
+        --color-sale: {{ settings.color_sale | default: '#c52f3e' }};
+        --color-dark: {{ settings.color_dark | default: '#0b1a3a' }};
+        --color-dark-text: {{ settings.color_dark_text | default: '#ffffff' }};
 
         --font-display: {{ heading_stack }};
         --font-body: {{ body_stack }};
@@ -151,12 +151,12 @@
         --font-weight-heading: 400;
 
         --font-size-base: {{ settings.font_size_base | default: 16 }}px;
-        --heading-scale: {{ settings.heading_scale | default: 115 | divided_by: 100.0 }};
+        --heading-scale: {{ settings.heading_scale | default: 125 | divided_by: 100.0 }};
         --heading-transform: {{ settings.heading_transform | default: 'uppercase' }};
 
-        --logo-width: {{ settings.logo_width | default: 160 }}px;
-        --page-width: {{ settings.page_width | default: 1180 }}px;
-        --section-spacing: {{ settings.spacing_sections | default: 64 }}px;
+        --logo-width: {{ settings.logo_width | default: 220 }}px;
+        --page-width: {{ settings.page_width | default: 1320 }}px;
+        --section-spacing: {{ settings.spacing_sections | default: 56 }}px;
         --section-y: clamp(4.5rem, 10vw, 8rem);
         --radius: {{ radius_val }}px;
         --btn-radius: {{ btn_radius_val }}px;

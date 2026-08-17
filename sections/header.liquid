@@ -28,7 +28,13 @@
             height="{{ settings.logo.height }}"
             loading="eager">
         {%- else -%}
-          <span class="brand__text">{{ shop.name }}</span>
+          <img
+            class="brand__logo"
+            src="{{ 'logo-exentrik.png' | asset_url }}"
+            alt="{{ shop.name | escape }}"
+            width="440"
+            height="120"
+            loading="eager">
         {%- endif -%}
       </a>
 
@@ -82,7 +88,7 @@
         {%- if settings.logo != blank -%}
           <img class="brand__logo" src="{{ settings.logo | image_url: width: 320 }}" alt="{{ shop.name | escape }}" width="{{ settings.logo.width }}" height="{{ settings.logo.height }}">
         {%- else -%}
-          {{ shop.name }}
+          <img class="brand__logo" src="{{ 'logo-exentrik.png' | asset_url }}" alt="{{ shop.name | escape }}" width="320" height="88">
         {%- endif -%}
       </a>
       <button class="header__action" type="button" data-close aria-label="{{ 'accessibility.close' | t }}">{% render 'icon', name: 'close' %}</button>
