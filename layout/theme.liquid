@@ -121,11 +121,11 @@
       :root {
         --color-bg: {{ settings.color_background | default: '#ffffff' }};
         --color-bg-elevated: #ffffff;
-        --color-ink: {{ settings.color_text | default: '#0b1a3a' }};
-        --color-ink-soft: {{ settings.color_text_muted | default: '#4a5168' }};
-        --color-line: {{ settings.color_border | default: '#d9dbe3' | color_modify: 'alpha', 0.12 }};
-        --color-charcoal: {{ settings.color_dark | default: '#0b1a3a' }};
-        --color-charcoal-soft: {{ settings.color_dark | default: '#0b1a3a' | color_darken: 5 }};
+        --color-ink: {{ settings.color_text | default: '#111111' }};
+        --color-ink-soft: {{ settings.color_text_muted | default: '#5c5c5c' }};
+        --color-line: {{ settings.color_border | default: '#e4e4e4' | color_modify: 'alpha', 0.12 }};
+        --color-charcoal: {{ settings.color_dark | default: '#111111' }};
+        --color-charcoal-soft: {{ settings.color_dark | default: '#111111' | color_darken: 5 }};
         --color-ember: {{ settings.color_ember | default: '#c52f3e' }};
         --color-ember-deep: {{ settings.color_ember | default: '#c52f3e' | color_darken: 8 }};
         --color-flame: {{ settings.color_flame | default: '#ffd100' }};
@@ -134,13 +134,13 @@
         --color-on-dark-muted: {{ settings.color_dark_text | default: '#ffffff' | color_modify: 'alpha', 0.68 }};
 
         --color-surface: {{ settings.color_surface | default: '#f3f3f3' }};
-        --color-text: {{ settings.color_text | default: '#0b1a3a' }};
-        --color-text-muted: {{ settings.color_text_muted | default: '#4a5168' }};
-        --color-border: {{ settings.color_border | default: '#d9dbe3' }};
+        --color-text: {{ settings.color_text | default: '#111111' }};
+        --color-text-muted: {{ settings.color_text_muted | default: '#5c5c5c' }};
+        --color-border: {{ settings.color_border | default: '#e4e4e4' }};
         --color-accent: {{ settings.color_accent | default: '#c52f3e' }};
         --color-accent-text: {{ settings.color_accent_text | default: '#ffffff' }};
         --color-sale: {{ settings.color_sale | default: '#c52f3e' }};
-        --color-dark: {{ settings.color_dark | default: '#0b1a3a' }};
+        --color-dark: {{ settings.color_dark | default: '#111111' }};
         --color-dark-text: {{ settings.color_dark_text | default: '#ffffff' }};
 
         --font-display: {{ heading_stack }};

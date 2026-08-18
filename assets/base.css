@@ -2090,7 +2090,7 @@ body:not(.template-index) .site-header {
   position: sticky;
   inset: auto;
   top: 0;
-  background: var(--color-dark, #0b1a3a);
+  background: var(--color-dark, #111111);
   border-bottom-color: rgba(255, 255, 255, 0.08);
   color: #fff;
 }
@@ -2112,6 +2112,49 @@ body:not(.template-index) .main-content {
 .btn--primary:hover {
   background: var(--color-ember-deep, #9e1f2c);
   color: #fff;
+}
+
+/* ==========================================================================
+   Vorteile-Leiste
+   ========================================================================== */
+.usp-bar {
+  padding-block: 1.1rem 1.2rem;
+  border-block: 1px solid var(--color-border, var(--color-line));
+  background: var(--color-bg-elevated, #fff);
+}
+.usp-bar__grid {
+  display: grid;
+  gap: 1rem 1.5rem;
+  align-items: center;
+}
+.usp-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  min-width: 0;
+}
+.usp-item .icon {
+  flex-shrink: 0;
+  width: 1.35rem;
+  height: 1.35rem;
+  color: var(--color-accent, var(--color-ember));
+  margin-top: 0.12rem;
+}
+.usp-item__title {
+  font-weight: 700;
+  font-size: 0.92rem;
+  line-height: 1.25;
+}
+.usp-item__text {
+  margin-top: 0.15rem;
+  font-size: 0.82rem;
+  color: var(--color-text-muted, var(--color-ink-soft));
+}
+@media (max-width: 749px) {
+  .usp-bar__grid { grid-template-columns: 1fr 1fr !important; }
+}
+@media (max-width: 549px) {
+  .usp-bar__grid { grid-template-columns: 1fr !important; }
 }
 
 /* ==========================================================================
@@ -2159,12 +2202,12 @@ body:not(.template-index) .main-content {
 }
 .hero-tiles__placeholder {
   background:
-    radial-gradient(circle at 20% 20%, rgba(255, 209, 0, 0.45), transparent 42%),
-    radial-gradient(circle at 80% 70%, rgba(19, 154, 142, 0.4), transparent 46%),
-    linear-gradient(145deg, #1a1e35 0%, #c52f3e 55%, #0b1a3a 100%);
+    radial-gradient(circle at 20% 20%, rgba(255, 209, 0, 0.38), transparent 42%),
+    radial-gradient(circle at 80% 70%, rgba(197, 47, 62, 0.42), transparent 46%),
+    linear-gradient(145deg, #1a1a1a 0%, #c52f3e 55%, #111 100%);
 }
 .hero-tiles__veil {
-  background: linear-gradient(180deg, rgba(11, 26, 58, 0.08) 20%, rgba(11, 26, 58, 0.78) 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.08) 20%, rgba(0, 0, 0, 0.78) 100%);
   pointer-events: none;
 }
 .hero-tiles__tile--dark .hero-tiles__veil {
@@ -2251,14 +2294,25 @@ body:not(.template-index) .main-content {
 
 @media (min-width: 750px) {
   .hero-tiles__grid {
-    grid-template-columns: 1.15fr 1fr 1fr 1.35fr;
-    grid-auto-rows: minmax(10.5rem, 18vh);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: minmax(12rem, 28vw);
     grid-auto-flow: dense;
   }
   .hero-tiles__tile { min-height: 0; }
-  .hero-tiles__tile--featured { grid-row: span 2; }
-  .hero-tiles__tile--banner { grid-column: span 3; }
+  .hero-tiles__tile--featured { grid-column: span 2; }
+  .hero-tiles__tile--banner,
   .hero-tiles__tile--wide { grid-column: span 2; }
+  .hero-tiles__tile--fill { grid-column-end: -1; }
+}
+@media (min-width: 990px) {
+  .hero-tiles__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-rows: minmax(12.5rem, 17vw);
+  }
+  .hero-tiles__tile--featured {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
 }
 @media (max-width: 749px) {
   .hero-tiles__tile--featured,

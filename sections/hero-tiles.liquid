@@ -19,23 +19,27 @@
         {%- assign slide_total = 0 -%}
         {%- for i in (1..4) -%}
           {%- assign slide_has = false -%}
+          {%- assign slide_tile_count = 0 -%}
           {%- for block in section.blocks -%}
             {%- if block.settings.slide == i -%}
               {%- assign slide_has = true -%}
+              {%- assign slide_tile_count = slide_tile_count | plus: 1 -%}
             {%- endif -%}
           {%- endfor -%}
           {%- if slide_has -%}
             {%- assign slide_total = slide_total | plus: 1 -%}
             <div class="hero-tiles__slide" data-hero-tiles-slide {% if slide_total == 1 %}aria-hidden="false"{% else %}hidden aria-hidden="true"{% endif %}>
               <div class="hero-tiles__grid">
+                {%- assign slide_tile_i = 0 -%}
                 {%- for block in section.blocks -%}
                   {%- if block.settings.slide == i -%}
+                    {%- assign slide_tile_i = slide_tile_i | plus: 1 -%}
                     {%- assign tile_tag = 'div' -%}
                     {%- if block.settings.link != blank -%}
                       {%- assign tile_tag = 'a' -%}
                     {%- endif -%}
                     <{{ tile_tag }}
-                      class="hero-tiles__tile hero-tiles__tile--{{ block.settings.size }}{% if block.settings.tone == 'dark' %} hero-tiles__tile--dark{% endif %}"
+                      class="hero-tiles__tile hero-tiles__tile--{{ block.settings.size }}{% if block.settings.tone == 'dark' %} hero-tiles__tile--dark{% endif %}{% if slide_tile_i == slide_tile_count %} hero-tiles__tile--fill{% endif %}"
                       {% if tile_tag == 'a' %}href="{{ block.settings.link }}"{% endif %}
                       {{ block.shopify_attributes }}
                     >
@@ -122,12 +126,13 @@
           "id": "size",
           "label": "Größe",
           "options": [
-            { "value": "featured", "label": "Groß (hoch)" },
-            { "value": "banner", "label": "Banner (breit)" },
+            { "value": "featured", "label": "Großes Quadrat (2×2)" },
+            { "value": "banner", "label": "Banner (2 Spalten)" },
             { "value": "square", "label": "Quadrat" },
-            { "value": "wide", "label": "Breit" }
+            { "value": "wide", "label": "Breit (2 Spalten)" }
           ],
-          "default": "square"
+          "default": "square",
+          "info": "Die letzte Kachel einer Slide füllt immer die restliche Breite bis zur rechten unteren Ecke."
         },
         { "type": "image_picker", "id": "image", "label": "Bild" },
         { "type": "text", "id": "badge", "label": "Badge" },

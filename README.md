@@ -2,7 +2,7 @@
 
 Shopify-Theme für **exentrik.com** (Schompi Trading), gestartet aus dem mediaplan Shopify Theme-Rohling.
 
-Stil: Merch-Shop in der Richtung von EMP (kräftig, dunkel im Header, Rot/Navy/Gelb aus dem Logo) – nicht 1:1 kopiert.
+Stil: Merch-Shop in der Richtung von EMP (kräftig, dunkler Header, Schwarz/Weiß/Rot, Gelb nur als kleiner Logo-Akzent) – nicht 1:1 kopiert.
 
 ## Hero Kacheln
 
