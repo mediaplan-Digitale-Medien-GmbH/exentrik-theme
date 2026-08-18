@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero-tiles": {
@@ -50,7 +59,9 @@
           "settings": {
             "slide": 1,
             "size": "square",
+            "badge": "",
             "heading": "Accessoires",
+            "text": "",
             "button_label": "Shoppen",
             "link": "shopify://collections/all",
             "cta_style": "link",
@@ -62,7 +73,9 @@
           "settings": {
             "slide": 1,
             "size": "square",
+            "badge": "",
             "heading": "Sneaker",
+            "text": "",
             "button_label": "Shoppen",
             "link": "shopify://collections/all",
             "cta_style": "link",
@@ -74,7 +87,9 @@
           "settings": {
             "slide": 1,
             "size": "square",
+            "badge": "",
             "heading": "Lifestyle",
+            "text": "",
             "button_label": "Shoppen",
             "link": "shopify://collections/all",
             "cta_style": "link",
@@ -96,7 +111,15 @@
           }
         }
       },
-      "block_order": ["t1", "t2", "t3", "t4", "t5", "t6", "t7"],
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5",
+        "t6",
+        "t7"
+      ],
       "settings": {
         "eyebrow": "",
         "heading": ""
@@ -138,13 +161,21 @@
           }
         }
       },
-      "block_order": ["u1", "u2", "u3", "u4"],
+      "block_order": [
+        "u1",
+        "u2",
+        "u3",
+        "u4"
+      ],
       "settings": {}
     },
     "featured-collection": {
       "type": "featured-collection",
       "settings": {
+        "eyebrow": "",
         "heading": "Bestsellers",
+        "subheading": "",
+        "collection": "",
         "products_to_show": 8,
         "columns": 4,
         "show_view_all": true,
