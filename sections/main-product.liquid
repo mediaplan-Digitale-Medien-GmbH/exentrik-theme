@@ -1,5 +1,22 @@
 {%- liquid
   assign current_variant = product.selected_or_first_available_variant
+  assign gallery_ratio = section.settings.media_ratio | default: 'square'
+  case gallery_ratio
+    when 'natural'
+      assign gallery_ratio_css = ''
+    when 'portrait_45'
+      assign gallery_ratio_css = '4 / 5'
+    when 'portrait_34'
+      assign gallery_ratio_css = '3 / 4'
+    when 'landscape_43'
+      assign gallery_ratio_css = '4 / 3'
+    when 'landscape_169'
+      assign gallery_ratio_css = '16 / 9'
+    else
+      assign gallery_ratio_css = '1 / 1'
+  endcase
+  assign gallery_fit = section.settings.media_fit | default: 'cover'
+  assign gallery_thumbs = section.settings.thumbs_per_row | default: 5
   assign on_sale = false
   if current_variant.compare_at_price > current_variant.price
     assign on_sale = true
@@ -15,7 +32,7 @@
 
   <div class="product">
     {%- comment -%} -------------------------- Gallery -------------------------- {%- endcomment -%}
-    <div class="product-gallery" data-gallery>
+    <div class="product-gallery{% if gallery_ratio_css != blank %} product-gallery--ratio{% endif %}" data-gallery style="--pg-fit: {{ gallery_fit }}; --pg-thumbs: {{ gallery_thumbs }};{% if gallery_ratio_css != blank %} --pg-ratio: {{ gallery_ratio_css }};{% endif %}">
       <div class="product-gallery__main media">
         {%- if product.featured_media -%}
           <img
@@ -272,6 +289,33 @@
   "settings": [
     { "type": "checkbox", "id": "show_vendor", "label": "Marke anzeigen", "default": true },
     { "type": "checkbox", "id": "show_dynamic_checkout", "label": "Express-Checkout Buttons anzeigen", "default": true },
+    { "type": "header", "content": "Produktbilder" },
+    {
+      "type": "select",
+      "id": "media_ratio",
+      "label": "Bildformat",
+      "options": [
+        { "value": "natural", "label": "Wie hochgeladen" },
+        { "value": "square", "label": "Quadratisch 1:1" },
+        { "value": "portrait_45", "label": "Hochformat 4:5" },
+        { "value": "portrait_34", "label": "Hochformat 3:4" },
+        { "value": "landscape_43", "label": "Querformat 4:3" },
+        { "value": "landscape_169", "label": "Querformat 16:9" }
+      ],
+      "default": "square"
+    },
+    {
+      "type": "select",
+      "id": "media_fit",
+      "label": "Bild im Format",
+      "options": [
+        { "value": "cover", "label": "Format füllen, Ränder werden beschnitten" },
+        { "value": "contain", "label": "Bild vollständig zeigen" }
+      ],
+      "default": "cover",
+      "info": "Bei Freistellern mit viel Rand ist „vollständig zeigen\" die sichere Wahl."
+    },
+    { "type": "range", "id": "thumbs_per_row", "label": "Vorschaubilder pro Reihe", "min": 3, "max": 6, "step": 1, "default": 5 },
     { "type": "header", "content": "Variantenauswahl" },
     { "type": "paragraph", "content": "Alle Optionen des Produkts werden automatisch angezeigt, egal ob Gewicht, Farbe, Größe oder Jahrgang. Die Reihenfolge steuern Sie im Admin am Produkt." },
     {

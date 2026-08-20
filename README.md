@@ -18,11 +18,23 @@ Was auf der Produktseite die Metafeld-Blöcke leisten, übernimmt auf der Katego
 
 Darstellung als Tabelle, Kacheln oder kompakte Zeile. Listen, Bilder, Dateien, Links, Ja/Nein und Datum werden passend formatiert. Leere Felder bleiben im Shop unsichtbar, im Editor stehen sie als „ohne Angabe“ da. Ist für eine Kategorie nichts gepflegt, verschwindet die Sektion dort komplett.
 
+## Produktbilder
+
+Theme Editor, Produktvorlage, Sektion **Produkt**, Bereich **Produktbilder**:
+
+| Einstellung | Wirkung |
+|---|---|
+| **Bildformat** | Wie hochgeladen, quadratisch 1:1, hoch 4:5 oder 3:4, quer 4:3 oder 16:9. Alle Bilder der Galerie bekommen dasselbe Format, dadurch springt die Seite beim Blättern nicht. |
+| **Bild im Format** | Format füllen schneidet die Ränder ab. Vollständig zeigen legt das ganze Bild ins Format und lässt seitlich Fläche frei, die sichere Wahl bei Freistellern und Verpackungsfotos. |
+| **Vorschaubilder pro Reihe** | Drei bis sechs Miniaturen unter dem großen Bild. |
+
+Mit **Wie hochgeladen** behält jedes Bild sein eigenes Seitenverhältnis. Das Format der Produktkarten in Listen und Rastern steht davon getrennt in den Theme-Einstellungen unter Produktkarten.
+
 ## Seiten bauen
 
 Jede Seite hat oben ihr Inhaltsfeld aus dem Admin. Steht dort Text, erscheint er über allem anderen, ist das Feld leer, wird nichts angezeigt und es entsteht auch keine Lücke. Darunter lässt sich die Seite mit Blöcken erweitern:
 
-Die Ausrichtung steuert jede Textsektion selbst. **Seite** und **Textabschnitt** haben dafür die Einstellung **Ausrichtung** mit Links, Mitte und Rechts, damit Titel und Text darunter zusammenpassen.
+Die Ausrichtung steuert jede Textsektion selbst. **Seite** und **Textabschnitt** haben dafür die Einstellung **Ausrichtung** mit Links, Mitte und Rechts, damit Titel und Text darunter zusammenpassen. Über **Abstand oben** lässt sich der Freiraum über dem Seitentitel auf Klein oder Ohne stellen, wenn darüber schon ein anderer Baustein steht.
 
 | Block | Wofür |
 |---|---|
@@ -63,6 +75,8 @@ python3 deploy.py --push   # holen, zusammenführen, prüfen, pushen
 Das Skript holt zuerst den Stand aus dem Shop, führt ihn in `staging` zusammen, prüft das Theme und schreibt erst dann nach `main`. Es pusht nie mit Gewalt und bricht bei einem Konflikt in einer Inhaltsdatei ab, statt eine Seite zu bevorzugen.
 
 Diese Dateien schreibt der Theme-Editor, sie gehören dem Shop: `templates/*.json` (Aufbau der Seiten), `sections/*-group.json` (Kopf und Fuß), `config/settings_data.json` (Farben, Schriften, Logo), `locales/*.json` (im Editor geänderte Texte). Neue Funktionen kommen deshalb als neue Sektion oder als neuer Block dazu und werden im Editor eingesetzt, statt bestehende Vorlagen zu überschreiben. Vor größeren Eingriffen im Admin unter Onlineshop → Themes das Live-Theme duplizieren, das ist ein vollständiger Schnappschuss aller Inhalte.
+
+Neue Einstellungen erscheinen im Theme Editor erst nach einem Neuladen der Seite. Wer den Editor während eines Updates offen lässt, arbeitet mit dem alten Stand und schreibt beim Speichern unter Umständen leere Werte in die Vorlage. Nach jedem Push den Editor einmal neu laden.
 
 ## Start
 

@@ -22,6 +22,17 @@
     endif
   endfor
 
+  comment
+    Direkt unter einem Seitenkopf wirkt der volle Abstand oben zu gross,
+    deshalb laesst er sich pro Seite kleiner stellen.
+  endcomment
+  assign space_class = ''
+  if section.settings.space_top == 'small'
+    assign space_class = ' section--space-small'
+  elsif section.settings.space_top == 'none'
+    assign space_class = ' section--space-none'
+  endif
+
   assign show_section = false
   if section.settings.show_title or has_content or section.blocks.size > 0
     assign show_section = true
@@ -29,7 +40,7 @@
 -%}
 
 {%- if show_section -%}
-<div class="page-width{% if section.settings.width == 'narrow' %} page-width--narrow{% endif %} section" style="text-align:{{ section.settings.align | default: 'left' }};">
+<div class="page-width{% if section.settings.width == 'narrow' %} page-width--narrow{% endif %} section{{ space_class }}" style="text-align:{{ section.settings.align | default: 'left' }};">
   {%- if section.settings.show_title -%}
     <header class="section-header" reveal>
       <h1>{{ page.title }}</h1>
@@ -195,6 +206,18 @@
         { "value": "right", "label": "Rechts" }
       ],
       "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "space_top",
+      "label": "Abstand oben",
+      "options": [
+        { "value": "normal", "label": "Normal" },
+        { "value": "small", "label": "Klein" },
+        { "value": "none", "label": "Ohne" }
+      ],
+      "default": "normal",
+      "info": "Kleiner stellen, wenn darüber schon ein Seitenkopf steht."
     }
   ],
   "blocks": [

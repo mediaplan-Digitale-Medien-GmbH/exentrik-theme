@@ -2390,3 +2390,15 @@ body:not(.template-index) .main-content {
 @media (min-width: 750px) {
   .shopify-policy__container { width: min(100% - 4rem, 860px); }
 }
+
+/* Produktgalerie: Format, Zuschnitt und Anzahl der Vorschaubilder kommen aus der Sektion. */
+.product-gallery__main { aspect-ratio: auto; }
+.product-gallery__main img { width: 100%; height: auto; display: block; object-fit: var(--pg-fit, cover); }
+.product-gallery--ratio .product-gallery__main { aspect-ratio: var(--pg-ratio, 1 / 1); }
+.product-gallery--ratio .product-gallery__main img { height: 100%; }
+.product-gallery__thumbs { grid-template-columns: repeat(var(--pg-thumbs, 5), minmax(0, 1fr)); }
+.product-gallery__thumb img { object-fit: var(--pg-fit, cover); }
+
+/* Seitenvorlage: Abstand oben laesst sich pro Seite verkleinern. */
+.page-main-section .section--space-small { padding-top: clamp(0.75rem, 2vw, 1.25rem); margin-top: 0; }
+.page-main-section .section--space-none { padding-top: 0; margin-top: 0; }
