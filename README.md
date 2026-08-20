@@ -22,6 +22,8 @@ Darstellung als Tabelle, Kacheln oder kompakte Zeile. Listen, Bilder, Dateien, L
 
 Jede Seite hat oben ihr Inhaltsfeld aus dem Admin. Steht dort Text, erscheint er über allem anderen, ist das Feld leer, wird nichts angezeigt und es entsteht auch keine Lücke. Darunter lässt sich die Seite mit Blöcken erweitern:
 
+Die Ausrichtung steuert jede Textsektion selbst. **Seite** und **Textabschnitt** haben dafür die Einstellung **Ausrichtung** mit Links, Mitte und Rechts, damit Titel und Text darunter zusammenpassen.
+
 | Block | Wofür |
 |---|---|
 | **Seiteninhalt aus dem Admin** | Nur nötig, wenn der Text nicht oben, sondern zwischen den Blöcken stehen soll |

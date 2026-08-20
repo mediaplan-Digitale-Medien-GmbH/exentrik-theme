@@ -29,7 +29,7 @@
 -%}
 
 {%- if show_section -%}
-<div class="page-width{% if section.settings.width == 'narrow' %} page-width--narrow{% endif %} section">
+<div class="page-width{% if section.settings.width == 'narrow' %} page-width--narrow{% endif %} section" style="text-align:{{ section.settings.align | default: 'left' }};">
   {%- if section.settings.show_title -%}
     <header class="section-header" reveal>
       <h1>{{ page.title }}</h1>
@@ -171,6 +171,7 @@
 {
   "name": "Seite",
   "tag": "section",
+  "class": "page-main-section",
   "settings": [
     { "type": "paragraph", "content": "Zeigt oben den Inhalt, der im Admin unter Onlineshop, Seiten bei dieser Seite steht. Ist das Feld dort leer, erscheint hier nichts. Darunter lassen sich über Blöcke Text, Bild, Video, Metafelder und Buttons ergänzen. Für unterschiedliche Seiten oben im Editor die Vorlage duplizieren." },
     { "type": "checkbox", "id": "show_title", "label": "Seitentitel anzeigen", "default": true, "info": "Ausschalten, wenn die Seite schon einen eigenen Seitenkopf hat." },
@@ -183,6 +184,17 @@
         { "value": "wide", "label": "Volle Breite" }
       ],
       "default": "narrow"
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Ausrichtung",
+      "options": [
+        { "value": "left", "label": "Links" },
+        { "value": "center", "label": "Mitte" },
+        { "value": "right", "label": "Rechts" }
+      ],
+      "default": "left"
     }
   ],
   "blocks": [

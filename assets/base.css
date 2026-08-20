@@ -876,6 +876,13 @@ body.template-index .main-content {
   padding-block: var(--section-y);
 }
 
+/* Ohne einen einzigen Wert faellt der Detailblock samt Titel weg. */
+.product-details:not(:has(.product-details__row:not([hidden]))) { display: none; }
+
+/* Nach einem Seitenkopf braucht der Seiteninhalt oben keinen zweiten Abstand. */
+.page-header-section + .page-main-section .section { padding-top: clamp(1.5rem, 3vw, 2.5rem); }
+.page-main-section .section-header { margin-bottom: clamp(0.75rem, 2vw, 1.5rem); }
+
 .section--dark {
   background: var(--color-charcoal);
   color: var(--color-on-dark);

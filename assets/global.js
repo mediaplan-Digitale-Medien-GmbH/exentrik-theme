@@ -501,25 +501,29 @@
     }
 
     renderMetafields(variant) {
-      const design = !!(window.Shopify && window.Shopify.designMode);
+      const showEmpty = this.showsEmptyMetafields();
       const values = (variant && variant.metafields) || {};
       $$('[data-vmf]', this.root).forEach((row) => {
         const key = row.getAttribute('data-vmf');
         const val = values[key];
         const has = !(val === undefined || val === null || val === '');
         const valEl = $('[data-vmf-value]', row);
-        if (valEl) valEl.innerHTML = has ? val : '\u2014';
-        row.hidden = !has && !design;
+        if (valEl) valEl.innerHTML = has ? val : 'ohne Angabe';
+        row.hidden = !has && !showEmpty;
       });
       this.toggleDetails();
+    }
+
+    showsEmptyMetafields() {
+      const container = $('[data-product-details]', this.root);
+      return !!(container && container.hasAttribute('data-show-empty'));
     }
 
     toggleDetails() {
       const container = $('[data-product-details]', this.root);
       if (!container) return;
-      const design = !!(window.Shopify && window.Shopify.designMode);
       const anyVisible = $$('.product-details__row', container).some((r) => !r.hidden);
-      container.hidden = !anyVisible && !design;
+      container.hidden = !anyVisible;
     }
 
     renderUnavailable() {
