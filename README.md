@@ -41,6 +41,14 @@ Rechtstexte bekommen eine eigene Vorlage: **widerruf** (`templates/page.widerruf
 - Branches: `main` (Live), `staging` (Preview)
 - Repo: https://github.com/mediaplan-Digitale-Medien-GmbH/exentrik-theme
 
+## Seitenvorlagen und Rechtstexte
+
+Fertige Vorlagen mit festem Suffix: `impressum`, `datenschutz`, `agb`, `widerruf`, `versand`, `zahlung`, dazu `contact` und `baukasten`. Die Rechtstext-Vorlagen zeigen Titel und Inhalt der Seite in Lesebreite.
+
+Hintergrund ist eine Falle in Shopify: Steht bei einer Seite im Admin unter **Theme-Vorlage** ein Suffix, das das aktive Theme nicht als Datei hat, rendert Shopify die Seite **leer**. Kopf und Fuß erscheinen, der Inhalt fehlt, ohne Fehlermeldung und ohne Rückfall auf die Standardvorlage. Prüfen unter Admin → Onlineshop → Seiten → Seite öffnen → rechts **Theme-Vorlage**.
+
+Rechtstexte aus Einstellungen → Richtlinien laufen über `/policies/...` und bringen eigenes Markup mit. Dafür sorgt `.shopify-policy__container` in `base.css` für Lesebreite und Abstände.
+
 ## Von Staging nach Live
 
 Der Shop hängt an `main`. Alles, was im Theme-Editor eingestellt wird, landet als Commit von `shopify[bot]` direkt dort. Entwickelt wird auf `staging`. Übertragen mit:
