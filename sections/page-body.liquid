@@ -1,0 +1,317 @@
+{%- liquid
+  comment
+    Seitenvorlage als Baukasten. Der Inhalt aus dem Admin steht immer zur
+    Verfuegung und erscheint oben, sobald etwas drinsteht. Bleibt das Feld leer
+    und gibt es weder Titel noch Bloecke, faellt die ganze Sektion weg, damit
+    keine leere Flaeche entsteht. Zusaetzliche Inhalte kommen ueber Bloecke.
+  endcomment
+
+  assign has_content = false
+  if page.content != blank
+    assign has_content = true
+  endif
+
+  comment
+    Wer den Block "Seiteninhalt" nutzt, bestimmt die Position selbst. Dann faellt
+    die automatische Ausgabe oben weg, sonst stuende der Text doppelt da.
+  endcomment
+  assign content_placed = false
+  for block in section.blocks
+    if block.type == 'content'
+      assign content_placed = true
+    endif
+  endfor
+
+  comment
+    Direkt unter einem Seitenkopf wirkt der volle Abstand oben zu gross,
+    deshalb laesst er sich pro Seite kleiner stellen.
+  endcomment
+  assign space_class = ''
+  if section.settings.space_top == 'small'
+    assign space_class = ' section--space-small'
+  elsif section.settings.space_top == 'none'
+    assign space_class = ' section--space-none'
+  endif
+
+  assign show_section = false
+  if section.settings.show_title or has_content or section.blocks.size > 0
+    assign show_section = true
+  endif
+-%}
+
+{%- if show_section -%}
+<div class="page-width{% if section.settings.width == 'narrow' %} page-width--narrow{% endif %} section{{ space_class }}" style="text-align:{{ section.settings.align | default: 'left' }};">
+  {%- if section.settings.show_title -%}
+    <header class="section-header" reveal>
+      <h1>{{ page.title }}</h1>
+    </header>
+  {%- endif -%}
+
+  {%- if has_content and content_placed == false -%}
+    <div class="page-content rte" reveal>{{ page.content }}</div>
+  {%- endif -%}
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="page-blocks">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'content' -%}
+            <div class="page-block page-block--text rte" reveal {{ block.shopify_attributes }}>{{ page.content }}</div>
+
+          {%- when 'heading' -%}
+            <h2 class="page-block page-block--heading" reveal {{ block.shopify_attributes }}>{{ block.settings.text }}</h2>
+
+          {%- when 'text' -%}
+            <div class="page-block page-block--text rte" reveal {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+
+          {%- when 'image' -%}
+            <figure class="page-block page-block--image" reveal {{ block.shopify_attributes }}>
+              {%- if block.settings.image != blank -%}
+                <img
+                  src="{{ block.settings.image | image_url: width: 1600 }}"
+                  srcset="{{ block.settings.image | image_url: width: 800 }} 800w, {{ block.settings.image | image_url: width: 1600 }} 1600w"
+                  sizes="(min-width: 990px) 900px, 100vw"
+                  alt="{{ block.settings.image.alt | escape }}"
+                  width="{{ block.settings.image.width }}"
+                  height="{{ block.settings.image.height }}"
+                  loading="lazy">
+              {%- else -%}
+                {{ 'lifestyle-1' | placeholder_svg_tag }}
+              {%- endif -%}
+              {%- if block.settings.caption != blank -%}
+                <figcaption>{{ block.settings.caption }}</figcaption>
+              {%- endif -%}
+            </figure>
+
+          {%- when 'video' -%}
+            <div class="page-block page-block--video" reveal {{ block.shopify_attributes }}>
+              {%- if block.settings.video != blank -%}
+                <video
+                  {% if block.settings.controls %}controls{% endif %}
+                  {% if block.settings.autoplay %}autoplay muted loop playsinline{% endif %}
+                  preload="metadata"
+                  {% if block.settings.poster != blank %}poster="{{ block.settings.poster | image_url: width: 1600 }}"{% endif %}>
+                  {%- for source in block.settings.video.sources -%}
+                    <source src="{{ source.url }}" type="{% if source.mime_type != blank %}{{ source.mime_type }}{% else %}video/{{ source.format }}{% endif %}">
+                  {%- endfor -%}
+                </video>
+              {%- elsif block.settings.video_url != blank -%}
+                <div class="page-video">
+                  <video
+                    {% if block.settings.controls %}controls{% endif %}
+                    {% if block.settings.autoplay %}autoplay muted loop playsinline{% endif %}
+                    preload="metadata"
+                    {% if block.settings.poster != blank %}poster="{{ block.settings.poster | image_url: width: 1600 }}"{% endif %}>
+                    <source src="{{ block.settings.video_url }}" type="video/mp4">
+                  </video>
+                </div>
+              {%- elsif block.settings.external_video != blank -%}
+                <div class="page-video">
+                  {%- if block.settings.external_video.type == 'youtube' -%}
+                    <iframe
+                      src="https://www.youtube-nocookie.com/embed/{{ block.settings.external_video.id }}"
+                      title="{{ block.settings.caption | default: page.title | escape }}"
+                      loading="lazy"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen></iframe>
+                  {%- else -%}
+                    <iframe
+                      src="https://player.vimeo.com/video/{{ block.settings.external_video.id }}"
+                      title="{{ block.settings.caption | default: page.title | escape }}"
+                      loading="lazy"
+                      allow="autoplay; fullscreen; picture-in-picture"
+                      allowfullscreen></iframe>
+                  {%- endif -%}
+                </div>
+              {%- elsif request.design_mode -%}
+                <p class="text-muted">Video: noch keine Datei und keine Adresse hinterlegt.</p>
+              {%- endif -%}
+              {%- if block.settings.caption != blank -%}
+                <p class="page-block__caption">{{ block.settings.caption }}</p>
+              {%- endif -%}
+            </div>
+
+          {%- when 'metafield' -%}
+            {%- liquid
+              assign pb_ns = block.settings.namespace | default: 'custom'
+              assign pb_key = block.settings.key
+              assign pb_group = page.metafields[pb_ns]
+              assign pb_field = pb_group[pb_key]
+            -%}
+            {%- comment -%}Ausgabe passend zum Feldtyp, bewusst ohne eigenes Snippet.{%- endcomment -%}
+            {%- capture pb_value -%}
+              {%- assign mv_type = pb_field.type -%}
+              {%- if mv_type contains 'list.' -%}
+                <ul class="metafield-value__list">{%- for item in pb_field.value -%}<li>{%- if item.width -%}<img src="{{ item | image_url: width: 800 }}" alt="{{ item.alt | escape }}" loading="lazy" width="{{ item.width }}" height="{{ item.height }}">{%- elsif item.title -%}<a href="{{ item.url }}">{{ item.title }}</a>{%- else -%}{{ item }}{%- endif -%}</li>{%- endfor -%}</ul>
+              {%- else -%}
+                {%- case mv_type -%}
+                  {%- when 'boolean' -%}{%- if pb_field.value -%}Ja{%- else -%}Nein{%- endif -%}
+                  {%- when 'date' -%}{{ pb_field.value | date: '%d.%m.%Y' }}
+                  {%- when 'date_time' -%}{{ pb_field.value | date: '%d.%m.%Y, %H:%M Uhr' }}
+                  {%- when 'url' -%}<a href="{{ pb_field.value }}" rel="noopener">{{ pb_field.value | remove: 'https://' | remove: 'http://' }}</a>
+                  {%- when 'multi_line_text_field' -%}{{ pb_field.value | newline_to_br }}
+                  {%- when 'rich_text_field' -%}<div class="rte">{{ pb_field }}</div>
+                  {%- when 'file_reference' -%}{%- if pb_field.value.width -%}<img src="{{ pb_field.value | image_url: width: 1200 }}" alt="{{ pb_field.value.alt | escape }}" loading="lazy" width="{{ pb_field.value.width }}" height="{{ pb_field.value.height }}">{%- else -%}<a href="{{ pb_field.value.url }}" rel="noopener">Datei öffnen</a>{%- endif -%}
+                  {%- when 'page_reference' or 'product_reference' or 'collection_reference' -%}<a href="{{ pb_field.value.url }}">{{ pb_field.value.title }}</a>
+                  {%- else -%}{{ pb_field }}
+                {%- endcase -%}
+              {%- endif -%}
+            {%- endcapture -%}
+            {%- assign pb_value = pb_value | strip -%}
+            {%- assign pb_empty = false -%}
+            {%- if pb_value == blank or pb_value == 'null' -%}
+              {%- assign pb_empty = true -%}
+            {%- endif -%}
+            {%- if pb_empty == false or request.design_mode -%}
+              <div class="page-block page-block--metafield" reveal {{ block.shopify_attributes }}>
+                {%- unless block.settings.hide_label -%}
+                  <div class="page-block__label">
+                    {{ block.settings.label }}
+                    {%- if request.design_mode -%}
+                      <span class="page-block__ref">{{ pb_ns }}.{{ pb_key }}</span>
+                    {%- endif -%}
+                  </div>
+                {%- endunless -%}
+                <div class="page-block__value">
+                  {%- if pb_empty -%}ohne Angabe{%- else -%}{{ pb_value }}{%- endif -%}
+                </div>
+              </div>
+            {%- endif -%}
+
+          {%- when 'button' -%}
+            <div class="page-block page-block--button" reveal {{ block.shopify_attributes }}>
+              <a href="{{ block.settings.link | default: '#' }}" class="btn btn--{{ block.settings.style }} btn--large">{{ block.settings.label }}</a>
+            </div>
+
+          {%- when 'divider' -%}
+            <div class="page-block page-block--divider" {{ block.shopify_attributes }}><hr></div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>
+{%- elsif request.design_mode -%}
+  <div class="page-width page-width--narrow section">
+    <p class="text-muted">Seiteninhalt: Diese Fläche bleibt leer, solange die Seite im Admin keinen Inhalt hat. Im Shop wird hier nichts angezeigt.</p>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Seite",
+  "tag": "section",
+  "class": "page-main-section",
+  "settings": [
+    { "type": "paragraph", "content": "Zeigt oben den Inhalt, der im Admin unter Onlineshop, Seiten bei dieser Seite steht. Ist das Feld dort leer, erscheint hier nichts. Darunter lassen sich über Blöcke Text, Bild, Video, Metafelder und Buttons ergänzen. Für unterschiedliche Seiten oben im Editor die Vorlage duplizieren." },
+    { "type": "checkbox", "id": "show_title", "label": "Seitentitel anzeigen", "default": true, "info": "Ausschalten, wenn die Seite schon einen eigenen Seitenkopf hat." },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "Breite",
+      "options": [
+        { "value": "narrow", "label": "Schmal, gut lesbar" },
+        { "value": "wide", "label": "Volle Breite" }
+      ],
+      "default": "narrow"
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Ausrichtung",
+      "options": [
+        { "value": "left", "label": "Links" },
+        { "value": "center", "label": "Mitte" },
+        { "value": "right", "label": "Rechts" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "space_top",
+      "label": "Abstand oben",
+      "options": [
+        { "value": "normal", "label": "Normal" },
+        { "value": "small", "label": "Klein" },
+        { "value": "none", "label": "Ohne" }
+      ],
+      "default": "normal",
+      "info": "Kleiner stellen, wenn darüber schon ein Seitenkopf steht."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "content",
+      "name": "Seiteninhalt aus dem Admin",
+      "limit": 1,
+      "settings": [
+        { "type": "paragraph", "content": "Nur nötig, wenn der Text aus dem Admin nicht oben, sondern zwischen den anderen Blöcken stehen soll. Sobald dieser Block da ist, erscheint der Text an dieser Stelle statt am Anfang." }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Überschrift",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Zwischenüberschrift" }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Ein Absatz mit den wichtigsten Informationen.</p>" }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Bild",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Bild" },
+        { "type": "text", "id": "caption", "label": "Bildunterschrift" }
+      ]
+    },
+    {
+      "type": "video",
+      "name": "Video",
+      "settings": [
+        { "type": "video", "id": "video", "label": "Video aus Shopify", "info": "Hochgeladen unter Inhalte, Dateien. Wird über das Shopify CDN ausgeliefert." },
+        { "type": "url", "id": "video_url", "label": "Adresse einer MP4-Datei", "info": "Alternative, falls das Video woanders liegt." },
+        { "type": "video_url", "id": "external_video", "label": "YouTube oder Vimeo", "accept": ["youtube", "vimeo"] },
+        { "type": "image_picker", "id": "poster", "label": "Vorschaubild" },
+        { "type": "checkbox", "id": "controls", "label": "Bedienelemente anzeigen", "default": true },
+        { "type": "checkbox", "id": "autoplay", "label": "Automatisch und stumm abspielen", "default": false },
+        { "type": "text", "id": "caption", "label": "Bildunterschrift" }
+      ]
+    },
+    {
+      "type": "metafield",
+      "name": "Metafeld der Seite",
+      "settings": [
+        { "type": "paragraph", "content": "Felder legen Sie im Admin unter Einstellungen, Benutzerdefinierte Daten, Seiten an und füllen sie bei der jeweiligen Seite." },
+        { "type": "text", "id": "label", "label": "Anzeigename", "default": "Merkmal" },
+        { "type": "text", "id": "namespace", "label": "Namespace", "default": "custom", "info": "z. B. custom" },
+        { "type": "text", "id": "key", "label": "Key", "info": "Der Schlüssel des Metafelds, z. B. ansprechpartner" },
+        { "type": "checkbox", "id": "hide_label", "label": "Anzeigename ausblenden", "default": false }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Text", "default": "Mehr erfahren" },
+        { "type": "url", "id": "link", "label": "Ziel" },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Stil",
+          "options": [
+            { "value": "primary", "label": "Kräftig" },
+            { "value": "ghost", "label": "Zurückhaltend" }
+          ],
+          "default": "primary"
+        }
+      ]
+    },
+    { "type": "divider", "name": "Trennlinie", "settings": [] }
+  ]
+}
+{% endschema %}

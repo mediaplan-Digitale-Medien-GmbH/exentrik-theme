@@ -8,7 +8,7 @@
       }
     },
     "seiteninhalt": {
-      "type": "main-page",
+      "type": "page-body",
       "settings": {
         "show_title": false,
         "width": "narrow"
