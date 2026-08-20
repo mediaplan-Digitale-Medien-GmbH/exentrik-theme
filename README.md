@@ -45,7 +45,7 @@ Die Ausrichtung steuert jede Textsektion selbst. **Seite** und **Textabschnitt**
 | **Metafeld der Seite** | Werte aus Einstellungen, Benutzerdefinierte Daten, Seiten |
 | **Button, Trennlinie** | Handlungsaufruf und Gliederung |
 
-Auch die gestalteten Vorlagen wie Kontakt haben das Inhaltsfeld, dort ohne Seitentitel, weil sie schon eine eigene Überschrift mitbringen. Die Einstellungen der Vorlage gelten für alle Seiten, die sie nutzen. Für eine Seite mit eigenem Aufbau im Editor oben die Vorlage duplizieren und der Seite zuweisen. Mitgeliefert ist dafür die Vorlage **baukasten** als fertiges Beispiel mit Inhalt, Bild, Text, Video und Metafeld. Über **Breite** steht der Text entweder in angenehmer Lesebreite oder über die volle Spalte.
+Auch die gestalteten Vorlagen wie Kontakt haben das Inhaltsfeld, dort ohne Seitentitel, weil sie schon eine eigene Überschrift mitbringen. Die Einstellungen der Vorlage gelten für alle Seiten, die sie nutzen. Für eine Seite mit eigenem Aufbau im Editor oben die Vorlage duplizieren und der Seite zuweisen. Über **Breite** steht der Text entweder in angenehmer Lesebreite oder über die volle Spalte.
 
 Rechtstexte bekommen eine eigene Vorlage: **widerruf** (`templates/page.widerruf.json`). Sie zeigt Titel und Inhalt der Seite in Lesebreite, ohne zusätzliche Blöcke, damit der Text so erscheint, wie er im Admin oder von einem Rechtstexte-Dienst hinterlegt ist. Beim Anlegen der Seite unter Onlineshop, Seiten rechts unter Theme-Vorlage **widerruf** auswählen.
 
