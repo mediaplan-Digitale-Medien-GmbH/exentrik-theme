@@ -41,6 +41,19 @@ Rechtstexte bekommen eine eigene Vorlage: **widerruf** (`templates/page.widerruf
 - Branches: `main` (Live), `staging` (Preview)
 - Repo: https://github.com/mediaplan-Digitale-Medien-GmbH/exentrik-theme
 
+## Von Staging nach Live
+
+Der Shop hängt an `main`. Alles, was im Theme-Editor eingestellt wird, landet als Commit von `shopify[bot]` direkt dort. Entwickelt wird auf `staging`. Übertragen mit:
+
+```bash
+python3 deploy.py          # Vorschau: was kommt aus dem Shop, was würden wir überschreiben
+python3 deploy.py --push   # holen, zusammenführen, prüfen, pushen
+```
+
+Das Skript holt zuerst den Stand aus dem Shop, führt ihn in `staging` zusammen, prüft das Theme und schreibt erst dann nach `main`. Es pusht nie mit Gewalt und bricht bei einem Konflikt in einer Inhaltsdatei ab, statt eine Seite zu bevorzugen.
+
+Diese Dateien schreibt der Theme-Editor, sie gehören dem Shop: `templates/*.json` (Aufbau der Seiten), `sections/*-group.json` (Kopf und Fuß), `config/settings_data.json` (Farben, Schriften, Logo), `locales/*.json` (im Editor geänderte Texte). Neue Funktionen kommen deshalb als neue Sektion oder als neuer Block dazu und werden im Editor eingesetzt, statt bestehende Vorlagen zu überschreiben. Vor größeren Eingriffen im Admin unter Onlineshop → Themes das Live-Theme duplizieren, das ist ein vollständiger Schnappschuss aller Inhalte.
+
 ## Start
 
 1. In Shopify GitHub anbinden (`staging` zuerst).
