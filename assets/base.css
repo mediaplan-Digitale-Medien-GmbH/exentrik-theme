@@ -2402,3 +2402,21 @@ body:not(.template-index) .main-content {
 /* Seitenvorlage: Abstand oben laesst sich pro Seite verkleinern. */
 .page-main-section .section--space-small { padding-top: clamp(0.75rem, 2vw, 1.25rem); margin-top: 0; }
 .page-main-section .section--space-none { padding-top: 0; margin-top: 0; }
+
+/* Seiteninhalt direkt unter einem Seitenkopf: Der Kopf bringt den Titel schon mit,
+   deshalb faellt der zweite Titel weg und oben reicht ein kleiner Abstand. Die Regeln
+   haengen nicht an der Klasse der Sektion und greifen auch bei aelteren Staenden. */
+.page-header-section + .shopify-section .section:has(> .section-header:first-child > h1) {
+  padding-top: clamp(0.75rem, 2vw, 1.25rem);
+  margin-top: 0;
+}
+.page-header-section + .shopify-section .section > .section-header:first-child:has(> h1) {
+  margin-bottom: clamp(0.5rem, 1.5vw, 1rem);
+}
+.page-header-section + .shopify-section .section > .section-header:first-child > h1 { display: none; }
+
+/* Bleibt danach nur ein leeres Inhaltsfeld uebrig, faellt die Flaeche ganz weg. */
+.page-header-section + .shopify-section .section:has(> .section-header:first-child > h1):has(> .rte:empty:last-child) {
+  padding-block: 0;
+  margin-block: 0;
+}
