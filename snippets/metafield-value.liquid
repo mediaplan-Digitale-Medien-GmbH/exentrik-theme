@@ -1,0 +1,53 @@
+{%- comment -%}
+  Gibt einen Metafeldwert passend zu seinem Typ aus: Text, Liste, Bild, Datei,
+  Link, Datum, Ja/Nein oder Verweis auf Produkt, Kategorie und Seite.
+  Erwartet: field (das Metafeld). Ohne Wert bleibt die Ausgabe leer, die
+  aufrufende Sektion entscheidet, was dann passiert.
+{%- endcomment -%}
+{%- liquid
+  assign mv_type = field.type
+  assign mv_is_list = false
+  if mv_type contains 'list.'
+    assign mv_is_list = true
+  endif
+-%}
+{%- if mv_is_list -%}
+  <ul class="metafield-value__list">
+    {%- for item in field.value -%}
+      <li>
+        {%- if item.width -%}
+          <img src="{{ item | image_url: width: 800 }}" alt="{{ item.alt | escape }}" loading="lazy" width="{{ item.width }}" height="{{ item.height }}">
+        {%- elsif item.title -%}
+          <a href="{{ item.url }}">{{ item.title }}</a>
+        {%- else -%}
+          {{ item }}
+        {%- endif -%}
+      </li>
+    {%- endfor -%}
+  </ul>
+{%- else -%}
+  {%- case mv_type -%}
+    {%- when 'boolean' -%}
+      {%- if field.value -%}Ja{%- else -%}Nein{%- endif -%}
+    {%- when 'date' -%}
+      {{ field.value | date: '%d.%m.%Y' }}
+    {%- when 'date_time' -%}
+      {{ field.value | date: '%d.%m.%Y, %H:%M Uhr' }}
+    {%- when 'url' -%}
+      <a href="{{ field.value }}" rel="noopener">{{ field.value | remove: 'https://' | remove: 'http://' }}</a>
+    {%- when 'multi_line_text_field' -%}
+      {{ field.value | newline_to_br }}
+    {%- when 'rich_text_field' -%}
+      <div class="rte">{{ field }}</div>
+    {%- when 'file_reference' -%}
+      {%- if field.value.width -%}
+        <img src="{{ field.value | image_url: width: 1200 }}" alt="{{ field.value.alt | escape }}" loading="lazy" width="{{ field.value.width }}" height="{{ field.value.height }}">
+      {%- else -%}
+        <a href="{{ field.value.url }}" rel="noopener">Datei öffnen</a>
+      {%- endif -%}
+    {%- when 'page_reference' or 'product_reference' or 'collection_reference' -%}
+      <a href="{{ field.value.url }}">{{ field.value.title }}</a>
+    {%- else -%}
+      {{ field }}
+  {%- endcase -%}
+{%- endif -%}

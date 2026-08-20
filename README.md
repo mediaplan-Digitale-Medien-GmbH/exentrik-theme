@@ -8,6 +8,31 @@ Stil: Merch-Shop in der Richtung von EMP (kräftig, dunkler Header, Schwarz/Wei�
 
 Die Startseite nutzt die Sektion **Hero Kacheln**: ein Bento-Raster, jede Kachel mit Bild, Badge, Text und CTA. Mehrere Slides werden zum Karussell. Bilder im Theme-Editor nachziehen.
 
+## Metafelder der Kategorie
+
+Was auf der Produktseite die Metafeld-Blöcke leisten, übernimmt auf der Kategorieseite die Sektion **Kategorie-Details**, etwa für Material, Größenhinweise oder ein Datenblatt. Sie wird im Editor hinzugefügt, verschoben und bei Bedarf mehrfach verwendet.
+
+1. Admin → Einstellungen → Benutzerdefinierte Daten → **Kategorien**, Felder anlegen.
+2. Werte je Kategorie unter Produkte → Kategorien → Metafelder pflegen.
+3. Theme Editor → Kategorieseite → Abschnitt hinzufügen → **Kategorie-Details**, pro Feld einen Block mit Anzeigename, Namespace und Key.
+
+Darstellung als Tabelle, Kacheln oder kompakte Zeile. Listen, Bilder, Dateien, Links, Ja/Nein und Datum werden passend formatiert. Leere Felder bleiben im Shop unsichtbar, im Editor stehen sie als „ohne Angabe“ da. Ist für eine Kategorie nichts gepflegt, verschwindet die Sektion dort komplett.
+
+## Seiten bauen
+
+Die Seitenvorlage ist ein Baukasten. Ohne Blöcke zeigt sie wie bisher Titel und Inhalt aus dem Admin, mit Blöcken lassen sich Bausteine frei kombinieren und sortieren:
+
+| Block | Wofür |
+|---|---|
+| **Seiteninhalt aus dem Admin** | Der Text, der unter Onlineshop, Seiten steht, an beliebiger Stelle |
+| **Überschrift / Text** | Zwischenüberschriften und Absätze direkt im Editor |
+| **Bild** | Mit optionaler Bildunterschrift, volle Spaltenbreite |
+| **Video** | Shopify-Video, MP4-Adresse oder YouTube und Vimeo, wahlweise mit Bedienelementen oder stumm im Autoplay |
+| **Metafeld der Seite** | Werte aus Einstellungen, Benutzerdefinierte Daten, Seiten |
+| **Button, Trennlinie** | Handlungsaufruf und Gliederung |
+
+Die Einstellungen der Vorlage gelten für alle Seiten, die sie nutzen. Für eine Seite mit eigenem Aufbau im Editor oben die Vorlage duplizieren und der Seite zuweisen. Mitgeliefert ist dafür die Vorlage **baukasten** als fertiges Beispiel mit Inhalt, Bild, Text, Video und Metafeld. Über **Breite** steht der Text entweder in angenehmer Lesebreite oder über die volle Spalte.
+
 ## Git / Shopify
 
 - Repo-Root = Theme-Root

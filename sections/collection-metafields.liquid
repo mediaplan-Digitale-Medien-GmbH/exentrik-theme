@@ -1,0 +1,146 @@
+{%- liquid
+  comment
+    Modul fuer Kategorie-Metafelder. Liegt als eigene Sektion vor, damit es im
+    Editor frei ueber oder unter der Produktliste sitzen und mehrfach vorkommen
+    kann. Ohne eigene Auswahl greift die Kategorie der aktuellen Seite.
+  endcomment
+  assign cmf_collection = collection
+  if section.settings.collection != blank
+    assign cmf_collection = section.settings.collection
+  endif
+  assign cmf_auto_ns = section.settings.auto_namespace | default: 'custom'
+-%}
+
+{%- capture cmf_items -%}
+  {%- for block in section.blocks -%}
+    {%- case block.type -%}
+      {%- when 'metafield' -%}
+        {%- liquid
+          assign cmf_ns = block.settings.namespace | default: 'custom'
+          assign cmf_key = block.settings.key
+          assign cmf_group = cmf_collection.metafields[cmf_ns]
+          assign cmf_field = cmf_group[cmf_key]
+        -%}
+        {%- capture cmf_value -%}{% render 'metafield-value', field: cmf_field %}{%- endcapture -%}
+        {%- assign cmf_value = cmf_value | strip -%}
+        {%- assign cmf_empty = false -%}
+        {%- if cmf_value == blank or cmf_value == 'null' -%}
+          {%- assign cmf_empty = true -%}
+        {%- endif -%}
+        {%- if cmf_empty == false or request.design_mode -%}
+          <div class="collection-facts__item" {{ block.shopify_attributes }}>
+            {%- unless block.settings.hide_label -%}
+              <div class="collection-facts__key">
+                {{ block.settings.label }}
+                {%- if request.design_mode -%}
+                  <span class="collection-facts__ref">{{ cmf_ns }}.{{ cmf_key }}</span>
+                {%- endif -%}
+              </div>
+            {%- endunless -%}
+            <div class="collection-facts__value">
+              {%- if cmf_empty -%}ohne Angabe{%- else -%}{{ cmf_value }}{%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
+      {%- when 'text' -%}
+        <div class="collection-facts__item" {{ block.shopify_attributes }}>
+          {%- if block.settings.label != blank -%}
+            <div class="collection-facts__key">{{ block.settings.label }}</div>
+          {%- endif -%}
+          <div class="collection-facts__value rte">{{ block.settings.text }}</div>
+        </div>
+    {%- endcase -%}
+  {%- endfor -%}
+
+  {%- if section.settings.auto_show -%}
+    {%- for field in cmf_collection.metafields[cmf_auto_ns] -%}
+      {%- capture cmf_auto_value -%}{% render 'metafield-value', field: field.last %}{%- endcapture -%}
+      {%- assign cmf_auto_value = cmf_auto_value | strip -%}
+      {%- if cmf_auto_value != blank and cmf_auto_value != 'null' -%}
+        <div class="collection-facts__item">
+          <div class="collection-facts__key">{{ field.first | replace: '_', ' ' | capitalize }}</div>
+          <div class="collection-facts__value">{{ cmf_auto_value }}</div>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- assign cmf_has_items = cmf_items | strip -%}
+
+{%- if cmf_has_items != blank -%}
+  <div class="section collection-facts collection-facts--{{ section.settings.layout }}" style="--facts-columns: {{ section.settings.columns }};{% if section.settings.background != blank %}background:{{ section.settings.background }};padding-block:var(--section-spacing);{% endif %}">
+    <div class="page-width{% if section.settings.narrow %} page-width--narrow{% endif %}">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="collection-facts__heading" reveal>{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="collection-facts__intro rte" reveal>{{ section.settings.text }}</div>
+      {%- endif -%}
+      <div class="collection-facts__grid" reveal>{{ cmf_items }}</div>
+    </div>
+  </div>
+{%- elsif request.design_mode -%}
+  <div class="section">
+    <div class="page-width">
+      <p class="text-muted">Kategorie-Details: noch keine Felder hinterlegt. Füge rechts einen Block hinzu und trage Namespace und Key des Metafelds ein.</p>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Kategorie-Details",
+  "tag": "section",
+  "class": "collection-facts-section",
+  "settings": [
+    { "type": "paragraph", "content": "Zeigt Metafelder der Kategorie, zum Beispiel Größenhinweise, Material oder ein Datenblatt. Die Felder legen Sie im Admin unter Einstellungen, Benutzerdefinierte Daten, Kategorien an und füllen sie bei der jeweiligen Kategorie. Hier unten fügen Sie pro Feld einen Block hinzu und tragen Namespace und Key ein." },
+    { "type": "text", "id": "heading", "label": "Überschrift", "default": "Gut zu wissen" },
+    { "type": "richtext", "id": "text", "label": "Einleitung" },
+    { "type": "collection", "id": "collection", "label": "Kategorie", "info": "Leer lassen, dann gilt die Kategorie der aktuellen Seite." },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Darstellung",
+      "options": [
+        { "value": "list", "label": "Tabelle" },
+        { "value": "cards", "label": "Kacheln" },
+        { "value": "inline", "label": "Kompakte Zeile" }
+      ],
+      "default": "list"
+    },
+    { "type": "range", "id": "columns", "min": 2, "max": 4, "step": 1, "label": "Spalten bei Kacheln", "default": 3 },
+    { "type": "checkbox", "id": "narrow", "label": "Schmale Breite", "default": false },
+    { "type": "color", "id": "background", "label": "Hintergrundfarbe" },
+    { "type": "header", "content": "Automatisch" },
+    { "type": "checkbox", "id": "auto_show", "label": "Alle Metafelder eines Namespace anzeigen", "default": false, "info": "Zusätzlich zu den Blöcken unten. Praktisch, solange die Felder noch wachsen." },
+    { "type": "text", "id": "auto_namespace", "label": "Namespace für die automatische Anzeige", "default": "custom" }
+  ],
+  "blocks": [
+    {
+      "type": "metafield",
+      "name": "Kategorie-Metafeld",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Anzeigename", "default": "Merkmal" },
+        { "type": "text", "id": "namespace", "label": "Namespace", "default": "custom", "info": "z. B. custom" },
+        { "type": "text", "id": "key", "label": "Key", "info": "Der Schlüssel des Metafelds, z. B. material" },
+        { "type": "checkbox", "id": "hide_label", "label": "Anzeigename ausblenden", "default": false }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Freitext",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Anzeigename", "default": "Hinweis" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Kurzer Hinweis zu dieser Kategorie.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Kategorie-Details",
+      "blocks": [{ "type": "metafield" }]
+    }
+  ]
+}
+{% endschema %}
