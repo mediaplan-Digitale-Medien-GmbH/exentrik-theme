@@ -1,5 +1,8 @@
-"""Prueft ein Shopify-Theme vor dem Push: JSON, Schema-Ranges, Liquid-Tags,
-Filter in eckigen Klammern und CSS-Balance."""
+"""Prueft ein Shopify-Theme vor dem Push: JSON, Schema-Ranges, Namenslaengen,
+Liquid-Tags, Filter in eckigen Klammern, fehlende Snippets und CSS-Balance.
+
+Ohne Argument wird das Verzeichnis geprueft, in dem der Aufruf passiert.
+"""
 import glob
 import json
 import re
@@ -7,6 +10,13 @@ import sys
 
 OPENERS = {'if', 'unless', 'for', 'case', 'form', 'paginate', 'comment',
            'schema', 'capture', 'style', 'javascript', 'stylesheet'}
+
+# Shopify verwirft ein Schema still, sobald ein Name laenger ist. Die Sektion
+# behaelt dann die zuletzt gueltige Fassung im Shop, ohne jede Fehlermeldung.
+MAX_NAME = 25
+
+# Diese Sektionstypen bringt Shopify selbst mit, sie brauchen keine Datei.
+BUILT_IN_SECTIONS = {'apps'}
 
 
 def strip_header(raw):
@@ -36,6 +46,13 @@ def check(theme):
                 problems.append(f'SCHEMA {f}: {e}')
                 schema = None
             if schema:
+                named = [('Sektion', schema.get('name', ''))]
+                named += [('Block', b.get('name', '')) for b in schema.get('blocks') or []]
+                named += [('Preset', p.get('name', '')) for p in schema.get('presets') or []]
+                for kind, name in named:
+                    if len(name) > MAX_NAME:
+                        problems.append(f'NAME ZU LANG {f}: {kind} {name!r} hat {len(name)} Zeichen, erlaubt sind {MAX_NAME}')
+
                 groups = [schema.get('settings')]
                 groups += [b.get('settings') for b in schema.get('blocks') or []]
                 for settings in groups:
@@ -75,6 +92,19 @@ def check(theme):
             if not glob.glob(f'{theme}/snippets/{used}.liquid'):
                 problems.append(f'SNIPPET FEHLT {f}: {used}')
 
+    # Jede Sektion, die eine Vorlage nutzt, muss es auch als Datei geben.
+    for f in glob.glob(theme + '/templates/**/*.json', recursive=True):
+        try:
+            data = json.loads(strip_header(open(f, encoding='utf-8').read()))
+        except Exception:
+            continue
+        for section in (data.get('sections') or {}).values():
+            typ = section.get('type', '')
+            if typ in BUILT_IN_SECTIONS or typ.startswith('@'):
+                continue
+            if typ and not glob.glob(f'{theme}/sections/{typ}.liquid'):
+                problems.append(f'SEKTION FEHLT {f}: {typ}')
+
     print(f'{theme}: ' + ('OK' if not problems else f'{len(problems)} Problem(e)'))
     for p in sorted(set(problems)):
         print('  ' + p)
@@ -82,5 +112,6 @@ def check(theme):
 
 
 if __name__ == '__main__':
-    ok = all(check(t) for t in sys.argv[1:])
+    themes = sys.argv[1:] or ['.']
+    ok = all(check(t) for t in themes)
     sys.exit(0 if ok else 1)
