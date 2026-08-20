@@ -1,11 +1,34 @@
 {%- liquid
   comment
-    Seitenvorlage als Baukasten. Ohne Bloecke verhaelt sie sich wie vorher und
-    zeigt Titel und Inhalt aus dem Admin. Mit Bloecken lassen sich Text, Bild,
-    Video, Metafelder und Buttons frei kombinieren und sortieren.
+    Seitenvorlage als Baukasten. Der Inhalt aus dem Admin steht immer zur
+    Verfuegung und erscheint oben, sobald etwas drinsteht. Bleibt das Feld leer
+    und gibt es weder Titel noch Bloecke, faellt die ganze Sektion weg, damit
+    keine leere Flaeche entsteht. Zusaetzliche Inhalte kommen ueber Bloecke.
   endcomment
+
+  assign has_content = false
+  if page.content != blank
+    assign has_content = true
+  endif
+
+  comment
+    Wer den Block "Seiteninhalt" nutzt, bestimmt die Position selbst. Dann faellt
+    die automatische Ausgabe oben weg, sonst stuende der Text doppelt da.
+  endcomment
+  assign content_placed = false
+  for block in section.blocks
+    if block.type == 'content'
+      assign content_placed = true
+    endif
+  endfor
+
+  assign show_section = false
+  if section.settings.show_title or has_content or section.blocks.size > 0
+    assign show_section = true
+  endif
 -%}
 
+{%- if show_section -%}
 <div class="page-width{% if section.settings.width == 'narrow' %} page-width--narrow{% endif %} section">
   {%- if section.settings.show_title -%}
     <header class="section-header" reveal>
@@ -13,9 +36,11 @@
     </header>
   {%- endif -%}
 
-  {%- if section.blocks.size == 0 -%}
-    <div class="rte" reveal>{{ page.content }}</div>
-  {%- else -%}
+  {%- if has_content and content_placed == false -%}
+    <div class="page-content rte" reveal>{{ page.content }}</div>
+  {%- endif -%}
+
+  {%- if section.blocks.size > 0 -%}
     <div class="page-blocks">
       {%- for block in section.blocks -%}
         {%- case block.type -%}
@@ -136,14 +161,19 @@
     </div>
   {%- endif -%}
 </div>
+{%- elsif request.design_mode -%}
+  <div class="page-width page-width--narrow section">
+    <p class="text-muted">Seiteninhalt: Diese Fläche bleibt leer, solange die Seite im Admin keinen Inhalt hat. Im Shop wird hier nichts angezeigt.</p>
+  </div>
+{%- endif -%}
 
 {% schema %}
 {
   "name": "Seite",
   "tag": "section",
   "settings": [
-    { "type": "paragraph", "content": "Ohne Blöcke zeigt die Seite Titel und Inhalt aus dem Admin. Mit Blöcken lassen sich Text, Bild, Video, Metafelder und Buttons frei kombinieren. Für unterschiedliche Seiten oben im Editor die Vorlage duplizieren." },
-    { "type": "checkbox", "id": "show_title", "label": "Seitentitel anzeigen", "default": true },
+    { "type": "paragraph", "content": "Zeigt oben den Inhalt, der im Admin unter Onlineshop, Seiten bei dieser Seite steht. Ist das Feld dort leer, erscheint hier nichts. Darunter lassen sich über Blöcke Text, Bild, Video, Metafelder und Buttons ergänzen. Für unterschiedliche Seiten oben im Editor die Vorlage duplizieren." },
+    { "type": "checkbox", "id": "show_title", "label": "Seitentitel anzeigen", "default": true, "info": "Ausschalten, wenn die Seite schon einen eigenen Seitenkopf hat." },
     {
       "type": "select",
       "id": "width",
@@ -161,7 +191,7 @@
       "name": "Seiteninhalt aus dem Admin",
       "limit": 1,
       "settings": [
-        { "type": "paragraph", "content": "Zeigt den Text, der im Admin unter Onlineshop, Seiten steht. So lässt er sich zwischen den anderen Blöcken platzieren." }
+        { "type": "paragraph", "content": "Nur nötig, wenn der Text aus dem Admin nicht oben, sondern zwischen den anderen Blöcken stehen soll. Sobald dieser Block da ist, erscheint der Text an dieser Stelle statt am Anfang." }
       ]
     },
     {

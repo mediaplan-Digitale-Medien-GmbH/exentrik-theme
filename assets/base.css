@@ -1812,7 +1812,8 @@ body.template-index .main-content {
 .product-details__value { font-size: 0.95rem; }
 .product-details__ref { display: block; margin-top: 0.15rem; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.62rem; font-weight: 400; letter-spacing: 0; text-transform: none; color: var(--color-text-muted); opacity: 0.7; }
 
-/* Seitenbaukasten: Bloecke der Seitenvorlage. */
+/* Seitenbaukasten: Inhalt aus dem Admin plus Bloecke der Seitenvorlage. */
+.page-content + .page-blocks { margin-top: clamp(1.5rem, 3vw, 2.5rem); }
 .page-blocks > * { margin: 0; }
 .page-blocks > * + * { margin-top: clamp(1.5rem, 3vw, 2.5rem); }
 .page-block--image img { width: 100%; height: auto; border-radius: var(--radius); }

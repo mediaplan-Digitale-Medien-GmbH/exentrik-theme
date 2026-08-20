@@ -6,7 +6,17 @@
         "heading": "Kontakt",
         "text": "Sie haben Fragen zu einem Produkt? Wir beraten Sie gerne persönlich."
       }
+    },
+    "seiteninhalt": {
+      "type": "main-page",
+      "settings": {
+        "show_title": false,
+        "width": "narrow"
+      }
     }
   },
-  "order": ["main"]
+  "order": [
+    "seiteninhalt",
+    "main"
+  ]
 }

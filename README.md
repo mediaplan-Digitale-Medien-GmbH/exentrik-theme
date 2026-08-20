@@ -20,18 +20,18 @@ Darstellung als Tabelle, Kacheln oder kompakte Zeile. Listen, Bilder, Dateien, L
 
 ## Seiten bauen
 
-Die Seitenvorlage ist ein Baukasten. Ohne Blöcke zeigt sie wie bisher Titel und Inhalt aus dem Admin, mit Blöcken lassen sich Bausteine frei kombinieren und sortieren:
+Jede Seite hat oben ihr Inhaltsfeld aus dem Admin. Steht dort Text, erscheint er über allem anderen, ist das Feld leer, wird nichts angezeigt und es entsteht auch keine Lücke. Darunter lässt sich die Seite mit Blöcken erweitern:
 
 | Block | Wofür |
 |---|---|
-| **Seiteninhalt aus dem Admin** | Der Text, der unter Onlineshop, Seiten steht, an beliebiger Stelle |
+| **Seiteninhalt aus dem Admin** | Nur nötig, wenn der Text nicht oben, sondern zwischen den Blöcken stehen soll |
 | **Überschrift / Text** | Zwischenüberschriften und Absätze direkt im Editor |
 | **Bild** | Mit optionaler Bildunterschrift, volle Spaltenbreite |
 | **Video** | Shopify-Video, MP4-Adresse oder YouTube und Vimeo, wahlweise mit Bedienelementen oder stumm im Autoplay |
 | **Metafeld der Seite** | Werte aus Einstellungen, Benutzerdefinierte Daten, Seiten |
 | **Button, Trennlinie** | Handlungsaufruf und Gliederung |
 
-Die Einstellungen der Vorlage gelten für alle Seiten, die sie nutzen. Für eine Seite mit eigenem Aufbau im Editor oben die Vorlage duplizieren und der Seite zuweisen. Mitgeliefert ist dafür die Vorlage **baukasten** als fertiges Beispiel mit Inhalt, Bild, Text, Video und Metafeld. Über **Breite** steht der Text entweder in angenehmer Lesebreite oder über die volle Spalte.
+Auch die gestalteten Vorlagen wie Kontakt haben das Inhaltsfeld, dort ohne Seitentitel, weil sie schon eine eigene Überschrift mitbringen. Die Einstellungen der Vorlage gelten für alle Seiten, die sie nutzen. Für eine Seite mit eigenem Aufbau im Editor oben die Vorlage duplizieren und der Seite zuweisen. Mitgeliefert ist dafür die Vorlage **baukasten** als fertiges Beispiel mit Inhalt, Bild, Text, Video und Metafeld. Über **Breite** steht der Text entweder in angenehmer Lesebreite oder über die volle Spalte.
 
 Rechtstexte bekommen eine eigene Vorlage: **widerruf** (`templates/page.widerruf.json`). Sie zeigt Titel und Inhalt der Seite in Lesebreite, ohne zusätzliche Blöcke, damit der Text so erscheint, wie er im Admin oder von einem Rechtstexte-Dienst hinterlegt ist. Beim Anlegen der Seite unter Onlineshop, Seiten rechts unter Theme-Vorlage **widerruf** auswählen.
 
