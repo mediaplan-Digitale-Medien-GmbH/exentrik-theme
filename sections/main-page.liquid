@@ -138,7 +138,25 @@
               assign pb_group = page.metafields[pb_ns]
               assign pb_field = pb_group[pb_key]
             -%}
-            {%- capture pb_value -%}{% render 'metafield-value', field: pb_field %}{%- endcapture -%}
+            {%- comment -%}Ausgabe passend zum Feldtyp, bewusst ohne eigenes Snippet.{%- endcomment -%}
+            {%- capture pb_value -%}
+              {%- assign mv_type = pb_field.type -%}
+              {%- if mv_type contains 'list.' -%}
+                <ul class="metafield-value__list">{%- for item in pb_field.value -%}<li>{%- if item.width -%}<img src="{{ item | image_url: width: 800 }}" alt="{{ item.alt | escape }}" loading="lazy" width="{{ item.width }}" height="{{ item.height }}">{%- elsif item.title -%}<a href="{{ item.url }}">{{ item.title }}</a>{%- else -%}{{ item }}{%- endif -%}</li>{%- endfor -%}</ul>
+              {%- else -%}
+                {%- case mv_type -%}
+                  {%- when 'boolean' -%}{%- if pb_field.value -%}Ja{%- else -%}Nein{%- endif -%}
+                  {%- when 'date' -%}{{ pb_field.value | date: '%d.%m.%Y' }}
+                  {%- when 'date_time' -%}{{ pb_field.value | date: '%d.%m.%Y, %H:%M Uhr' }}
+                  {%- when 'url' -%}<a href="{{ pb_field.value }}" rel="noopener">{{ pb_field.value | remove: 'https://' | remove: 'http://' }}</a>
+                  {%- when 'multi_line_text_field' -%}{{ pb_field.value | newline_to_br }}
+                  {%- when 'rich_text_field' -%}<div class="rte">{{ pb_field }}</div>
+                  {%- when 'file_reference' -%}{%- if pb_field.value.width -%}<img src="{{ pb_field.value | image_url: width: 1200 }}" alt="{{ pb_field.value.alt | escape }}" loading="lazy" width="{{ pb_field.value.width }}" height="{{ pb_field.value.height }}">{%- else -%}<a href="{{ pb_field.value.url }}" rel="noopener">Datei öffnen</a>{%- endif -%}
+                  {%- when 'page_reference' or 'product_reference' or 'collection_reference' -%}<a href="{{ pb_field.value.url }}">{{ pb_field.value.title }}</a>
+                  {%- else -%}{{ pb_field }}
+                {%- endcase -%}
+              {%- endif -%}
+            {%- endcapture -%}
             {%- assign pb_value = pb_value | strip -%}
             {%- assign pb_empty = false -%}
             {%- if pb_value == blank or pb_value == 'null' -%}

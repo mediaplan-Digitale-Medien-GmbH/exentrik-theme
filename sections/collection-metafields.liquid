@@ -21,7 +21,25 @@
           assign cmf_group = cmf_collection.metafields[cmf_ns]
           assign cmf_field = cmf_group[cmf_key]
         -%}
-        {%- capture cmf_value -%}{% render 'metafield-value', field: cmf_field %}{%- endcapture -%}
+        {%- comment -%}Ausgabe passend zum Feldtyp, bewusst ohne eigenes Snippet.{%- endcomment -%}
+        {%- capture cmf_value -%}
+          {%- assign mv_type = cmf_field.type -%}
+          {%- if mv_type contains 'list.' -%}
+            <ul class="metafield-value__list">{%- for item in cmf_field.value -%}<li>{%- if item.width -%}<img src="{{ item | image_url: width: 800 }}" alt="{{ item.alt | escape }}" loading="lazy" width="{{ item.width }}" height="{{ item.height }}">{%- elsif item.title -%}<a href="{{ item.url }}">{{ item.title }}</a>{%- else -%}{{ item }}{%- endif -%}</li>{%- endfor -%}</ul>
+          {%- else -%}
+            {%- case mv_type -%}
+              {%- when 'boolean' -%}{%- if cmf_field.value -%}Ja{%- else -%}Nein{%- endif -%}
+              {%- when 'date' -%}{{ cmf_field.value | date: '%d.%m.%Y' }}
+              {%- when 'date_time' -%}{{ cmf_field.value | date: '%d.%m.%Y, %H:%M Uhr' }}
+              {%- when 'url' -%}<a href="{{ cmf_field.value }}" rel="noopener">{{ cmf_field.value | remove: 'https://' | remove: 'http://' }}</a>
+              {%- when 'multi_line_text_field' -%}{{ cmf_field.value | newline_to_br }}
+              {%- when 'rich_text_field' -%}<div class="rte">{{ cmf_field }}</div>
+              {%- when 'file_reference' -%}{%- if cmf_field.value.width -%}<img src="{{ cmf_field.value | image_url: width: 1200 }}" alt="{{ cmf_field.value.alt | escape }}" loading="lazy" width="{{ cmf_field.value.width }}" height="{{ cmf_field.value.height }}">{%- else -%}<a href="{{ cmf_field.value.url }}" rel="noopener">Datei öffnen</a>{%- endif -%}
+              {%- when 'page_reference' or 'product_reference' or 'collection_reference' -%}<a href="{{ cmf_field.value.url }}">{{ cmf_field.value.title }}</a>
+              {%- else -%}{{ cmf_field }}
+            {%- endcase -%}
+          {%- endif -%}
+        {%- endcapture -%}
         {%- assign cmf_value = cmf_value | strip -%}
         {%- assign cmf_empty = false -%}
         {%- if cmf_value == blank or cmf_value == 'null' -%}
@@ -54,7 +72,25 @@
 
   {%- if section.settings.auto_show -%}
     {%- for field in cmf_collection.metafields[cmf_auto_ns] -%}
-      {%- capture cmf_auto_value -%}{% render 'metafield-value', field: field.last %}{%- endcapture -%}
+      {%- assign cmf_auto_field = field.last -%}
+      {%- capture cmf_auto_value -%}
+        {%- assign mv_type = cmf_auto_field.type -%}
+        {%- if mv_type contains 'list.' -%}
+          <ul class="metafield-value__list">{%- for item in cmf_auto_field.value -%}<li>{%- if item.width -%}<img src="{{ item | image_url: width: 800 }}" alt="{{ item.alt | escape }}" loading="lazy" width="{{ item.width }}" height="{{ item.height }}">{%- elsif item.title -%}<a href="{{ item.url }}">{{ item.title }}</a>{%- else -%}{{ item }}{%- endif -%}</li>{%- endfor -%}</ul>
+        {%- else -%}
+          {%- case mv_type -%}
+            {%- when 'boolean' -%}{%- if cmf_auto_field.value -%}Ja{%- else -%}Nein{%- endif -%}
+            {%- when 'date' -%}{{ cmf_auto_field.value | date: '%d.%m.%Y' }}
+            {%- when 'date_time' -%}{{ cmf_auto_field.value | date: '%d.%m.%Y, %H:%M Uhr' }}
+            {%- when 'url' -%}<a href="{{ cmf_auto_field.value }}" rel="noopener">{{ cmf_auto_field.value | remove: 'https://' | remove: 'http://' }}</a>
+            {%- when 'multi_line_text_field' -%}{{ cmf_auto_field.value | newline_to_br }}
+            {%- when 'rich_text_field' -%}<div class="rte">{{ cmf_auto_field }}</div>
+            {%- when 'file_reference' -%}{%- if cmf_auto_field.value.width -%}<img src="{{ cmf_auto_field.value | image_url: width: 1200 }}" alt="{{ cmf_auto_field.value.alt | escape }}" loading="lazy" width="{{ cmf_auto_field.value.width }}" height="{{ cmf_auto_field.value.height }}">{%- else -%}<a href="{{ cmf_auto_field.value.url }}" rel="noopener">Datei öffnen</a>{%- endif -%}
+            {%- when 'page_reference' or 'product_reference' or 'collection_reference' -%}<a href="{{ cmf_auto_field.value.url }}">{{ cmf_auto_field.value.title }}</a>
+            {%- else -%}{{ cmf_auto_field }}
+          {%- endcase -%}
+        {%- endif -%}
+      {%- endcapture -%}
       {%- assign cmf_auto_value = cmf_auto_value | strip -%}
       {%- if cmf_auto_value != blank and cmf_auto_value != 'null' -%}
         <div class="collection-facts__item">
