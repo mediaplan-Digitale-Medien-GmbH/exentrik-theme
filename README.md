@@ -84,3 +84,20 @@ Neue Einstellungen erscheinen im Theme Editor erst nach einem Neuladen der Seite
 2. Logo liegt als Fallback in `assets/logo-exentrik.png` – zusätzlich im Editor hochladen, Favicon setzen.
 3. Kachel-Bilder und Links im Hero befüllen.
 4. Menüs (`main-menu`, `footer`) und Kollektionen pflegen.
+
+## Menüs und Megamenü
+
+Menüs kommen aus dem Admin unter **Onlineshop → Navigation**. Drei Ebenen werden unterstützt, zum Beispiel Sortiment → Holzkohle → Buchenholz: Untermenü anlegen, an einen Menüpunkt hängen, und an dessen Unterpunkt noch ein Untermenü.
+
+Im Theme Editor steuert die Sektion **Kopfzeile**, wie die Untermenüs aussehen:
+
+| Einstellung | Bedeutung |
+| --- | --- |
+| Untermenüs: Automatisch | Ab einer dritten Ebene oder mehr als fünf Unterpunkten wird daraus ein Megamenü, sonst bleibt es ein schlankes Klappmenü. |
+| Untermenüs: Klappmenü | Immer die schmale Klappliste. Die dritte Ebene steht darin eingerückt. |
+| Untermenüs: Megamenü | Immer die breite Fläche unter der Kopfzeile. |
+| Spalten im Megamenü | Zwei bis fünf Spalten. Jede Spalte ist ein Unterpunkt mit seinen eigenen Unterpunkten darunter. |
+
+Über **Block hinzufügen → Megamenü Aktion** kommt rechts ins Megamenü eine Fläche mit Bild, Überschrift, Text und Link. Ins Feld **Menüpunkt** schreiben Sie den Menüpunkt genau so, wie er im Menü heißt, zum Beispiel Sortiment. Auf schmalen Bildschirmen wird diese Fläche ausgeblendet und das Megamenü fällt auf zwei Spalten zurück.
+
+Auf dem Handy laufen alle drei Ebenen als aufklappbare Gruppen im Menü-Schubfach, jede Gruppe mit einem Link auf die Übersicht, zum Beispiel Alle Sortiment.
