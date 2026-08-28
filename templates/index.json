@@ -26,6 +26,20 @@
             "tone": "light"
           }
         },
+        "tile_6UBL7r": {
+          "type": "tile",
+          "settings": {
+            "slide": 1,
+            "size": "featured",
+            "badge": "New In",
+            "heading": "Hearts & Roses London",
+            "text": "Trage dein Herz mit Stil",
+            "button_label": "Jetzt shoppen",
+            "link": "shopify://collections/all",
+            "cta_style": "button",
+            "tone": "light"
+          }
+        },
         "t2": {
           "type": "tile",
           "settings": {
@@ -113,6 +127,7 @@
       },
       "block_order": [
         "t1",
+        "tile_6UBL7r",
         "t2",
         "t3",
         "t4",
