@@ -102,10 +102,10 @@
             "slide": 1,
             "size": "square",
             "badge": "",
-            "heading": "Lifestyle",
+            "heading": "Geldbörsen",
             "text": "",
             "button_label": "Shoppen",
-            "link": "shopify://collections/all",
+            "link": "shopify://collections/damen-accessoires-geldboersen",
             "cta_style": "link",
             "tone": "dark"
           }
@@ -117,7 +117,7 @@
             "size": "wide",
             "badge": "Drop",
             "heading": "Hell Bunnny",
-            "text": "Zeitlos frech, unwiderstehlich bunt",
+            "text": "Hol dir den Retro-Rebell in dir.",
             "button_label": "Jetzt ansehen",
             "link": "shopify://collections/all",
             "cta_style": "button",
