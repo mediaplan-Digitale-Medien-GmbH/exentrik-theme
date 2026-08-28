@@ -88,10 +88,10 @@
             "slide": 1,
             "size": "square",
             "badge": "",
-            "heading": "Sneaker",
+            "heading": "Caps",
             "text": "",
             "button_label": "Shoppen",
-            "link": "shopify://collections/all",
+            "link": "shopify://collections/herren-accessoires-caps",
             "cta_style": "link",
             "tone": "dark"
           }
