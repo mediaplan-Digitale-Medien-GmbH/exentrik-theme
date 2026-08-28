@@ -59,10 +59,10 @@
           "settings": {
             "slide": 1,
             "size": "square",
-            "badge": "Sale",
-            "heading": "Reduziert",
+            "badge": "",
+            "heading": "Taschen",
             "text": "",
-            "button_label": "Zum Sale",
+            "button_label": "Shoppen",
             "link": "shopify://collections/all",
             "cta_style": "link",
             "tone": "light"
