@@ -40,18 +40,32 @@
             "tone": "light"
           }
         },
-        "t2": {
+        "t5": {
           "type": "tile",
           "settings": {
             "slide": 1,
-            "size": "banner",
-            "badge": "Hot",
-            "heading": "Bestsellers",
-            "text": "Die Pieces, die alle wollen.",
-            "button_label": "Entdecken",
-            "link": "shopify://collections/all",
-            "cta_style": "button",
-            "tone": "light"
+            "size": "square",
+            "badge": "",
+            "heading": "Caps",
+            "text": "",
+            "button_label": "Shoppen",
+            "link": "shopify://collections/herren-accessoires-caps",
+            "cta_style": "link",
+            "tone": "dark"
+          }
+        },
+        "t6": {
+          "type": "tile",
+          "settings": {
+            "slide": 1,
+            "size": "square",
+            "badge": "",
+            "heading": "Geldbörsen",
+            "text": "",
+            "button_label": "Shoppen",
+            "link": "shopify://collections/damen-accessoires-geldboersen",
+            "cta_style": "link",
+            "tone": "dark"
           }
         },
         "t3": {
@@ -82,32 +96,18 @@
             "tone": "dark"
           }
         },
-        "t5": {
+        "t2": {
           "type": "tile",
           "settings": {
             "slide": 1,
-            "size": "square",
-            "badge": "",
-            "heading": "Caps",
-            "text": "",
-            "button_label": "Shoppen",
-            "link": "shopify://collections/herren-accessoires-caps",
-            "cta_style": "link",
-            "tone": "dark"
-          }
-        },
-        "t6": {
-          "type": "tile",
-          "settings": {
-            "slide": 1,
-            "size": "square",
-            "badge": "",
-            "heading": "Geldbörsen",
-            "text": "",
-            "button_label": "Shoppen",
-            "link": "shopify://collections/damen-accessoires-geldboersen",
-            "cta_style": "link",
-            "tone": "dark"
+            "size": "banner",
+            "badge": "Hot",
+            "heading": "Band Merch",
+            "text": "Kleidung und Accessoires deiner Ikonen",
+            "button_label": "Entdecken",
+            "link": "shopify://collections/all",
+            "cta_style": "button",
+            "tone": "light"
           }
         },
         "t7": {
@@ -128,11 +128,11 @@
       "block_order": [
         "t1",
         "tile_6UBL7r",
-        "t2",
-        "t3",
-        "t4",
         "t5",
         "t6",
+        "t3",
+        "t4",
+        "t2",
         "t7"
       ],
       "settings": {
