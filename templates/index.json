@@ -70,20 +70,6 @@
             "tone": "dark"
           }
         },
-        "t3": {
-          "type": "tile",
-          "settings": {
-            "slide": 1,
-            "size": "square",
-            "badge": "",
-            "heading": "",
-            "text": "",
-            "button_label": "Taschen",
-            "link": "shopify://collections/damen-accessoires-taschen",
-            "cta_style": "link",
-            "tone": "light"
-          }
-        },
         "t4": {
           "type": "tile",
           "settings": {
@@ -96,6 +82,21 @@
             "link": "shopify://collections/all",
             "cta_style": "link",
             "tone": "dark"
+          }
+        },
+        "t3": {
+          "type": "tile",
+          "settings": {
+            "slide": 1,
+            "size": "square",
+            "image": "shopify://shop_images/the_lovers_red_smooth.jpg",
+            "badge": "",
+            "heading": "",
+            "text": "",
+            "button_label": "Taschen",
+            "link": "shopify://collections/damen-accessoires-taschen",
+            "cta_style": "link",
+            "tone": "light"
           }
         },
         "t2": {
@@ -133,8 +134,8 @@
         "tile_6UBL7r",
         "t5",
         "t6",
-        "t3",
         "t4",
+        "t3",
         "t2",
         "t7"
       ],
