@@ -14,6 +14,22 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
+        "item_gkKPTc": {
+          "type": "item",
+          "settings": {
+            "text": "Kauf auf Rechnung",
+            "link": "",
+            "icon": "credit-card"
+          }
+        },
+        "item_tB7jCK": {
+          "type": "item",
+          "settings": {
+            "text": "Kostenlose Retoure",
+            "link": "",
+            "icon": "truck"
+          }
+        },
         "b1": {
           "type": "item",
           "settings": {
@@ -32,6 +48,8 @@
         }
       },
       "block_order": [
+        "item_gkKPTc",
+        "item_tB7jCK",
         "b1",
         "b2"
       ],
