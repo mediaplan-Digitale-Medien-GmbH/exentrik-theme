@@ -103,6 +103,7 @@
           "settings": {
             "slide": 1,
             "size": "banner",
+            "image": "shopify://shop_images/band_merch_hoodies.png",
             "badge": "Hot",
             "heading": "Band Merch",
             "text": "Kleidung und Accessoires deiner Ikonen",
