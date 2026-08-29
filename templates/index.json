@@ -275,15 +275,6 @@
         "button_link": ""
       }
     },
-    "newsletter": {
-      "type": "newsletter",
-      "settings": {
-        "eyebrow": "Newsletter",
-        "heading": "Drops, Deals, Exentrik.",
-        "text": "Melde dich an und verpasse keine Neuheiten oder Aktionen.",
-        "button_label": "Abonnieren"
-      }
-    },
     "image_with_text_6LLMBn": {
       "type": "image-with-text",
       "blocks": {
@@ -311,7 +302,7 @@
         "feature_rDxtDt",
         "feature_LPGEpp"
       ],
-      "name": "Bild mit Text",
+      "name": "Metallica",
       "settings": {
         "layout": "reverse",
         "eyebrow": "Top Band",
@@ -319,6 +310,15 @@
         "text": "<p>Ersetze diesen Platzhaltertext im Theme-Editor.</p>",
         "button_label": "button",
         "button_link": ""
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "eyebrow": "Newsletter",
+        "heading": "Drops, Deals, Exentrik.",
+        "text": "Melde dich an und verpasse keine Neuheiten oder Aktionen.",
+        "button_label": "Abonnieren"
       }
     }
   },
@@ -328,7 +328,7 @@
     "featured-collection",
     "collection_list_wYaVLY",
     "image_with_text_CMYYfd",
-    "newsletter",
-    "image_with_text_6LLMBn"
+    "image_with_text_6LLMBn",
+    "newsletter"
   ]
 }
