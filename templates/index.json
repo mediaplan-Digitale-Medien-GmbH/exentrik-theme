@@ -238,15 +238,6 @@
         "columns": 3
       }
     },
-    "newsletter": {
-      "type": "newsletter",
-      "settings": {
-        "eyebrow": "Newsletter",
-        "heading": "Drops, Deals, Exentrik.",
-        "text": "Melde dich an und verpasse keine Neuheiten oder Aktionen.",
-        "button_label": "Abonnieren"
-      }
-    },
     "image_with_text_CMYYfd": {
       "type": "image-with-text",
       "blocks": {
@@ -283,6 +274,52 @@
         "button_label": "button",
         "button_link": ""
       }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "eyebrow": "Newsletter",
+        "heading": "Drops, Deals, Exentrik.",
+        "text": "Melde dich an und verpasse keine Neuheiten oder Aktionen.",
+        "button_label": "Abonnieren"
+      }
+    },
+    "image_with_text_6LLMBn": {
+      "type": "image-with-text",
+      "blocks": {
+        "feature_gGRnRT": {
+          "type": "feature",
+          "settings": {
+            "text": "Vorteil 1"
+          }
+        },
+        "feature_rDxtDt": {
+          "type": "feature",
+          "settings": {
+            "text": "Vorteil 2"
+          }
+        },
+        "feature_LPGEpp": {
+          "type": "feature",
+          "settings": {
+            "text": "Vorteil 3"
+          }
+        }
+      },
+      "block_order": [
+        "feature_gGRnRT",
+        "feature_rDxtDt",
+        "feature_LPGEpp"
+      ],
+      "name": "Bild mit Text",
+      "settings": {
+        "layout": "reverse",
+        "eyebrow": "Top Band",
+        "heading": "Metallica",
+        "text": "<p>Ersetze diesen Platzhaltertext im Theme-Editor.</p>",
+        "button_label": "button",
+        "button_link": ""
+      }
     }
   },
   "order": [
@@ -290,7 +327,8 @@
     "usp-bar",
     "featured-collection",
     "collection_list_wYaVLY",
+    "image_with_text_CMYYfd",
     "newsletter",
-    "image_with_text_CMYYfd"
+    "image_with_text_6LLMBn"
   ]
 }
