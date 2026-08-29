@@ -62,10 +62,10 @@
             "slide": 1,
             "size": "square",
             "badge": "",
-            "heading": "Geldbörsen",
+            "heading": "",
             "text": "",
-            "button_label": "Shoppen",
-            "link": "shopify://collections/damen-accessoires-geldboersen",
+            "button_label": "Hoodies & Pullover",
+            "link": "shopify://collections/herren-bekleidung-pullover-hoodies",
             "cta_style": "link",
             "tone": "dark"
           }
