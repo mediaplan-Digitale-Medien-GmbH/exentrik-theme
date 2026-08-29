@@ -76,10 +76,10 @@
             "slide": 1,
             "size": "square",
             "badge": "",
-            "heading": "Taschen",
+            "heading": "",
             "text": "",
-            "button_label": "Shoppen",
-            "link": "shopify://collections/all",
+            "button_label": "Taschen",
+            "link": "shopify://collections/damen-accessoires-taschen",
             "cta_style": "link",
             "tone": "light"
           }
