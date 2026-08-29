@@ -48,9 +48,9 @@
             "size": "square",
             "image": "shopify://shop_images/sullen_cap.jpg",
             "badge": "",
-            "heading": "Caps",
+            "heading": "",
             "text": "",
-            "button_label": "Shoppen",
+            "button_label": "Caps",
             "link": "shopify://collections/herren-accessoires-caps",
             "cta_style": "link",
             "tone": "dark"
