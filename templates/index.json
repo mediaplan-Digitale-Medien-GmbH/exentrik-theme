@@ -17,6 +17,7 @@
           "settings": {
             "slide": 1,
             "size": "featured",
+            "image": "shopify://shop_images/sullen_tshirt.jpg",
             "badge": "New In",
             "heading": "Sullen Clothing",
             "text": "Mutige und absolut kompromisslose Designs",
