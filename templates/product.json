@@ -128,15 +128,6 @@
         "columns": 4
       }
     },
-    "aehnliche": {
-      "type": "related-products",
-      "name": "Mehr Marke",
-      "settings": {
-        "heading": "Mehr von dieser Marke",
-        "products_to_show": 4,
-        "columns": 4
-      }
-    },
     "related_products_8nEXgG": {
       "type": "related-products",
       "name": "Mehr Kategorie",
@@ -146,10 +137,20 @@
         "columns": 4
       }
     },
-    "related_products_Q87GmV": {
+    "aehnliche": {
       "type": "related-products",
+      "name": "Mehr Marke",
       "settings": {
         "heading": "Mehr von dieser Marke",
+        "products_to_show": 4,
+        "columns": 4
+      }
+    },
+    "related_products_Q87GmV": {
+      "type": "related-products",
+      "name": "Kunden kauften",
+      "settings": {
+        "heading": "Kunden kauften auch",
         "products_to_show": 4,
         "columns": 4
       }
@@ -159,8 +160,8 @@
     "main",
     "produktdetails",
     "zubehoer",
-    "aehnliche",
     "related_products_8nEXgG",
+    "aehnliche",
     "related_products_Q87GmV"
   ]
 }
