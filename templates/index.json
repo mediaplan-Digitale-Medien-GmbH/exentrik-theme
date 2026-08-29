@@ -68,7 +68,7 @@
             "button_label": "Hoodies & Pullover",
             "link": "shopify://collections/herren-bekleidung-pullover-hoodies",
             "cta_style": "link",
-            "tone": "dark"
+            "tone": "light"
           }
         },
         "t4": {
@@ -82,7 +82,7 @@
             "button_label": "Shoppen",
             "link": "shopify://collections/all",
             "cta_style": "link",
-            "tone": "dark"
+            "tone": "light"
           }
         },
         "t3": {
