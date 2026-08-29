@@ -139,8 +139,9 @@
     },
     "related_products_8nEXgG": {
       "type": "related-products",
+      "name": "Mehr Kategorie",
       "settings": {
-        "heading": "Mehr von dieser Marke",
+        "heading": "Mehr von dieser Kategorie",
         "products_to_show": 4,
         "columns": 4
       }
