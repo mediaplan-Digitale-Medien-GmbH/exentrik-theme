@@ -9,7 +9,9 @@
  */
 {
   "current": {
+    "logo": "shopify://shop_images/Logo_Quer_freigestellt_weiss.png",
     "logo_width": 220,
+    "favicon": "shopify://shop_images/logo_freigestellt_ohne_schriftzug.png",
     "color_background": "#ffffff",
     "color_surface": "#f4f4f4",
     "color_text": "#111111",
