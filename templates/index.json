@@ -45,6 +45,7 @@
           "settings": {
             "slide": 1,
             "size": "square",
+            "image": "shopify://shop_images/sullen_cap.jpg",
             "badge": "",
             "heading": "Caps",
             "text": "",
@@ -117,7 +118,7 @@
             "size": "wide",
             "badge": "Drop",
             "heading": "Hell Bunnny",
-            "text": "Hol dir den Retro-Rebell in dir.",
+            "text": "Hol dir den Retro-Rebell in dir",
             "button_label": "Jetzt ansehen",
             "link": "shopify://collections/all",
             "cta_style": "button",
