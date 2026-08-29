@@ -201,6 +201,43 @@
         "view_all_label": "Alle ansehen"
       }
     },
+    "collection_list_wYaVLY": {
+      "type": "collection-list",
+      "blocks": {
+        "category_LRMFKx": {
+          "type": "category",
+          "settings": {
+            "collection": "damen-bekleidung-kleider",
+            "title": ""
+          }
+        },
+        "category_aPcRKU": {
+          "type": "category",
+          "settings": {
+            "collection": "damen-accessoires-taschen",
+            "title": ""
+          }
+        },
+        "category_y7eC9y": {
+          "type": "category",
+          "settings": {
+            "collection": "deko-wohnen-wanddeko",
+            "title": ""
+          }
+        }
+      },
+      "block_order": [
+        "category_LRMFKx",
+        "category_aPcRKU",
+        "category_y7eC9y"
+      ],
+      "name": "Kategorien",
+      "settings": {
+        "eyebrow": "Top Seller",
+        "heading": "unsere beliebtesten Kategorien",
+        "columns": 3
+      }
+    },
     "newsletter": {
       "type": "newsletter",
       "settings": {
@@ -215,6 +252,7 @@
     "hero-tiles",
     "usp-bar",
     "featured-collection",
+    "collection_list_wYaVLY",
     "newsletter"
   ]
 }
