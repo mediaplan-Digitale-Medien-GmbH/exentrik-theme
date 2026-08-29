@@ -43,6 +43,7 @@
         },
         "t5": {
           "type": "tile",
+          "name": "Kachel Caps",
           "settings": {
             "slide": 1,
             "size": "square",
@@ -53,7 +54,7 @@
             "button_label": "Caps",
             "link": "shopify://collections/herren-accessoires-caps",
             "cta_style": "link",
-            "tone": "dark"
+            "tone": "light"
           }
         },
         "t6": {
