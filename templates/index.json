@@ -305,6 +305,7 @@
       ],
       "name": "Metallica",
       "settings": {
+        "image": "shopify://shop_images/metallica-kill-em-all-front.jpg",
         "layout": "reverse",
         "eyebrow": "Metallica Fanshop",
         "heading": "Merchandise für echte Metalheads",
