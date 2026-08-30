@@ -11,15 +11,6 @@
   "sections": {
     "main": {
       "type": "main-product",
-      "blocks": {
-        "sku": {
-          "type": "sku",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "sku"
-      ],
       "settings": {
         "show_vendor": true,
         "show_dynamic_checkout": true,
