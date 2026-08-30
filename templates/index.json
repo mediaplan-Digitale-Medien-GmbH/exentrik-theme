@@ -225,9 +225,10 @@
         },
         "category_y7eC9y": {
           "type": "category",
+          "name": "Film/TV",
           "settings": {
             "collection": "deko-wohnen-wanddeko",
-            "title": ""
+            "title": "Film/TV"
           }
         }
       },
