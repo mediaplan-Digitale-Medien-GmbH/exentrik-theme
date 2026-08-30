@@ -114,7 +114,7 @@
       ],
       "settings": {
         "product_metafields_title": "Technische Daten",
-        "product_metafields_auto": false,
+        "product_metafields_auto": true,
         "product_metafields_namespace": "custom",
         "metafields_show_empty": false
       }
