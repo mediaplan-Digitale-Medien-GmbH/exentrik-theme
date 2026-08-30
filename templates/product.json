@@ -24,27 +24,11 @@
             "line_3": "3 Prozent Rabatt bei Vorkasse",
             "line_4": "Persönliche Beratung per Telefon"
           }
-        },
-        "shipping": {
-          "type": "collapsible",
-          "settings": {
-            "title": "Versand und Lieferung",
-            "content": "<p>Lieferung innerhalb von 2 bis 3 Tagen mit DHL. Ab einem Bestellwert von 50 Euro liefern wir versandkostenfrei innerhalb Deutschlands.</p>"
-          }
-        },
-        "payment": {
-          "type": "collapsible",
-          "settings": {
-            "title": "Zahlungsarten",
-            "content": "<p>Sie zahlen bequem per Rechnung, PayPal, Kreditkarte, Lastschrift oder Vorkasse. Bei Vorkasse erhalten Sie 3 Prozent Rabatt.</p>"
-          }
         }
       },
       "block_order": [
         "sku",
-        "trust",
-        "shipping",
-        "payment"
+        "trust"
       ],
       "settings": {
         "show_vendor": true,
@@ -55,7 +39,7 @@
         "variant_style": "theme",
         "price_note": "",
         "product_metafields_title": "Produktdetails",
-        "product_metafields_auto": false,
+        "product_metafields_auto": true,
         "product_metafields_namespace": "custom",
         "metafields_show_empty": false
       }
