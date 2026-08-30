@@ -32,6 +32,7 @@
           "settings": {
             "slide": 1,
             "size": "featured",
+            "image": "shopify://shop_images/handr.jpg",
             "badge": "New In",
             "heading": "Hearts & Roses London",
             "text": "Stilsicher und komfortabeler Vintage Look",
