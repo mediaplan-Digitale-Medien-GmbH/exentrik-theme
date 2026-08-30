@@ -121,6 +121,7 @@
           "settings": {
             "slide": 1,
             "size": "wide",
+            "image": "shopify://shop_images/jacken_und_maentel.jpg",
             "badge": "Drop",
             "heading": "Jacken & Mäntel",
             "text": "Für die kalte Jahreszeit",
