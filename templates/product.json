@@ -75,6 +75,7 @@
       "blocks": {
         "item_64Kh7m": {
           "type": "item",
+          "disabled": true,
           "settings": {
             "text": "Versandkostenfrei ab 59 Euro innerhalb Deutschlands",
             "link": "",
@@ -83,6 +84,7 @@
         },
         "item_Yx9djM": {
           "type": "item",
+          "disabled": true,
           "settings": {
             "text": "3 Prozent Rabatt bei Vorkasse",
             "link": "",
@@ -91,6 +93,7 @@
         },
         "item_BFnzxV": {
           "type": "item",
+          "disabled": true,
           "settings": {
             "text": "Kauf auf Rechnung möglich",
             "link": "",
