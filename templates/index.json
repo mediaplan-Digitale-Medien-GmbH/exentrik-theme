@@ -358,6 +358,39 @@
         "text": "Melde dich an und verpasse keine Neuheiten oder Aktionen.",
         "button_label": "Abonnieren"
       }
+    },
+    "rich_text_w9bWQ7": {
+      "type": "rich-text",
+      "blocks": {
+        "eyebrow_44m8CB": {
+          "type": "eyebrow",
+          "settings": {
+            "text": "Über uns"
+          }
+        },
+        "heading_VV6fzW": {
+          "type": "heading",
+          "settings": {
+            "text": "EXENTRIK - Dein Shop für Lifestyle Kleidung und Fan Merchandise"
+          }
+        },
+        "text_nXt9Dp": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Erzähle hier kurz, wofür dein Shop steht. Ersetze diesen Platzhalter im Theme-Editor.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "eyebrow_44m8CB",
+        "heading_VV6fzW",
+        "text_nXt9Dp"
+      ],
+      "name": "Textabschnitt",
+      "settings": {
+        "align": "center",
+        "background": ""
+      }
     }
   },
   "order": [
@@ -367,6 +400,7 @@
     "collection_list_wYaVLY",
     "image_with_text_CMYYfd",
     "image_with_text_6LLMBn",
-    "newsletter"
+    "newsletter",
+    "rich_text_w9bWQ7"
   ]
 }
