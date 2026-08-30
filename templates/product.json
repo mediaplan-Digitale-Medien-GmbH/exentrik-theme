@@ -109,6 +109,7 @@
         "mf_herkunft",
         "variant_metafield_4WwtdC"
       ],
+      "name": "Produktdetails Metafelder",
       "settings": {
         "product_metafields_title": "Eigenschaften",
         "product_metafields_auto": true,
@@ -191,7 +192,7 @@
         "variant_metafield_DJDYh8",
         "variant_metafield_bwtX8Q"
       ],
-      "name": "Hersteller",
+      "name": "Hersteller Metafelder",
       "settings": {
         "product_metafields_title": "EU ansässiger Wirtschaftsakteur",
         "product_metafields_auto": true,
