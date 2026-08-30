@@ -217,9 +217,10 @@
         },
         "category_aPcRKU": {
           "type": "category",
+          "name": "Disney",
           "settings": {
             "collection": "damen-accessoires-taschen",
-            "title": ""
+            "title": "Disney"
           }
         },
         "category_y7eC9y": {
