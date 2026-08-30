@@ -236,7 +236,8 @@
           "name": "Gothic",
           "settings": {
             "collection": "",
-            "title": "Gothic"
+            "title": "Gothic",
+            "image": "shopify://shop_images/gothic.jpg"
           }
         },
         "category_VmE6Dh": {
