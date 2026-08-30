@@ -306,9 +306,9 @@
       "name": "Metallica",
       "settings": {
         "layout": "reverse",
-        "eyebrow": "Top Band",
-        "heading": "Metallica",
-        "text": "<p>Ersetze diesen Platzhaltertext im Theme-Editor.</p>",
+        "eyebrow": "Metallica Fanshop",
+        "heading": "Merchandise für echte Metalheads",
+        "text": "<p>Metallica zählen zu den einflussreichsten und erfolgreichsten Metal-Bands der Musikgeschichte und haben mit Alben wie \"Master of Puppets\" oder dem \"Black Album\" Millionen Fans weltweit begeistert. Seit den frühen 1980er-Jahren prägt die Band den Thrash Metal wie keine andere und füllt bis heute die größten Stadien der Welt. In unserem Online-Shop findest du eine vielseitige Auswahl an offiziellem Metallica Merchandise: von T-Shirts und Hoodies über Caps, Bandanas und Anstecknadeln bis hin zu Flaggen und Taschen für den Alltag. Egal ob als Streetwear-Piece, Sammlerstück oder Geschenk für echte Metalheads – bei uns wird jeder Fan fündig. </p>",
         "button_label": "button",
         "button_link": ""
       }
