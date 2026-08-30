@@ -12,12 +12,22 @@
     "main": {
       "type": "main-product",
       "blocks": {
+        "variant_metafield_z4hgqF": {
+          "type": "variant_metafield",
+          "name": "Bullet Points",
+          "settings": {
+            "label": "Merkmal",
+            "namespace": "custom",
+            "key": ""
+          }
+        },
         "sku": {
           "type": "sku",
           "settings": {}
         }
       },
       "block_order": [
+        "variant_metafield_z4hgqF",
         "sku"
       ],
       "settings": {
