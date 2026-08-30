@@ -207,6 +207,28 @@
     "collection_list_wYaVLY": {
       "type": "collection-list",
       "blocks": {
+        "category_LqcGAG": {
+          "type": "category",
+          "name": "Gothic",
+          "settings": {
+            "collection": "",
+            "title": "Gothic"
+          }
+        },
+        "category_VmE6Dh": {
+          "type": "category",
+          "settings": {
+            "collection": "",
+            "title": ""
+          }
+        },
+        "category_dQ7hkN": {
+          "type": "category",
+          "settings": {
+            "collection": "",
+            "title": ""
+          }
+        },
         "category_LRMFKx": {
           "type": "category",
           "name": "Anime/Manga",
@@ -233,6 +255,9 @@
         }
       },
       "block_order": [
+        "category_LqcGAG",
+        "category_VmE6Dh",
+        "category_dQ7hkN",
         "category_LRMFKx",
         "category_aPcRKU",
         "category_y7eC9y"
