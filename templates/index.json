@@ -27,6 +27,21 @@
             "tone": "light"
           }
         },
+        "tile_6UBL7r": {
+          "type": "tile",
+          "settings": {
+            "slide": 1,
+            "size": "featured",
+            "image": "shopify://shop_images/handr.jpg",
+            "badge": "New In",
+            "heading": "Hearts & Roses London",
+            "text": "Stilsicher und komfortabler Vintage Look",
+            "button_label": "Bestellen",
+            "link": "shopify://collections/all",
+            "cta_style": "button",
+            "tone": "light"
+          }
+        },
         "t5": {
           "type": "tile",
           "name": "Kachel Caps",
@@ -54,6 +69,20 @@
             "text": "",
             "button_label": "Hoodies & Pullover",
             "link": "shopify://collections/herren-bekleidung-pullover-hoodies",
+            "cta_style": "link",
+            "tone": "light"
+          }
+        },
+        "t4": {
+          "type": "tile",
+          "settings": {
+            "slide": 1,
+            "size": "square",
+            "badge": "",
+            "heading": "",
+            "text": "",
+            "button_label": "Shoppen",
+            "link": "shopify://collections/all",
             "cta_style": "link",
             "tone": "light"
           }
@@ -88,21 +117,6 @@
             "tone": "light"
           }
         },
-        "tile_6UBL7r": {
-          "type": "tile",
-          "settings": {
-            "slide": 1,
-            "size": "featured",
-            "image": "shopify://shop_images/handr.jpg",
-            "badge": "New In",
-            "heading": "Hearts & Roses London",
-            "text": "Stilsicher und komfortabler Vintage Look",
-            "button_label": "Bestellen",
-            "link": "shopify://collections/all",
-            "cta_style": "button",
-            "tone": "light"
-          }
-        },
         "t3": {
           "type": "tile",
           "name": "Taschen",
@@ -118,31 +132,17 @@
             "cta_style": "link",
             "tone": "light"
           }
-        },
-        "t4": {
-          "type": "tile",
-          "settings": {
-            "slide": 1,
-            "size": "square",
-            "badge": "",
-            "heading": "",
-            "text": "",
-            "button_label": "Shoppen",
-            "link": "shopify://collections/all",
-            "cta_style": "link",
-            "tone": "light"
-          }
         }
       },
       "block_order": [
         "t1",
+        "tile_6UBL7r",
         "t5",
         "t6",
+        "t4",
         "t2",
         "t7",
-        "tile_6UBL7r",
-        "t3",
-        "t4"
+        "t3"
       ],
       "settings": {
         "eyebrow": "",
