@@ -217,16 +217,18 @@
         },
         "category_VmE6Dh": {
           "type": "category",
+          "name": "Vintage",
           "settings": {
             "collection": "",
-            "title": ""
+            "title": "Vintage"
           }
         },
         "category_dQ7hkN": {
           "type": "category",
+          "name": "Tattoo",
           "settings": {
             "collection": "",
-            "title": ""
+            "title": "Tattoo"
           }
         },
         "category_LRMFKx": {
