@@ -269,10 +269,10 @@
       "name": "AC/DC",
       "settings": {
         "layout": "normal",
-        "eyebrow": "Top Band",
-        "heading": "AC/DC Merchandise",
-        "text": "<p>Ersetze diesen Platzhaltertext im Theme-Editor.</p>",
-        "button_label": "button",
+        "eyebrow": "AC/DC Merchandise",
+        "heading": "Rock-Legenden zum Anziehen und Sammeln",
+        "text": "<p><br/>AC/DC gehören zu den größten Rock-'n'-Roll-Legenden aller Zeiten und brauchen eigentlich keine Vorstellung mehr – ihr Sound hat Generationen von Fans geprägt und die Band füllt bis heute Stadien rund um den Globus. In unserem Online-Shop findest du eine große Auswahl an offiziellem AC/DC Merchandise: von coolen T-Shirts und gemütlichen Hoodies über Caps und Anstecknadeln bis hin zu Socken und gerahmten Bildern fürs Wohnzimmer. Ob als Alltagslook, Geschenk für echte Fans oder Sammlerstück – bei uns wird jeder Rocker fündig. Zeig deine Leidenschaft für Rockmusik und trage AC/DC nicht nur im Herzen, sondern auch am Körper.<br/><br/></p>",
+        "button_label": "Artikel anzeigen",
         "button_link": ""
       }
     },
