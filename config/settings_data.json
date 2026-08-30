@@ -30,7 +30,7 @@
     "heading_scale": 125,
     "heading_transform": "uppercase",
     "page_width": 1320,
-    "spacing_sections": 56,
+    "spacing_sections": 40,
     "corner_style": "square",
     "corner_radius": 8,
     "card_image_ratio": "square",
