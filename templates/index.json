@@ -60,15 +60,16 @@
         },
         "t6": {
           "type": "tile",
-          "name": "Hoodies",
+          "name": "Hemden",
           "settings": {
             "slide": 1,
             "size": "square",
+            "image": "shopify://shop_images/hemden.png",
             "badge": "",
             "heading": "",
             "text": "",
-            "button_label": "Hoodies & Pullover",
-            "link": "shopify://collections/herren-bekleidung-pullover-hoodies",
+            "button_label": "Hemden",
+            "link": "shopify://collections/herren-bekleidung-hemden",
             "cta_style": "link",
             "tone": "light"
           }
