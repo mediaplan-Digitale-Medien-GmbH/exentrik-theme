@@ -55,7 +55,7 @@
         "variant_style": "theme",
         "price_note": "",
         "product_metafields_title": "Produktdetails",
-        "product_metafields_auto": true,
+        "product_metafields_auto": false,
         "product_metafields_namespace": "custom",
         "metafields_show_empty": false
       }
