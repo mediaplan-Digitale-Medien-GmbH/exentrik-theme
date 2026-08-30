@@ -212,15 +212,17 @@
           "name": "Anime/Manga",
           "settings": {
             "collection": "damen-bekleidung-kleider",
-            "title": "Anime/Manga"
+            "title": "Anime/Manga",
+            "image": "shopify://shop_images/anime.jpg"
           }
         },
         "category_aPcRKU": {
           "type": "category",
-          "name": "Disney",
+          "name": "Gaming",
           "settings": {
             "collection": "damen-accessoires-taschen",
-            "title": "Disney"
+            "title": "Disney",
+            "image": "shopify://shop_images/gaming.jpg"
           }
         },
         "category_y7eC9y": {
