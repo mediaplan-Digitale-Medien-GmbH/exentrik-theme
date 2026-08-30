@@ -65,10 +65,11 @@
       "blocks": {
         "mf_brenndauer": {
           "type": "variant_metafield",
+          "name": "Marke",
           "settings": {
-            "label": "Brenndauer",
+            "label": "Marke",
             "namespace": "custom",
-            "key": "brenndauer"
+            "key": "marke"
           }
         },
         "mf_koernung": {
@@ -118,16 +119,6 @@
         "metafields_show_empty": false
       }
     },
-    "zubehoer": {
-      "type": "product-recommendations",
-      "settings": {
-        "eyebrow": "Dazu passend",
-        "heading": "Passend dazu",
-        "intent": "complementary",
-        "products_to_show": 4,
-        "columns": 4
-      }
-    },
     "related_products_8nEXgG": {
       "type": "related-products",
       "name": "Mehr Kategorie",
@@ -159,7 +150,6 @@
   "order": [
     "main",
     "produktdetails",
-    "zubehoer",
     "related_products_8nEXgG",
     "aehnliche",
     "related_products_Q87GmV"
