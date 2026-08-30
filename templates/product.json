@@ -37,6 +37,15 @@
     "produktdetails": {
       "type": "product-details",
       "blocks": {
+        "mf_rohstoff": {
+          "type": "variant_metafield",
+          "name": "Artikelnummer",
+          "settings": {
+            "label": "Artikelnummer",
+            "namespace": "custom",
+            "key": "rohstoff"
+          }
+        },
         "mf_brenndauer": {
           "type": "variant_metafield",
           "name": "Marke",
@@ -71,22 +80,14 @@
             "namespace": "custom",
             "key": "herkunft"
           }
-        },
-        "mf_rohstoff": {
-          "type": "variant_metafield",
-          "settings": {
-            "label": "Rohstoff",
-            "namespace": "custom",
-            "key": "rohstoff"
-          }
         }
       },
       "block_order": [
+        "mf_rohstoff",
         "mf_brenndauer",
         "mf_koernung",
         "mf_asche",
-        "mf_herkunft",
-        "mf_rohstoff"
+        "mf_herkunft"
       ],
       "settings": {
         "product_metafields_title": "Eigenschaften",
