@@ -244,7 +244,8 @@
           "name": "Vintage",
           "settings": {
             "collection": "",
-            "title": "Vintage"
+            "title": "Vintage",
+            "image": "shopify://shop_images/vintage.jpg"
           }
         },
         "category_dQ7hkN": {
@@ -252,7 +253,8 @@
           "name": "Tattoo",
           "settings": {
             "collection": "",
-            "title": "Tattoo"
+            "title": "Tattoo",
+            "image": "shopify://shop_images/tattoo.jpg"
           }
         }
       },
