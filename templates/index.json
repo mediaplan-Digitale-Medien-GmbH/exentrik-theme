@@ -125,12 +125,12 @@
           "settings": {
             "slide": 1,
             "size": "square",
-            "image": "shopify://shop_images/the_lovers_red_smooth.jpg",
+            "image": "shopify://shop_images/skirt.jpg",
             "badge": "",
             "heading": "",
             "text": "",
-            "button_label": "Taschen",
-            "link": "shopify://collections/damen-accessoires-taschen",
+            "button_label": "Röcke",
+            "link": "shopify://collections/damen-bekleidung-roecke",
             "cta_style": "link",
             "tone": "light"
           }
