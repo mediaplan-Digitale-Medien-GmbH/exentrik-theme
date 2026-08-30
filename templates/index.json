@@ -79,11 +79,12 @@
           "settings": {
             "slide": 1,
             "size": "square",
+            "image": "shopify://shop_images/strickjacken.jpg",
             "badge": "",
             "heading": "",
             "text": "",
-            "button_label": "Shoppen",
-            "link": "shopify://collections/all",
+            "button_label": "Strickjacken",
+            "link": "shopify://collections/damen-bekleidung-strickjacken-boleros",
             "cta_style": "link",
             "tone": "light"
           }
