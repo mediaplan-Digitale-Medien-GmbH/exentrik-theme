@@ -46,23 +46,6 @@
             "key": "rohstoff"
           }
         },
-        "variant_metafield_9d6C7z": {
-          "type": "variant_metafield",
-          "name": "Modellname",
-          "settings": {
-            "label": "Modellname",
-            "namespace": "custom",
-            "key": "modellname"
-          }
-        },
-        "variant_metafield_4WwtdC": {
-          "type": "variant_metafield",
-          "settings": {
-            "label": "Merkmal",
-            "namespace": "custom",
-            "key": ""
-          }
-        },
         "mf_brenndauer": {
           "type": "variant_metafield",
           "name": "Marke",
@@ -81,6 +64,15 @@
             "key": "band"
           }
         },
+        "variant_metafield_9d6C7z": {
+          "type": "variant_metafield",
+          "name": "Modellname",
+          "settings": {
+            "label": "Modellname",
+            "namespace": "custom",
+            "key": "modellname"
+          }
+        },
         "mf_asche": {
           "type": "variant_metafield",
           "name": "Thema",
@@ -92,21 +84,30 @@
         },
         "mf_herkunft": {
           "type": "variant_metafield",
+          "name": "Abteilung",
           "settings": {
-            "label": "Herkunft",
+            "label": "Abteilung",
             "namespace": "custom",
-            "key": "herkunft"
+            "key": "abteilung"
+          }
+        },
+        "variant_metafield_4WwtdC": {
+          "type": "variant_metafield",
+          "settings": {
+            "label": "Merkmal",
+            "namespace": "custom",
+            "key": ""
           }
         }
       },
       "block_order": [
         "mf_rohstoff",
-        "variant_metafield_9d6C7z",
-        "variant_metafield_4WwtdC",
         "mf_brenndauer",
         "mf_koernung",
+        "variant_metafield_9d6C7z",
         "mf_asche",
-        "mf_herkunft"
+        "mf_herkunft",
+        "variant_metafield_4WwtdC"
       ],
       "settings": {
         "product_metafields_title": "Eigenschaften",
