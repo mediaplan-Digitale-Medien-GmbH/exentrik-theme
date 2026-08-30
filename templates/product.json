@@ -48,10 +48,11 @@
         },
         "mf_koernung": {
           "type": "variant_metafield",
+          "name": "Band",
           "settings": {
-            "label": "Körnung",
+            "label": "Band",
             "namespace": "custom",
-            "key": "koernung"
+            "key": "band"
           }
         },
         "mf_asche": {
