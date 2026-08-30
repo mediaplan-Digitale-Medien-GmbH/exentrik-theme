@@ -34,6 +34,51 @@
         "metafields_show_empty": false
       }
     },
+    "usp_bar_KzABTV": {
+      "type": "usp-bar",
+      "blocks": {
+        "usp_XKVGgM": {
+          "type": "usp",
+          "settings": {
+            "icon": "truck",
+            "title": "Schneller Versand",
+            "text": "Lieferung mit DHL in 2 bis 3 Tagen"
+          }
+        },
+        "usp_GdUmFb": {
+          "type": "usp",
+          "settings": {
+            "icon": "return",
+            "title": "Rückgaberecht",
+            "text": "1 Monat Widerrufsrecht"
+          }
+        },
+        "usp_NLcB9P": {
+          "type": "usp",
+          "settings": {
+            "icon": "credit-card",
+            "title": "Kauf auf Rechnung",
+            "text": "Sicher und bequem zahlen"
+          }
+        },
+        "usp_p6V47P": {
+          "type": "usp",
+          "settings": {
+            "icon": "headset",
+            "title": "Persönliche Beratung",
+            "text": "Mo bis Fr per Telefon und E-Mail"
+          }
+        }
+      },
+      "block_order": [
+        "usp_XKVGgM",
+        "usp_GdUmFb",
+        "usp_NLcB9P",
+        "usp_p6V47P"
+      ],
+      "name": "Vorteile-Leiste",
+      "settings": {}
+    },
     "produktdetails": {
       "type": "product-details",
       "blocks": {
@@ -226,10 +271,51 @@
         "products_to_show": 4,
         "columns": 4
       }
+    },
+    "announcement_bar_YFG3AL": {
+      "type": "announcement-bar",
+      "blocks": {
+        "item_64Kh7m": {
+          "type": "item",
+          "settings": {
+            "text": "Versandkostenfrei ab 59 Euro innerhalb Deutschlands",
+            "link": "",
+            "icon": "truck"
+          }
+        },
+        "item_Yx9djM": {
+          "type": "item",
+          "settings": {
+            "text": "3 Prozent Rabatt bei Vorkasse",
+            "link": "",
+            "icon": "credit-card"
+          }
+        },
+        "item_BFnzxV": {
+          "type": "item",
+          "settings": {
+            "text": "Kauf auf Rechnung möglich",
+            "link": "",
+            "icon": "shield"
+          }
+        }
+      },
+      "block_order": [
+        "item_64Kh7m",
+        "item_Yx9djM",
+        "item_BFnzxV"
+      ],
+      "name": "Ankündigungsleiste",
+      "settings": {
+        "bg_color": "#0d1117",
+        "text_color": "#f4f6f8"
+      }
     }
   },
   "order": [
     "main",
+    "usp_bar_KzABTV",
+    "announcement_bar_YFG3AL",
     "produktdetails",
     "product_details_LkXhj3",
     "related_products_8nEXgG",
