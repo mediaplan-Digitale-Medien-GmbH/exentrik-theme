@@ -79,18 +79,48 @@
       "name": "Vorteile-Leiste",
       "settings": {}
     },
+    "announcement_bar_YFG3AL": {
+      "type": "announcement-bar",
+      "blocks": {
+        "item_64Kh7m": {
+          "type": "item",
+          "settings": {
+            "text": "Versandkostenfrei ab 59 Euro innerhalb Deutschlands",
+            "link": "",
+            "icon": "truck"
+          }
+        },
+        "item_Yx9djM": {
+          "type": "item",
+          "settings": {
+            "text": "3 Prozent Rabatt bei Vorkasse",
+            "link": "",
+            "icon": "credit-card"
+          }
+        },
+        "item_BFnzxV": {
+          "type": "item",
+          "settings": {
+            "text": "Kauf auf Rechnung möglich",
+            "link": "",
+            "icon": "shield"
+          }
+        }
+      },
+      "block_order": [
+        "item_64Kh7m",
+        "item_Yx9djM",
+        "item_BFnzxV"
+      ],
+      "name": "Ankündigungsleiste",
+      "settings": {
+        "bg_color": "#0d1117",
+        "text_color": "#f4f6f8"
+      }
+    },
     "produktdetails": {
       "type": "product-details",
       "blocks": {
-        "mf_rohstoff": {
-          "type": "variant_metafield",
-          "name": "Artikelnummer",
-          "settings": {
-            "label": "Artikelnummer",
-            "namespace": "custom",
-            "key": "rohstoff"
-          }
-        },
         "mf_brenndauer": {
           "type": "variant_metafield",
           "name": "Marke",
@@ -146,7 +176,6 @@
         }
       },
       "block_order": [
-        "mf_rohstoff",
         "mf_brenndauer",
         "mf_koernung",
         "variant_metafield_9d6C7z",
@@ -270,45 +299,6 @@
         "heading": "Kunden kauften auch",
         "products_to_show": 4,
         "columns": 4
-      }
-    },
-    "announcement_bar_YFG3AL": {
-      "type": "announcement-bar",
-      "blocks": {
-        "item_64Kh7m": {
-          "type": "item",
-          "settings": {
-            "text": "Versandkostenfrei ab 59 Euro innerhalb Deutschlands",
-            "link": "",
-            "icon": "truck"
-          }
-        },
-        "item_Yx9djM": {
-          "type": "item",
-          "settings": {
-            "text": "3 Prozent Rabatt bei Vorkasse",
-            "link": "",
-            "icon": "credit-card"
-          }
-        },
-        "item_BFnzxV": {
-          "type": "item",
-          "settings": {
-            "text": "Kauf auf Rechnung möglich",
-            "link": "",
-            "icon": "shield"
-          }
-        }
-      },
-      "block_order": [
-        "item_64Kh7m",
-        "item_Yx9djM",
-        "item_BFnzxV"
-      ],
-      "name": "Ankündigungsleiste",
-      "settings": {
-        "bg_color": "#0d1117",
-        "text_color": "#f4f6f8"
       }
     }
   },
