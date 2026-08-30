@@ -392,6 +392,52 @@
         "align": "center",
         "background": ""
       }
+    },
+    "1788083098b2b4003f": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_b352b53_LXzwgw": {
+          "type": "ai_gen_block_b352b53",
+          "settings": {
+            "heading": "EXENTRIK -",
+            "subheading": "",
+            "heading_alignment": "center",
+            "column_1_heading": "",
+            "column_1_text": "",
+            "column_2_heading": "",
+            "column_2_text": "",
+            "column_3_heading": "",
+            "column_3_text": "",
+            "desktop_width_percent": 100,
+            "max_width": 1320,
+            "columns_tablet": "2",
+            "column_gap": 40,
+            "padding_top": 60,
+            "padding_bottom": 60,
+            "padding_horizontal": 20,
+            "heading_spacing": 20,
+            "columns_spacing": 40,
+            "column_heading_spacing": 15,
+            "paragraph_spacing": 15,
+            "background_color": "#ffffff",
+            "heading_color": "#111111",
+            "column_heading_color": "#111111",
+            "text_color": "#111111",
+            "link_color": "#c52f3e",
+            "link_hover_color": "#111111",
+            "heading_size": 36,
+            "subheading_size": 18,
+            "column_heading_size": 20,
+            "text_size": 16,
+            "line_height": 1.6
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_b352b53_LXzwgw"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -402,6 +448,7 @@
     "image_with_text_CMYYfd",
     "image_with_text_6LLMBn",
     "newsletter",
-    "rich_text_w9bWQ7"
+    "rich_text_w9bWQ7",
+    "1788083098b2b4003f"
   ]
 }
