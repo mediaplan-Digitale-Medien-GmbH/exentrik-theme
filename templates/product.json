@@ -47,7 +47,7 @@
         "payment"
       ],
       "settings": {
-        "show_vendor": false,
+        "show_vendor": true,
         "show_dynamic_checkout": true,
         "media_ratio": "natural",
         "media_fit": "cover",
