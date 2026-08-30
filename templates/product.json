@@ -82,6 +82,15 @@
             "icon": "truck"
           }
         },
+        "item_7mLncA": {
+          "type": "item",
+          "disabled": true,
+          "settings": {
+            "text": "Versandkostenfrei ab 59 Euro innerhalb Deutschlands",
+            "link": "",
+            "icon": "truck"
+          }
+        },
         "item_Yx9djM": {
           "type": "item",
           "disabled": true,
@@ -103,6 +112,7 @@
       },
       "block_order": [
         "item_64Kh7m",
+        "item_7mLncA",
         "item_Yx9djM",
         "item_BFnzxV"
       ],
@@ -177,6 +187,7 @@
         "mf_herkunft",
         "variant_metafield_4WwtdC"
       ],
+      "disabled": true,
       "name": "Produktdetails Metafelder",
       "settings": {
         "product_metafields_title": "Eigenschaften",
