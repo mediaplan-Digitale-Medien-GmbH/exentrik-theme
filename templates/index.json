@@ -191,10 +191,11 @@
     },
     "featured-collection": {
       "type": "featured-collection",
+      "name": "Deko Wohnen Produkt-Slider",
       "settings": {
         "eyebrow": "Entdecke",
         "heading": "Dekoartikel & Wohnaccessoires von deinen Lieblingsfilmen, Bands, TV Serien und Videospielen",
-        "subheading": "Entdecke unsere vielfältige Auswahl an Dekoartikeln und Wohnaccessoires rund um bekannte Filme, TV-Serien und Videospiele. Von stimmungsvollen Leuchten über liebevoll gestaltete Figuren bis hin zu Postern und Deko-Objekten – hier findet jeder Fan das passende Stück für Zuhause. Unsere lizenzierten Produkte bringen echtes Fan-Feeling in jedes Zimmer und werten Wohnzimmer, Schlafzimmer oder Gaming-Ecke im Handumdrehen auf. Egal ob für Jung oder Alt und unabhängig vom Geschlecht – unsere Artikel eignen sich hervorragend als originelles Geschenk zu jedem Anlass. Ob Geburtstag, Weihnachten oder einfach als kleine Überraschung: Mit unseren Fanartikeln liegst du garantiert richtig. Stöbere jetzt durch unser Sortiment und finde das perfekte Deko-Highlight für dich oder deine Liebsten.",
+        "subheading": "Entdecke unsere vielfältige Auswahl an Dekoartikeln und Wohnaccessoires rund um bekannte Filme, TV-Serien, Anime, Bands und Videospiele. Von stimmungsvollen Leuchten über liebevoll gestaltete Figuren bis hin zu Postern und Deko-Objekten – hier findet jeder Fan das passende Stück für Zuhause. Unsere lizenzierten Produkte bringen echtes Fan-Feeling in jedes Zimmer und werten Wohnzimmer, Schlafzimmer oder Gaming-Ecke im Handumdrehen auf. Egal ob für Jung oder Alt und unabhängig vom Geschlecht – unsere Artikel eignen sich hervorragend als originelles Geschenk zu jedem Anlass. Ob Geburtstag, Weihnachten oder einfach als kleine Überraschung: Mit unseren Fanartikeln liegst du garantiert richtig. Stöbere jetzt durch unser Sortiment und finde das perfekte Deko-Highlight für dich oder deine Liebsten.",
         "collection": "deko-wohnen",
         "products_to_show": 4,
         "columns": 4,
