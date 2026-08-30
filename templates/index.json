@@ -230,7 +230,8 @@
           "name": "Film/TV",
           "settings": {
             "collection": "deko-wohnen-wanddeko",
-            "title": "Film/TV"
+            "title": "Film/TV",
+            "image": "shopify://shop_images/film.jpg"
           }
         },
         "category_LqcGAG": {
