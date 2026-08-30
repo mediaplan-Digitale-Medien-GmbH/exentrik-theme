@@ -121,7 +121,7 @@
         },
         "t3": {
           "type": "tile",
-          "name": "Taschen",
+          "name": "Röcke",
           "settings": {
             "slide": 1,
             "size": "square",
