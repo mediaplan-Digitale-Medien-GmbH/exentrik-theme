@@ -57,10 +57,11 @@
         },
         "mf_asche": {
           "type": "variant_metafield",
+          "name": "Thema",
           "settings": {
-            "label": "Aschegehalt",
+            "label": "Thema",
             "namespace": "custom",
-            "key": "aschegehalt"
+            "key": "thema"
           }
         },
         "mf_herkunft": {
