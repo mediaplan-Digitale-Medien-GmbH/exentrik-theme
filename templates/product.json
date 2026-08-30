@@ -15,20 +15,10 @@
         "sku": {
           "type": "sku",
           "settings": {}
-        },
-        "trust": {
-          "type": "trust",
-          "settings": {
-            "line_1": "Kauf auf Rechnung möglich",
-            "line_2": "Versandkostenfrei ab 50 Euro",
-            "line_3": "3 Prozent Rabatt bei Vorkasse",
-            "line_4": "Persönliche Beratung per Telefon"
-          }
         }
       },
       "block_order": [
-        "sku",
-        "trust"
+        "sku"
       ],
       "settings": {
         "show_vendor": true,
@@ -97,10 +87,10 @@
         "mf_rohstoff"
       ],
       "settings": {
-        "product_metafields_title": "Technische Daten",
+        "product_metafields_title": "Eigenschaften",
         "product_metafields_auto": true,
         "product_metafields_namespace": "custom",
-        "metafields_show_empty": false
+        "metafields_show_empty": true
       }
     },
     "related_products_8nEXgG": {
