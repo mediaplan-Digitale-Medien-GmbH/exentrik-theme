@@ -288,13 +288,15 @@
         "metafields_show_empty": true
       }
     },
-    "related_products_8nEXgG": {
-      "type": "related-products",
+    "product_recommendations_4rBbgw": {
+      "type": "product-recommendations",
       "name": "Mehr Kategorie",
       "settings": {
-        "heading": "Mehr von dieser Kategorie",
-        "products_to_show": 4,
-        "columns": 4
+        "eyebrow": "kleiner titel",
+        "heading": "Passendes Zubehör",
+        "intent": "related",
+        "products_to_show": 5,
+        "columns": 5
       }
     },
     "aehnliche": {
@@ -332,17 +334,6 @@
         "judge_me_reviews_review_widget_NeyXqh"
       ],
       "settings": {}
-    },
-    "product_recommendations_4rBbgw": {
-      "type": "product-recommendations",
-      "name": "Produktempfehlungen",
-      "settings": {
-        "eyebrow": "kleiner titel",
-        "heading": "Passendes Zubehör",
-        "intent": "related",
-        "products_to_show": 5,
-        "columns": 5
-      }
     }
   },
   "order": [
@@ -351,10 +342,9 @@
     "announcement_bar_YFG3AL",
     "produktdetails",
     "product_details_LkXhj3",
-    "related_products_8nEXgG",
+    "product_recommendations_4rBbgw",
     "aehnliche",
     "related_products_Q87GmV",
-    "1788199601cb4597f0",
-    "product_recommendations_4rBbgw"
+    "1788199601cb4597f0"
   ]
 }
