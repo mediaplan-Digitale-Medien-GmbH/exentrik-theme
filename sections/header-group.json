@@ -71,11 +71,50 @@
     "cart-drawer": {
       "type": "cart-drawer",
       "settings": {}
+    },
+    "faq_xPqpA3": {
+      "type": "faq",
+      "blocks": {
+        "faq_RehRJW": {
+          "type": "faq",
+          "settings": {
+            "question": "Wie lange dauert der Versand?",
+            "answer": "<p>Die Lieferung erfolgt in der Regel innerhalb weniger Werktage. Exacte Zeiten findest du in den Versandinformationen.</p>"
+          }
+        },
+        "faq_9aAD6r": {
+          "type": "faq",
+          "settings": {
+            "question": "Wie lange dauert der Versand?",
+            "answer": "<p>Die Lieferung erfolgt in der Regel innerhalb weniger Werktage. Exacte Zeiten findest du in den Versandinformationen.</p>"
+          }
+        },
+        "faq_LfTjyt": {
+          "type": "faq",
+          "settings": {
+            "question": "Wie lange dauert der Versand?",
+            "answer": "<p>Die Lieferung erfolgt in der Regel innerhalb weniger Werktage. Exacte Zeiten findest du in den Versandinformationen.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_RehRJW",
+        "faq_9aAD6r",
+        "faq_LfTjyt"
+      ],
+      "name": "FAQ",
+      "settings": {
+        "eyebrow": "Gut zu wissen",
+        "heading": "Häufige Fragen",
+        "open_first": false,
+        "enable_schema": true
+      }
     }
   },
   "order": [
     "announcement-bar",
     "header",
-    "cart-drawer"
+    "cart-drawer",
+    "faq_xPqpA3"
   ]
 }
