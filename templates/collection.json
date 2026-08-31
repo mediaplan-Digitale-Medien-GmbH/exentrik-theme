@@ -12,7 +12,7 @@
     "main": {
       "type": "main-collection",
       "settings": {
-        "show_hero": false,
+        "show_hero": true,
         "show_description": true,
         "show_filters": true,
         "columns": 4,
