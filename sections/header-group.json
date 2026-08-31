@@ -239,6 +239,44 @@
         "open_first": true,
         "enable_schema": true
       }
+    },
+    "faq_ihrjr9": {
+      "type": "faq",
+      "blocks": {
+        "faq_6FkxzT": {
+          "type": "faq",
+          "settings": {
+            "question": "Wie lange dauert der Versand?",
+            "answer": "<p>Die Lieferung erfolgt in der Regel innerhalb weniger Werktage. Exacte Zeiten findest du in den Versandinformationen.</p>"
+          }
+        },
+        "faq_wWhGJ6": {
+          "type": "faq",
+          "settings": {
+            "question": "Wie lange dauert der Versand?",
+            "answer": "<p>Die Lieferung erfolgt in der Regel innerhalb weniger Werktage. Exacte Zeiten findest du in den Versandinformationen.</p>"
+          }
+        },
+        "faq_HJGrPF": {
+          "type": "faq",
+          "settings": {
+            "question": "Wie lange dauert der Versand?",
+            "answer": "<p>Die Lieferung erfolgt in der Regel innerhalb weniger Werktage. Exacte Zeiten findest du in den Versandinformationen.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_6FkxzT",
+        "faq_wWhGJ6",
+        "faq_HJGrPF"
+      ],
+      "name": "FAQ Bonusprogramm",
+      "settings": {
+        "eyebrow": "Gut zu wissen",
+        "heading": "Häufige Fragen",
+        "open_first": true,
+        "enable_schema": true
+      }
     }
   },
   "order": [
@@ -248,6 +286,7 @@
     "faq_xPqpA3",
     "faq_hfWcqK",
     "faq_ynG64L",
-    "faq_rhfb9F"
+    "faq_rhfb9F",
+    "faq_ihrjr9"
   ]
 }
