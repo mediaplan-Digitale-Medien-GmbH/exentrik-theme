@@ -40,6 +40,7 @@
     "product_sticky_info": true,
     "product_enable_zoom": true,
     "variant_swatch_size": "medium",
+    "variant_swatch_use_variant_image": false,
     "social_facebook": "",
     "social_instagram": "",
     "social_youtube": "",
