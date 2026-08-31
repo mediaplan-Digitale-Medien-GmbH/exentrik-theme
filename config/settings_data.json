@@ -39,6 +39,7 @@
     "card_show_quick_add": true,
     "product_sticky_info": true,
     "product_enable_zoom": true,
+    "variant_swatch_size": "medium",
     "social_facebook": "",
     "social_instagram": "",
     "social_youtube": "",
