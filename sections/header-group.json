@@ -156,10 +156,48 @@
         "faq_8JiFU4",
         "faq_FqeVNU"
       ],
-      "name": "FAQ",
+      "name": "FAQ Bestellungen",
       "settings": {
         "eyebrow": "Gut zu wissen",
         "heading": "Bestellprozess",
+        "open_first": true,
+        "enable_schema": true
+      }
+    },
+    "faq_ynG64L": {
+      "type": "faq",
+      "blocks": {
+        "faq_gQnz9e": {
+          "type": "faq",
+          "settings": {
+            "question": "Wie lange dauert der Versand?",
+            "answer": "<p>Die Lieferung erfolgt in der Regel innerhalb weniger Werktage. Exacte Zeiten findest du in den Versandinformationen.</p>"
+          }
+        },
+        "faq_zP3GHY": {
+          "type": "faq",
+          "settings": {
+            "question": "Wie lange dauert der Versand?",
+            "answer": "<p>Die Lieferung erfolgt in der Regel innerhalb weniger Werktage. Exacte Zeiten findest du in den Versandinformationen.</p>"
+          }
+        },
+        "faq_gx6X9j": {
+          "type": "faq",
+          "settings": {
+            "question": "Wie lange dauert der Versand?",
+            "answer": "<p>Die Lieferung erfolgt in der Regel innerhalb weniger Werktage. Exacte Zeiten findest du in den Versandinformationen.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_gQnz9e",
+        "faq_zP3GHY",
+        "faq_gx6X9j"
+      ],
+      "name": "FAQ",
+      "settings": {
+        "eyebrow": "Gut zu wissen",
+        "heading": "Häufige Fragen",
         "open_first": true,
         "enable_schema": true
       }
@@ -170,6 +208,7 @@
     "header",
     "cart-drawer",
     "faq_xPqpA3",
-    "faq_hfWcqK"
+    "faq_hfWcqK",
+    "faq_ynG64L"
   ]
 }
