@@ -332,6 +332,17 @@
         "judge_me_reviews_review_widget_NeyXqh"
       ],
       "settings": {}
+    },
+    "product_recommendations_4rBbgw": {
+      "type": "product-recommendations",
+      "name": "Produktempfehlungen",
+      "settings": {
+        "eyebrow": "kleiner titel",
+        "heading": "Passendes Zubehör",
+        "intent": "related",
+        "products_to_show": 5,
+        "columns": 5
+      }
     }
   },
   "order": [
@@ -343,6 +354,7 @@
     "related_products_8nEXgG",
     "aehnliche",
     "related_products_Q87GmV",
-    "1788199601cb4597f0"
+    "1788199601cb4597f0",
+    "product_recommendations_4rBbgw"
   ]
 }
