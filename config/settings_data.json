@@ -33,7 +33,7 @@
     "spacing_sections": 40,
     "corner_style": "square",
     "corner_radius": 8,
-    "card_image_ratio": "square",
+    "card_image_ratio": "portrait",
     "card_show_vendor": false,
     "card_show_second_image": true,
     "card_show_quick_add": true,
