@@ -301,6 +301,7 @@
     },
     "aehnliche": {
       "type": "related-products",
+      "disabled": true,
       "name": "Mehr Marke",
       "settings": {
         "heading": "Mehr von dieser Marke",
@@ -310,6 +311,7 @@
     },
     "related_products_Q87GmV": {
       "type": "related-products",
+      "disabled": true,
       "name": "Kunden kauften",
       "settings": {
         "heading": "Kunden kauften auch",
