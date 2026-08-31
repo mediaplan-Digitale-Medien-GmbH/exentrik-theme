@@ -75,6 +75,13 @@
     "faq_xPqpA3": {
       "type": "faq",
       "blocks": {
+        "faq_Hepxfi": {
+          "type": "faq",
+          "settings": {
+            "question": "Wo kann ich meine Sendung verfolgen?",
+            "answer": "<p>Die Lieferung erfolgt in der Regel innerhalb weniger Werktage. Exacte Zeiten findest du in den Versandinformationen.</p>"
+          }
+        },
         "faq_RehRJW": {
           "type": "faq",
           "settings": {
@@ -85,11 +92,50 @@
         "faq_9aAD6r": {
           "type": "faq",
           "settings": {
-            "question": "Wie lange dauert der Versand?",
+            "question": "Was kostet der Versand?",
             "answer": "<p>Die Lieferung erfolgt in der Regel innerhalb weniger Werktage. Exacte Zeiten findest du in den Versandinformationen.</p>"
           }
         },
         "faq_LfTjyt": {
+          "type": "faq",
+          "settings": {
+            "question": "Versendet Ihr auch ins Ausland?",
+            "answer": "<p>Die Lieferung erfolgt in der Regel innerhalb weniger Werktage. Exacte Zeiten findest du in den Versandinformationen.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_Hepxfi",
+        "faq_RehRJW",
+        "faq_9aAD6r",
+        "faq_LfTjyt"
+      ],
+      "name": "FAQ",
+      "settings": {
+        "eyebrow": "Gut zu wissen",
+        "heading": "Versand & Lieferung",
+        "open_first": false,
+        "enable_schema": true
+      }
+    },
+    "faq_hfWcqK": {
+      "type": "faq",
+      "blocks": {
+        "faq_UyGFcN": {
+          "type": "faq",
+          "settings": {
+            "question": "Wie lange dauert der Versand?",
+            "answer": "<p>Die Lieferung erfolgt in der Regel innerhalb weniger Werktage. Exacte Zeiten findest du in den Versandinformationen.</p>"
+          }
+        },
+        "faq_8JiFU4": {
+          "type": "faq",
+          "settings": {
+            "question": "Wie lange dauert der Versand?",
+            "answer": "<p>Die Lieferung erfolgt in der Regel innerhalb weniger Werktage. Exacte Zeiten findest du in den Versandinformationen.</p>"
+          }
+        },
+        "faq_FqeVNU": {
           "type": "faq",
           "settings": {
             "question": "Wie lange dauert der Versand?",
@@ -98,15 +144,15 @@
         }
       },
       "block_order": [
-        "faq_RehRJW",
-        "faq_9aAD6r",
-        "faq_LfTjyt"
+        "faq_UyGFcN",
+        "faq_8JiFU4",
+        "faq_FqeVNU"
       ],
       "name": "FAQ",
       "settings": {
         "eyebrow": "Gut zu wissen",
-        "heading": "Häufige Fragen",
-        "open_first": false,
+        "heading": "Bestellprozess",
+        "open_first": true,
         "enable_schema": true
       }
     }
@@ -115,6 +161,7 @@
     "announcement-bar",
     "header",
     "cart-drawer",
-    "faq_xPqpA3"
+    "faq_xPqpA3",
+    "faq_hfWcqK"
   ]
 }
