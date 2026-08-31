@@ -353,6 +353,14 @@
         "open_first": true,
         "enable_schema": true
       }
+    },
+    "contact_form_xKizh6": {
+      "type": "contact-form",
+      "name": "Kontaktformular",
+      "settings": {
+        "heading": "Kontakt",
+        "text": "Sie haben Fragen zu einem Produkt? Wir beraten Sie gerne persönlich."
+      }
     }
   },
   "order": [
@@ -365,6 +373,7 @@
     "faq_rhfb9F",
     "faq_ihrjr9",
     "faq_eabJAd",
-    "faq_PcGVe7"
+    "faq_PcGVe7",
+    "contact_form_xKizh6"
   ]
 }
