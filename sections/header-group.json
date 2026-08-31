@@ -75,6 +75,13 @@
     "faq_xPqpA3": {
       "type": "faq",
       "blocks": {
+        "faq_gRJEWF": {
+          "type": "faq",
+          "settings": {
+            "question": "Meine Sendung wurde nicht zugestellt?",
+            "answer": "<p>Die Lieferung erfolgt in der Regel innerhalb weniger Werktage. Exacte Zeiten findest du in den Versandinformationen.</p>"
+          }
+        },
         "faq_Hepxfi": {
           "type": "faq",
           "settings": {
@@ -105,6 +112,7 @@
         }
       },
       "block_order": [
+        "faq_gRJEWF",
         "faq_Hepxfi",
         "faq_RehRJW",
         "faq_9aAD6r",
