@@ -168,29 +168,20 @@
               {%- if mfval == blank or mfval == 'null' -%}{%- assign mf = product.metafields[block.settings.namespace][block.settings.key] -%}{%- capture mfval -%}{{ mf }}{%- endcapture -%}{%- assign mfval = mfval | strip -%}{%- endif -%}
               {%- if mfval == blank or mfval == 'null' -%}{%- assign mf_empty = true -%}{%- endif -%}
               {%- assign mf_hide = false -%}
-              {%- assign mf_unset = false -%}
-              {%- if block.settings.key == blank -%}{%- assign mf_unset = true -%}{%- endif -%}
-              {%- if mf_empty -%}{%- assign mf_hide = true -%}{%- endif -%}
-              {%- comment -%}Ein Block ohne zugewiesenes Metafeld bleibt im Editor sichtbar, sonst ist er nach dem Anlegen nicht mehr auffindbar.{%- endcomment -%}
-              {%- if mf_unset and request.design_mode -%}{%- assign mf_hide = false -%}{%- endif -%}
-              <div class="product-details__row" data-vmf="{{ block.id }}"{% if mf_hide %} hidden{% endif %}{% if mf_unset %} data-vmf-keep{% endif %} {{ block.shopify_attributes }}>
+              {%- if mf_empty -%}{%- assign mf_hide = true -%}{%- assign mfval = '' -%}{%- endif -%}
+              <div class="product-details__row" data-vmf="{{ block.id }}"{% if mf_hide %} hidden{% endif %} {{ block.shopify_attributes }}>
                 <div class="product-details__key">{{ block.settings.label }}{% if request.design_mode %}<span class="product-details__ref">{{ block.settings.namespace }}.{{ block.settings.key }}</span>{% endif %}</div>
-                <div class="product-details__value" data-vmf-value>{% if mf_empty %}{% if mf_unset %}Metafeld noch nicht zugewiesen{% endif %}{% else %}{{ mfval }}{% endif %}</div>
+                <div class="product-details__value" data-vmf-value>{{ mfval }}</div>
               </div>
             {%- elsif block.type == 'product_metafield' -%}
               {%- assign pmf = product.metafields[block.settings.namespace][block.settings.key] -%}
               {%- capture pmfval -%}{{ pmf }}{%- endcapture -%}{%- assign pmfval = pmfval | strip -%}
               {%- assign pmf_empty = false -%}
               {%- if pmfval == blank or pmfval == 'null' -%}{%- assign pmf_empty = true -%}{%- endif -%}
-              {%- assign pmf_unset = false -%}
-              {%- if block.settings.key == blank -%}{%- assign pmf_unset = true -%}{%- endif -%}
-              {%- assign pmf_show = false -%}
-              {%- if pmf_empty == false -%}{%- assign pmf_show = true -%}{%- endif -%}
-              {%- if pmf_unset and request.design_mode -%}{%- assign pmf_show = true -%}{%- endif -%}
-              {%- if pmf_show -%}
+              {%- if pmf_empty == false -%}
                 <div class="product-details__row" {{ block.shopify_attributes }}>
                   <div class="product-details__key">{{ block.settings.label }}{% if request.design_mode %}<span class="product-details__ref">{{ block.settings.namespace }}.{{ block.settings.key }}</span>{% endif %}</div>
-                  <div class="product-details__value">{% if pmf_empty %}{% if pmf_unset %}Metafeld noch nicht zugewiesen{% endif %}{% else %}{{ pmfval }}{% endif %}</div>
+                  <div class="product-details__value">{{ pmfval }}</div>
                 </div>
               {%- endif -%}
             {%- endif -%}
@@ -204,7 +195,7 @@
                 {%- assign vaf_empty = false -%}
                 {%- if vafval == blank or vafval == 'null' -%}{%- assign vaf_empty = true -%}{%- endif -%}
                 {%- assign vaf_hide = false -%}
-                {%- if vaf_empty -%}{%- assign vaf_hide = true -%}{%- endif -%}
+                {%- if vaf_empty -%}{%- assign vaf_hide = true -%}{%- assign vafval = '' -%}{%- endif -%}
                 <div class="product-details__row" data-vmf="auto-{{ vk }}"{% if vaf_hide %} hidden{% endif %}>
                   <div class="product-details__key">{{ vk | replace: '_', ' ' | capitalize }}{% if request.design_mode %}<span class="product-details__ref">{{ pmf_ns }}.{{ vk }}</span>{% endif %}</div>
                   <div class="product-details__value" data-vmf-value>{{ vafval }}</div>
