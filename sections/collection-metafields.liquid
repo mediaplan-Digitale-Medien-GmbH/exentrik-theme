@@ -45,12 +45,7 @@
         {%- if cmf_value == blank or cmf_value == 'null' -%}
           {%- assign cmf_empty = true -%}
         {%- endif -%}
-        {%- assign cmf_unset = false -%}
-        {%- if cmf_key == blank -%}{%- assign cmf_unset = true -%}{%- endif -%}
-        {%- assign cmf_show = false -%}
-        {%- if cmf_empty == false -%}{%- assign cmf_show = true -%}{%- endif -%}
-        {%- if cmf_unset and request.design_mode -%}{%- assign cmf_show = true -%}{%- endif -%}
-        {%- if cmf_show -%}
+        {%- if cmf_empty == false -%}
           <div class="collection-facts__item" {{ block.shopify_attributes }}>
             {%- unless block.settings.hide_label -%}
               <div class="collection-facts__key">
@@ -61,7 +56,7 @@
               </div>
             {%- endunless -%}
             <div class="collection-facts__value">
-              {%- if cmf_empty -%}{%- if cmf_unset -%}Metafeld noch nicht zugewiesen{%- endif -%}{%- else -%}{{ cmf_value }}{%- endif -%}
+              {{ cmf_value }}
             </div>
           </div>
         {%- endif -%}

@@ -508,9 +508,7 @@
         const has = !(val === undefined || val === null || val === '');
         const valEl = $('[data-vmf-value]', row);
         if (valEl) valEl.innerHTML = has ? val : '';
-        // Ohne Wert wird ausgeblendet. Ausnahme: ein Block, dem im Editor noch kein
-        // Metafeld zugewiesen ist, der traegt data-vmf-keep.
-        row.hidden = !has && !row.hasAttribute('data-vmf-keep');
+        row.hidden = !has;
       });
       this.toggleDetails();
     }
