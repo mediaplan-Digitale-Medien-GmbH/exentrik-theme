@@ -178,7 +178,12 @@
       {{ content_for_layout }}
     </main>
 
-    {% sections 'footer-group' %}
+    {% comment %}
+      Der Footer laeuft bewusst als statische Sektion, nicht ueber eine
+      Sektionsgruppe. Dieser Shop hat sections/footer-group.json bei keinem
+      Import je uebernommen, auch nicht nach einem vollen Re-Import.
+    {% endcomment %}
+    {% section 'footer' %}
 
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
 

@@ -606,6 +606,16 @@ body.template-index .main-content {
   visibility: hidden;
 }
 
+/* Geschlossen darf die Schublade keine Flaeche belegen. Sonst spannt sie sich
+   als unsichtbares Rechteck ueber den ganzen Viewport und der Theme-Editor
+   meldet fuer jeden Klick die Sektion "Warenkorb-Schublade". */
+.drawer:not(.is-open) {
+  inset: 0 auto auto 0;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
 .drawer.is-open {
   pointer-events: auto;
   visibility: visible;
