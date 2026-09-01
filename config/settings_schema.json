@@ -514,7 +514,7 @@
     "settings": [
       {
         "type": "paragraph",
-        "content": "Die Fußzeile wird in diesem Theme nicht über eine Sektion gepflegt, sondern hier. Die Spalten kommen aus den Navigationen \"footer\" und \"service\", die Kontaktdaten aus \"SEO & Vertrauen\"."
+        "content": "Die Fußzeile wird in diesem Theme hier gepflegt, nicht über einen Abschnitt. Das Logo kommt aus \"Marke & Logo\", Telefon, Öffnungszeiten und E-Mail aus \"SEO & Vertrauen\"."
       },
       {
         "type": "textarea",
@@ -522,10 +522,45 @@
         "label": "Kurztext unter dem Logo"
       },
       {
+        "type": "header",
+        "content": "Linkspalten"
+      },
+      {
+        "type": "link_list",
+        "id": "footer_menu_1",
+        "label": "Menü der ersten Spalte",
+        "default": "footer"
+      },
+      {
+        "type": "text",
+        "id": "footer_menu_1_title",
+        "label": "Überschrift der ersten Spalte",
+        "info": "Leer lassen, dann wird der Name des Menüs verwendet."
+      },
+      {
+        "type": "link_list",
+        "id": "footer_menu_2",
+        "label": "Menü der zweiten Spalte"
+      },
+      {
+        "type": "text",
+        "id": "footer_menu_2_title",
+        "label": "Überschrift der zweiten Spalte",
+        "info": "Leer lassen, dann wird der Name des Menüs verwendet."
+      },
+      {
+        "type": "header",
+        "content": "Kontaktspalte"
+      },
+      {
         "type": "text",
         "id": "footer_contact_title",
         "label": "Überschrift der Kontaktspalte",
         "default": "Kontakt"
+      },
+      {
+        "type": "header",
+        "content": "Untere Zeile"
       },
       {
         "type": "text",
@@ -552,10 +587,25 @@
         "label": "Ziel des Kündigungs-Buttons"
       },
       {
+        "type": "header",
+        "content": "Zahlungsarten"
+      },
+      {
         "type": "checkbox",
         "id": "footer_payment_icons",
         "label": "Zahlungsarten-Symbole anzeigen",
         "default": true
+      },
+      {
+        "type": "text",
+        "id": "footer_payment_custom",
+        "label": "Symbole manuell festlegen",
+        "info": "Kommagetrennt. Leer lassen, dann werden automatisch die in Einstellungen → Zahlungen aktivierten Anbieter angezeigt. Möglich sind u. a.: visa, master, american_express, maestro, paypal, apple_pay, google_pay, shopify_pay, klarna, discover, diners_club, jcb, ideal, sofort, bitcoin"
+      },
+      {
+        "type": "text",
+        "id": "footer_payment_note",
+        "label": "Hinweis neben den Symbolen"
       }
     ]
   }

@@ -191,12 +191,18 @@
       "is not a valid section type", waehrend Aenderungen an dieser Datei hier
       sofort ankommen.
 
-      Inhalte kommen daher aus den Theme-Einstellungen (Gruppe "Fusszeile")
-      und den Menues footer/service. Fuer den Haendler ist das gleichwertig
-      bedienbar, nur eben unter Theme-Einstellungen statt am Abschnitt.
+      Inhalte kommen daher komplett aus den Theme-Einstellungen, Gruppe
+      "Fusszeile": Texte, die beiden Linkspalten als Menue-Auswahl und die
+      Zahlungs-Symbole. Fuer den Haendler ist das gleichwertig bedienbar, nur
+      eben unter Theme-Einstellungen statt am Abschnitt.
     {% endcomment %}
-    {%- assign footer_menu = linklists.footer -%}
-    {%- assign service_menu = linklists.service -%}
+    {%- comment -%}
+      Solange in den Theme-Einstellungen nichts gewaehlt ist, greifen die
+      bisherigen Menues footer und service, damit die Fusszeile unveraendert
+      aussieht.
+    {%- endcomment -%}
+    {%- assign footer_menu = settings.footer_menu_1 | default: linklists.footer -%}
+    {%- assign service_menu = settings.footer_menu_2 | default: linklists.service -%}
     <footer class="site-footer" role="contentinfo">
       <div class="page-width">
         <div class="site-footer__top">
@@ -217,7 +223,7 @@
 
           {%- if footer_menu != blank -%}
             <div>
-              <h3 class="site-footer__heading">{{ footer_menu.title }}</h3>
+              <h3 class="site-footer__heading">{{ settings.footer_menu_1_title | default: footer_menu.title }}</h3>
               <ul class="site-footer__links">
                 {%- for link in footer_menu.links -%}
                   <li><a href="{{ link.url }}">{{ link.title }}</a></li>
@@ -228,7 +234,7 @@
 
           {%- if service_menu != blank -%}
             <div>
-              <h3 class="site-footer__heading">{{ service_menu.title }}</h3>
+              <h3 class="site-footer__heading">{{ settings.footer_menu_2_title | default: service_menu.title }}</h3>
               <ul class="site-footer__links">
                 {%- for link in service_menu.links -%}
                   <li><a href="{{ link.url }}">{{ link.title }}</a></li>
@@ -261,7 +267,18 @@
               <a class="site-footer__cancel-btn" href="{{ footer_cancel_url }}">{{ settings.footer_cancel_label | default: 'Vertrag kündigen' }}</a>
             {%- endif -%}
             {%- if settings.footer_payment_icons -%}
-              <span class="site-footer__payments">{{ shop.enabled_payment_types | payment_type_svg_tag }}</span>
+              {%- assign footer_pay_custom = settings.footer_payment_custom | strip -%}
+              <span class="site-footer__payments">
+                {%- if footer_pay_custom != blank -%}
+                  {%- assign footer_pay_list = footer_pay_custom | split: ',' -%}
+                  {%- for pay_type in footer_pay_list -%}{{ pay_type | strip | downcase | payment_type_svg_tag }}{%- endfor -%}
+                {%- else -%}
+                  {{ shop.enabled_payment_types | payment_type_svg_tag }}
+                {%- endif -%}
+              </span>
+            {%- endif -%}
+            {%- if settings.footer_payment_note != blank -%}
+              <span>{{ settings.footer_payment_note }}</span>
             {%- endif -%}
           </div>
         </div>
