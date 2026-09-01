@@ -3,11 +3,11 @@
   assign pd_ns = section.settings.product_metafields_namespace | default: 'custom'
   assign cur = product.selected_or_first_available_variant
   comment
-    Leere Felder bleiben im Shop unsichtbar. Nur im Editor lassen sie sich
-    einblenden, damit frisch angelegte Felder greifbar sind.
+    Im Editor immer sichtbar, sonst lässt sich ein neu angelegtes Feld nicht
+    befüllen. Im Shop bleiben leere Felder nur auf Wunsch sichtbar.
   endcomment
   assign pd_show_empty = false
-  if request.design_mode and section.settings.metafields_show_empty
+  if request.design_mode or section.settings.metafields_show_empty
     assign pd_show_empty = true
   endif
   assign has_details = false
@@ -135,7 +135,7 @@
     { "type": "paragraph", "content": "Füge Blöcke hinzu: „Variantenmetafeld\" (aktualisiert sich beim Variantenwechsel) oder „Produktmetafeld\" (gilt fürs ganze Produkt). Reihenfolge per Drag & Drop. Diese Sektion kannst du frei auf der Produktseite platzieren. Angezeigt wird nur, was am Produkt oder an der Variante einen Wert hat. Fehlt der Wert an der Variante, greift der Wert am Produkt." },
     { "type": "checkbox", "id": "product_metafields_auto", "label": "Alle Produktmetafelder automatisch anzeigen", "default": false },
     { "type": "text", "id": "product_metafields_namespace", "label": "Namespace für automatische Anzeige", "default": "custom", "info": "z. B. custom" },
-    { "type": "checkbox", "id": "metafields_show_empty", "label": "Leere Felder im Editor anzeigen", "default": false, "info": "Nur im Theme-Editor sichtbar, damit sich frisch angelegte Felder greifen lassen. Im Shop bleiben Felder ohne Wert immer unsichtbar." }
+    { "type": "checkbox", "id": "metafields_show_empty", "label": "Leere Felder im Shop zeigen", "default": false, "info": "Im Theme-Editor sind neu angelegte Felder immer sichtbar, damit sie sich befüllen lassen. Diese Option zeigt Felder ohne Wert zusätzlich im Shop an." }
   ],
   "blocks": [
     {
