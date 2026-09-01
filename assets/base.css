@@ -1886,6 +1886,9 @@ body.template-index .main-content {
 
 .product-accordion { border-top: 1px solid var(--color-border); }
 .product-accordion__item { border-bottom: 1px solid var(--color-border); }
+/* Kein Abschlussstrich am letzten Eintrag, sonst haengt direkt ueber der
+   Vorteile-Leiste eine zweite Linie in anderer Breite. */
+.product-accordion__item:last-child { border-bottom: 0; }
 .product-accordion__summary { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 0; font-weight: var(--font-weight-bold); cursor: pointer; list-style: none; }
 .product-accordion__summary::-webkit-details-marker { display: none; }
 .product-accordion__summary .icon { transition: transform 0.2s ease; }
@@ -2210,9 +2213,14 @@ body:not(.template-index) .main-content {
    Vorteile-Leiste
    ========================================================================== */
 .usp-bar {
+  background: var(--color-bg-elevated, #fff);
+}
+/* Linien sitzen auf dem inneren .page-width, damit sie genauso breit sind wie
+   der uebrige Seiteninhalt. Am Element selbst liefen sie randlos durch und
+   passten dadurch nicht zu den anderen Trennlinien der Seite. */
+.usp-bar > .page-width {
   padding-block: 1.1rem 1.2rem;
   border-block: 1px solid var(--color-border, var(--color-line));
-  background: var(--color-bg-elevated, #fff);
 }
 .usp-bar__grid {
   display: grid;
