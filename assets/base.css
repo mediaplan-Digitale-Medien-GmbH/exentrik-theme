@@ -2231,11 +2231,15 @@ body:not(.template-index) .main-content {
    Klassen gleich stark sind und die spaetere Regel gewinnt. */
 .btn--atc {
   background: var(--color-atc);
+  background-color: var(--color-atc);
   color: var(--color-atc-text);
+  border-color: var(--color-atc);
 }
 .btn--atc:hover {
   background: var(--color-atc);
+  background-color: var(--color-atc);
   color: var(--color-atc-text);
+  border-color: var(--color-atc);
   filter: brightness(0.88);
 }
 
