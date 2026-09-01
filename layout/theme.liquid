@@ -179,20 +179,21 @@
     </main>
 
     {% comment %}
-      UEBERGANGSLOESUNG. Der Footer gehoert in sections/site-footer.liquid und
-      wird dort weiter gepflegt.
+      Der Footer steht in diesem Theme bewusst inline und NICHT als Sektion.
+      Nicht wieder auf einen Sektionsaufruf umbauen.
 
-      Diese Theme-Instanz hat footer.liquid beim Erstimport uebersprungen. Der
-      inkrementelle Sync holt uebersprungene Dateien nicht nach, auch nicht
-      unter neuem Namen: site-footer.liquid liegt im Branch, kommt im Shop aber
-      nicht an ("is not a valid section type"), waehrend Aenderungen an dieser
-      Datei hier sofort wirksam werden.
+      Grund: sections/footer.liquid lag beim Erstimport (18.08.) als roher
+      Diff-Patch im Repo und wurde von Shopify verworfen. Seither nimmt dieser
+      Shop keine Footer-Sektion mehr an. Erfolglos versucht wurden: die Datei
+      reparieren, footer-group.json, ein frischer Dateiname
+      (site-footer.liquid), GitHub trennen und neu verbinden, und ein komplett
+      neu angelegtes Theme aus dem Branch. Jedes Mal
+      "is not a valid section type", waehrend Aenderungen an dieser Datei hier
+      sofort ankommen.
 
-      Darum steht die Auszeichnung hier inline. Ihre Inhalte kommen aus den
-      Theme-Einstellungen (Gruppe "Fusszeile") und den Menues footer/service,
-      weil Sektionseinstellungen ohne Sektion nicht verfuegbar sind. Sobald das
-      Theme in Shopify neu angelegt ist, ersetzt der Aufruf der Sektion
-      site-footer diesen Block.
+      Inhalte kommen daher aus den Theme-Einstellungen (Gruppe "Fusszeile")
+      und den Menues footer/service. Fuer den Haendler ist das gleichwertig
+      bedienbar, nur eben unter Theme-Einstellungen statt am Abschnitt.
     {% endcomment %}
     {%- assign footer_menu = linklists.footer -%}
     {%- assign service_menu = linklists.service -%}
