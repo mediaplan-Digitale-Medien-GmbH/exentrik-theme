@@ -119,7 +119,32 @@
 
       {%- comment -%} -------------------- Produktdetails (Metafelder) -------------------- {%- endcomment -%}
       {%- assign pmf_auto = section.settings.product_metafields_auto -%}
+      {%- assign vmf_auto = section.settings.variant_metafields_auto -%}
       {%- assign pmf_ns = section.settings.product_metafields_namespace | default: 'custom' -%}
+      {%- comment -%}
+        Schluesselliste fuer die automatische Variantenanzeige. Die Vereinigung ueber alle
+        Varianten sorgt dafuer, dass auch ein Feld eine Zeile bekommt, das nur an einer
+        einzelnen Variante gepflegt ist. Felder mit eigenem Block bleiben aussen vor, sonst
+        stuenden sie doppelt da. Die Pipes ringsum machen den contains-Test eindeutig.
+      {%- endcomment -%}
+      {%- assign vmf_manual = '|' -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'variant_metafield' and block.settings.key != blank and block.settings.namespace == pmf_ns -%}
+          {%- assign vmf_manual = vmf_manual | append: block.settings.key | append: '|' -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- assign vmf_keys = '|' -%}
+      {%- if vmf_auto -%}
+        {%- for v in product.variants -%}
+          {%- for field in v.metafields[pmf_ns] -%}
+            {%- capture vmf_probe -%}|{{ field.first }}|{%- endcapture -%}
+            {%- unless vmf_keys contains vmf_probe or vmf_manual contains vmf_probe -%}
+              {%- assign vmf_keys = vmf_keys | append: field.first | append: '|' -%}
+            {%- endunless -%}
+          {%- endfor -%}
+        {%- endfor -%}
+      {%- endif -%}
+      {%- assign vmf_list = vmf_keys | split: '|' -%}
       {%- comment -%}Im Editor immer sichtbar, sonst lässt sich ein neu angelegtes Feld nicht befüllen. Im Shop nur auf Wunsch.{%- endcomment -%}
       {%- assign pd_show_empty = false -%}
       {%- if request.design_mode or section.settings.metafields_show_empty -%}{%- assign pd_show_empty = true -%}{%- endif -%}
@@ -127,7 +152,7 @@
       {%- for block in section.blocks -%}
         {%- if block.type == 'variant_metafield' or block.type == 'product_metafield' -%}{%- assign has_details = true -%}{%- endif -%}
       {%- endfor -%}
-      {%- if pmf_auto -%}{%- assign has_details = true -%}{%- endif -%}
+      {%- if pmf_auto or vmf_auto -%}{%- assign has_details = true -%}{%- endif -%}
       {%- if has_details -%}
         <div class="product-details" data-product-details{% if pd_show_empty %} data-show-empty{% endif %}>
           {%- if section.settings.product_metafields_title != blank -%}
@@ -160,6 +185,23 @@
               {%- endif -%}
             {%- endif -%}
           {%- endfor -%}
+          {%- if vmf_auto -%}
+            {%- for vk in vmf_list -%}
+              {%- if vk != blank -%}
+                {%- assign vaf = current_variant.metafields[pmf_ns][vk] -%}
+                {%- capture vafval -%}{{ vaf }}{%- endcapture -%}{%- assign vafval = vafval | strip -%}
+                {%- if vafval == blank or vafval == 'null' -%}{%- assign vaf = product.metafields[pmf_ns][vk] -%}{%- capture vafval -%}{{ vaf }}{%- endcapture -%}{%- assign vafval = vafval | strip -%}{%- endif -%}
+                {%- assign vaf_empty = false -%}
+                {%- if vafval == blank or vafval == 'null' -%}{%- assign vaf_empty = true -%}{%- endif -%}
+                {%- assign vaf_hide = false -%}
+                {%- if vaf_empty and pd_show_empty == false -%}{%- assign vaf_hide = true -%}{%- endif -%}
+                <div class="product-details__row" data-vmf="auto-{{ vk }}"{% if vaf_hide %} hidden{% endif %}>
+                  <div class="product-details__key">{{ vk | replace: '_', ' ' | capitalize }}{% if request.design_mode %}<span class="product-details__ref">{{ pmf_ns }}.{{ vk }}</span>{% endif %}</div>
+                  <div class="product-details__value" data-vmf-value>{% if vaf_empty %}ohne Angabe{% else %}{{ vafval }}{% endif %}</div>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
           {%- if pmf_auto -%}
             {%- comment -%} Compliance-Felder (GPSR, DSGVO, EU-Verantwortlicher) immer ans Ende {%- endcomment -%}
             {%- for pass in (1..2) -%}
@@ -173,6 +215,9 @@
                   {%- assign show_now = false -%}
                   {%- if pass == 1 and is_compliance == false -%}{%- assign show_now = true -%}{%- endif -%}
                   {%- if pass == 2 and is_compliance -%}{%- assign show_now = true -%}{%- endif -%}
+                  {%- comment -%}Steht das Feld schon als Variantenzeile, nicht noch einmal ausgeben.{%- endcomment -%}
+                  {%- capture pmf_probe -%}|{{ field.first }}|{%- endcapture -%}
+                  {%- if vmf_keys contains pmf_probe or vmf_manual contains pmf_probe -%}{%- assign show_now = false -%}{%- endif -%}
                   {%- if show_now -%}
                     <div class="product-details__row">
                       <div class="product-details__key">{{ field.first | replace: '_', ' ' | capitalize }}</div>
@@ -255,6 +300,19 @@
                 {{ block.id | json }}: {{ mfval | strip | json }}
               {%- endif -%}
             {%- endfor -%}
+            {%- if vmf_auto -%}
+              {%- for vk in vmf_list -%}
+                {%- if vk != blank -%}
+                  {%- unless first_mf %},{% endunless -%}{%- assign first_mf = false -%}
+                  {%- assign vaf = variant.metafields[pmf_ns][vk] -%}
+                  {%- capture vafval -%}{{ vaf }}{%- endcapture -%}{%- assign vafval = vafval | strip -%}
+                  {%- if vafval == blank or vafval == 'null' -%}{%- assign vaf = product.metafields[pmf_ns][vk] -%}{%- capture vafval -%}{{ vaf }}{%- endcapture -%}{%- assign vafval = vafval | strip -%}{%- endif -%}
+                  {%- if vafval == 'null' -%}{%- assign vafval = '' -%}{%- endif -%}
+                  {%- capture vaf_key -%}auto-{{ vk }}{%- endcapture -%}
+                  {{ vaf_key | json }}: {{ vafval | json }}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
           }
         }{% unless forloop.last %},{% endunless %}
       {%- endfor -%}
@@ -336,7 +394,8 @@
     { "type": "paragraph", "content": "Alle Metafelder erscheinen gebündelt unter „Produktdetails\". Füge unten Blöcke hinzu: „Variantenmetafeld\" (aktualisiert sich beim Variantenwechsel) oder „Produktmetafeld\" (gilt fürs ganze Produkt). Reihenfolge per Drag & Drop. Angezeigt wird nur, was am Produkt oder an der Variante einen Wert hat. Fehlt der Wert an der Variante, greift der Wert am Produkt. Zum Einrichten lässt sich unten einblenden, welche Felder noch leer sind. Alternativ unten „Automatisch anzeigen\" aktivieren." },
     { "type": "text", "id": "product_metafields_title", "label": "Titel", "default": "Produktdetails" },
     { "type": "checkbox", "id": "product_metafields_auto", "label": "Alle Produktmetafelder automatisch anzeigen", "default": false },
-    { "type": "text", "id": "product_metafields_namespace", "label": "Namespace für automatische Anzeige", "default": "custom", "info": "z. B. custom" },
+    { "type": "checkbox", "id": "variant_metafields_auto", "label": "Alle Variantenmetafelder automatisch anzeigen", "default": false, "info": "Zeigt jedes gepflegte Metafeld der gewählten Variante und wechselt den Wert beim Variantenwechsel mit. Fehlt der Wert an der Variante, greift der Wert am Produkt. Felder mit eigenem Block erscheinen nicht doppelt." },
+    { "type": "text", "id": "product_metafields_namespace", "label": "Namespace für automatische Anzeige", "default": "custom", "info": "Gilt für beide Automatiken, z. B. custom" },
     { "type": "checkbox", "id": "metafields_show_empty", "label": "Leere Felder im Shop zeigen", "default": false, "info": "Im Theme-Editor sind neu angelegte Felder immer sichtbar, damit sie sich befüllen lassen. Diese Option zeigt Felder ohne Wert zusätzlich im Shop an." }
   ],
   "blocks": [
