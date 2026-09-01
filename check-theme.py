@@ -1,6 +1,9 @@
 """Prueft ein Shopify-Theme vor dem Push: JSON, Schema-Ranges, Namenslaengen,
 Liquid-Tags, Filter in eckigen Klammern, fehlende Snippets und CSS-Balance.
 
+Geprueft werden auch Theme-Blocks aus blocks/. Dort landet alles, was die
+Shopify-KI generiert, und es gelten dieselben stillen Schema-Fallen.
+
 Ohne Argument wird das Verzeichnis geprueft, in dem der Aufruf passiert.
 """
 import glob
@@ -9,7 +12,7 @@ import re
 import sys
 
 OPENERS = {'if', 'unless', 'for', 'case', 'form', 'paginate', 'comment',
-           'schema', 'capture', 'style', 'javascript', 'stylesheet'}
+           'schema', 'capture', 'style', 'javascript', 'stylesheet', 'doc'}
 
 # Shopify verwirft ein Schema still, sobald ein Name laenger ist. Die Sektion
 # behaelt dann die zuletzt gueltige Fassung im Shop, ohne jede Fehlermeldung.
@@ -24,6 +27,15 @@ def strip_header(raw):
     return re.sub(r'^\s*/\*.*?\*/', '', raw, flags=re.S)
 
 
+def check_theme_blocks(theme, blocks, f, problems):
+    """Theme-Blocks koennen verschachtelt sein, darum rekursiv."""
+    for block in (blocks or {}).values():
+        typ = block.get('type', '')
+        if typ and not typ.startswith('@') and not glob.glob(f'{theme}/blocks/{typ}.liquid'):
+            problems.append(f'BLOCK FEHLT {f}: {typ}')
+        check_theme_blocks(theme, block.get('blocks'), f, problems)
+
+
 def check(theme):
     problems = []
 
@@ -36,7 +48,9 @@ def check(theme):
         except Exception as e:
             problems.append(f'JSON {f}: {e}')
 
-    for f in glob.glob(theme + '/sections/*.liquid') + glob.glob(theme + '/snippets/*.liquid'):
+    for f in (glob.glob(theme + '/sections/*.liquid')
+              + glob.glob(theme + '/snippets/*.liquid')
+              + glob.glob(theme + '/blocks/*.liquid')):
         src = open(f, encoding='utf-8').read()
 
         m = re.search(r'\{%\s*schema\s*%\}(.*?)\{%\s*endschema\s*%\}', src, re.S)
@@ -60,7 +74,14 @@ def check(theme):
                     for s in settings or []:
                         if s.get('type') == 'range' and s.get('default') is not None:
                             lo, hi, step, d = s['min'], s['max'], s['step'], s['default']
-                            if (d - lo) % step or not lo <= d <= hi or (hi - lo) / step > 101:
+                            if not step:
+                                problems.append(f'RANGE {f}: {s["id"]} hat step 0')
+                                continue
+                            # Dezimal-Steps wie 0.1 erzeugen Rundungsfehler, darum
+                            # nicht per Modulo, sondern mit Toleranz vergleichen.
+                            steps = (d - lo) / step
+                            off_grid = abs(steps - round(steps)) > 1e-6
+                            if off_grid or not lo <= d <= hi or (hi - lo) / step > 101:
                                 problems.append(f'RANGE {f}: {s["id"]}')
 
         for bad in re.findall(r'\[[^\]\n]*\|[^\]\n]*\]', src):
@@ -88,19 +109,26 @@ def check(theme):
 
     for f in (glob.glob(theme + '/sections/*.liquid')
               + glob.glob(theme + '/snippets/*.liquid')
+              + glob.glob(theme + '/blocks/*.liquid')
               + glob.glob(theme + '/layout/*.liquid')):
         for used in re.findall(r"render\s+'([a-z0-9-]+)'", open(f, encoding='utf-8').read()):
             if not glob.glob(f'{theme}/snippets/{used}.liquid'):
                 problems.append(f'SNIPPET FEHLT {f}: {used}')
 
-    # Jede Sektion, die eine Vorlage nutzt, muss es auch als Datei geben.
-    for f in glob.glob(theme + '/templates/**/*.json', recursive=True):
+    # Jede Sektion aus einer Vorlage oder Sektionsgruppe muss es als Datei geben,
+    # und jeder Theme-Block braucht seine Datei in blocks/. Fehlt sie, verschwindet
+    # der Block im Shop still.
+    for f in (glob.glob(theme + '/templates/**/*.json', recursive=True)
+              + glob.glob(theme + '/sections/*.json')):
         try:
             data = json.loads(strip_header(open(f, encoding='utf-8').read()))
         except Exception:
             continue
         for section in (data.get('sections') or {}).values():
             typ = section.get('type', '')
+            if typ == '_blocks':
+                check_theme_blocks(theme, section.get('blocks'), f, problems)
+                continue
             if typ in BUILT_IN_SECTIONS or typ.startswith('@'):
                 continue
             if typ and not glob.glob(f'{theme}/sections/{typ}.liquid'):
