@@ -17,39 +17,59 @@
           "settings": {
             "slide": 1,
             "size": "featured",
+            "image": "shopify://shop_images/sullen_tshirt.jpg",
             "badge": "New In",
-            "heading": "Street & Stage",
-            "text": "Looks, die laut sind – ohne Kompromiss.",
+            "heading": "Sullen Clothing",
+            "text": "Mutige und absolut kompromisslose Designs",
             "button_label": "Jetzt shoppen",
             "link": "shopify://collections/all",
             "cta_style": "button",
             "tone": "light"
           }
         },
-        "t2": {
+        "tile_6UBL7r": {
           "type": "tile",
           "settings": {
             "slide": 1,
-            "size": "banner",
-            "badge": "Hot",
-            "heading": "Bestsellers",
-            "text": "Die Pieces, die alle wollen.",
-            "button_label": "Entdecken",
+            "size": "featured",
+            "image": "shopify://shop_images/handr.jpg",
+            "badge": "New In",
+            "heading": "Hearts & Roses London",
+            "text": "Stilsicher und komfortabler Vintage Look",
+            "button_label": "Bestellen",
             "link": "shopify://collections/all",
             "cta_style": "button",
             "tone": "light"
           }
         },
-        "t3": {
+        "t5": {
           "type": "tile",
+          "name": "Kachel Caps",
           "settings": {
             "slide": 1,
             "size": "square",
-            "badge": "Sale",
-            "heading": "Reduziert",
+            "image": "shopify://shop_images/sullen_cap.jpg",
+            "badge": "",
+            "heading": "",
             "text": "",
-            "button_label": "Zum Sale",
-            "link": "shopify://collections/all",
+            "button_label": "Caps",
+            "link": "shopify://collections/herren-accessoires-caps",
+            "cta_style": "link",
+            "tone": "light"
+          }
+        },
+        "t6": {
+          "type": "tile",
+          "name": "Hemden",
+          "settings": {
+            "slide": 1,
+            "size": "square",
+            "image": "shopify://shop_images/hemden.png",
+            "badge": "",
+            "heading": "",
+            "text": "",
+            "button_label": "Hemden",
+            "link": "shopify://collections/herren-bekleidung-hemden",
             "cta_style": "link",
             "tone": "light"
           }
@@ -59,41 +79,29 @@
           "settings": {
             "slide": 1,
             "size": "square",
+            "image": "shopify://shop_images/strickjacken.jpg",
             "badge": "",
-            "heading": "Accessoires",
+            "heading": "",
             "text": "",
-            "button_label": "Shoppen",
-            "link": "shopify://collections/all",
+            "button_label": "Strickjacken",
+            "link": "shopify://collections/damen-bekleidung-strickjacken-boleros",
             "cta_style": "link",
-            "tone": "dark"
+            "tone": "light"
           }
         },
-        "t5": {
+        "t2": {
           "type": "tile",
           "settings": {
             "slide": 1,
-            "size": "square",
-            "badge": "",
-            "heading": "Sneaker",
-            "text": "",
-            "button_label": "Shoppen",
+            "size": "banner",
+            "image": "shopify://shop_images/band_merch_hoodies.png",
+            "badge": "Hot",
+            "heading": "Band Merch",
+            "text": "Kleidung und Accessoires deiner Ikonen",
+            "button_label": "Entdecken",
             "link": "shopify://collections/all",
-            "cta_style": "link",
-            "tone": "dark"
-          }
-        },
-        "t6": {
-          "type": "tile",
-          "settings": {
-            "slide": 1,
-            "size": "square",
-            "badge": "",
-            "heading": "Lifestyle",
-            "text": "",
-            "button_label": "Shoppen",
-            "link": "shopify://collections/all",
-            "cta_style": "link",
-            "tone": "dark"
+            "cta_style": "button",
+            "tone": "light"
           }
         },
         "t7": {
@@ -101,24 +109,42 @@
           "settings": {
             "slide": 1,
             "size": "wide",
+            "image": "shopify://shop_images/jacken_und_maentel.jpg",
             "badge": "Drop",
-            "heading": "Looks der Saison",
-            "text": "Street, Stage, Everyday.",
+            "heading": "Jacken & Mäntel",
+            "text": "Für die kalte Jahreszeit",
             "button_label": "Jetzt ansehen",
-            "link": "shopify://collections/all",
+            "link": "shopify://collections/damen-bekleidung-jacken-maentel",
             "cta_style": "button",
+            "tone": "light"
+          }
+        },
+        "t3": {
+          "type": "tile",
+          "name": "Röcke",
+          "settings": {
+            "slide": 1,
+            "size": "square",
+            "image": "shopify://shop_images/skirt.jpg",
+            "badge": "",
+            "heading": "",
+            "text": "",
+            "button_label": "Röcke",
+            "link": "shopify://collections/damen-bekleidung-roecke",
+            "cta_style": "link",
             "tone": "light"
           }
         }
       },
       "block_order": [
         "t1",
-        "t2",
-        "t3",
-        "t4",
+        "tile_6UBL7r",
         "t5",
         "t6",
-        "t7"
+        "t4",
+        "t2",
+        "t7",
+        "t3"
       ],
       "settings": {
         "eyebrow": "",
@@ -171,15 +197,165 @@
     },
     "featured-collection": {
       "type": "featured-collection",
+      "name": "Deko Wohnen Produkt-Slider",
       "settings": {
-        "eyebrow": "",
-        "heading": "Bestsellers",
-        "subheading": "",
-        "collection": "",
-        "products_to_show": 8,
-        "columns": 4,
+        "eyebrow": "Entdecke",
+        "heading": "Dekoartikel & Wohnaccessoires von deinen Lieblingsfilmen, Bands, TV Serien und Videospielen",
+        "subheading": "Entdecke unsere vielfältige Auswahl an Dekoartikeln und Wohnaccessoires rund um bekannte Filme, TV-Serien, Anime, Bands und Videospiele. Von stimmungsvollen Leuchten über liebevoll gestaltete Figuren bis hin zu Postern und Deko-Objekten – hier findet jeder Fan das passende Stück für Zuhause. Unsere lizenzierten Produkte bringen echtes Fan-Feeling in jedes Zimmer und werten Wohnzimmer, Schlafzimmer oder Gaming-Ecke im Handumdrehen auf. Egal ob für Jung oder Alt und unabhängig vom Geschlecht – unsere Artikel eignen sich hervorragend als originelles Geschenk zu jedem Anlass. Ob Geburtstag, Weihnachten oder einfach als kleine Überraschung: Mit unseren Fanartikeln liegst du garantiert richtig. Stöbere jetzt durch unser Sortiment und finde das perfekte Deko-Highlight für dich oder deine Liebsten.",
+        "collection": "deko-wohnen",
+        "products_to_show": 5,
+        "columns": 5,
         "show_view_all": true,
         "view_all_label": "Alle ansehen"
+      }
+    },
+    "collection_list_wYaVLY": {
+      "type": "collection-list",
+      "blocks": {
+        "category_LRMFKx": {
+          "type": "category",
+          "name": "Anime/Manga",
+          "settings": {
+            "collection": "damen-bekleidung-kleider",
+            "title": "Anime/Manga",
+            "image": "shopify://shop_images/anime.jpg"
+          }
+        },
+        "category_aPcRKU": {
+          "type": "category",
+          "name": "Gaming",
+          "settings": {
+            "collection": "damen-accessoires-taschen",
+            "title": "Gaming",
+            "image": "shopify://shop_images/gaming.jpg"
+          }
+        },
+        "category_y7eC9y": {
+          "type": "category",
+          "name": "Film/TV",
+          "settings": {
+            "collection": "deko-wohnen-wanddeko",
+            "title": "Film/TV",
+            "image": "shopify://shop_images/film.jpg"
+          }
+        },
+        "category_LqcGAG": {
+          "type": "category",
+          "name": "Gothic",
+          "settings": {
+            "collection": "",
+            "title": "Gothic",
+            "image": "shopify://shop_images/gothic.jpg"
+          }
+        },
+        "category_VmE6Dh": {
+          "type": "category",
+          "name": "Vintage",
+          "settings": {
+            "collection": "",
+            "title": "Vintage",
+            "image": "shopify://shop_images/hr_kleid.jpg"
+          }
+        },
+        "category_dQ7hkN": {
+          "type": "category",
+          "name": "Tattoo",
+          "settings": {
+            "collection": "",
+            "title": "Tattoo",
+            "image": "shopify://shop_images/sullen_schwarz.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "category_LRMFKx",
+        "category_aPcRKU",
+        "category_y7eC9y",
+        "category_LqcGAG",
+        "category_VmE6Dh",
+        "category_dQ7hkN"
+      ],
+      "name": "Top Seller Kategorien",
+      "settings": {
+        "eyebrow": "Themenwelten",
+        "heading": "Dein Style, deine Welt – jetzt Lieblingsthema entdecken",
+        "columns": 3
+      }
+    },
+    "image_with_text_CMYYfd": {
+      "type": "image-with-text",
+      "blocks": {
+        "feature_WAAUeG": {
+          "type": "feature",
+          "settings": {
+            "text": "Offiziell lizensierte Merchandise Produkte"
+          }
+        },
+        "feature_n6aHeL": {
+          "type": "feature",
+          "settings": {
+            "text": "Große Auswahl – von Socken bis Kleidung und Deko für jeden Fan-Anspruch"
+          }
+        },
+        "feature_krjWhh": {
+          "type": "feature",
+          "settings": {
+            "text": "Perfekt für Fans & Geschenke – ideal für jeden Anlass, ob für dich oder Freunde"
+          }
+        }
+      },
+      "block_order": [
+        "feature_WAAUeG",
+        "feature_n6aHeL",
+        "feature_krjWhh"
+      ],
+      "name": "AC/DC",
+      "settings": {
+        "image": "shopify://shop_images/ACDCTS74MB04.jpg",
+        "layout": "reverse",
+        "eyebrow": "AC/DC Merchandise",
+        "heading": "Rock-Legenden zum Anziehen und Sammeln",
+        "text": "<p>AC/DC gehören zu den größten Rock-'n'-Roll-Legenden aller Zeiten und brauchen eigentlich keine Vorstellung mehr – ihr Sound hat Generationen von Fans geprägt und die Band füllt bis heute Stadien rund um den Globus. In unserem Online-Shop findest du eine große Auswahl an offiziellem AC/DC Merchandise: von coolen T-Shirts und gemütlichen Hoodies über Caps und Anstecknadeln bis hin zu Socken und gerahmten Bildern fürs Wohnzimmer. Ob als Alltagslook, Geschenk für echte Fans oder Sammlerstück – bei uns wird jeder Rocker fündig. Zeig deine Leidenschaft für Rockmusik und trage AC/DC nicht nur im Herzen, sondern auch am Körper.</p>",
+        "button_label": "Artikel anzeigen",
+        "button_link": ""
+      }
+    },
+    "image_with_text_6LLMBn": {
+      "type": "image-with-text",
+      "blocks": {
+        "feature_gGRnRT": {
+          "type": "feature",
+          "settings": {
+            "text": "Einzigartige Accessoires – Flaggen und Taschen als echter Blickfang"
+          }
+        },
+        "feature_rDxtDt": {
+          "type": "feature",
+          "settings": {
+            "text": "Große Auswahl – von Bandanas bis Kleidung und Deko für jeden Fan-Anspruch"
+          }
+        },
+        "feature_LPGEpp": {
+          "type": "feature",
+          "settings": {
+            "text": "Regelmäßig neue Produkte – immer wieder frisches Merchandise für echte Fans"
+          }
+        }
+      },
+      "block_order": [
+        "feature_gGRnRT",
+        "feature_rDxtDt",
+        "feature_LPGEpp"
+      ],
+      "name": "Metallica",
+      "settings": {
+        "image": "shopify://shop_images/metallica-kill-em-all-front.jpg",
+        "layout": "normal",
+        "eyebrow": "Metallica Fanshop",
+        "heading": "Merchandise für echte Metalheads",
+        "text": "<p>Metallica zählen zu den einflussreichsten und erfolgreichsten Metal-Bands der Musikgeschichte und haben mit Alben wie \"Master of Puppets\" oder dem \"Black Album\" Millionen Fans weltweit begeistert. Seit den frühen 1980er-Jahren prägt die Band den Thrash Metal wie keine andere und füllt bis heute die größten Stadien der Welt. In unserem Online-Shop findest du eine vielseitige Auswahl an offiziellem Metallica Merchandise: von T-Shirts und Hoodies über Caps, Bandanas und Anstecknadeln bis hin zu Flaggen und Taschen für den Alltag. Egal ob als Streetwear-Piece, Sammlerstück oder Geschenk für echte Metalheads – bei uns wird jeder Fan fündig. </p>",
+        "button_label": "Hier bestellen",
+        "button_link": ""
       }
     },
     "newsletter": {
@@ -190,12 +366,63 @@
         "text": "Melde dich an und verpasse keine Neuheiten oder Aktionen.",
         "button_label": "Abonnieren"
       }
+    },
+    "1788083098b2b4003f": {
+      "type": "_blocks",
+      "blocks": {
+        "ai_gen_block_b352b53_LXzwgw": {
+          "type": "ai_gen_block_b352b53",
+          "settings": {
+            "heading": "EXENTRIK - Dein Shop für Lifestyle Kleidung und Fan Merchandise",
+            "subheading": "<p>Vintage-Charme trifft moderne Subkultur. Shoppe jetzt angesagte Retro-Kleidung, Tattoo-Styles und Fan-Merch! Finde dein Unikat!</p>",
+            "heading_alignment": "center",
+            "column_1_heading": "",
+            "column_1_text": "<p><strong>Riesiges Sortiment im Retro-Stil</strong><br/>Hier findest du ein riesiges Sortiment im Retro-Stil, welches dein Herz höher schlagen lässt. Unsere Kollektion umfasst Kleider, Tops, Röcke, Gürtel, Taschen und vieles mehr von bekannten Marken wie Hell Bunny, Hearts & Roses, Banned Retro, Voodoo Vixen, Steady Clothing und Rockabella.</p><p>Unsere Kleidung ist perfekt für alle, die den Vintage, Rockabilly, Retro, Old School, 50er und 60er Style lieben. Mit unseren einzigartigen Stücken kannst du deinen individuellen Look kreieren und dich wie eine echte Rockabella fühlen. <br/><br/>Wir legen großen Wert auf Qualität und Vielfalt in unserem Sortiment. Egal ob du nach einem eleganten Swingkleid für besondere Anlässe suchst oder nach lässigen T-Shirts im Pin-Up-Stil für den Alltag - bei uns wirst du fündig.<br/><br/>Unsere Vintage-Kleidung ist perfekt für alle, die den Charme vergangener Zeiten lieben. Ob du auf der Suche nach einem eleganten Kleid im 50er-Jahre-Stil bist oder nach einer lässigen Marlene-Hose im Rockabilly-Look, bei uns wirst du garantiert fündig. Unsere Kollektion umfasst eine Vielzahl von Designs und Schnitten, die sowohl klassisch als auch modern interpretiert sind. <br/><br/>Neben Kleidung bieten wir auch eine große Auswahl an Accessoires an, die dein Outfit komplettieren. Von handgefertigten Taschen aus hochwertigem Kunstleder bis hin zu edlen Geldbörsen und Gürteln – bei uns findest du alles, was das Herz begehrt. Unsere Accessoires sind nicht nur praktisch, sondern auch echte Hingucker, die deinen Look aufwerten.<br/><br/>Stöber in unserem Vintage und Rockabilly Fashion Paradies! Entdecke eine einzigartige Auswahl an zeitlosen Stücken und Accessoires, die perfekt zu deinem unverwechselbaren Style passen. Von klassischen Swingkleidern bis hin zu coolen Lederjacken - unser Sortiment bietet alles, was das Retro-Herz begehrt. Tauche ein in die Welt vergangener Zeiten und finde dein neues Lieblingsoutfit bei uns. Shoppe jetzt und bringe den Rockabilly-Chic in deinen Kleiderschrank!</p>",
+            "column_2_heading": "",
+            "column_2_text": "<p>Entdecke jetzt unsere Auswahl an trendiger Vintage- und Rockabilly-Kleidung und tauche ein in die Welt der 50er und 60er Jahre. Hol dir deinen Retro-Look und rocke den Style der Vergangenheit!<br/><br/><strong>Zeige deine dunkle Seite mit Gothic Mode</strong><br/>Bei uns findest du eine breite Auswahl an hochwertigen Stücken, die deine dunkle Seite zum Ausdruck bringen. Unsere Kollektion umfasst T-Shirts, Tops, Kleider und Accessoires von renommierten Marken wie Vixxsin, Banned Alternative, Jawbreaker, Cupcake Cult, Killer Panda, Poizen Industries und Heartless.<br/><br/>Unsere Kleidung ist perfekt für alle, die sich gerne von der Norm abheben und einen individuellen Style pflegen. Ob Gothic, Emo oder Grufti - bei uns findest du das passende Outfit, um deine Persönlichkeit zu<br/>unterstreichen.<br/><br/>Wir legen großen Wert auf herausragende Qualität und Vielfalt in unserem Sortiment. Egal ob du nach einem auffälligen Print-Shirt für den Alltag suchst oder nach einem eleganten Kleid für besondere Anlässe - bei uns wirst du fündig.<br/><br/>Darüber hinaus führen wir auch eine breite Palette an Fanartikeln von Videospielen, Filmen, Serien, Mangas und Animes. Egal ob du ein großer Gaming-Fan bist oder deine Lieblingsserie auf Schritt und Tritt zeigen möchtest – bei uns findest du sicherlich das passende Merchandise. Von T-Shirts über Hoodies bis hin zu Tassen und Schlüsselanhängern – stöbere durch unser Sortiment und entdecke deine neuen Lieblingsstücke.<br/><br/>Unser Online-Shop zeichnet sich nicht nur durch seine vielfältige Auswahl aus, sondern auch durch seine hohe Qualität und faire Preise. Wir legen großen Wert darauf, dass unsere Produkte nachhaltig hergestellt werden und unseren Kunden lange Freude bereiten. Zudem bieten wir regelmäßig Rabattaktionen und Sonderangebote an, damit du noch mehr sparen kannst.</p>",
+            "column_3_heading": "",
+            "column_3_text": "<p><strong>Fan Merchandise<br/></strong>Tauche ein in unzählige Fan-Welten – von Harry Potter über Star Wars und Pokémon bis hin zu den beliebtesten Anime- und Manga-Serien wie Naruto, One Piece, Jujutsu Kaisen, Demon Slayer und My Hero Academia. Egal ob Zauberwelt, Weltraum-Saga oder japanische Popkultur – bei uns findest du Kleidung, Taschen, Schlüsselanhänger und viele weitere Fanartikel, die deine Lieblingscharaktere zum Leben erwecken.</p><p>Auch Film-, Serien- und Gaming-Fans kommen bei uns voll auf ihre Kosten: Von Jurassic Park über die Simpsons, Zurück in die Zukunft und Der Herr der Ringe bis hin zu South Park, Rick and Morty, Overwatch und Stranger Things bieten wir vielfältiges Merchandise für jede Fangemeinde. Ergänzt wird das Sortiment durch unsere Disney-Kollektion mit Klassikern wie Lilo & Stitch, Mulan, The Nightmare Before Christmas, Die kleine Meerjungfrau, Bambi und König der Löwen.</p><p>Neben lizenziertem Charakter-Merchandise findest du bei uns außerdem individuelle Vintage-, Rockabilly-, Gothic- und Streetwear-Mode von Marken wie Banned, Hell Bunny und Sullen Clothing – perfekt für alle, die ihren eigenen Style mit Persönlichkeit und Liebe zum Detail ausdrücken möchten. So wird jeder Fan-Shop-Besuch zur Entdeckungsreise durch die Welten von Film, Serie, Games, Anime und individueller Mode.<br/><br/><strong>Band Merchandise</strong><br/>Crowdsurfe in die Welt des Rock, Hard Rock, Heavy Metal, Alternative und Rock 'n' Roll! Unser Sortiment bringt dich den größten Legenden der Musikgeschichte näher – von Motörhead, Johnny Cash und AC/DC über Black Sabbath und The Rolling Stones bis hin zu Electric Callboy und Social Distortion.</p><p>Unsere Band-Merchandise-Kollektion umfasst T-Shirts, Hoodies, Accessoires, Poster und mehr – alle mit einzigartigen Designs, die die Essenz der Musik und ihrer Künstler einfangen. Egal ob treuer Fan einer bestimmten Band oder einfach auf der Suche nach einem Ausdruck deiner Liebe zur Rockmusik, hier wirst du garantiert fündig.</p><p>Unsere Produkte überzeugen durch höchste Qualität, Langlebigkeit und Originalität. Zeige deine Leidenschaft für die Musik mit Stil, trage deine Lieblingsbands stolz auf deiner Kleidung und entdecke jetzt unsere umfangreiche Kollektion, um deinen individuellen Stil zu unterstreichen und deine Liebe zur Musik zu zelebrieren. Rock on!<br/><br/></p>",
+            "desktop_width_percent": 100,
+            "max_width": 1320,
+            "columns_tablet": "2",
+            "column_gap": 40,
+            "padding_top": 60,
+            "padding_bottom": 60,
+            "padding_horizontal": 20,
+            "heading_spacing": 20,
+            "columns_spacing": 40,
+            "column_heading_spacing": 15,
+            "paragraph_spacing": 15,
+            "background_color": "#ffffff",
+            "heading_color": "#111111",
+            "column_heading_color": "#111111",
+            "text_color": "#111111",
+            "link_color": "#c52f3e",
+            "link_hover_color": "#111111",
+            "heading_size": 36,
+            "subheading_size": 18,
+            "column_heading_size": 20,
+            "text_size": 16,
+            "line_height": 1.6
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "ai_gen_block_b352b53_LXzwgw"
+      ],
+      "name": "SEO Block",
+      "settings": {}
     }
   },
   "order": [
     "hero-tiles",
     "usp-bar",
     "featured-collection",
-    "newsletter"
+    "collection_list_wYaVLY",
+    "image_with_text_CMYYfd",
+    "image_with_text_6LLMBn",
+    "newsletter",
+    "1788083098b2b4003f"
   ]
 }

@@ -1,15 +1,40 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "header",
   "name": "Kopfbereich",
   "sections": {
     "announcement-bar": {
       "type": "announcement-bar",
-      "disabled": false,
       "blocks": {
+        "item_gkKPTc": {
+          "type": "item",
+          "settings": {
+            "text": "Kauf auf Rechnung",
+            "link": "",
+            "icon": "credit-card"
+          }
+        },
+        "item_tB7jCK": {
+          "type": "item",
+          "settings": {
+            "text": "Kostenlose Retoure",
+            "link": "",
+            "icon": "truck"
+          }
+        },
         "b1": {
           "type": "item",
           "settings": {
             "text": "Neue Drops jede Woche – sei schneller als der Rest",
+            "link": "",
             "icon": "check"
           }
         },
@@ -17,11 +42,17 @@
           "type": "item",
           "settings": {
             "text": "30 Tage Rückgaberecht",
+            "link": "",
             "icon": "return"
           }
         }
       },
-      "block_order": ["b1", "b2"],
+      "block_order": [
+        "item_gkKPTc",
+        "item_tB7jCK",
+        "b1",
+        "b2"
+      ],
       "settings": {
         "bg_color": "#c52f3e",
         "text_color": "#ffffff"
@@ -31,13 +62,20 @@
       "type": "header",
       "settings": {
         "menu": "main-menu",
-        "cta_label": "Jetzt shoppen",
+        "menu_style": "auto",
+        "mega_columns": 4,
+        "cta_label": "",
         "cta_link": "shopify://collections/all"
       }
     },
     "cart-drawer": {
-      "type": "cart-drawer"
+      "type": "cart-drawer",
+      "settings": {}
     }
   },
-  "order": ["announcement-bar", "header", "cart-drawer"]
+  "order": [
+    "announcement-bar",
+    "header",
+    "cart-drawer"
+  ]
 }

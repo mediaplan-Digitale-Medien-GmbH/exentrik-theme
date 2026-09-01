@@ -1,125 +1,308 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "main-product",
       "blocks": {
-        "sku": {
-          "type": "sku",
+        "judge_me_reviews_preview_badge_c7piLJ": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {}
-        },
-        "trust": {
-          "type": "trust",
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_preview_badge_c7piLJ"
+      ],
+      "settings": {
+        "show_vendor": true,
+        "show_dynamic_checkout": false,
+        "media_ratio": "natural",
+        "media_fit": "contain",
+        "thumbs_per_row": 5,
+        "variant_style": "theme",
+        "price_note": "",
+        "product_metafields_title": "Produktdetails",
+        "product_metafields_auto": true,
+        "product_metafields_namespace": "custom",
+        "metafields_show_empty": false
+      }
+    },
+    "usp_bar_KzABTV": {
+      "type": "usp-bar",
+      "blocks": {
+        "usp_XKVGgM": {
+          "type": "usp",
           "settings": {
-            "line_1": "Kauf auf Rechnung möglich",
-            "line_2": "Versandkostenfrei ab 50 Euro",
-            "line_3": "3 Prozent Rabatt bei Vorkasse",
-            "line_4": "Persönliche Beratung per Telefon"
+            "icon": "truck",
+            "title": "Schneller Versand",
+            "text": "Lieferung mit DHL in 2 bis 3 Tagen"
           }
         },
-        "shipping": {
-          "type": "collapsible",
+        "usp_GdUmFb": {
+          "type": "usp",
           "settings": {
-            "title": "Versand und Lieferung",
-            "content": "<p>Lieferung innerhalb von 2 bis 3 Tagen mit DHL. Ab einem Bestellwert von 50 Euro liefern wir versandkostenfrei innerhalb Deutschlands.</p>"
+            "icon": "return",
+            "title": "Rückgaberecht",
+            "text": "1 Monat Widerrufsrecht"
           }
         },
-        "payment": {
-          "type": "collapsible",
+        "usp_NLcB9P": {
+          "type": "usp",
           "settings": {
-            "title": "Zahlungsarten",
-            "content": "<p>Sie zahlen bequem per Rechnung, PayPal, Kreditkarte, Lastschrift oder Vorkasse. Bei Vorkasse erhalten Sie 3 Prozent Rabatt.</p>"
+            "icon": "credit-card",
+            "title": "Kauf auf Rechnung",
+            "text": "Sicher und bequem zahlen"
+          }
+        },
+        "usp_p6V47P": {
+          "type": "usp",
+          "settings": {
+            "icon": "headset",
+            "title": "Persönliche Beratung",
+            "text": "Mo bis Fr per Telefon und E-Mail"
           }
         }
       },
       "block_order": [
-        "sku",
-        "trust",
-        "shipping",
-        "payment"
+        "usp_XKVGgM",
+        "usp_GdUmFb",
+        "usp_NLcB9P",
+        "usp_p6V47P"
       ],
-      "settings": {
-        "show_vendor": false,
-        "show_dynamic_checkout": true
-      }
+      "name": "Vorteile-Leiste",
+      "settings": {}
     },
     "produktdetails": {
       "type": "product-details",
       "blocks": {
-        "mf_brenndauer": {
+        "variant_metafield_PWyte9": {
           "type": "variant_metafield",
           "settings": {
-            "label": "Brenndauer",
+            "label": "Merkmal",
             "namespace": "custom",
-            "key": "brenndauer"
+            "key": ""
+          }
+        },
+        "mf_brenndauer": {
+          "type": "variant_metafield",
+          "name": "Marke",
+          "settings": {
+            "label": "Marke",
+            "namespace": "custom",
+            "key": "marke"
           }
         },
         "mf_koernung": {
           "type": "variant_metafield",
+          "name": "Band",
           "settings": {
-            "label": "Körnung",
+            "label": "Band",
             "namespace": "custom",
-            "key": "koernung"
+            "key": "band"
+          }
+        },
+        "variant_metafield_9d6C7z": {
+          "type": "variant_metafield",
+          "name": "Modellname",
+          "settings": {
+            "label": "Modellname",
+            "namespace": "custom",
+            "key": "modellname"
           }
         },
         "mf_asche": {
           "type": "variant_metafield",
+          "name": "Thema",
           "settings": {
-            "label": "Aschegehalt",
+            "label": "Thema",
             "namespace": "custom",
-            "key": "aschegehalt"
+            "key": "thema"
           }
         },
         "mf_herkunft": {
           "type": "variant_metafield",
+          "name": "Abteilung",
           "settings": {
-            "label": "Herkunft",
+            "label": "Abteilung",
             "namespace": "custom",
-            "key": "herkunft"
+            "key": "abteilung"
           }
         },
-        "mf_rohstoff": {
+        "variant_metafield_4WwtdC": {
           "type": "variant_metafield",
           "settings": {
-            "label": "Rohstoff",
+            "label": "Merkmal",
             "namespace": "custom",
-            "key": "rohstoff"
+            "key": ""
           }
         }
       },
       "block_order": [
+        "variant_metafield_PWyte9",
         "mf_brenndauer",
         "mf_koernung",
+        "variant_metafield_9d6C7z",
         "mf_asche",
         "mf_herkunft",
-        "mf_rohstoff"
+        "variant_metafield_4WwtdC"
       ],
+      "name": "Produktdetails Metafelder",
       "settings": {
-        "product_metafields_title": "Technische Daten"
+        "product_metafields_title": "Eigenschaften",
+        "product_metafields_auto": true,
+        "product_metafields_namespace": "custom",
+        "metafields_show_empty": true
       }
     },
-    "zubehoer": {
-      "type": "product-recommendations",
+    "product_details_LkXhj3": {
+      "type": "product-details",
+      "blocks": {
+        "variant_metafield_aqUTkA": {
+          "type": "variant_metafield",
+          "name": "Artikelnummer",
+          "settings": {
+            "label": "Artikelnummer",
+            "namespace": "custom",
+            "key": "rohstoff"
+          }
+        },
+        "variant_metafield_6FVfBi": {
+          "type": "variant_metafield",
+          "name": "Marke",
+          "settings": {
+            "label": "Marke",
+            "namespace": "custom",
+            "key": "marke"
+          }
+        },
+        "variant_metafield_aLp6A3": {
+          "type": "variant_metafield",
+          "name": "Band",
+          "settings": {
+            "label": "Band",
+            "namespace": "custom",
+            "key": "band"
+          }
+        },
+        "variant_metafield_BnfJLT": {
+          "type": "variant_metafield",
+          "name": "Modellname",
+          "settings": {
+            "label": "Modellname",
+            "namespace": "custom",
+            "key": "modellname"
+          }
+        },
+        "variant_metafield_Mh84QW": {
+          "type": "variant_metafield",
+          "name": "Thema",
+          "settings": {
+            "label": "Thema",
+            "namespace": "custom",
+            "key": "thema"
+          }
+        },
+        "variant_metafield_DJDYh8": {
+          "type": "variant_metafield",
+          "name": "Abteilung",
+          "settings": {
+            "label": "Abteilung",
+            "namespace": "custom",
+            "key": "abteilung"
+          }
+        },
+        "variant_metafield_bwtX8Q": {
+          "type": "variant_metafield",
+          "settings": {
+            "label": "Merkmal",
+            "namespace": "custom",
+            "key": ""
+          }
+        }
+      },
+      "block_order": [
+        "variant_metafield_aqUTkA",
+        "variant_metafield_6FVfBi",
+        "variant_metafield_aLp6A3",
+        "variant_metafield_BnfJLT",
+        "variant_metafield_Mh84QW",
+        "variant_metafield_DJDYh8",
+        "variant_metafield_bwtX8Q"
+      ],
+      "disabled": true,
+      "name": "Hersteller Metafelder",
       "settings": {
-        "eyebrow": "Dazu passend",
-        "heading": "Passend dazu",
-        "intent": "complementary",
-        "products_to_show": 4,
-        "columns": 4
+        "product_metafields_title": "EU ansässiger Wirtschaftsakteur",
+        "product_metafields_auto": true,
+        "product_metafields_namespace": "custom",
+        "metafields_show_empty": true
+      }
+    },
+    "product_recommendations_4rBbgw": {
+      "type": "product-recommendations",
+      "name": "Mehr Kategorie",
+      "settings": {
+        "eyebrow": "kleiner titel",
+        "heading": "Passendes Zubehör",
+        "intent": "related",
+        "products_to_show": 5,
+        "columns": 5
       }
     },
     "aehnliche": {
       "type": "related-products",
+      "disabled": true,
+      "name": "Mehr Marke",
       "settings": {
-        "heading": "Weitere Produkte aus dem Sortiment",
+        "heading": "Mehr von dieser Marke",
         "products_to_show": 4,
         "columns": 4
       }
+    },
+    "related_products_Q87GmV": {
+      "type": "related-products",
+      "disabled": true,
+      "name": "Kunden kauften",
+      "settings": {
+        "heading": "Kunden kauften auch",
+        "products_to_show": 4,
+        "columns": 4
+      }
+    },
+    "1788199601cb4597f0": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_NeyXqh": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": false,
+            "empty_state": "empty_widget"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_NeyXqh"
+      ],
+      "settings": {}
     }
   },
   "order": [
     "main",
+    "usp_bar_KzABTV",
     "produktdetails",
-    "zubehoer",
-    "aehnliche"
+    "product_details_LkXhj3",
+    "product_recommendations_4rBbgw",
+    "aehnliche",
+    "related_products_Q87GmV",
+    "1788199601cb4597f0"
   ]
 }

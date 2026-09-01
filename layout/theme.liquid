@@ -179,13 +179,93 @@
     </main>
 
     {% comment %}
-      Der Footer laeuft als statische Sektion und heisst site-footer, nicht
-      footer. Dieser Shop hat weder sections/footer.liquid noch
-      sections/footer-group.json je uebernommen, auch nicht nach einem vollen
-      Re-Import: Shopify meldete "'footer' is not a valid section type".
-      Ein frischer Dateiname umgeht den Importzustand. Nicht umbenennen.
+      UEBERGANGSLOESUNG. Der Footer gehoert in sections/site-footer.liquid und
+      wird dort weiter gepflegt.
+
+      Diese Theme-Instanz hat footer.liquid beim Erstimport uebersprungen. Der
+      inkrementelle Sync holt uebersprungene Dateien nicht nach, auch nicht
+      unter neuem Namen: site-footer.liquid liegt im Branch, kommt im Shop aber
+      nicht an ("is not a valid section type"), waehrend Aenderungen an dieser
+      Datei hier sofort wirksam werden.
+
+      Darum steht die Auszeichnung hier inline. Ihre Inhalte kommen aus den
+      Theme-Einstellungen (Gruppe "Fusszeile") und den Menues footer/service,
+      weil Sektionseinstellungen ohne Sektion nicht verfuegbar sind. Sobald das
+      Theme in Shopify neu angelegt ist, ersetzt {% raw %}{% section 'site-footer' %}{% endraw %}
+      diesen Block.
     {% endcomment %}
-    {% section 'site-footer' %}
+    {%- assign footer_menu = linklists.footer -%}
+    {%- assign service_menu = linklists.service -%}
+    <footer class="site-footer" role="contentinfo">
+      <div class="page-width">
+        <div class="site-footer__top">
+          <div>
+            <div class="site-footer__brand">
+              {%- if settings.logo_inverted != blank -%}
+                <img class="site-footer__logo" src="{{ settings.logo_inverted | image_url: width: 440 }}" alt="{{ shop.name | escape }}" width="220" height="60" loading="lazy">
+              {%- elsif settings.logo != blank -%}
+                <img class="site-footer__logo" src="{{ settings.logo | image_url: width: 440 }}" alt="{{ shop.name | escape }}" width="220" height="60" loading="lazy">
+              {%- else -%}
+                <span class="site-footer__brand-name">{{ settings.organization_name | default: shop.name }}</span>
+              {%- endif -%}
+            </div>
+            {%- if settings.footer_about != blank -%}
+              <p class="site-footer__about">{{ settings.footer_about }}</p>
+            {%- endif -%}
+          </div>
+
+          {%- if footer_menu != blank -%}
+            <div>
+              <h3 class="site-footer__heading">{{ footer_menu.title }}</h3>
+              <ul class="site-footer__links">
+                {%- for link in footer_menu.links -%}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- endif -%}
+
+          {%- if service_menu != blank -%}
+            <div>
+              <h3 class="site-footer__heading">{{ service_menu.title }}</h3>
+              <ul class="site-footer__links">
+                {%- for link in service_menu.links -%}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- endif -%}
+
+          <div>
+            <h3 class="site-footer__heading">{{ settings.footer_contact_title | default: 'Kontakt' }}</h3>
+            <div class="site-footer__links">
+              {%- if settings.support_phone != blank -%}
+                <a href="tel:{{ settings.support_phone | remove: ' ' | remove: '-' }}">{{ settings.support_phone }}</a>
+              {%- endif -%}
+              {%- if settings.support_hours != blank -%}
+                <span>{{ settings.support_hours }}</span>
+              {%- endif -%}
+              {%- if settings.support_email != blank -%}
+                <a href="mailto:{{ settings.support_email }}">{{ settings.support_email }}</a>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+
+        <div class="site-footer__bottom">
+          <span>&copy; {{ 'now' | date: '%Y' }} {{ settings.organization_name | default: shop.name }}. {{ settings.footer_tax_note | default: 'Alle Preise inkl. MwSt. zzgl. Versand.' }}</span>
+          <div class="site-footer__bottom-actions">
+            {%- if settings.footer_cancel_enabled -%}
+              {%- assign footer_cancel_url = settings.footer_cancel_link | default: '/pages/vertrag-kuendigen' -%}
+              <a class="site-footer__cancel-btn" href="{{ footer_cancel_url }}">{{ settings.footer_cancel_label | default: 'Vertrag kündigen' }}</a>
+            {%- endif -%}
+            {%- if settings.footer_payment_icons -%}
+              <span class="site-footer__payments">{{ shop.enabled_payment_types | payment_type_svg_tag }}</span>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </footer>
 
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
 

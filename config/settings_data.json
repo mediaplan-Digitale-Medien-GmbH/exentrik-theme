@@ -9,7 +9,9 @@
  */
 {
   "current": {
+    "logo": "shopify://shop_images/Logo_Quer_freigestellt_weiss.png",
     "logo_width": 220,
+    "favicon": "shopify://shop_images/logo_freigestellt_ohne_schriftzug.png",
     "color_background": "#ffffff",
     "color_surface": "#f4f4f4",
     "color_text": "#111111",
@@ -22,31 +24,40 @@
     "color_dark_text": "#ffffff",
     "color_ember": "#c52f3e",
     "color_flame": "#ffd100",
-    "heading_font": "barlow",
+    "heading_font": "poppins",
     "body_font": "outfit",
     "font_size_base": 16,
     "heading_scale": 125,
     "heading_transform": "uppercase",
     "page_width": 1320,
-    "spacing_sections": 56,
+    "spacing_sections": 40,
     "corner_style": "square",
     "corner_radius": 8,
-    "card_image_ratio": "square",
+    "card_image_ratio": "portrait",
     "card_show_vendor": false,
     "card_show_second_image": true,
     "card_show_quick_add": true,
     "product_sticky_info": true,
     "product_enable_zoom": true,
+    "variant_swatch_size": "medium",
+    "variant_swatch_use_variant_image": false,
     "social_facebook": "",
     "social_instagram": "",
     "social_youtube": "",
     "social_tiktok": "",
-    "organization_name": "Exentrik",
+    "organization_name": "EXENTRIK",
     "support_phone": "",
     "support_hours": "",
-    "support_email": "",
+    "support_email": "info@exentrik.com",
     "animations_enabled": true,
-    "content_for_index": []
+    "content_for_index": [],
+    "blocks": {
+      "14060646107696862457": {
+        "type": "shopify://apps/judge-me-reviews/blocks/judgeme_core/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+        "disabled": false,
+        "settings": {}
+      }
+    }
   },
   "presets": {
     "Exentrik": {
