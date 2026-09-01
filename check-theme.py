@@ -16,7 +16,8 @@ OPENERS = {'if', 'unless', 'for', 'case', 'form', 'paginate', 'comment',
 MAX_NAME = 25
 
 # Diese Sektionstypen bringt Shopify selbst mit, sie brauchen keine Datei.
-BUILT_IN_SECTIONS = {'apps'}
+# '_blocks' ist Shopifys Pseudo-Sektion fuer Theme-Blocks aus blocks/.
+BUILT_IN_SECTIONS = {'apps', '_blocks'}
 
 
 def strip_header(raw):
