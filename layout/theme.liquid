@@ -179,23 +179,30 @@
     </main>
 
     {% comment %}
-      UEBERGANGSLOESUNG. Der Footer gehoert in sections/site-footer.liquid und
-      wird dort weiter gepflegt.
+      Der Footer steht in diesem Theme bewusst inline und NICHT als Sektion.
+      Nicht wieder auf einen Sektionsaufruf umbauen.
 
-      Diese Theme-Instanz hat footer.liquid beim Erstimport uebersprungen. Der
-      inkrementelle Sync holt uebersprungene Dateien nicht nach, auch nicht
-      unter neuem Namen: site-footer.liquid liegt im Branch, kommt im Shop aber
-      nicht an ("is not a valid section type"), waehrend Aenderungen an dieser
-      Datei hier sofort wirksam werden.
+      Grund: sections/footer.liquid lag beim Erstimport (18.08.) als roher
+      Diff-Patch im Repo und wurde von Shopify verworfen. Seither nimmt dieser
+      Shop keine Footer-Sektion mehr an. Erfolglos versucht wurden: die Datei
+      reparieren, footer-group.json, ein frischer Dateiname
+      (site-footer.liquid), GitHub trennen und neu verbinden, und ein komplett
+      neu angelegtes Theme aus dem Branch. Jedes Mal
+      "is not a valid section type", waehrend Aenderungen an dieser Datei hier
+      sofort ankommen.
 
-      Darum steht die Auszeichnung hier inline. Ihre Inhalte kommen aus den
-      Theme-Einstellungen (Gruppe "Fusszeile") und den Menues footer/service,
-      weil Sektionseinstellungen ohne Sektion nicht verfuegbar sind. Sobald das
-      Theme in Shopify neu angelegt ist, ersetzt der Aufruf der Sektion
-      site-footer diesen Block.
+      Inhalte kommen daher komplett aus den Theme-Einstellungen, Gruppe
+      "Fusszeile": Texte, die beiden Linkspalten als Menue-Auswahl und die
+      Zahlungs-Symbole. Fuer den Haendler ist das gleichwertig bedienbar, nur
+      eben unter Theme-Einstellungen statt am Abschnitt.
     {% endcomment %}
-    {%- assign footer_menu = linklists.footer -%}
-    {%- assign service_menu = linklists.service -%}
+    {%- comment -%}
+      Solange in den Theme-Einstellungen nichts gewaehlt ist, greifen die
+      bisherigen Menues footer und service, damit die Fusszeile unveraendert
+      aussieht.
+    {%- endcomment -%}
+    {%- assign footer_menu = settings.footer_menu_1 | default: linklists.footer -%}
+    {%- assign service_menu = settings.footer_menu_2 | default: linklists.service -%}
     <footer class="site-footer" role="contentinfo">
       <div class="page-width">
         <div class="site-footer__top">
@@ -216,7 +223,7 @@
 
           {%- if footer_menu != blank -%}
             <div>
-              <h3 class="site-footer__heading">{{ footer_menu.title }}</h3>
+              <h3 class="site-footer__heading">{{ settings.footer_menu_1_title | default: footer_menu.title }}</h3>
               <ul class="site-footer__links">
                 {%- for link in footer_menu.links -%}
                   <li><a href="{{ link.url }}">{{ link.title }}</a></li>
@@ -227,7 +234,7 @@
 
           {%- if service_menu != blank -%}
             <div>
-              <h3 class="site-footer__heading">{{ service_menu.title }}</h3>
+              <h3 class="site-footer__heading">{{ settings.footer_menu_2_title | default: service_menu.title }}</h3>
               <ul class="site-footer__links">
                 {%- for link in service_menu.links -%}
                   <li><a href="{{ link.url }}">{{ link.title }}</a></li>
@@ -260,7 +267,18 @@
               <a class="site-footer__cancel-btn" href="{{ footer_cancel_url }}">{{ settings.footer_cancel_label | default: 'Vertrag kündigen' }}</a>
             {%- endif -%}
             {%- if settings.footer_payment_icons -%}
-              <span class="site-footer__payments">{{ shop.enabled_payment_types | payment_type_svg_tag }}</span>
+              {%- assign footer_pay_custom = settings.footer_payment_custom | strip -%}
+              <span class="site-footer__payments">
+                {%- if footer_pay_custom != blank -%}
+                  {%- assign footer_pay_list = footer_pay_custom | split: ',' -%}
+                  {%- for pay_type in footer_pay_list -%}{{ pay_type | strip | downcase | payment_type_svg_tag }}{%- endfor -%}
+                {%- else -%}
+                  {{ shop.enabled_payment_types | payment_type_svg_tag }}
+                {%- endif -%}
+              </span>
+            {%- endif -%}
+            {%- if settings.footer_payment_note != blank -%}
+              <span>{{ settings.footer_payment_note }}</span>
             {%- endif -%}
           </div>
         </div>

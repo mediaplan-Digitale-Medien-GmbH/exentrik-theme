@@ -502,6 +502,7 @@
 
     renderMetafields(variant) {
       const showEmpty = this.showsEmptyMetafields();
+      const showEmptyAuto = this.showsEmptyMetafields(true);
       const values = (variant && variant.metafields) || {};
       $$('[data-vmf]', this.root).forEach((row) => {
         const key = row.getAttribute('data-vmf');
@@ -509,15 +510,20 @@
         const has = !(val === undefined || val === null || val === '');
         const valEl = $('[data-vmf-value]', row);
         if (valEl) valEl.innerHTML = has ? val : 'ohne Angabe';
-        row.hidden = !has && !showEmpty;
+        const allowEmpty = key.startsWith('auto-') ? showEmptyAuto : showEmpty;
+        row.hidden = !has && !allowEmpty;
       });
       this.toggleDetails();
     }
 
-    showsEmptyMetafields() {
-      // Im Theme-Editor nie ausblenden, sonst verschwindet ein neu angelegter Block sofort wieder.
-      if (window.Shopify && window.Shopify.designMode) return true;
+    showsEmptyMetafields(auto) {
+      // Manuell angelegte Bloecke im Theme-Editor nie ausblenden, sonst verschwindet
+      // ein neuer Block sofort wieder. Automatisch gefundene Felder sind nicht
+      // konfigurierbar und bleiben ohne Wert auch im Editor aus, darum haengen sie
+      // an einem eigenen Attribut.
       const container = $('[data-product-details]', this.root);
+      if (auto) return !!(container && container.hasAttribute('data-show-empty-auto'));
+      if (window.Shopify && window.Shopify.designMode) return true;
       return !!(container && container.hasAttribute('data-show-empty'));
     }
 

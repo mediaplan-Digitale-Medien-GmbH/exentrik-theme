@@ -148,13 +148,19 @@
       {%- comment -%}Im Editor immer sichtbar, sonst lässt sich ein neu angelegtes Feld nicht befüllen. Im Shop nur auf Wunsch.{%- endcomment -%}
       {%- assign pd_show_empty = false -%}
       {%- if request.design_mode or section.settings.metafields_show_empty -%}{%- assign pd_show_empty = true -%}{%- endif -%}
+      {%- comment -%}
+        Automatisch gefundene Felder haben keine Einstellungen, die man im
+        Editor sehen muesste. Ohne Wert bleiben sie darum immer ausgeblendet,
+        auch im Editor. Nur manuell angelegte Bloecke brauchen die Ausnahme.
+      {%- endcomment -%}
+      {%- assign pd_show_empty_auto = section.settings.metafields_show_empty -%}
       {%- assign has_details = false -%}
       {%- for block in section.blocks -%}
         {%- if block.type == 'variant_metafield' or block.type == 'product_metafield' -%}{%- assign has_details = true -%}{%- endif -%}
       {%- endfor -%}
       {%- if pmf_auto or vmf_auto -%}{%- assign has_details = true -%}{%- endif -%}
       {%- if has_details -%}
-        <div class="product-details" data-product-details{% if pd_show_empty %} data-show-empty{% endif %}>
+        <div class="product-details" data-product-details{% if pd_show_empty %} data-show-empty{% endif %}{% if pd_show_empty_auto %} data-show-empty-auto{% endif %}>
           {%- if section.settings.product_metafields_title != blank -%}
             <div class="product-details__title">{{ section.settings.product_metafields_title }}</div>
           {%- endif -%}
@@ -194,7 +200,7 @@
                 {%- assign vaf_empty = false -%}
                 {%- if vafval == blank or vafval == 'null' -%}{%- assign vaf_empty = true -%}{%- endif -%}
                 {%- assign vaf_hide = false -%}
-                {%- if vaf_empty and pd_show_empty == false -%}{%- assign vaf_hide = true -%}{%- endif -%}
+                {%- if vaf_empty and pd_show_empty_auto == false -%}{%- assign vaf_hide = true -%}{%- endif -%}
                 <div class="product-details__row" data-vmf="auto-{{ vk }}"{% if vaf_hide %} hidden{% endif %}>
                   <div class="product-details__key">{{ vk | replace: '_', ' ' | capitalize }}{% if request.design_mode %}<span class="product-details__ref">{{ pmf_ns }}.{{ vk }}</span>{% endif %}</div>
                   <div class="product-details__value" data-vmf-value>{% if vaf_empty %}ohne Angabe{% else %}{{ vafval }}{% endif %}</div>
@@ -396,7 +402,7 @@
     { "type": "checkbox", "id": "product_metafields_auto", "label": "Alle Produktmetafelder automatisch anzeigen", "default": false },
     { "type": "checkbox", "id": "variant_metafields_auto", "label": "Alle Variantenmetafelder automatisch anzeigen", "default": false, "info": "Zeigt jedes gepflegte Metafeld der gewählten Variante und wechselt den Wert beim Variantenwechsel mit. Fehlt der Wert an der Variante, greift der Wert am Produkt. Felder mit eigenem Block erscheinen nicht doppelt." },
     { "type": "text", "id": "product_metafields_namespace", "label": "Namespace für automatische Anzeige", "default": "custom", "info": "Gilt für beide Automatiken, z. B. custom" },
-    { "type": "checkbox", "id": "metafields_show_empty", "label": "Leere Felder im Shop zeigen", "default": false, "info": "Im Theme-Editor sind neu angelegte Felder immer sichtbar, damit sie sich befüllen lassen. Diese Option zeigt Felder ohne Wert zusätzlich im Shop an." }
+    { "type": "checkbox", "id": "metafields_show_empty", "label": "Leere Felder im Shop zeigen", "default": false, "info": "Felder ohne Wert bleiben ausgeblendet, auch bei automatischer Anzeige aller Produkt- oder Variantenfelder. Diese Option zeigt sie im Shop trotzdem an. Manuell angelegte Blöcke bleiben im Theme-Editor immer sichtbar, damit sie sich befüllen lassen." }
   ],
   "blocks": [
     { "type": "@app" },
