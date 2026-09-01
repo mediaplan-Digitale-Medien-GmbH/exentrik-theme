@@ -8,6 +8,7 @@ Ohne Argument wird das Verzeichnis geprueft, in dem der Aufruf passiert.
 """
 import glob
 import json
+import os
 import re
 import sys
 
@@ -52,8 +53,31 @@ def check_theme_blocks(theme, blocks, f, problems):
         check_theme_blocks(theme, block.get('blocks'), f, problems)
 
 
+def check_patch_artifacts(theme, problems):
+    """Kein Diff-Muell in Theme-Dateien.
+
+    Exentrik hat sections/footer.liquid als rohen Diff-Patch importiert
+    (Zeilen mit +-Praefix). Shopify hat die Datei verworfen und holt
+    uebersprungene Dateien nie nach: der Footer fehlte wochenlang und war
+    auch unter neuem Dateinamen nicht mehr zu retten."""
+    markers = re.compile(r'^(?:\+\+\+ b/|--- a/|@@ .*@@|<<<<<<< |>>>>>>> |\+\{\s*$)', re.M)
+    for pattern in ('/sections/*', '/snippets/*', '/blocks/*', '/layout/*',
+                    '/templates/**/*', '/config/*', '/assets/*.css',
+                    '/assets/*.js', '/locales/*'):
+        for f in glob.glob(theme + pattern, recursive=True):
+            if not os.path.isfile(f):
+                continue
+            try:
+                src = open(f, encoding='utf-8').read()
+            except (UnicodeDecodeError, OSError):
+                continue
+            if markers.search(src):
+                problems.append(f'PATCH-RESTE {f}')
+
+
 def check(theme):
     problems = []
+    check_patch_artifacts(theme, problems)
 
     for f in (glob.glob(theme + '/templates/**/*.json', recursive=True)
               + glob.glob(theme + '/config/*.json')
