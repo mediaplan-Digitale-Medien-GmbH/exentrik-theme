@@ -282,27 +282,25 @@
             </p>
         {%- endcase -%}
       {%- endfor -%}
-    </div>
-  </div>
 
-  {%- comment -%} -------------------- Description / accordions -------------------- {%- endcomment -%}
-  <div class="section" style="max-width:900px;">
-    <div class="product-accordion">
-      {%- if product.description != blank -%}
-        <details class="product-accordion__item" open>
-          <summary class="product-accordion__summary">{{ 'products.product.description' | t }} {% render 'icon', name: 'chevron-down' %}</summary>
-          <div class="product-accordion__content rte">{{ product.description }}</div>
-        </details>
-      {%- endif -%}
-
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'collapsible' -%}
-          <details class="product-accordion__item" {{ block.shopify_attributes }}>
-            <summary class="product-accordion__summary">{{ block.settings.title }} {% render 'icon', name: 'chevron-down' %}</summary>
-            <div class="product-accordion__content rte">{{ block.settings.content }}</div>
+      {%- comment -%} -------------------- Description / accordions -------------------- {%- endcomment -%}
+      <div class="product-accordion">
+        {%- if product.description != blank -%}
+          <details class="product-accordion__item" open>
+            <summary class="product-accordion__summary">{{ 'products.product.description' | t }} {% render 'icon', name: 'chevron-down' %}</summary>
+            <div class="product-accordion__content rte">{{ product.description }}</div>
           </details>
         {%- endif -%}
-      {%- endfor -%}
+
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'collapsible' -%}
+            <details class="product-accordion__item" {{ block.shopify_attributes }}>
+              <summary class="product-accordion__summary">{{ block.settings.title }} {% render 'icon', name: 'chevron-down' %}</summary>
+              <div class="product-accordion__content rte">{{ block.settings.content }}</div>
+            </details>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
     </div>
   </div>
 
