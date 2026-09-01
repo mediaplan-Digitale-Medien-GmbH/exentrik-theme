@@ -1884,7 +1884,9 @@ body.template-index .main-content {
   .collection-facts--list .collection-facts__item { grid-template-columns: 1fr; gap: 0.2rem; }
 }
 
-.product-accordion { border-top: 1px solid var(--color-border); }
+/* Steht als letzter Block in der rechten Produktspalte, darum ein eigener
+   Abstand nach oben statt der frueheren Sektionspolsterung. */
+.product-accordion { border-top: 1px solid var(--color-border); margin-top: 1.5rem; }
 .product-accordion__item { border-bottom: 1px solid var(--color-border); }
 /* Kein Abschlussstrich am letzten Eintrag, sonst haengt direkt ueber der
    Vorteile-Leiste eine zweite Linie in anderer Breite. */
