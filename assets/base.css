@@ -2188,6 +2188,19 @@ body:not(.template-index) .main-content {
   color: #fff;
 }
 
+/* Der Warenkorb-Button hat eine eigene Farbe, unabhaengig von der Akzentfarbe.
+   Steht nach .btn--primary, weil beide Klassen gleich stark sind und die
+   spaetere Regel gewinnt. */
+.btn--atc {
+  background: var(--color-atc);
+  color: var(--color-atc-text);
+}
+.btn--atc:hover {
+  background: var(--color-atc);
+  color: var(--color-atc-text);
+  filter: brightness(0.88);
+}
+
 /* ==========================================================================
    Vorteile-Leiste
    ========================================================================== */
