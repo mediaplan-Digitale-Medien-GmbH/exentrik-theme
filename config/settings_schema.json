@@ -508,5 +508,55 @@
         "default": true
       }
     ]
+  },
+  {
+    "name": "Fußzeile",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Die Fußzeile wird in diesem Theme nicht über eine Sektion gepflegt, sondern hier. Die Spalten kommen aus den Navigationen \"footer\" und \"service\", die Kontaktdaten aus \"SEO & Vertrauen\"."
+      },
+      {
+        "type": "textarea",
+        "id": "footer_about",
+        "label": "Kurztext unter dem Logo"
+      },
+      {
+        "type": "text",
+        "id": "footer_contact_title",
+        "label": "Überschrift der Kontaktspalte",
+        "default": "Kontakt"
+      },
+      {
+        "type": "text",
+        "id": "footer_tax_note",
+        "label": "Steuer- und Versandhinweis",
+        "default": "Alle Preise inkl. MwSt. zzgl. Versand."
+      },
+      {
+        "type": "checkbox",
+        "id": "footer_cancel_enabled",
+        "label": "Kündigungs-Button anzeigen",
+        "info": "Für Abos gesetzlich vorgeschrieben.",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "footer_cancel_label",
+        "label": "Text des Kündigungs-Buttons",
+        "default": "Vertrag kündigen"
+      },
+      {
+        "type": "url",
+        "id": "footer_cancel_link",
+        "label": "Ziel des Kündigungs-Buttons"
+      },
+      {
+        "type": "checkbox",
+        "id": "footer_payment_icons",
+        "label": "Zahlungsarten-Symbole anzeigen",
+        "default": true
+      }
+    ]
   }
 ]
