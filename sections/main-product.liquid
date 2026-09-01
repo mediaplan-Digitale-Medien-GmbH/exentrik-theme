@@ -107,7 +107,7 @@
         Ist keines gefuellt, greift der Anbieter aus dem Produkt.
       {%- endcomment -%}
       {%- assign vendor_text = '' -%}
-      {%- assign vendor_ns = section.settings.product_metafields_namespace | default: 'custom' -%}
+      {%- assign vendor_ns = section.settings.vendor_metafield_namespace | default: 'custom' -%}
       {%- assign vendor_keys = section.settings.vendor_metafield_keys | default: 'hersteller,marke' | split: ',' -%}
       {%- for vendor_raw_key in vendor_keys -%}
         {%- if vendor_text == blank -%}
@@ -192,122 +192,6 @@
         </div>
       {% endform %}
 
-      {%- comment -%} -------------------- Produktdetails (Metafelder) -------------------- {%- endcomment -%}
-      {%- assign pmf_auto = section.settings.product_metafields_auto -%}
-      {%- assign vmf_auto = section.settings.variant_metafields_auto -%}
-      {%- assign pmf_ns = section.settings.product_metafields_namespace | default: 'custom' -%}
-      {%- comment -%}
-        Schluesselliste fuer die automatische Variantenanzeige. Die Vereinigung ueber alle
-        Varianten sorgt dafuer, dass auch ein Feld eine Zeile bekommt, das nur an einer
-        einzelnen Variante gepflegt ist. Felder mit eigenem Block bleiben aussen vor, sonst
-        stuenden sie doppelt da. Die Pipes ringsum machen den contains-Test eindeutig.
-      {%- endcomment -%}
-      {%- assign vmf_manual = '|' -%}
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'variant_metafield' and block.settings.key != blank and block.settings.namespace == pmf_ns -%}
-          {%- assign vmf_manual = vmf_manual | append: block.settings.key | append: '|' -%}
-        {%- endif -%}
-      {%- endfor -%}
-      {%- assign vmf_keys = '|' -%}
-      {%- if vmf_auto -%}
-        {%- for v in product.variants -%}
-          {%- for field in v.metafields[pmf_ns] -%}
-            {%- capture vmf_probe -%}|{{ field.first }}|{%- endcapture -%}
-            {%- unless vmf_keys contains vmf_probe or vmf_manual contains vmf_probe -%}
-              {%- assign vmf_keys = vmf_keys | append: field.first | append: '|' -%}
-            {%- endunless -%}
-          {%- endfor -%}
-        {%- endfor -%}
-      {%- endif -%}
-      {%- assign vmf_list = vmf_keys | split: '|' -%}
-      {%- comment -%}
-        Metafelder ohne Wert werden immer ausgeblendet, im Shop wie im
-        Theme-Editor. Es gibt dafuer bewusst keine Einstellung mehr.
-      {%- endcomment -%}
-      {%- assign has_details = false -%}
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'variant_metafield' or block.type == 'product_metafield' -%}{%- assign has_details = true -%}{%- endif -%}
-      {%- endfor -%}
-      {%- if pmf_auto or vmf_auto -%}{%- assign has_details = true -%}{%- endif -%}
-      {%- if has_details -%}
-        <div class="product-details" data-product-details>
-          {%- if section.settings.product_metafields_title != blank -%}
-            <div class="product-details__title">{{ section.settings.product_metafields_title }}</div>
-          {%- endif -%}
-          {%- for block in section.blocks -%}
-            {%- if block.type == 'variant_metafield' -%}
-              {%- assign mf = current_variant.metafields[block.settings.namespace][block.settings.key] -%}
-              {%- capture mfval -%}{{ mf }}{%- endcapture -%}{%- assign mfval = mfval | strip -%}
-              {%- assign mf_empty = false -%}
-              {%- comment -%}Ohne Wert an der Variante zaehlt der Wert am Produkt.{%- endcomment -%}
-              {%- if mfval == blank or mfval == 'null' -%}{%- assign mf = product.metafields[block.settings.namespace][block.settings.key] -%}{%- capture mfval -%}{{ mf }}{%- endcapture -%}{%- assign mfval = mfval | strip -%}{%- endif -%}
-              {%- if mfval == blank or mfval == 'null' -%}{%- assign mf_empty = true -%}{%- endif -%}
-              {%- assign mf_hide = false -%}
-              {%- if mf_empty -%}{%- assign mf_hide = true -%}{%- assign mfval = '' -%}{%- endif -%}
-              <div class="product-details__row" data-vmf="{{ block.id }}"{% if mf_hide %} hidden{% endif %} {{ block.shopify_attributes }}>
-                <div class="product-details__key">{{ block.settings.label | strip | remove_last: ':' }}:{% if request.design_mode %}<span class="product-details__ref">{{ block.settings.namespace }}.{{ block.settings.key }}</span>{% endif %}</div>
-                <div class="product-details__value" data-vmf-value>{{ mfval }}</div>
-              </div>
-            {%- elsif block.type == 'product_metafield' -%}
-              {%- assign pmf = product.metafields[block.settings.namespace][block.settings.key] -%}
-              {%- capture pmfval -%}{{ pmf }}{%- endcapture -%}{%- assign pmfval = pmfval | strip -%}
-              {%- assign pmf_empty = false -%}
-              {%- if pmfval == blank or pmfval == 'null' -%}{%- assign pmf_empty = true -%}{%- endif -%}
-              {%- if pmf_empty == false -%}
-                <div class="product-details__row" {{ block.shopify_attributes }}>
-                  <div class="product-details__key">{{ block.settings.label | strip | remove_last: ':' }}:{% if request.design_mode %}<span class="product-details__ref">{{ block.settings.namespace }}.{{ block.settings.key }}</span>{% endif %}</div>
-                  <div class="product-details__value">{{ pmfval }}</div>
-                </div>
-              {%- endif -%}
-            {%- endif -%}
-          {%- endfor -%}
-          {%- if vmf_auto -%}
-            {%- for vk in vmf_list -%}
-              {%- if vk != blank -%}
-                {%- assign vaf = current_variant.metafields[pmf_ns][vk] -%}
-                {%- capture vafval -%}{{ vaf }}{%- endcapture -%}{%- assign vafval = vafval | strip -%}
-                {%- if vafval == blank or vafval == 'null' -%}{%- assign vaf = product.metafields[pmf_ns][vk] -%}{%- capture vafval -%}{{ vaf }}{%- endcapture -%}{%- assign vafval = vafval | strip -%}{%- endif -%}
-                {%- assign vaf_empty = false -%}
-                {%- if vafval == blank or vafval == 'null' -%}{%- assign vaf_empty = true -%}{%- endif -%}
-                {%- assign vaf_hide = false -%}
-                {%- if vaf_empty -%}{%- assign vaf_hide = true -%}{%- assign vafval = '' -%}{%- endif -%}
-                <div class="product-details__row" data-vmf="auto-{{ vk }}"{% if vaf_hide %} hidden{% endif %}>
-                  <div class="product-details__key">{{ vk | replace: '_', ' ' | capitalize }}:{% if request.design_mode %}<span class="product-details__ref">{{ pmf_ns }}.{{ vk }}</span>{% endif %}</div>
-                  <div class="product-details__value" data-vmf-value>{{ vafval }}</div>
-                </div>
-              {%- endif -%}
-            {%- endfor -%}
-          {%- endif -%}
-          {%- if pmf_auto -%}
-            {%- comment -%} Compliance-Felder (GPSR, DSGVO, EU-Verantwortlicher) immer ans Ende {%- endcomment -%}
-            {%- for pass in (1..2) -%}
-              {%- for field in product.metafields[pmf_ns] -%}
-                {%- assign av = field.last -%}{%- capture av -%}{{ av }}{%- endcapture -%}{%- assign av = av | strip -%}
-                {%- if av != blank and av != 'null' -%}
-                  {%- assign fk = field.first | downcase -%}
-                  {%- assign is_compliance = false -%}
-                  {%- if fk contains 'gpsr' or fk contains 'dsgvo' -%}{%- assign is_compliance = true -%}{%- endif -%}
-                  {%- if fk contains 'antwort' or fk contains 'responsible' -%}{%- assign is_compliance = true -%}{%- endif -%}
-                  {%- assign show_now = false -%}
-                  {%- if pass == 1 and is_compliance == false -%}{%- assign show_now = true -%}{%- endif -%}
-                  {%- if pass == 2 and is_compliance -%}{%- assign show_now = true -%}{%- endif -%}
-                  {%- comment -%}Steht das Feld schon als Variantenzeile, nicht noch einmal ausgeben.{%- endcomment -%}
-                  {%- capture pmf_probe -%}|{{ field.first }}|{%- endcapture -%}
-                  {%- if vmf_keys contains pmf_probe or vmf_manual contains pmf_probe -%}{%- assign show_now = false -%}{%- endif -%}
-                  {%- if show_now -%}
-                    <div class="product-details__row">
-                      <div class="product-details__key">{{ field.first | replace: '_', ' ' | capitalize }}:</div>
-                      <div class="product-details__value">{{ av }}</div>
-                    </div>
-                  {%- endif -%}
-                {%- endif -%}
-              {%- endfor -%}
-            {%- endfor -%}
-          {%- endif -%}
-        </div>
-      {%- endif -%}
-
-      {%- comment -%} -------------------- Additional blocks -------------------- {%- endcomment -%}
       {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when 'trust' -%}
@@ -351,28 +235,6 @@
           "unit_price": {{ variant_unit_price | strip | json }},
           "featured_media": {% if variant.featured_media %}{ "id": {{ variant.featured_media.id }}, "src": {{ variant.featured_media | image_url: width: 1200 | json }} }{% else %}null{% endif %},
           "metafields": {
-            {%- assign first_mf = true -%}
-            {%- for block in section.blocks -%}
-              {%- if block.type == 'variant_metafield' -%}
-                {%- unless first_mf %},{% endunless -%}{%- assign first_mf = false -%}
-                {%- assign mf = variant.metafields[block.settings.namespace][block.settings.key] -%}
-                {%- capture mfval -%}{{ mf }}{%- endcapture -%}{%- assign mfval = mfval | strip -%}{%- if mfval == blank or mfval == 'null' -%}{%- assign mf = product.metafields[block.settings.namespace][block.settings.key] -%}{%- capture mfval -%}{{ mf }}{%- endcapture -%}{%- endif -%}
-                {{ block.id | json }}: {{ mfval | strip | json }}
-              {%- endif -%}
-            {%- endfor -%}
-            {%- if vmf_auto -%}
-              {%- for vk in vmf_list -%}
-                {%- if vk != blank -%}
-                  {%- unless first_mf %},{% endunless -%}{%- assign first_mf = false -%}
-                  {%- assign vaf = variant.metafields[pmf_ns][vk] -%}
-                  {%- capture vafval -%}{{ vaf }}{%- endcapture -%}{%- assign vafval = vafval | strip -%}
-                  {%- if vafval == blank or vafval == 'null' -%}{%- assign vaf = product.metafields[pmf_ns][vk] -%}{%- capture vafval -%}{{ vaf }}{%- endcapture -%}{%- assign vafval = vafval | strip -%}{%- endif -%}
-                  {%- if vafval == 'null' -%}{%- assign vafval = '' -%}{%- endif -%}
-                  {%- capture vaf_key -%}auto-{{ vk }}{%- endcapture -%}
-                  {{ vaf_key | json }}: {{ vafval | json }}
-                {%- endif -%}
-              {%- endfor -%}
-            {%- endif -%}
           }
         }{% unless forloop.last %},{% endunless %}
       {%- endfor -%}
@@ -405,21 +267,65 @@
   "name": "Produkt",
   "tag": "section",
   "settings": [
-    { "type": "checkbox", "id": "show_vendor", "label": "Marke anzeigen", "default": true },
-    { "type": "text", "id": "vendor_metafield_keys", "label": "Metafelder für die Markenzeile", "default": "hersteller,marke", "info": "Kommagetrennt, in dieser Reihenfolge geprüft. Angezeigt wird das erste Feld mit Inhalt, gesucht zuerst an der Variante, dann am Produkt. Ist keines gefüllt, greift der Anbieter des Produkts. Namespace wie unten bei den Metafeldern." },
-    { "type": "checkbox", "id": "show_dynamic_checkout", "label": "Express-Checkout Buttons anzeigen", "default": true },
-    { "type": "header", "content": "Produktbilder" },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Marke anzeigen",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "vendor_metafield_keys",
+      "label": "Metafelder für die Markenzeile",
+      "default": "hersteller,marke",
+      "info": "Kommagetrennt, in dieser Reihenfolge geprüft. Angezeigt wird das erste Feld mit Inhalt, gesucht zuerst an der Variante, dann am Produkt. Ist keines gefüllt, greift der Anbieter des Produkts. Namespace wie unten bei den Metafeldern."
+    },
+    {
+      "type": "text",
+      "id": "vendor_metafield_namespace",
+      "label": "Namespace der Markenzeile",
+      "default": "custom",
+      "info": "Namespace der oben genannten Metafelder, in der Regel custom."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dynamic_checkout",
+      "label": "Express-Checkout Buttons anzeigen",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Produktbilder"
+    },
     {
       "type": "select",
       "id": "media_ratio",
       "label": "Bildformat",
       "options": [
-        { "value": "natural", "label": "Wie hochgeladen" },
-        { "value": "square", "label": "Quadratisch 1:1" },
-        { "value": "portrait_45", "label": "Hochformat 4:5" },
-        { "value": "portrait_34", "label": "Hochformat 3:4" },
-        { "value": "landscape_43", "label": "Querformat 4:3" },
-        { "value": "landscape_169", "label": "Querformat 16:9" }
+        {
+          "value": "natural",
+          "label": "Wie hochgeladen"
+        },
+        {
+          "value": "square",
+          "label": "Quadratisch 1:1"
+        },
+        {
+          "value": "portrait_45",
+          "label": "Hochformat 4:5"
+        },
+        {
+          "value": "portrait_34",
+          "label": "Hochformat 3:4"
+        },
+        {
+          "value": "landscape_43",
+          "label": "Querformat 4:3"
+        },
+        {
+          "value": "landscape_169",
+          "label": "Querformat 16:9"
+        }
       ],
       "default": "square"
     },
@@ -428,8 +334,14 @@
       "id": "media_fit",
       "label": "Bild im Format",
       "options": [
-        { "value": "cover", "label": "Format füllen, Ränder werden beschnitten" },
-        { "value": "contain", "label": "Bild vollständig zeigen" }
+        {
+          "value": "cover",
+          "label": "Format füllen, Ränder werden beschnitten"
+        },
+        {
+          "value": "contain",
+          "label": "Bild vollständig zeigen"
+        }
       ],
       "default": "cover",
       "info": "Bei Freistellern mit viel Rand ist „vollständig zeigen\" die sichere Wahl."
@@ -440,8 +352,14 @@
       "label": "Produktbeschreibung",
       "default": "right",
       "options": [
-        { "value": "below", "label": "Unter dem Produkt, volle Breite" },
-        { "value": "right", "label": "Rechte Spalte unter den Kaufoptionen" }
+        {
+          "value": "below",
+          "label": "Unter dem Produkt, volle Breite"
+        },
+        {
+          "value": "right",
+          "label": "Rechte Spalte unter den Kaufoptionen"
+        }
       ]
     },
     {
@@ -451,61 +369,107 @@
       "default": "left",
       "info": "Links steht eine senkrechte Leiste zum Scrollen. Auf dem Handy stehen sie immer unter dem Bild.",
       "options": [
-        { "value": "below", "label": "Unter dem großen Bild" },
-        { "value": "left", "label": "Links neben dem Bild" }
+        {
+          "value": "below",
+          "label": "Unter dem großen Bild"
+        },
+        {
+          "value": "left",
+          "label": "Links neben dem Bild"
+        }
       ]
     },
-    { "type": "range", "id": "thumb_width", "label": "Breite der Leiste links", "min": 60, "max": 140, "step": 4, "unit": "px", "default": 88 },
-    { "type": "range", "id": "thumbs_per_row", "label": "Vorschaubilder pro Reihe", "min": 3, "max": 6, "step": 1, "default": 5, "info": "Gilt nur, wenn die Vorschaubilder unter dem Bild stehen." },
-    { "type": "header", "content": "Variantenauswahl" },
-    { "type": "paragraph", "content": "Alle Optionen des Produkts werden automatisch angezeigt, egal ob Gewicht, Farbe, Größe oder Jahrgang. Die Reihenfolge steuern Sie im Admin am Produkt." },
+    {
+      "type": "range",
+      "id": "thumb_width",
+      "label": "Breite der Leiste links",
+      "min": 60,
+      "max": 140,
+      "step": 4,
+      "unit": "px",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "thumbs_per_row",
+      "label": "Vorschaubilder pro Reihe",
+      "min": 3,
+      "max": 6,
+      "step": 1,
+      "default": 5,
+      "info": "Gilt nur, wenn die Vorschaubilder unter dem Bild stehen."
+    },
+    {
+      "type": "header",
+      "content": "Variantenauswahl"
+    },
+    {
+      "type": "paragraph",
+      "content": "Alle Optionen des Produkts werden automatisch angezeigt, egal ob Gewicht, Farbe, Größe oder Jahrgang. Die Reihenfolge steuern Sie im Admin am Produkt."
+    },
     {
       "type": "select",
       "id": "variant_style",
       "label": "Darstellung",
       "options": [
-        { "value": "theme", "label": "Wie in den Theme-Einstellungen" },
-        { "value": "auto", "label": "Automatisch" },
-        { "value": "pills", "label": "Kacheln" },
-        { "value": "swatches", "label": "Farbfelder" },
-        { "value": "dropdown", "label": "Auswahlliste" }
+        {
+          "value": "theme",
+          "label": "Wie in den Theme-Einstellungen"
+        },
+        {
+          "value": "auto",
+          "label": "Automatisch"
+        },
+        {
+          "value": "pills",
+          "label": "Kacheln"
+        },
+        {
+          "value": "swatches",
+          "label": "Farbfelder"
+        },
+        {
+          "value": "dropdown",
+          "label": "Auswahlliste"
+        }
       ],
       "default": "theme"
     },
-    { "type": "text", "id": "price_note", "label": "Hinweis unter dem Preis", "info": "Optionaler Text direkt unter dem Preis." },
-    { "type": "header", "content": "Produktdetails (Metafelder)" },
-    { "type": "paragraph", "content": "Alle Metafelder erscheinen gebündelt unter „Produktdetails\". Füge unten Blöcke hinzu: „Variantenmetafeld\" (aktualisiert sich beim Variantenwechsel) oder „Produktmetafeld\" (gilt fürs ganze Produkt). Reihenfolge per Drag & Drop. Angezeigt wird nur, was am Produkt oder an der Variante einen Wert hat. Fehlt der Wert an der Variante, greift der Wert am Produkt. Zum Einrichten lässt sich unten einblenden, welche Felder noch leer sind. Alternativ unten „Automatisch anzeigen\" aktivieren." },
-    { "type": "text", "id": "product_metafields_title", "label": "Titel", "default": "Produktdetails" },
-    { "type": "checkbox", "id": "product_metafields_auto", "label": "Alle Produktmetafelder automatisch anzeigen", "default": false },
-    { "type": "checkbox", "id": "variant_metafields_auto", "label": "Alle Variantenmetafelder automatisch anzeigen", "default": false, "info": "Zeigt jedes gepflegte Metafeld der gewählten Variante und wechselt den Wert beim Variantenwechsel mit. Fehlt der Wert an der Variante, greift der Wert am Produkt. Felder mit eigenem Block erscheinen nicht doppelt." },
-    { "type": "text", "id": "product_metafields_namespace", "label": "Namespace für automatische Anzeige", "default": "custom", "info": "Gilt für beide Automatiken, z. B. custom" }
-  ],
-  "blocks": [
-    { "type": "@app" },
     {
-      "type": "variant_metafield",
-      "name": "Variantenmetafeld",
-      "settings": [
-        { "type": "text", "id": "label", "label": "Anzeigename", "default": "Merkmal" },
-        { "type": "text", "id": "namespace", "label": "Namespace", "default": "custom", "info": "z. B. custom" },
-        { "type": "text", "id": "key", "label": "Key", "info": "Der Schlüssel des Metafelds, z. B. aufloesung" }
-      ]
+      "type": "text",
+      "id": "price_note",
+      "label": "Hinweis unter dem Preis",
+      "info": "Optionaler Text direkt unter dem Preis."
     },
     {
-      "type": "product_metafield",
-      "name": "Produktmetafeld",
-      "settings": [
-        { "type": "text", "id": "label", "label": "Anzeigename", "default": "Merkmal" },
-        { "type": "text", "id": "namespace", "label": "Namespace", "default": "custom", "info": "z. B. custom" },
-        { "type": "text", "id": "key", "label": "Key", "info": "Der Schlüssel des Produkt-Metafelds, z. B. herkunft" }
-      ]
+      "type": "header",
+      "content": "Produktdetails (Metafelder)"
+    },
+    {
+      "type": "paragraph",
+      "content": "Alle Metafelder erscheinen gebündelt unter „Produktdetails\". Füge unten Blöcke hinzu: „Variantenmetafeld\" (aktualisiert sich beim Variantenwechsel) oder „Produktmetafeld\" (gilt fürs ganze Produkt). Reihenfolge per Drag & Drop. Angezeigt wird nur, was am Produkt oder an der Variante einen Wert hat. Fehlt der Wert an der Variante, greift der Wert am Produkt. Zum Einrichten lässt sich unten einblenden, welche Felder noch leer sind. Alternativ unten „Automatisch anzeigen\" aktivieren."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
     },
     {
       "type": "collapsible",
       "name": "Aufklappbarer Text",
       "settings": [
-        { "type": "text", "id": "title", "label": "Titel", "default": "Versand und Lieferung" },
-        { "type": "richtext", "id": "content", "label": "Inhalt", "default": "<p>Lieferung innerhalb von 2 bis 3 Tagen mit DHL. Ab 50 Euro versandkostenfrei innerhalb Deutschlands.</p>" }
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titel",
+          "default": "Versand und Lieferung"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Inhalt",
+          "default": "<p>Lieferung innerhalb von 2 bis 3 Tagen mit DHL. Ab 50 Euro versandkostenfrei innerhalb Deutschlands.</p>"
+        }
       ]
     },
     {
@@ -513,10 +477,30 @@
       "name": "Vertrauens-Hinweise",
       "limit": 1,
       "settings": [
-        { "type": "text", "id": "line_1", "label": "Zeile 1", "default": "Kauf auf Rechnung möglich" },
-        { "type": "text", "id": "line_2", "label": "Zeile 2", "default": "Versandkostenfrei ab 50 Euro" },
-        { "type": "text", "id": "line_3", "label": "Zeile 3", "default": "3 Prozent Rabatt bei Vorkasse" },
-        { "type": "text", "id": "line_4", "label": "Zeile 4", "default": "Persönliche Beratung per Telefon" }
+        {
+          "type": "text",
+          "id": "line_1",
+          "label": "Zeile 1",
+          "default": "Kauf auf Rechnung möglich"
+        },
+        {
+          "type": "text",
+          "id": "line_2",
+          "label": "Zeile 2",
+          "default": "Versandkostenfrei ab 50 Euro"
+        },
+        {
+          "type": "text",
+          "id": "line_3",
+          "label": "Zeile 3",
+          "default": "3 Prozent Rabatt bei Vorkasse"
+        },
+        {
+          "type": "text",
+          "id": "line_4",
+          "label": "Zeile 4",
+          "default": "Persönliche Beratung per Telefon"
+        }
       ]
     },
     {

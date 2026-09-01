@@ -11,8 +11,10 @@
   endcomment
   assign vd_manual = '|'
   for block in section.blocks
-    if block.type == 'variant_metafield' and block.settings.key != blank and block.settings.namespace == pd_ns
-      assign vd_manual = vd_manual | append: block.settings.key | append: '|'
+    if block.settings.key != blank and block.settings.namespace == pd_ns
+      if block.type == 'variant_metafield' or block.type == 'product_metafield'
+        assign vd_manual = vd_manual | append: block.settings.key | append: '|'
+      endif
     endif
   endfor
   assign vd_keys = '|'
@@ -193,7 +195,7 @@
   "tag": "section",
   "settings": [
     { "type": "text", "id": "product_metafields_title", "label": "Titel", "default": "Produktdetails" },
-    { "type": "paragraph", "content": "Füge Blöcke hinzu: „Variantenmetafeld\" (aktualisiert sich beim Variantenwechsel) oder „Produktmetafeld\" (gilt fürs ganze Produkt). Reihenfolge per Drag & Drop. Diese Sektion kannst du frei auf der Produktseite platzieren. Angezeigt wird nur, was am Produkt oder an der Variante einen Wert hat. Fehlt der Wert an der Variante, greift der Wert am Produkt." },
+    { "type": "paragraph", "content": "Das ist die einzige Merkmalstabelle der Produktseite. Sie füllt sich entweder automatisch über die beiden Haken unten oder von Hand über eigene Blöcke – beides landet in derselben Tabelle und ergänzt sich. Eigene Blöcke: „Variantenmetafeld\" wechselt beim Variantenwechsel mit, „Produktmetafeld\" gilt fürs ganze Produkt. Reihenfolge per Drag & Drop. Angezeigt wird nur, was einen Wert hat; fehlt er an der Variante, greift der Wert am Produkt." },
     { "type": "checkbox", "id": "product_metafields_auto", "label": "Alle Produktmetafelder automatisch anzeigen", "default": false },
     { "type": "checkbox", "id": "variant_metafields_auto", "label": "Alle Variantenmetafelder automatisch anzeigen", "default": false, "info": "Zeigt jedes gepflegte Metafeld der gewählten Variante und wechselt den Wert beim Variantenwechsel mit. Fehlt der Wert an der Variante, greift der Wert am Produkt. Felder mit eigenem Block erscheinen nicht doppelt." },
     { "type": "text", "id": "product_metafields_namespace", "label": "Namespace für automatische Anzeige", "default": "custom", "info": "Gilt für beide Automatiken, z. B. custom" }
