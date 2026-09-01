@@ -179,11 +179,13 @@
     </main>
 
     {% comment %}
-      Der Footer laeuft bewusst als statische Sektion, nicht ueber eine
-      Sektionsgruppe. Dieser Shop hat sections/footer-group.json bei keinem
-      Import je uebernommen, auch nicht nach einem vollen Re-Import.
+      Der Footer laeuft als statische Sektion und heisst site-footer, nicht
+      footer. Dieser Shop hat weder sections/footer.liquid noch
+      sections/footer-group.json je uebernommen, auch nicht nach einem vollen
+      Re-Import: Shopify meldete "'footer' is not a valid section type".
+      Ein frischer Dateiname umgeht den Importzustand. Nicht umbenennen.
     {% endcomment %}
-    {% section 'footer' %}
+    {% section 'site-footer' %}
 
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
 
