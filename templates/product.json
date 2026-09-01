@@ -82,6 +82,14 @@
     "produktdetails": {
       "type": "product-details",
       "blocks": {
+        "variant_metafield_PWyte9": {
+          "type": "variant_metafield",
+          "settings": {
+            "label": "Merkmal",
+            "namespace": "custom",
+            "key": ""
+          }
+        },
         "mf_brenndauer": {
           "type": "variant_metafield",
           "name": "Marke",
@@ -137,6 +145,7 @@
         }
       },
       "block_order": [
+        "variant_metafield_PWyte9",
         "mf_brenndauer",
         "mf_koernung",
         "variant_metafield_9d6C7z",
