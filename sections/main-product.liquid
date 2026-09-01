@@ -83,6 +83,7 @@
           auf Hoehe des grossen Bildes, statt es in die Laenge zu ziehen.
         {%- endcomment -%}
         <div class="product-gallery__rail">
+        <button type="button" class="product-gallery__nav product-gallery__nav--up" data-gallery-scroll="up" aria-label="Vorherige Bilder" hidden>{% render 'icon', name: 'chevron-down' %}</button>
         <div class="product-gallery__thumbs">
           {%- for media in product.media -%}
             <button type="button" class="product-gallery__thumb {% if forloop.first %}is-active{% endif %}"
@@ -95,6 +96,7 @@
             </button>
           {%- endfor -%}
         </div>
+        <button type="button" class="product-gallery__nav product-gallery__nav--down" data-gallery-scroll="down" aria-label="Weitere Bilder" hidden>{% render 'icon', name: 'chevron-down' %}</button>
         </div>
       {%- endif -%}
     </div>
@@ -260,6 +262,43 @@
     "url": {{ request.origin | append: product.url | json }}
   }
 }
+</script>
+
+<script>
+  (function () {
+    // Pfeile fuer die senkrechte Bildleiste. Sie erscheinen nur, wenn wirklich
+    // mehr Vorschaubilder da sind als Platz, und der jeweilige Pfeil verschwindet
+    // am oberen bzw. unteren Ende. Ohne JavaScript bleibt die Leiste per Mausrad
+    // und Tastatur scrollbar.
+    document.querySelectorAll('.product-gallery--left').forEach(function (gallery) {
+      var rail = gallery.querySelector('.product-gallery__thumbs');
+      var up = gallery.querySelector('[data-gallery-scroll="up"]');
+      var down = gallery.querySelector('[data-gallery-scroll="down"]');
+      if (!rail || !up || !down) return;
+
+      function update() {
+        var rest = rail.scrollHeight - rail.clientHeight;
+        var scrollable = rest > 2;
+        up.hidden = !scrollable || rail.scrollTop <= 1;
+        down.hidden = !scrollable || rail.scrollTop >= rest - 1;
+      }
+
+      function step(dir) {
+        var by = Math.max(120, rail.clientHeight * 0.8);
+        rail.scrollBy({ top: dir * by, behavior: 'smooth' });
+      }
+
+      up.addEventListener('click', function () { step(-1); });
+      down.addEventListener('click', function () { step(1); });
+      rail.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      window.addEventListener('load', update);
+      // Das grosse Bild gibt die Hoehe der Leiste vor, deshalb neu rechnen,
+      // sobald es seine Groesse aendert.
+      if (window.ResizeObserver) new ResizeObserver(update).observe(gallery);
+      update();
+    });
+  })();
 </script>
 
 {% schema %}
