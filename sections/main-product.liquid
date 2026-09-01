@@ -66,8 +66,37 @@
 
     {%- comment -%} -------------------------- Info -------------------------- {%- endcomment -%}
     <div class="product-info {% if settings.product_sticky_info %}product-info--sticky{% endif %}">
-      {%- if product.vendor != blank and section.settings.show_vendor -%}
-        <div class="product-info__vendor">{{ product.vendor }}</div>
+      {%- comment -%}
+        Markenzeile ueber dem Titel. Es gewinnt das erste gefuellte Metafeld aus
+        vendor_metafield_keys, gesucht zuerst an der Variante, dann am Produkt.
+        Ist keines gefuellt, greift der Anbieter aus dem Produkt.
+      {%- endcomment -%}
+      {%- assign vendor_text = '' -%}
+      {%- assign vendor_ns = section.settings.product_metafields_namespace | default: 'custom' -%}
+      {%- assign vendor_keys = section.settings.vendor_metafield_keys | default: 'hersteller,marke' | split: ',' -%}
+      {%- for vendor_raw_key in vendor_keys -%}
+        {%- if vendor_text == blank -%}
+          {%- assign vendor_key = vendor_raw_key | strip -%}
+          {%- if vendor_key != blank -%}
+            {%- assign vendor_mf = current_variant.metafields[vendor_ns][vendor_key] -%}
+            {%- capture vendor_val -%}{{ vendor_mf }}{%- endcapture -%}
+            {%- assign vendor_val = vendor_val | strip -%}
+            {%- if vendor_val == blank or vendor_val == 'null' -%}
+              {%- assign vendor_mf = product.metafields[vendor_ns][vendor_key] -%}
+              {%- capture vendor_val -%}{{ vendor_mf }}{%- endcapture -%}
+              {%- assign vendor_val = vendor_val | strip -%}
+            {%- endif -%}
+            {%- if vendor_val != blank and vendor_val != 'null' -%}
+              {%- assign vendor_text = vendor_val -%}
+            {%- endif -%}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if vendor_text == blank -%}
+        {%- assign vendor_text = product.vendor -%}
+      {%- endif -%}
+      {%- if vendor_text != blank and section.settings.show_vendor -%}
+        <div class="product-info__vendor">{{ vendor_text }}</div>
       {%- endif -%}
       <h1 class="product-info__title">{{ product.title }}</h1>
 
@@ -329,7 +358,7 @@
   "url": {{ request.origin | append: product.url | json }},
   {% if product.featured_media %}"image": {{ product.featured_media | image_url: width: 1200 | prepend: "https:" | json }},{% endif %}
   "description": {{ product.description | strip_html | truncate: 300 | json }},
-  {% if product.vendor != blank %}"brand": { "@type": "Brand", "name": {{ product.vendor | json }} },{% endif %}
+  {% if vendor_text != blank %}"brand": { "@type": "Brand", "name": {{ vendor_text | json }} },{% endif %}
   "sku": {{ current_variant.sku | json }},
   "offers": {
     "@type": "Offer",
@@ -347,6 +376,7 @@
   "tag": "section",
   "settings": [
     { "type": "checkbox", "id": "show_vendor", "label": "Marke anzeigen", "default": true },
+    { "type": "text", "id": "vendor_metafield_keys", "label": "Metafelder für die Markenzeile", "default": "hersteller,marke", "info": "Kommagetrennt, in dieser Reihenfolge geprüft. Angezeigt wird das erste Feld mit Inhalt, gesucht zuerst an der Variante, dann am Produkt. Ist keines gefüllt, greift der Anbieter des Produkts. Namespace wie unten bei den Metafeldern." },
     { "type": "checkbox", "id": "show_dynamic_checkout", "label": "Express-Checkout Buttons anzeigen", "default": true },
     { "type": "header", "content": "Produktbilder" },
     {
