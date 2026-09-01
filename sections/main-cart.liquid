@@ -57,7 +57,7 @@
           <textarea name="note" class="select" rows="3" style="width:100%;resize:vertical;">{{ cart.note }}</textarea>
         {%- endif -%}
 
-        <button type="submit" name="checkout" class="btn btn--primary btn--large btn--full" style="margin-top:1rem;">
+        <button type="submit" name="checkout" class="btn btn--primary btn--atc btn--large btn--full" style="margin-top:1rem;">
           {% render 'icon', name: 'lock' %} {{ 'cart.checkout' | t }}
         </button>
         <a href="{{ routes.all_products_collection_url }}" class="btn btn--secondary btn--full" style="margin-top:0.5rem;">{{ 'cart.continue_shopping' | t }}</a>

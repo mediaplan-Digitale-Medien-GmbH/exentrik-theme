@@ -94,14 +94,14 @@
       {
         "type": "color",
         "id": "color_atc",
-        "label": "Warenkorb-Button",
-        "info": "Eigene Farbe für „In den Warenkorb\", unabhängig von der Akzentfarbe.",
+        "label": "Kauf-Buttons",
+        "info": "Eigene Farbe für „In den Warenkorb\" und „Zur Kasse\", unabhängig von der Akzentfarbe.",
         "default": "#15803d"
       },
       {
         "type": "color",
         "id": "color_atc_text",
-        "label": "Text auf dem Warenkorb-Button",
+        "label": "Text auf den Kauf-Buttons",
         "default": "#ffffff"
       },
       {
