@@ -162,7 +162,12 @@
             {%- if pb_value == blank or pb_value == 'null' -%}
               {%- assign pb_empty = true -%}
             {%- endif -%}
-            {%- if pb_empty == false or request.design_mode -%}
+            {%- assign pb_unset = false -%}
+            {%- if pb_key == blank -%}{%- assign pb_unset = true -%}{%- endif -%}
+            {%- assign pb_show = false -%}
+            {%- if pb_empty == false -%}{%- assign pb_show = true -%}{%- endif -%}
+            {%- if pb_unset and request.design_mode -%}{%- assign pb_show = true -%}{%- endif -%}
+            {%- if pb_show -%}
               <div class="page-block page-block--metafield" reveal {{ block.shopify_attributes }}>
                 {%- unless block.settings.hide_label -%}
                   <div class="page-block__label">
@@ -173,7 +178,7 @@
                   </div>
                 {%- endunless -%}
                 <div class="page-block__value">
-                  {%- if pb_empty -%}ohne Angabe{%- else -%}{{ pb_value }}{%- endif -%}
+                  {%- if pb_empty -%}{%- if pb_unset -%}Metafeld noch nicht zugewiesen{%- endif -%}{%- else -%}{{ pb_value }}{%- endif -%}
                 </div>
               </div>
             {%- endif -%}
