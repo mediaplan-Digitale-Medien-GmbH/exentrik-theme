@@ -17,11 +17,39 @@
   endcase
   assign gallery_fit = section.settings.media_fit | default: 'cover'
   assign gallery_thumbs = section.settings.thumbs_per_row | default: 5
+  assign gallery_thumb_pos = section.settings.thumb_position | default: 'left'
+  assign gallery_thumb_w = section.settings.thumb_width | default: 88
   assign on_sale = false
   if current_variant.compare_at_price > current_variant.price
     assign on_sale = true
   endif
 -%}
+
+{%- comment -%}
+  Beschreibung und Aufklapp-Bloecke werden einmal gebaut und je nach
+  Einstellung entweder in der rechten Produktspalte oder in voller Breite
+  unter dem Produkt ausgegeben.
+{%- endcomment -%}
+{%- assign desc_pos = section.settings.description_position | default: 'right' -%}
+{%- capture product_accordion -%}
+  <div class="product-accordion">
+    {%- if product.description != blank -%}
+      <details class="product-accordion__item" open>
+        <summary class="product-accordion__summary">{{ 'products.product.description' | t }} {% render 'icon', name: 'chevron-down' %}</summary>
+        <div class="product-accordion__content rte">{{ product.description }}</div>
+      </details>
+    {%- endif -%}
+
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'collapsible' -%}
+        <details class="product-accordion__item" {{ block.shopify_attributes }}>
+          <summary class="product-accordion__summary">{{ block.settings.title }} {% render 'icon', name: 'chevron-down' %}</summary>
+          <div class="product-accordion__content rte">{{ block.settings.content }}</div>
+        </details>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+{%- endcapture -%}
 
 <div class="page-width product-page" data-variant-selector>
   <nav class="breadcrumb text-muted" aria-label="Breadcrumb">
@@ -32,7 +60,7 @@
 
   <div class="product">
     {%- comment -%} -------------------------- Gallery -------------------------- {%- endcomment -%}
-    <div class="product-gallery{% if gallery_ratio_css != blank %} product-gallery--ratio{% endif %}" data-gallery style="--pg-fit: {{ gallery_fit }}; --pg-thumbs: {{ gallery_thumbs }};{% if gallery_ratio_css != blank %} --pg-ratio: {{ gallery_ratio_css }};{% endif %}">
+    <div class="product-gallery{% if gallery_ratio_css != blank %} product-gallery--ratio{% endif %}{% if gallery_thumb_pos == 'left' %} product-gallery--left{% endif %}" data-gallery style="--pg-fit: {{ gallery_fit }}; --pg-thumbs: {{ gallery_thumbs }}; --pg-thumb-w: {{ gallery_thumb_w }}px;{% if gallery_ratio_css != blank %} --pg-ratio: {{ gallery_ratio_css }};{% endif %}">
       <div class="product-gallery__main media">
         {%- if product.featured_media -%}
           <img
@@ -49,6 +77,12 @@
         {%- endif -%}
       </div>
       {%- if product.media.size > 1 -%}
+        {%- comment -%}
+          Die Schiene ist der eigentliche Rasterplatz. Steht die Leiste links,
+          liegen die Vorschaubilder absolut darin und scrollen deshalb genau
+          auf Hoehe des grossen Bildes, statt es in die Laenge zu ziehen.
+        {%- endcomment -%}
+        <div class="product-gallery__rail">
         <div class="product-gallery__thumbs">
           {%- for media in product.media -%}
             <button type="button" class="product-gallery__thumb {% if forloop.first %}is-active{% endif %}"
@@ -60,6 +94,7 @@
               <img src="{{ media | image_url: width: 200 }}" alt="{{ media.alt | escape }}" width="120" height="120" loading="lazy">
             </button>
           {%- endfor -%}
+        </div>
         </div>
       {%- endif -%}
     </div>
@@ -210,7 +245,7 @@
               {%- assign mf_hide = false -%}
               {%- if mf_empty -%}{%- assign mf_hide = true -%}{%- assign mfval = '' -%}{%- endif -%}
               <div class="product-details__row" data-vmf="{{ block.id }}"{% if mf_hide %} hidden{% endif %} {{ block.shopify_attributes }}>
-                <div class="product-details__key">{{ block.settings.label }}{% if request.design_mode %}<span class="product-details__ref">{{ block.settings.namespace }}.{{ block.settings.key }}</span>{% endif %}</div>
+                <div class="product-details__key">{{ block.settings.label | strip | remove_last: ':' }}:{% if request.design_mode %}<span class="product-details__ref">{{ block.settings.namespace }}.{{ block.settings.key }}</span>{% endif %}</div>
                 <div class="product-details__value" data-vmf-value>{{ mfval }}</div>
               </div>
             {%- elsif block.type == 'product_metafield' -%}
@@ -220,7 +255,7 @@
               {%- if pmfval == blank or pmfval == 'null' -%}{%- assign pmf_empty = true -%}{%- endif -%}
               {%- if pmf_empty == false -%}
                 <div class="product-details__row" {{ block.shopify_attributes }}>
-                  <div class="product-details__key">{{ block.settings.label }}{% if request.design_mode %}<span class="product-details__ref">{{ block.settings.namespace }}.{{ block.settings.key }}</span>{% endif %}</div>
+                  <div class="product-details__key">{{ block.settings.label | strip | remove_last: ':' }}:{% if request.design_mode %}<span class="product-details__ref">{{ block.settings.namespace }}.{{ block.settings.key }}</span>{% endif %}</div>
                   <div class="product-details__value">{{ pmfval }}</div>
                 </div>
               {%- endif -%}
@@ -237,7 +272,7 @@
                 {%- assign vaf_hide = false -%}
                 {%- if vaf_empty -%}{%- assign vaf_hide = true -%}{%- assign vafval = '' -%}{%- endif -%}
                 <div class="product-details__row" data-vmf="auto-{{ vk }}"{% if vaf_hide %} hidden{% endif %}>
-                  <div class="product-details__key">{{ vk | replace: '_', ' ' | capitalize }}{% if request.design_mode %}<span class="product-details__ref">{{ pmf_ns }}.{{ vk }}</span>{% endif %}</div>
+                  <div class="product-details__key">{{ vk | replace: '_', ' ' | capitalize }}:{% if request.design_mode %}<span class="product-details__ref">{{ pmf_ns }}.{{ vk }}</span>{% endif %}</div>
                   <div class="product-details__value" data-vmf-value>{{ vafval }}</div>
                 </div>
               {%- endif -%}
@@ -261,7 +296,7 @@
                   {%- if vmf_keys contains pmf_probe or vmf_manual contains pmf_probe -%}{%- assign show_now = false -%}{%- endif -%}
                   {%- if show_now -%}
                     <div class="product-details__row">
-                      <div class="product-details__key">{{ field.first | replace: '_', ' ' | capitalize }}</div>
+                      <div class="product-details__key">{{ field.first | replace: '_', ' ' | capitalize }}:</div>
                       <div class="product-details__value">{{ av }}</div>
                     </div>
                   {%- endif -%}
@@ -293,25 +328,13 @@
       {%- endfor -%}
 
       {%- comment -%} -------------------- Description / accordions -------------------- {%- endcomment -%}
-      <div class="product-accordion">
-        {%- if product.description != blank -%}
-          <details class="product-accordion__item" open>
-            <summary class="product-accordion__summary">{{ 'products.product.description' | t }} {% render 'icon', name: 'chevron-down' %}</summary>
-            <div class="product-accordion__content rte">{{ product.description }}</div>
-          </details>
-        {%- endif -%}
-
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'collapsible' -%}
-            <details class="product-accordion__item" {{ block.shopify_attributes }}>
-              <summary class="product-accordion__summary">{{ block.settings.title }} {% render 'icon', name: 'chevron-down' %}</summary>
-              <div class="product-accordion__content rte">{{ block.settings.content }}</div>
-            </details>
-          {%- endif -%}
-        {%- endfor -%}
-      </div>
+      {%- if desc_pos == 'right' -%}{{ product_accordion }}{%- endif -%}
     </div>
   </div>
+
+  {%- if desc_pos == 'below' -%}
+    <div class="section" style="max-width:900px;">{{ product_accordion }}</div>
+  {%- endif -%}
 
   {%- comment -%} ------------------------ Variant data JSON ------------------------ {%- endcomment -%}
   <script type="application/json" data-variant-json>
@@ -411,7 +434,29 @@
       "default": "cover",
       "info": "Bei Freistellern mit viel Rand ist „vollständig zeigen\" die sichere Wahl."
     },
-    { "type": "range", "id": "thumbs_per_row", "label": "Vorschaubilder pro Reihe", "min": 3, "max": 6, "step": 1, "default": 5 },
+    {
+      "type": "select",
+      "id": "description_position",
+      "label": "Produktbeschreibung",
+      "default": "right",
+      "options": [
+        { "value": "below", "label": "Unter dem Produkt, volle Breite" },
+        { "value": "right", "label": "Rechte Spalte unter den Kaufoptionen" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "thumb_position",
+      "label": "Vorschaubilder",
+      "default": "left",
+      "info": "Links steht eine senkrechte Leiste zum Scrollen. Auf dem Handy stehen sie immer unter dem Bild.",
+      "options": [
+        { "value": "below", "label": "Unter dem großen Bild" },
+        { "value": "left", "label": "Links neben dem Bild" }
+      ]
+    },
+    { "type": "range", "id": "thumb_width", "label": "Breite der Leiste links", "min": 60, "max": 140, "step": 4, "unit": "px", "default": 88 },
+    { "type": "range", "id": "thumbs_per_row", "label": "Vorschaubilder pro Reihe", "min": 3, "max": 6, "step": 1, "default": 5, "info": "Gilt nur, wenn die Vorschaubilder unter dem Bild stehen." },
     { "type": "header", "content": "Variantenauswahl" },
     { "type": "paragraph", "content": "Alle Optionen des Produkts werden automatisch angezeigt, egal ob Gewicht, Farbe, Größe oder Jahrgang. Die Reihenfolge steuern Sie im Admin am Produkt." },
     {
