@@ -501,31 +501,20 @@
     }
 
     renderMetafields(variant) {
-      const showEmpty = this.showsEmptyMetafields();
-      const showEmptyAuto = this.showsEmptyMetafields(true);
       const values = (variant && variant.metafields) || {};
       $$('[data-vmf]', this.root).forEach((row) => {
         const key = row.getAttribute('data-vmf');
         const val = values[key];
         const has = !(val === undefined || val === null || val === '');
         const valEl = $('[data-vmf-value]', row);
-        if (valEl) valEl.innerHTML = has ? val : 'ohne Angabe';
-        const allowEmpty = key.startsWith('auto-') ? showEmptyAuto : showEmpty;
-        row.hidden = !has && !allowEmpty;
+        if (valEl) valEl.innerHTML = has ? val : '';
+        // Ohne Wert wird ausgeblendet. Ausnahme: ein Block, dem im Editor noch kein
+        // Metafeld zugewiesen ist, der traegt data-vmf-keep.
+        row.hidden = !has && !row.hasAttribute('data-vmf-keep');
       });
       this.toggleDetails();
     }
 
-    showsEmptyMetafields(auto) {
-      // Manuell angelegte Bloecke im Theme-Editor nie ausblenden, sonst verschwindet
-      // ein neuer Block sofort wieder. Automatisch gefundene Felder sind nicht
-      // konfigurierbar und bleiben ohne Wert auch im Editor aus, darum haengen sie
-      // an einem eigenen Attribut.
-      const container = $('[data-product-details]', this.root);
-      if (auto) return !!(container && container.hasAttribute('data-show-empty-auto'));
-      if (window.Shopify && window.Shopify.designMode) return true;
-      return !!(container && container.hasAttribute('data-show-empty'));
-    }
 
     toggleDetails() {
       const container = $('[data-product-details]', this.root);

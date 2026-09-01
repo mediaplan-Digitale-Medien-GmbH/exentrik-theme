@@ -158,7 +158,7 @@
         "product_metafields_title": "Eigenschaften",
         "product_metafields_auto": true,
         "product_metafields_namespace": "custom",
-        "metafields_show_empty": true
+        "metafields_show_empty": false
       }
     },
     "product_details_LkXhj3": {
@@ -242,7 +242,7 @@
         "product_metafields_title": "EU ansässiger Wirtschaftsakteur",
         "product_metafields_auto": true,
         "product_metafields_namespace": "custom",
-        "metafields_show_empty": true
+        "metafields_show_empty": false
       }
     },
     "product_recommendations_4rBbgw": {

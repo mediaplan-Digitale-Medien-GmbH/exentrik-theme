@@ -16,7 +16,7 @@ Was auf der Produktseite die Metafeld-Blöcke leisten, übernimmt auf der Katego
 2. Werte je Kategorie unter Produkte → Kategorien → Metafelder pflegen.
 3. Theme Editor → Kategorieseite → Abschnitt hinzufügen → **Kategorie-Details**, pro Feld einen Block mit Anzeigename, Namespace und Key.
 
-Darstellung als Tabelle, Kacheln oder kompakte Zeile. Listen, Bilder, Dateien, Links, Ja/Nein und Datum werden passend formatiert. Leere Felder bleiben im Shop unsichtbar, im Editor stehen sie als „ohne Angabe“ da. Ist für eine Kategorie nichts gepflegt, verschwindet die Sektion dort komplett.
+Darstellung als Tabelle, Kacheln oder kompakte Zeile. Listen, Bilder, Dateien, Links, Ja/Nein und Datum werden passend formatiert. Leere Felder werden ausgeblendet, im Shop wie im Theme-Editor; im Editor bleibt nur ein Block sichtbar, dem noch kein Metafeld zugewiesen ist. Ist für eine Kategorie nichts gepflegt, verschwindet die Sektion dort komplett.
 
 ## Produktbilder
 

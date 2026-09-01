@@ -31,15 +31,6 @@
     Im Editor immer sichtbar, sonst lässt sich ein neu angelegtes Feld nicht
     befüllen. Im Shop bleiben leere Felder nur auf Wunsch sichtbar.
   endcomment
-  assign pd_show_empty = false
-  if request.design_mode or section.settings.metafields_show_empty
-    assign pd_show_empty = true
-  endif
-  comment
-    Automatisch gefundene Felder haben keine Einstellungen, die man im Editor
-    sehen muesste. Ohne Wert bleiben sie darum immer ausgeblendet.
-  endcomment
-  assign pd_show_empty_auto = section.settings.metafields_show_empty
   assign has_details = false
   for block in section.blocks
     if block.type == 'variant_metafield' or block.type == 'product_metafield'
@@ -53,7 +44,7 @@
 {%- if product and has_details -%}
   <div class="section">
     <div class="page-width">
-      <div class="product-details" data-product-details data-pd-section="{{ section.id }}"{% if pd_show_empty %} data-show-empty{% endif %}>
+      <div class="product-details" data-product-details data-pd-section="{{ section.id }}">
         {%- if section.settings.product_metafields_title != blank -%}
           <div class="product-details__title">{{ section.settings.product_metafields_title }}</div>
         {%- endif -%}
@@ -66,20 +57,29 @@
             {%- if mfval == blank or mfval == 'null' -%}{%- assign mf = product.metafields[block.settings.namespace][block.settings.key] -%}{%- capture mfval -%}{{ mf }}{%- endcapture -%}{%- assign mfval = mfval | strip -%}{%- endif -%}
             {%- if mfval == blank or mfval == 'null' -%}{%- assign mf_empty = true -%}{%- endif -%}
             {%- assign mf_hide = false -%}
-            {%- if mf_empty and pd_show_empty == false -%}{%- assign mf_hide = true -%}{%- endif -%}
-            <div class="product-details__row" data-vmf="{{ block.id }}"{% if mf_hide %} hidden{% endif %} {{ block.shopify_attributes }}>
+            {%- assign mf_unset = false -%}
+            {%- if block.settings.key == blank -%}{%- assign mf_unset = true -%}{%- endif -%}
+            {%- if mf_empty -%}{%- assign mf_hide = true -%}{%- endif -%}
+            {%- comment -%}Ein Block ohne zugewiesenes Metafeld bleibt im Editor sichtbar, sonst ist er nach dem Anlegen nicht mehr auffindbar.{%- endcomment -%}
+            {%- if mf_unset and request.design_mode -%}{%- assign mf_hide = false -%}{%- endif -%}
+            <div class="product-details__row" data-vmf="{{ block.id }}"{% if mf_hide %} hidden{% endif %}{% if mf_unset %} data-vmf-keep{% endif %} {{ block.shopify_attributes }}>
               <div class="product-details__key">{{ block.settings.label }}{% if request.design_mode %}<span class="product-details__ref">{{ block.settings.namespace }}.{{ block.settings.key }}</span>{% endif %}</div>
-              <div class="product-details__value" data-vmf-value>{% if mf_empty %}ohne Angabe{% else %}{{ mfval }}{% endif %}</div>
+              <div class="product-details__value" data-vmf-value>{% if mf_empty %}{% if mf_unset %}Metafeld noch nicht zugewiesen{% endif %}{% else %}{{ mfval }}{% endif %}</div>
             </div>
           {%- elsif block.type == 'product_metafield' -%}
             {%- assign pmf = product.metafields[block.settings.namespace][block.settings.key] -%}
             {%- capture pmfval -%}{{ pmf }}{%- endcapture -%}{%- assign pmfval = pmfval | strip -%}
             {%- assign pmf_empty = false -%}
             {%- if pmfval == blank or pmfval == 'null' -%}{%- assign pmf_empty = true -%}{%- endif -%}
-            {%- if pmf_empty == false or pd_show_empty -%}
+            {%- assign pmf_unset = false -%}
+            {%- if block.settings.key == blank -%}{%- assign pmf_unset = true -%}{%- endif -%}
+            {%- assign pmf_show = false -%}
+            {%- if pmf_empty == false -%}{%- assign pmf_show = true -%}{%- endif -%}
+            {%- if pmf_unset and request.design_mode -%}{%- assign pmf_show = true -%}{%- endif -%}
+            {%- if pmf_show -%}
               <div class="product-details__row" {{ block.shopify_attributes }}>
                 <div class="product-details__key">{{ block.settings.label }}{% if request.design_mode %}<span class="product-details__ref">{{ block.settings.namespace }}.{{ block.settings.key }}</span>{% endif %}</div>
-                <div class="product-details__value">{% if pmf_empty %}ohne Angabe{% else %}{{ pmfval }}{% endif %}</div>
+                <div class="product-details__value">{% if pmf_empty %}{% if pmf_unset %}Metafeld noch nicht zugewiesen{% endif %}{% else %}{{ pmfval }}{% endif %}</div>
               </div>
             {%- endif -%}
           {%- endif -%}
@@ -93,10 +93,10 @@
               {%- assign vaf_empty = false -%}
               {%- if vafval == blank or vafval == 'null' -%}{%- assign vaf_empty = true -%}{%- endif -%}
               {%- assign vaf_hide = false -%}
-              {%- if vaf_empty and pd_show_empty_auto == false -%}{%- assign vaf_hide = true -%}{%- endif -%}
+              {%- if vaf_empty -%}{%- assign vaf_hide = true -%}{%- endif -%}
               <div class="product-details__row" data-vmf="auto-{{ vk }}"{% if vaf_hide %} hidden{% endif %}>
                 <div class="product-details__key">{{ vk | replace: '_', ' ' | capitalize }}{% if request.design_mode %}<span class="product-details__ref">{{ pd_ns }}.{{ vk }}</span>{% endif %}</div>
-                <div class="product-details__value" data-vmf-value>{% if vaf_empty %}ohne Angabe{% else %}{{ vafval }}{% endif %}</div>
+                <div class="product-details__value" data-vmf-value>{{ vafval }}</div>
               </div>
             {%- endif -%}
           {%- endfor -%}
@@ -172,8 +172,6 @@
       if (!root || !dataEl) return;
       var data = {};
       try { data = JSON.parse(dataEl.textContent); } catch (e) {}
-      var showEmpty = {% if pd_show_empty %}true{% else %}false{% endif %};
-      var showEmptyAuto = {% if pd_show_empty_auto %}true{% else %}false{% endif %};
       function apply(vid) {
         var vals = data[vid] || {};
         root.querySelectorAll('[data-vmf]').forEach(function (row) {
@@ -181,14 +179,19 @@
           var val = vals[key];
           var has = !(val === undefined || val === null || val === '');
           var ve = row.querySelector('[data-vmf-value]');
-          if (ve) ve.innerHTML = has ? val : 'ohne Angabe';
-          var allowEmpty = key.indexOf('auto-') === 0 ? showEmptyAuto : showEmpty;
-          row.hidden = !has && !allowEmpty;
+          if (ve) ve.innerHTML = has ? val : '';
+          row.hidden = !has && !row.hasAttribute('data-vmf-keep');
         });
+        // Bleibt keine Zeile uebrig, verschwindet der ganze Block samt Ueberschrift.
+        var rows = root.querySelectorAll('.product-details__row');
+        var visible = Array.prototype.some.call(rows, function (r) { return !r.hidden; });
+        root.hidden = rows.length > 0 && !visible;
       }
       document.addEventListener('variant:change', function (e) {
         if (e.detail && e.detail.variantId) apply(e.detail.variantId);
       });
+      var initial = {{ product.selected_or_first_available_variant.id | json }};
+      if (initial) apply(initial);
     })();
   </script>
 {%- endif -%}
@@ -202,8 +205,7 @@
     { "type": "paragraph", "content": "Füge Blöcke hinzu: „Variantenmetafeld\" (aktualisiert sich beim Variantenwechsel) oder „Produktmetafeld\" (gilt fürs ganze Produkt). Reihenfolge per Drag & Drop. Diese Sektion kannst du frei auf der Produktseite platzieren. Angezeigt wird nur, was am Produkt oder an der Variante einen Wert hat. Fehlt der Wert an der Variante, greift der Wert am Produkt." },
     { "type": "checkbox", "id": "product_metafields_auto", "label": "Alle Produktmetafelder automatisch anzeigen", "default": false },
     { "type": "checkbox", "id": "variant_metafields_auto", "label": "Alle Variantenmetafelder automatisch anzeigen", "default": false, "info": "Zeigt jedes gepflegte Metafeld der gewählten Variante und wechselt den Wert beim Variantenwechsel mit. Fehlt der Wert an der Variante, greift der Wert am Produkt. Felder mit eigenem Block erscheinen nicht doppelt." },
-    { "type": "text", "id": "product_metafields_namespace", "label": "Namespace für automatische Anzeige", "default": "custom", "info": "Gilt für beide Automatiken, z. B. custom" },
-    { "type": "checkbox", "id": "metafields_show_empty", "label": "Leere Felder im Shop zeigen", "default": false, "info": "Felder ohne Wert bleiben ausgeblendet, auch bei automatischer Anzeige aller Produkt- oder Variantenfelder. Diese Option zeigt sie im Shop trotzdem an. Manuell angelegte Blöcke bleiben im Theme-Editor immer sichtbar, damit sie sich befüllen lassen." }
+    { "type": "text", "id": "product_metafields_namespace", "label": "Namespace für automatische Anzeige", "default": "custom", "info": "Gilt für beide Automatiken, z. B. custom" }
   ],
   "blocks": [
     {
