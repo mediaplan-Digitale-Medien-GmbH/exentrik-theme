@@ -179,86 +179,11 @@
     </main>
 
     {% comment %}
-      UEBERGANGSLOESUNG. Der Footer gehoert in sections/site-footer.liquid und
-      wird dort weiter gepflegt.
-
-      Dieses Theme nimmt ueber den GitHub-Sync keine neuen Dateien mehr an.
-      Aenderungen an bestehenden Dateien kommen an, neue nicht: weder
-      sections/footer.liquid noch sections/footer-group.json noch die frisch
-      angelegte sections/site-footer.liquid sind je im Shop angekommen, auch
-      nach einem Re-Import nicht. Shopify meldete jedes Mal
-      "is not a valid section type", waehrend Aenderungen an dieser Datei hier
-      sofort wirksam wurden.
-
-      Darum steht die Auszeichnung hier inline. Sie ist bewusst schlank und
-      zieht ihre Inhalte aus den Theme-Einstellungen und den Shop-Menues, weil
-      Sektionseinstellungen ohne Sektion nicht zur Verfuegung stehen. Sobald
-      das Theme in Shopify neu angelegt ist, ersetzt der Aufruf der Sektion
-      site-footer diesen Block hier wieder.
+      Der Footer laeuft als statische Sektion. Ueber eine Sektionsgruppe hat
+      dieser Shop ihn nie importiert. Der Dateiname site-footer bleibt so,
+      Umbenennen bringt den Sync durcheinander.
     {% endcomment %}
-    {%- assign footer_menu = linklists.footer -%}
-    {%- assign service_menu = linklists.service -%}
-    <footer class="site-footer" role="contentinfo">
-      <div class="page-width">
-        <div class="site-footer__top">
-          <div>
-            <div class="site-footer__brand">
-              {%- if settings.logo_inverted != blank -%}
-                <img class="site-footer__logo" src="{{ settings.logo_inverted | image_url: width: 440 }}" alt="{{ shop.name | escape }}" width="220" height="60" loading="lazy">
-              {%- elsif settings.logo != blank -%}
-                <img class="site-footer__logo" src="{{ settings.logo | image_url: width: 440 }}" alt="{{ shop.name | escape }}" width="220" height="60" loading="lazy">
-              {%- else -%}
-                <span class="site-footer__brand-name">{{ settings.organization_name | default: shop.name }}</span>
-              {%- endif -%}
-            </div>
-          </div>
-
-          {%- if footer_menu != blank -%}
-            <div>
-              <h3 class="site-footer__heading">{{ footer_menu.title }}</h3>
-              <ul class="site-footer__links">
-                {%- for link in footer_menu.links -%}
-                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-                {%- endfor -%}
-              </ul>
-            </div>
-          {%- endif -%}
-
-          {%- if service_menu != blank -%}
-            <div>
-              <h3 class="site-footer__heading">{{ service_menu.title }}</h3>
-              <ul class="site-footer__links">
-                {%- for link in service_menu.links -%}
-                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-                {%- endfor -%}
-              </ul>
-            </div>
-          {%- endif -%}
-
-          <div>
-            <h3 class="site-footer__heading">{{ 'sections.footer.contact' | t | default: 'Kontakt' }}</h3>
-            <div class="site-footer__links">
-              {%- if settings.support_phone != blank -%}
-                <a href="tel:{{ settings.support_phone | remove: ' ' | remove: '-' }}">{{ settings.support_phone }}</a>
-              {%- endif -%}
-              {%- if settings.support_hours != blank -%}
-                <span>{{ settings.support_hours }}</span>
-              {%- endif -%}
-              {%- if settings.support_email != blank -%}
-                <a href="mailto:{{ settings.support_email }}">{{ settings.support_email }}</a>
-              {%- endif -%}
-            </div>
-          </div>
-        </div>
-
-        <div class="site-footer__bottom">
-          <span>&copy; {{ 'now' | date: '%Y' }} {{ settings.organization_name | default: shop.name }}. Alle Preise inkl. MwSt. zzgl. Versand.</span>
-          <div class="site-footer__bottom-actions">
-            <span class="site-footer__payments">{{ shop.enabled_payment_types | payment_type_svg_tag }}</span>
-          </div>
-        </div>
-      </div>
-    </footer>
+    {% section 'site-footer' %}
 
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
 
