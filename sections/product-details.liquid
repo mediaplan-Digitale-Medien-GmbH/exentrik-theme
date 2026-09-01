@@ -59,7 +59,7 @@
             {%- assign mf_hide = false -%}
             {%- if mf_empty -%}{%- assign mf_hide = true -%}{%- assign mfval = '' -%}{%- endif -%}
             <div class="product-details__row" data-vmf="{{ block.id }}"{% if mf_hide %} hidden{% endif %} {{ block.shopify_attributes }}>
-              <div class="product-details__key">{{ block.settings.label }}{% if request.design_mode %}<span class="product-details__ref">{{ block.settings.namespace }}.{{ block.settings.key }}</span>{% endif %}</div>
+              <div class="product-details__key">{{ block.settings.label | strip | remove_last: ':' }}:{% if request.design_mode %}<span class="product-details__ref">{{ block.settings.namespace }}.{{ block.settings.key }}</span>{% endif %}</div>
               <div class="product-details__value" data-vmf-value>{{ mfval }}</div>
             </div>
           {%- elsif block.type == 'product_metafield' -%}
@@ -69,7 +69,7 @@
             {%- if pmfval == blank or pmfval == 'null' -%}{%- assign pmf_empty = true -%}{%- endif -%}
             {%- if pmf_empty == false -%}
               <div class="product-details__row" {{ block.shopify_attributes }}>
-                <div class="product-details__key">{{ block.settings.label }}{% if request.design_mode %}<span class="product-details__ref">{{ block.settings.namespace }}.{{ block.settings.key }}</span>{% endif %}</div>
+                <div class="product-details__key">{{ block.settings.label | strip | remove_last: ':' }}:{% if request.design_mode %}<span class="product-details__ref">{{ block.settings.namespace }}.{{ block.settings.key }}</span>{% endif %}</div>
                 <div class="product-details__value">{{ pmfval }}</div>
               </div>
             {%- endif -%}
@@ -86,7 +86,7 @@
               {%- assign vaf_hide = false -%}
               {%- if vaf_empty -%}{%- assign vaf_hide = true -%}{%- assign vafval = '' -%}{%- endif -%}
               <div class="product-details__row" data-vmf="auto-{{ vk }}"{% if vaf_hide %} hidden{% endif %}>
-                <div class="product-details__key">{{ vk | replace: '_', ' ' | capitalize }}{% if request.design_mode %}<span class="product-details__ref">{{ pd_ns }}.{{ vk }}</span>{% endif %}</div>
+                <div class="product-details__key">{{ vk | replace: '_', ' ' | capitalize }}:{% if request.design_mode %}<span class="product-details__ref">{{ pd_ns }}.{{ vk }}</span>{% endif %}</div>
                 <div class="product-details__value" data-vmf-value>{{ vafval }}</div>
               </div>
             {%- endif -%}
@@ -110,7 +110,7 @@
                 {%- if vd_keys contains pd_probe or vd_manual contains pd_probe -%}{%- assign show_now = false -%}{%- endif -%}
                 {%- if show_now -%}
                   <div class="product-details__row">
-                    <div class="product-details__key">{{ field.first | replace: '_', ' ' | capitalize }}</div>
+                    <div class="product-details__key">{{ field.first | replace: '_', ' ' | capitalize }}:</div>
                     <div class="product-details__value">{{ av }}</div>
                   </div>
                 {%- endif -%}
