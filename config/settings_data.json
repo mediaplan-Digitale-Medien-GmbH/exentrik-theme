@@ -50,6 +50,7 @@
     "support_hours": "",
     "support_email": "info@exentrik.com",
     "animations_enabled": true,
+    "footer_cancel_enabled": true,
     "content_for_index": [],
     "blocks": {
       "14060646107696862457": {
