@@ -27,6 +27,22 @@ def strip_header(raw):
     return re.sub(r'^\s*/\*.*?\*/', '', raw, flags=re.S)
 
 
+def check_range(f, s, problems):
+    """Ein range-Default neben dem Raster laesst Shopify das ganze Schema still
+    verwerfen. In settings_schema.json heisst das: leere Theme-Einstellungen."""
+    if s.get('type') != 'range' or s.get('default') is None:
+        return
+    lo, hi, step, d = s['min'], s['max'], s['step'], s['default']
+    if not step:
+        problems.append(f'RANGE {f}: {s["id"]} hat step 0')
+        return
+    # Dezimal-Steps wie 0.1 erzeugen Rundungsfehler, darum nicht per Modulo,
+    # sondern mit Toleranz vergleichen.
+    steps = (d - lo) / step
+    if abs(steps - round(steps)) > 1e-6 or not lo <= d <= hi or (hi - lo) / step > 101:
+        problems.append(f'RANGE {f}: {s["id"]}')
+
+
 def check_theme_blocks(theme, blocks, f, problems):
     """Theme-Blocks koennen verschachtelt sein, darum rekursiv."""
     for block in (blocks or {}).values():
@@ -72,17 +88,7 @@ def check(theme):
                 groups += [b.get('settings') for b in schema.get('blocks') or []]
                 for settings in groups:
                     for s in settings or []:
-                        if s.get('type') == 'range' and s.get('default') is not None:
-                            lo, hi, step, d = s['min'], s['max'], s['step'], s['default']
-                            if not step:
-                                problems.append(f'RANGE {f}: {s["id"]} hat step 0')
-                                continue
-                            # Dezimal-Steps wie 0.1 erzeugen Rundungsfehler, darum
-                            # nicht per Modulo, sondern mit Toleranz vergleichen.
-                            steps = (d - lo) / step
-                            off_grid = abs(steps - round(steps)) > 1e-6
-                            if off_grid or not lo <= d <= hi or (hi - lo) / step > 101:
-                                problems.append(f'RANGE {f}: {s["id"]}')
+                        check_range(f, s, problems)
 
         for bad in re.findall(r'\[[^\]\n]*\|[^\]\n]*\]', src):
             if 'settings' in bad or 'metafields' in bad:
@@ -99,6 +105,26 @@ def check(theme):
                     problems.append(f'TAG {f}: {tag} unerwartet')
         if stack:
             problems.append(f'OFFENE TAGS {f}: {stack}')
+
+    for f in glob.glob(theme + '/config/settings_schema.json'):
+        try:
+            data = json.loads(strip_header(open(f, encoding='utf-8').read()))
+        except Exception:
+            data = []
+        for group in data:
+            for s in group.get('settings') or []:
+                check_range(f, s, problems)
+
+    # Was das Layout einbindet, muss es auch als Datei geben. Fehlt eine
+    # Sektionsgruppe, rendert Shopify an der Stelle stillschweigend nichts.
+    for f in glob.glob(theme + '/layout/*.liquid'):
+        src = open(f, encoding='utf-8').read()
+        for used in re.findall(r"\{%-?\s*section\s+'([^']+)'", src):
+            if not glob.glob(f'{theme}/sections/{used}.liquid'):
+                problems.append(f'SEKTION FEHLT {f}: {used}')
+        for used in re.findall(r"\{%-?\s*sections\s+'([^']+)'", src):
+            if not glob.glob(f'{theme}/sections/{used}.json'):
+                problems.append(f'GRUPPE FEHLT {f}: {used}')
 
     for f in glob.glob(theme + '/assets/*.css'):
         css = open(f, encoding='utf-8').read()
