@@ -93,6 +93,19 @@
       },
       {
         "type": "color",
+        "id": "color_atc",
+        "label": "Warenkorb-Button",
+        "info": "Eigene Farbe für „In den Warenkorb\", unabhängig von der Akzentfarbe.",
+        "default": "#15803d"
+      },
+      {
+        "type": "color",
+        "id": "color_atc_text",
+        "label": "Text auf dem Warenkorb-Button",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
         "id": "color_sale",
         "label": "Sale / Reduziert",
         "default": "#c52f3e"
