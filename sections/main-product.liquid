@@ -100,6 +100,17 @@
       {%- endif -%}
       <h1 class="product-info__title">{{ product.title }}</h1>
 
+      {%- comment -%}
+        App-Bloecke stehen zwischen Titel und Preis, weil dort das Bewertungs-
+        Badge von Judge.me erwartet wird. Sie laufen deshalb nicht mehr in der
+        Blockschleife am Ende der Spalte mit.
+      {%- endcomment -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == '@app' -%}
+          <div class="product-app-block" {{ block.shopify_attributes }}>{% render block %}</div>
+        {%- endif -%}
+      {%- endfor -%}
+
       <div class="product-info__price" data-price>
         {%- if on_sale -%}
           <span class="price price--on-sale"><span class="price__sale">{{ current_variant.price | money }}</span> <span class="price__regular">{{ current_variant.compare_at_price | money }}</span></span>
@@ -264,8 +275,6 @@
       {%- comment -%} -------------------- Additional blocks -------------------- {%- endcomment -%}
       {%- for block in section.blocks -%}
         {%- case block.type -%}
-          {%- when '@app' -%}
-            <div class="product-app-block" {{ block.shopify_attributes }}>{% render block %}</div>
           {%- when 'trust' -%}
             <div class="product-trust" {{ block.shopify_attributes }}>
               {%- for i in (1..4) -%}
