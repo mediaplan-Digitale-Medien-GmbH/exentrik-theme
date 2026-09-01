@@ -120,9 +120,9 @@
       {%- comment -%} -------------------- Produktdetails (Metafelder) -------------------- {%- endcomment -%}
       {%- assign pmf_auto = section.settings.product_metafields_auto -%}
       {%- assign pmf_ns = section.settings.product_metafields_namespace | default: 'custom' -%}
-      {%- comment -%}Leere Felder bleiben im Shop unsichtbar, im Editor auf Wunsch nicht.{%- endcomment -%}
+      {%- comment -%}Im Editor immer sichtbar, sonst lässt sich ein neu angelegtes Feld nicht befüllen. Im Shop nur auf Wunsch.{%- endcomment -%}
       {%- assign pd_show_empty = false -%}
-      {%- if request.design_mode and section.settings.metafields_show_empty -%}{%- assign pd_show_empty = true -%}{%- endif -%}
+      {%- if request.design_mode or section.settings.metafields_show_empty -%}{%- assign pd_show_empty = true -%}{%- endif -%}
       {%- assign has_details = false -%}
       {%- for block in section.blocks -%}
         {%- if block.type == 'variant_metafield' or block.type == 'product_metafield' -%}{%- assign has_details = true -%}{%- endif -%}
@@ -337,7 +337,7 @@
     { "type": "text", "id": "product_metafields_title", "label": "Titel", "default": "Produktdetails" },
     { "type": "checkbox", "id": "product_metafields_auto", "label": "Alle Produktmetafelder automatisch anzeigen", "default": false },
     { "type": "text", "id": "product_metafields_namespace", "label": "Namespace für automatische Anzeige", "default": "custom", "info": "z. B. custom" },
-    { "type": "checkbox", "id": "metafields_show_empty", "label": "Leere Felder im Editor anzeigen", "default": false, "info": "Nur im Theme-Editor sichtbar, damit sich frisch angelegte Felder greifen lassen. Im Shop bleiben Felder ohne Wert immer unsichtbar." }
+    { "type": "checkbox", "id": "metafields_show_empty", "label": "Leere Felder im Shop zeigen", "default": false, "info": "Im Theme-Editor sind neu angelegte Felder immer sichtbar, damit sie sich befüllen lassen. Diese Option zeigt Felder ohne Wert zusätzlich im Shop an." }
   ],
   "blocks": [
     { "type": "@app" },

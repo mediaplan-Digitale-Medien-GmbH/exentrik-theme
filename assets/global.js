@@ -515,6 +515,8 @@
     }
 
     showsEmptyMetafields() {
+      // Im Theme-Editor nie ausblenden, sonst verschwindet ein neu angelegter Block sofort wieder.
+      if (window.Shopify && window.Shopify.designMode) return true;
       const container = $('[data-product-details]', this.root);
       return !!(container && container.hasAttribute('data-show-empty'));
     }
