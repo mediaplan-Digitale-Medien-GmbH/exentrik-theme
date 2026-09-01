@@ -82,14 +82,6 @@
     "produktdetails": {
       "type": "product-details",
       "blocks": {
-        "variant_metafield_PWyte9": {
-          "type": "variant_metafield",
-          "settings": {
-            "label": "Merkmal",
-            "namespace": "custom",
-            "key": ""
-          }
-        },
         "mf_brenndauer": {
           "type": "variant_metafield",
           "name": "Marke",
@@ -134,112 +126,18 @@
             "namespace": "custom",
             "key": "abteilung"
           }
-        },
-        "variant_metafield_4WwtdC": {
-          "type": "variant_metafield",
-          "settings": {
-            "label": "Merkmal",
-            "namespace": "custom",
-            "key": ""
-          }
         }
       },
       "block_order": [
-        "variant_metafield_PWyte9",
         "mf_brenndauer",
         "mf_koernung",
         "variant_metafield_9d6C7z",
         "mf_asche",
-        "mf_herkunft",
-        "variant_metafield_4WwtdC"
+        "mf_herkunft"
       ],
       "name": "Produktdetails Metafelder",
       "settings": {
         "product_metafields_title": "Eigenschaften",
-        "product_metafields_auto": true,
-        "product_metafields_namespace": "custom",
-        "metafields_show_empty": false
-      }
-    },
-    "product_details_LkXhj3": {
-      "type": "product-details",
-      "blocks": {
-        "variant_metafield_aqUTkA": {
-          "type": "variant_metafield",
-          "name": "Artikelnummer",
-          "settings": {
-            "label": "Artikelnummer",
-            "namespace": "custom",
-            "key": "rohstoff"
-          }
-        },
-        "variant_metafield_6FVfBi": {
-          "type": "variant_metafield",
-          "name": "Marke",
-          "settings": {
-            "label": "Marke",
-            "namespace": "custom",
-            "key": "marke"
-          }
-        },
-        "variant_metafield_aLp6A3": {
-          "type": "variant_metafield",
-          "name": "Band",
-          "settings": {
-            "label": "Band",
-            "namespace": "custom",
-            "key": "band"
-          }
-        },
-        "variant_metafield_BnfJLT": {
-          "type": "variant_metafield",
-          "name": "Modellname",
-          "settings": {
-            "label": "Modellname",
-            "namespace": "custom",
-            "key": "modellname"
-          }
-        },
-        "variant_metafield_Mh84QW": {
-          "type": "variant_metafield",
-          "name": "Thema",
-          "settings": {
-            "label": "Thema",
-            "namespace": "custom",
-            "key": "thema"
-          }
-        },
-        "variant_metafield_DJDYh8": {
-          "type": "variant_metafield",
-          "name": "Abteilung",
-          "settings": {
-            "label": "Abteilung",
-            "namespace": "custom",
-            "key": "abteilung"
-          }
-        },
-        "variant_metafield_bwtX8Q": {
-          "type": "variant_metafield",
-          "settings": {
-            "label": "Merkmal",
-            "namespace": "custom",
-            "key": ""
-          }
-        }
-      },
-      "block_order": [
-        "variant_metafield_aqUTkA",
-        "variant_metafield_6FVfBi",
-        "variant_metafield_aLp6A3",
-        "variant_metafield_BnfJLT",
-        "variant_metafield_Mh84QW",
-        "variant_metafield_DJDYh8",
-        "variant_metafield_bwtX8Q"
-      ],
-      "disabled": true,
-      "name": "Hersteller Metafelder",
-      "settings": {
-        "product_metafields_title": "EU ansässiger Wirtschaftsakteur",
         "product_metafields_auto": true,
         "product_metafields_namespace": "custom",
         "metafields_show_empty": false
@@ -262,16 +160,6 @@
       "name": "Mehr Marke",
       "settings": {
         "heading": "Mehr von dieser Marke",
-        "products_to_show": 4,
-        "columns": 4
-      }
-    },
-    "related_products_Q87GmV": {
-      "type": "related-products",
-      "disabled": true,
-      "name": "Kunden kauften",
-      "settings": {
-        "heading": "Kunden kauften auch",
         "products_to_show": 4,
         "columns": 4
       }
@@ -299,10 +187,8 @@
     "main",
     "usp_bar_KzABTV",
     "produktdetails",
-    "product_details_LkXhj3",
     "product_recommendations_4rBbgw",
     "aehnliche",
-    "related_products_Q87GmV",
     "1788199601cb4597f0"
   ]
 }
