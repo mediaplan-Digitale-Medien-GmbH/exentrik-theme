@@ -1754,6 +1754,11 @@ body.template-index .main-content {
 @media (max-width: 990px) { .product-info--sticky { position: static; } }
 .product-info__vendor { font-size: 0.8rem; font-weight: var(--font-weight-bold); letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 0.5rem; }
 .product-info__title { font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom: 0.75rem; }
+/* App-Block zwischen Titel und Preis, aktuell das Bewertungs-Badge.
+   Ohne Bewertungen liefert die App ein leeres Element, das sonst eine Luecke
+   zwischen Titel und Preis reissen wuerde. */
+.product-info .product-app-block { margin-bottom: 0.6rem; }
+.product-info .product-app-block:empty { display: none; }
 .product-info__price { display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: 0.35rem; }
 .product-info__price .price { font-size: 1.6rem; }
 .product-info__tax { font-size: 0.82rem; color: var(--color-text-muted); margin-bottom: 1.5rem; }
