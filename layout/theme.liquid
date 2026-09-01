@@ -158,8 +158,8 @@
 
         --logo-width: {{ settings.logo_width | default: 220 }}px;
         --page-width: {{ settings.page_width | default: 1320 }}px;
-        --section-spacing: {{ settings.spacing_sections | default: 56 }}px;
-        --section-y: clamp(4.5rem, 10vw, 8rem);
+        --section-spacing: {{ settings.spacing_sections | default: 40 }}px;
+        --section-y: calc(var(--section-spacing) / 2);
         --radius: {{ radius_val }}px;
         --btn-radius: {{ btn_radius_val }}px;
       }

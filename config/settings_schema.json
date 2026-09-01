@@ -266,7 +266,8 @@
         "step": 4,
         "unit": "px",
         "label": "Abstand zwischen Abschnitten",
-        "default": 56
+        "info": "Sichtbarer Abstand zwischen zwei Abschnitten. Wirkt auf allen Seiten.",
+        "default": 40
       },
       {
         "type": "header",

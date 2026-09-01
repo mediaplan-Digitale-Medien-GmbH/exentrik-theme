@@ -104,7 +104,12 @@
   --font-body: "Outfit", sans-serif;
 
   --page-width: 1180px;
-  --section-y: clamp(4.5rem, 10vw, 8rem);
+  /* Jede .section polstert oben und unten mit --section-y. Zwei benachbarte
+     Abschnitte ergeben also 2x --section-y. Deshalb ist es die Haelfte der
+     Theme-Einstellung, damit der eingestellte Wert dem sichtbaren Abstand
+     entspricht. Fallback nur, falls das Layout die Variable nicht setzt. */
+  --section-spacing: 40px;
+  --section-y: calc(var(--section-spacing) / 2);
   --radius: 2px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -1733,7 +1738,7 @@ body.template-index .main-content {
 /* ==========================================================================
    Product page
    ========================================================================== */
-.product { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(24px, 4vw, 64px); align-items: start; padding-block: clamp(24px, 4vw, 48px); }
+.product { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(24px, 4vw, 64px); align-items: start; padding-block: clamp(12px, 1.5vw, 20px) clamp(20px, 3vw, 32px); }
 @media (max-width: 990px) { .product { grid-template-columns: 1fr; } }
 
 .product-gallery { display: grid; gap: 12px; position: sticky; top: 88px; }
