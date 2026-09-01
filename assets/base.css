@@ -7,6 +7,12 @@
    gelten nur als Fallback, etwa wenn die Datei ohne Theme geladen wird.
    ========================================================================== */
 
+/* Das hidden-Attribut muss jede Klassenregel schlagen. Ohne !important gewinnt
+   zum Beispiel .product-details__row { display: grid } und eine ausgeblendete
+   Zeile bleibt trotzdem sichtbar. Das war die Ursache dafuer, dass leere
+   Metafelder nicht verschwunden sind. */
+[hidden] { display: none !important; }
+
 @font-face {
   font-family: 'Archivo Black';
   font-style: normal;
