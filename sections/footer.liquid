@@ -199,15 +199,16 @@
       ]
     }
   ],
-  "presets": [
-    {
-      "name": "Fußzeile",
-      "blocks": [
-        { "type": "menu", "settings": { "title": "Shop" } },
-        { "type": "menu", "settings": { "title": "Service" } },
-        { "type": "contact", "settings": { "title": "Kontakt" } }
-      ]
-    }
-  ]
+  "default": {
+    "settings": {
+      "brand_name": "Exentrik",
+      "about_text": ""
+    },
+    "blocks": [
+      { "type": "menu", "settings": { "title": "Shop", "menu": "footer" } },
+      { "type": "menu", "settings": { "title": "Service", "menu": "footer" } },
+      { "type": "contact", "settings": { "title": "Kontakt" } }
+    ]
+  }
 }
 {% endschema %}
