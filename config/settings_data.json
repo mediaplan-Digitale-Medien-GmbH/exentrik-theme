@@ -54,8 +54,9 @@
     "footer_menu_1_title": "Rechtliches",
     "footer_menu_2_title": "Service",
     "footer_cancel_enabled": true,
-    "footer_payment_custom": "visa, master, american_express, maestro, paypal, apple_pay, google_pay, shopify_pay, klarna, discover, diners_club, jcb, ideal, sofort, bitcoin",
-    "footer_payment_note": "Zahlung auch per Vorkasse",
+    "footer_cancel_label": "Vertrag widerrufen",
+    "footer_payment_custom": "american_express, apple_pay, google_pay, klarna, maestro, master, paypal, shopify_pay, sofort, visa",
+    "footer_payment_note": "",
     "content_for_index": [],
     "blocks": {
       "14060646107696862457": {
