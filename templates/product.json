@@ -25,7 +25,7 @@
         "vendor_metafield_keys": "hersteller,marke",
         "vendor_metafield_namespace": "custom",
         "show_dynamic_checkout": false,
-        "media_ratio": "natural",
+        "media_ratio": "square",
         "media_fit": "contain",
         "description_position": "right",
         "thumb_position": "left",
@@ -160,7 +160,12 @@
       "disabled": true,
       "name": "Mehr Marke",
       "settings": {
+        "eyebrow": "",
         "heading": "Mehr von dieser Marke",
+        "source": "same_collection",
+        "collection": "",
+        "match_tags": false,
+        "match_metafield": "",
         "products_to_show": 4,
         "columns": 4
       }
