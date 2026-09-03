@@ -185,11 +185,11 @@
         },
         "variant_metafield_xKna4x": {
           "type": "variant_metafield",
-          "name": "Abteilung",
+          "name": "Ort",
           "settings": {
-            "label": "Abteilung",
+            "label": "Ort",
             "namespace": "custom",
-            "key": "abteilung"
+            "key": "ort"
           }
         }
       },
