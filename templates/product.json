@@ -149,7 +149,7 @@
       "blocks": {
         "variant_metafield_WTEtWp": {
           "type": "variant_metafield",
-          "name": "Marke",
+          "name": "Firma",
           "settings": {
             "label": "Firma",
             "namespace": "custom",
