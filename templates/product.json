@@ -158,11 +158,11 @@
         },
         "variant_metafield_BzfkPr": {
           "type": "variant_metafield",
-          "name": "Band",
+          "name": "Straße",
           "settings": {
-            "label": "Band",
+            "label": "Straße",
             "namespace": "custom",
-            "key": "band"
+            "key": "strase"
           }
         },
         "variant_metafield_zRhyah": {
