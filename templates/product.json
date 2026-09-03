@@ -147,24 +147,6 @@
     "product_details_zcWqd3": {
       "type": "product-details",
       "blocks": {
-        "variant_metafield_ekc33C": {
-          "type": "variant_metafield",
-          "name": "E-Mail",
-          "settings": {
-            "label": "E-Mail",
-            "namespace": "custom",
-            "key": "e_mail"
-          }
-        },
-        "variant_metafield_YnPEGk": {
-          "type": "variant_metafield",
-          "name": "Land",
-          "settings": {
-            "label": "Land",
-            "namespace": "custom",
-            "key": "land"
-          }
-        },
         "variant_metafield_WTEtWp": {
           "type": "variant_metafield",
           "name": "Firma",
@@ -209,16 +191,34 @@
             "namespace": "custom",
             "key": "ort"
           }
+        },
+        "variant_metafield_YnPEGk": {
+          "type": "variant_metafield",
+          "name": "Land",
+          "settings": {
+            "label": "Land",
+            "namespace": "custom",
+            "key": "land"
+          }
+        },
+        "variant_metafield_ekc33C": {
+          "type": "variant_metafield",
+          "name": "E-Mail",
+          "settings": {
+            "label": "E-Mail",
+            "namespace": "custom",
+            "key": "e_mail"
+          }
         }
       },
       "block_order": [
-        "variant_metafield_ekc33C",
-        "variant_metafield_YnPEGk",
         "variant_metafield_WTEtWp",
         "variant_metafield_BzfkPr",
         "variant_metafield_zRhyah",
         "variant_metafield_wmqzL8",
-        "variant_metafield_xKna4x"
+        "variant_metafield_xKna4x",
+        "variant_metafield_YnPEGk",
+        "variant_metafield_ekc33C"
       ],
       "name": "Hersteller Metafelder",
       "settings": {
