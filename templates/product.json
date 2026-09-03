@@ -147,6 +147,15 @@
     "product_details_zcWqd3": {
       "type": "product-details",
       "blocks": {
+        "variant_metafield_YnPEGk": {
+          "type": "variant_metafield",
+          "name": "Land",
+          "settings": {
+            "label": "Land",
+            "namespace": "custom",
+            "key": "land"
+          }
+        },
         "variant_metafield_WTEtWp": {
           "type": "variant_metafield",
           "name": "Firma",
@@ -194,6 +203,7 @@
         }
       },
       "block_order": [
+        "variant_metafield_YnPEGk",
         "variant_metafield_WTEtWp",
         "variant_metafield_BzfkPr",
         "variant_metafield_zRhyah",
