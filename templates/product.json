@@ -167,11 +167,11 @@
         },
         "variant_metafield_zRhyah": {
           "type": "variant_metafield",
-          "name": "Modellname",
+          "name": "Hausnummer",
           "settings": {
-            "label": "Modellname",
+            "label": "Hausnummer",
             "namespace": "custom",
-            "key": "modellname"
+            "key": "hausnummer"
           }
         },
         "variant_metafield_wmqzL8": {
