@@ -176,11 +176,11 @@
         },
         "variant_metafield_wmqzL8": {
           "type": "variant_metafield",
-          "name": "Thema",
+          "name": "PLZ",
           "settings": {
-            "label": "Thema",
+            "label": "PLZ",
             "namespace": "custom",
-            "key": "thema"
+            "key": "plz"
           }
         },
         "variant_metafield_xKna4x": {
