@@ -144,6 +144,70 @@
         "product_metafields_namespace": "custom"
       }
     },
+    "product_details_zcWqd3": {
+      "type": "product-details",
+      "blocks": {
+        "variant_metafield_WTEtWp": {
+          "type": "variant_metafield",
+          "name": "Marke",
+          "settings": {
+            "label": "Firma",
+            "namespace": "custom",
+            "key": "firma"
+          }
+        },
+        "variant_metafield_BzfkPr": {
+          "type": "variant_metafield",
+          "name": "Band",
+          "settings": {
+            "label": "Band",
+            "namespace": "custom",
+            "key": "band"
+          }
+        },
+        "variant_metafield_zRhyah": {
+          "type": "variant_metafield",
+          "name": "Modellname",
+          "settings": {
+            "label": "Modellname",
+            "namespace": "custom",
+            "key": "modellname"
+          }
+        },
+        "variant_metafield_wmqzL8": {
+          "type": "variant_metafield",
+          "name": "Thema",
+          "settings": {
+            "label": "Thema",
+            "namespace": "custom",
+            "key": "thema"
+          }
+        },
+        "variant_metafield_xKna4x": {
+          "type": "variant_metafield",
+          "name": "Abteilung",
+          "settings": {
+            "label": "Abteilung",
+            "namespace": "custom",
+            "key": "abteilung"
+          }
+        }
+      },
+      "block_order": [
+        "variant_metafield_WTEtWp",
+        "variant_metafield_BzfkPr",
+        "variant_metafield_zRhyah",
+        "variant_metafield_wmqzL8",
+        "variant_metafield_xKna4x"
+      ],
+      "name": "Hersteller Metafelder",
+      "settings": {
+        "product_metafields_title": "Eigenschaften",
+        "product_metafields_auto": true,
+        "variant_metafields_auto": true,
+        "product_metafields_namespace": "custom"
+      }
+    },
     "product_recommendations_4rBbgw": {
       "type": "product-recommendations",
       "name": "Mehr Kategorie",
@@ -193,6 +257,7 @@
     "main",
     "usp_bar_KzABTV",
     "produktdetails",
+    "product_details_zcWqd3",
     "product_recommendations_4rBbgw",
     "aehnliche",
     "1788199601cb4597f0"
