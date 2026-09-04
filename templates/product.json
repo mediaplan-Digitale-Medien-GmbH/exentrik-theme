@@ -144,90 +144,6 @@
         "product_metafields_namespace": "custom"
       }
     },
-    "product_details_zcWqd3": {
-      "type": "product-details",
-      "blocks": {
-        "variant_metafield_WTEtWp": {
-          "type": "variant_metafield",
-          "name": "Firma",
-          "settings": {
-            "label": "Firma",
-            "namespace": "custom",
-            "key": "firma"
-          }
-        },
-        "variant_metafield_BzfkPr": {
-          "type": "variant_metafield",
-          "name": "Straße",
-          "settings": {
-            "label": "Straße",
-            "namespace": "custom",
-            "key": "strase"
-          }
-        },
-        "variant_metafield_zRhyah": {
-          "type": "variant_metafield",
-          "name": "Hausnummer",
-          "settings": {
-            "label": "Hausnummer",
-            "namespace": "custom",
-            "key": "hausnummer"
-          }
-        },
-        "variant_metafield_wmqzL8": {
-          "type": "variant_metafield",
-          "name": "PLZ",
-          "settings": {
-            "label": "PLZ",
-            "namespace": "custom",
-            "key": "plz"
-          }
-        },
-        "variant_metafield_xKna4x": {
-          "type": "variant_metafield",
-          "name": "Ort",
-          "settings": {
-            "label": "Ort",
-            "namespace": "custom",
-            "key": "ort"
-          }
-        },
-        "variant_metafield_YnPEGk": {
-          "type": "variant_metafield",
-          "name": "Land",
-          "settings": {
-            "label": "Land",
-            "namespace": "custom",
-            "key": "land"
-          }
-        },
-        "variant_metafield_ekc33C": {
-          "type": "variant_metafield",
-          "name": "E-Mail",
-          "settings": {
-            "label": "E-Mail",
-            "namespace": "custom",
-            "key": "e_mail"
-          }
-        }
-      },
-      "block_order": [
-        "variant_metafield_WTEtWp",
-        "variant_metafield_BzfkPr",
-        "variant_metafield_zRhyah",
-        "variant_metafield_wmqzL8",
-        "variant_metafield_xKna4x",
-        "variant_metafield_YnPEGk",
-        "variant_metafield_ekc33C"
-      ],
-      "name": "Hersteller Metafelder",
-      "settings": {
-        "product_metafields_title": "EU Verantwortlicher",
-        "product_metafields_auto": true,
-        "variant_metafields_auto": true,
-        "product_metafields_namespace": "custom"
-      }
-    },
     "product_recommendations_4rBbgw": {
       "type": "product-recommendations",
       "name": "Mehr Kategorie",
@@ -277,7 +193,6 @@
     "main",
     "usp_bar_KzABTV",
     "produktdetails",
-    "product_details_zcWqd3",
     "product_recommendations_4rBbgw",
     "aehnliche",
     "1788199601cb4597f0"
