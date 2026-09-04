@@ -576,16 +576,6 @@
       },
       {
         "type": "header",
-        "content": "Kontaktspalte"
-      },
-      {
-        "type": "text",
-        "id": "footer_contact_title",
-        "label": "Überschrift der Kontaktspalte",
-        "default": "Kontakt"
-      },
-      {
-        "type": "header",
         "content": "Untere Zeile"
       },
       {

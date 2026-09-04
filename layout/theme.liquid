@@ -262,9 +262,8 @@
           {%- endif -%}
 
           {%- comment -%}
-            Dritte Spalte. Ist ein Menue gewaehlt, verhaelt sie sich genau wie
-            die beiden davor. Ohne Menue bleiben die Kontaktdaten stehen, damit
-            bestehende Fusszeilen unveraendert aussehen.
+            Dritte Spalte. Verhaelt sich genau wie die beiden davor. Ohne
+            gewaehltes Menue bleibt die Spalte komplett weg.
           {%- endcomment -%}
           {%- if extra_menu != blank -%}
             <div>
@@ -274,21 +273,6 @@
                   <li><a href="{{ link.url }}">{{ link.title }}</a></li>
                 {%- endfor -%}
               </ul>
-            </div>
-          {%- else -%}
-            <div>
-              <h3 class="site-footer__heading">{{ settings.footer_contact_title | default: 'Kontakt' }}</h3>
-              <div class="site-footer__links">
-                {%- if settings.support_phone != blank -%}
-                  <a href="tel:{{ settings.support_phone | remove: ' ' | remove: '-' }}">{{ settings.support_phone }}</a>
-                {%- endif -%}
-                {%- if settings.support_hours != blank -%}
-                  <span>{{ settings.support_hours }}</span>
-                {%- endif -%}
-                {%- if settings.support_email != blank -%}
-                  <a href="mailto:{{ settings.support_email }}">{{ settings.support_email }}</a>
-                {%- endif -%}
-              </div>
             </div>
           {%- endif -%}
         </div>
