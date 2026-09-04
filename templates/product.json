@@ -222,9 +222,9 @@
       ],
       "name": "Hersteller Metafelder",
       "settings": {
-        "product_metafields_title": "Produktdetails",
+        "product_metafields_title": "EU Verantwortlicher",
         "product_metafields_auto": false,
-        "variant_metafields_auto": true,
+        "variant_metafields_auto": false,
         "product_metafields_namespace": "custom"
       }
     },
