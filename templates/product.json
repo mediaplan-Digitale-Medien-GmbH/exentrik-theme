@@ -203,10 +203,11 @@
         },
         "variant_metafield_JJmVwF": {
           "type": "variant_metafield",
+          "name": "E-mail",
           "settings": {
-            "label": "Merkmal",
+            "label": "E-mail",
             "namespace": "custom",
-            "key": ""
+            "key": "e_mail"
           }
         }
       },
