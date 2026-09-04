@@ -59,7 +59,7 @@
     "footer_cancel_enabled": true,
     "footer_cancel_label": "Vertrag widerrufen",
     "footer_cancel_link": "shopify://pages/contact",
-    "footer_shipping_1": "shopify://shop_images/DHL_Logo.png",
+    "footer_shipping_1": "shopify://shop_images/DHL_Logo_BF_rgb.png",
     "footer_payment_custom": "american_express, apple_pay, google_pay, klarna, maestro, master, paypal, shopify_pay, sofort, visa",
     "footer_payment_note": "",
     "content_for_index": [],
