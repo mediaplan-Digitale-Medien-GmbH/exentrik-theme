@@ -62,7 +62,7 @@
       "type": "header",
       "settings": {
         "menu": "main-menu",
-        "menu_style": "dropdown",
+        "menu_style": "mega",
         "mega_columns": 4,
         "cta_label": "",
         "cta_link": "shopify://collections/all"
