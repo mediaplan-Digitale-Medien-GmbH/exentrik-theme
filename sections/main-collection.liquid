@@ -7,6 +7,23 @@
 -%}
 
 <div class="page-width" data-facets-section="{{ section.id }}">
+  {%- comment -%}
+    Kategoriebild aus Shopify. Liegt an der Kategorie kein Bild, bleibt der
+    Bereich komplett weg.
+  {%- endcomment -%}
+  {%- if section.settings.show_image and collection.image != blank -%}
+    <div class="collection-banner" reveal>
+      <img
+        src="{{ collection.image | image_url: width: 1600 }}"
+        srcset="{{ collection.image | image_url: width: 800 }} 800w, {{ collection.image | image_url: width: 1200 }} 1200w, {{ collection.image | image_url: width: 1600 }} 1600w"
+        sizes="100vw"
+        alt="{{ collection.title | escape }}"
+        width="{{ collection.image.width }}"
+        height="{{ collection.image.height }}"
+        loading="eager">
+    </div>
+  {%- endif -%}
+
   {%- if section.settings.show_hero -%}
     <div class="collection-hero" reveal>
       <h1 style="margin-bottom:0.5rem;">{{ collection.title }}</h1>
@@ -59,6 +76,7 @@
   "tag": "section",
   "settings": [
     { "type": "checkbox", "id": "show_hero", "label": "Titel anzeigen", "default": true },
+    { "type": "checkbox", "id": "show_image", "label": "Kategoriebild anzeigen", "default": true, "info": "Nutzt das Bild, das in Shopify an der Kategorie hinterlegt ist." },
     { "type": "checkbox", "id": "show_description", "label": "Beschreibung anzeigen", "default": true },
     { "type": "checkbox", "id": "show_filters", "label": "Filter anzeigen", "default": true, "info": "Filter kommen aus der kostenlosen Shopify App Search & Discovery. Dort legen Sie fest, welche Optionen und Metafelder filterbar sind." },
     { "type": "range", "id": "columns", "min": 2, "max": 4, "step": 1, "label": "Spalten", "default": 3 },

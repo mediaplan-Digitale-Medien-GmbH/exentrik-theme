@@ -205,6 +205,7 @@
     {%- endcomment -%}
     {%- assign footer_menu = settings.footer_menu_1 | default: linklists.footer -%}
     {%- assign service_menu = settings.footer_menu_2 | default: linklists.service -%}
+    {%- assign extra_menu = settings.footer_menu_3 -%}
     <footer class="site-footer" role="contentinfo">
       <div class="page-width">
         <div class="site-footer__top">
@@ -220,6 +221,21 @@
             </div>
             {%- if settings.footer_about != blank -%}
               <p class="site-footer__about">{{ settings.footer_about }}</p>
+            {%- endif -%}
+
+            {%- comment -%}Versandarten. Ohne hochgeladene Icons bleibt der Block weg.{%- endcomment -%}
+            {%- capture ship_icons -%}
+                {%- if settings.footer_shipping_1 != blank -%}<img src="{{ settings.footer_shipping_1 | image_url: width: 160 }}" alt="{{ settings.footer_shipping_1.alt | escape }}" loading="lazy">{%- endif -%}
+                {%- if settings.footer_shipping_2 != blank -%}<img src="{{ settings.footer_shipping_2 | image_url: width: 160 }}" alt="{{ settings.footer_shipping_2.alt | escape }}" loading="lazy">{%- endif -%}
+                {%- if settings.footer_shipping_3 != blank -%}<img src="{{ settings.footer_shipping_3 | image_url: width: 160 }}" alt="{{ settings.footer_shipping_3.alt | escape }}" loading="lazy">{%- endif -%}
+                {%- if settings.footer_shipping_4 != blank -%}<img src="{{ settings.footer_shipping_4 | image_url: width: 160 }}" alt="{{ settings.footer_shipping_4.alt | escape }}" loading="lazy">{%- endif -%}
+            {%- endcapture -%}
+            {%- assign ship_icons = ship_icons | strip -%}
+            {%- if ship_icons != blank -%}
+              {%- if settings.footer_shipping_title != blank -%}
+                <span class="site-footer__shipping-title">{{ settings.footer_shipping_title }}</span>
+              {%- endif -%}
+              <span class="site-footer__shipping">{{ ship_icons }}</span>
             {%- endif -%}
           </div>
 
@@ -245,20 +261,36 @@
             </div>
           {%- endif -%}
 
-          <div>
-            <h3 class="site-footer__heading">{{ settings.footer_contact_title | default: 'Kontakt' }}</h3>
-            <div class="site-footer__links">
-              {%- if settings.support_phone != blank -%}
-                <a href="tel:{{ settings.support_phone | remove: ' ' | remove: '-' }}">{{ settings.support_phone }}</a>
-              {%- endif -%}
-              {%- if settings.support_hours != blank -%}
-                <span>{{ settings.support_hours }}</span>
-              {%- endif -%}
-              {%- if settings.support_email != blank -%}
-                <a href="mailto:{{ settings.support_email }}">{{ settings.support_email }}</a>
-              {%- endif -%}
+          {%- comment -%}
+            Dritte Spalte. Ist ein Menue gewaehlt, verhaelt sie sich genau wie
+            die beiden davor. Ohne Menue bleiben die Kontaktdaten stehen, damit
+            bestehende Fusszeilen unveraendert aussehen.
+          {%- endcomment -%}
+          {%- if extra_menu != blank -%}
+            <div>
+              <h3 class="site-footer__heading">{{ settings.footer_menu_3_title | default: extra_menu.title }}</h3>
+              <ul class="site-footer__links">
+                {%- for link in extra_menu.links -%}
+                  <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+                {%- endfor -%}
+              </ul>
             </div>
-          </div>
+          {%- else -%}
+            <div>
+              <h3 class="site-footer__heading">{{ settings.footer_contact_title | default: 'Kontakt' }}</h3>
+              <div class="site-footer__links">
+                {%- if settings.support_phone != blank -%}
+                  <a href="tel:{{ settings.support_phone | remove: ' ' | remove: '-' }}">{{ settings.support_phone }}</a>
+                {%- endif -%}
+                {%- if settings.support_hours != blank -%}
+                  <span>{{ settings.support_hours }}</span>
+                {%- endif -%}
+                {%- if settings.support_email != blank -%}
+                  <a href="mailto:{{ settings.support_email }}">{{ settings.support_email }}</a>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
         </div>
 
         <div class="site-footer__bottom">

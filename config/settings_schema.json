@@ -563,6 +563,18 @@
         "info": "Leer lassen, dann wird der Name des Menüs verwendet."
       },
       {
+        "type": "link_list",
+        "id": "footer_menu_3",
+        "label": "Menü der dritten Spalte",
+        "info": "Ohne Auswahl zeigt die dritte Spalte die Kontaktdaten."
+      },
+      {
+        "type": "text",
+        "id": "footer_menu_3_title",
+        "label": "Überschrift der dritten Spalte",
+        "info": "Leer lassen, dann wird der Name des Menüs verwendet."
+      },
+      {
         "type": "header",
         "content": "Kontaktspalte"
       },
@@ -603,6 +615,37 @@
       {
         "type": "header",
         "content": "Zahlungsarten"
+      },
+      {
+        "type": "header",
+        "content": "Versandarten"
+      },
+      {
+        "type": "text",
+        "id": "footer_shipping_title",
+        "label": "Überschrift",
+        "default": "Versand mit",
+        "info": "Erscheint links unter dem Logo. Leer lassen, dann nur die Symbole."
+      },
+      {
+        "type": "image_picker",
+        "id": "footer_shipping_1",
+        "label": "Versand-Icon 1"
+      },
+      {
+        "type": "image_picker",
+        "id": "footer_shipping_2",
+        "label": "Versand-Icon 2"
+      },
+      {
+        "type": "image_picker",
+        "id": "footer_shipping_3",
+        "label": "Versand-Icon 3"
+      },
+      {
+        "type": "image_picker",
+        "id": "footer_shipping_4",
+        "label": "Versand-Icon 4"
       },
       {
         "type": "checkbox",
