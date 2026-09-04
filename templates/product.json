@@ -167,10 +167,11 @@
         },
         "variant_metafield_rBjMCt": {
           "type": "variant_metafield",
+          "name": "Hausnummer",
           "settings": {
-            "label": "Merkmal",
+            "label": "Hausnummer",
             "namespace": "custom",
-            "key": ""
+            "key": "hausnummer"
           }
         },
         "variant_metafield_Aqqmaa": {
