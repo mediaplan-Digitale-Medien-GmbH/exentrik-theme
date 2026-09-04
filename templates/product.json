@@ -194,10 +194,11 @@
         },
         "variant_metafield_rpfX6V": {
           "type": "variant_metafield",
+          "name": "Land",
           "settings": {
-            "label": "Merkmal",
+            "label": "Land",
             "namespace": "custom",
-            "key": ""
+            "key": "land"
           }
         },
         "variant_metafield_JJmVwF": {
