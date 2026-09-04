@@ -193,6 +193,7 @@
       "blocks": {
         "variant_metafield_x3KRjF": {
           "type": "variant_metafield",
+          "name": "Firma",
           "settings": {
             "label": "Firma",
             "namespace": "custom",
