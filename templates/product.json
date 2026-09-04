@@ -139,8 +139,8 @@
       "name": "Produktdetails Metafelder",
       "settings": {
         "product_metafields_title": "Eigenschaften",
-        "product_metafields_auto": true,
-        "variant_metafields_auto": true,
+        "product_metafields_auto": false,
+        "variant_metafields_auto": false,
         "product_metafields_namespace": "custom"
       }
     },
