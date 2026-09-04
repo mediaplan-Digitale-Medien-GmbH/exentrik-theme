@@ -185,10 +185,11 @@
         },
         "variant_metafield_kQRbyA": {
           "type": "variant_metafield",
+          "name": "Ort",
           "settings": {
-            "label": "Merkmal",
+            "label": "Ort",
             "namespace": "custom",
-            "key": ""
+            "key": "ort"
           }
         },
         "variant_metafield_rpfX6V": {
