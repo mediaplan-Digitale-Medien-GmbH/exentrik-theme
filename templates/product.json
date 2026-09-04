@@ -176,10 +176,11 @@
         },
         "variant_metafield_Aqqmaa": {
           "type": "variant_metafield",
+          "name": "PLZ",
           "settings": {
-            "label": "Merkmal",
+            "label": "PLZ",
             "namespace": "custom",
-            "key": ""
+            "key": "PLZ"
           }
         },
         "variant_metafield_kQRbyA": {
