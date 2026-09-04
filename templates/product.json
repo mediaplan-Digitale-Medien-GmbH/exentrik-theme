@@ -187,6 +187,29 @@
         "judge_me_reviews_review_widget_NeyXqh"
       ],
       "settings": {}
+    },
+    "product_details_QGNacN": {
+      "type": "product-details",
+      "blocks": {
+        "variant_metafield_x3KRjF": {
+          "type": "variant_metafield",
+          "settings": {
+            "label": "Firma",
+            "namespace": "custom",
+            "key": "firma"
+          }
+        }
+      },
+      "block_order": [
+        "variant_metafield_x3KRjF"
+      ],
+      "name": "Produktdetails",
+      "settings": {
+        "product_metafields_title": "Produktdetails",
+        "product_metafields_auto": false,
+        "variant_metafields_auto": false,
+        "product_metafields_namespace": "custom"
+      }
     }
   },
   "order": [
@@ -195,6 +218,7 @@
     "produktdetails",
     "product_recommendations_4rBbgw",
     "aehnliche",
-    "1788199601cb4597f0"
+    "1788199601cb4597f0",
+    "product_details_QGNacN"
   ]
 }
