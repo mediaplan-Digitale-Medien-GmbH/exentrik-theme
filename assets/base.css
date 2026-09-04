@@ -1276,7 +1276,7 @@ body.template-index .main-content {
 
 @media (min-width: 800px) {
   .site-footer__top {
-    grid-template-columns: 1.4fr 1fr 1fr;
+    grid-template-columns: 1.4fr repeat(3, 1fr);
     gap: 3rem;
   }
 }
@@ -2175,7 +2175,7 @@ body.template-index .main-content {
 .facets__badge { display: inline-flex; align-items: center; justify-content: center; min-width: 1.2rem; height: 1.2rem; padding: 0 0.3rem; border-radius: 999px; background: var(--color-text); color: var(--color-bg); font-size: 0.7rem; font-weight: 700; }
 .facets__body { padding-top: 0.75rem; }
 .facets__hint { margin: 0 0 0.6rem; font-size: 0.78rem; color: var(--color-text-muted); }
-.facets__list { list-style: none; margin: 0; padding: 0; max-height: 17rem; overflow-y: auto; }
+.facets__list { list-style: none; margin: 0; padding: 0 0.6rem 0 0; max-height: 17rem; overflow-y: auto; scrollbar-gutter: stable; }
 .facets__list--swatch,
 .facets__list--image { max-height: 22rem; }
 
@@ -2537,8 +2537,12 @@ body:not(.template-index) .main-content {
 }
 
 /* Navigation: drei Ebenen, wahlweise als Klappmenue oder als Megamenue. */
-.main-nav { display: flex; align-items: center; gap: clamp(0.75rem, 2vw, 1.75rem); list-style: none; margin: 0; padding: 0; }
-.main-nav__item { position: relative; }
+.main-nav { display: flex; align-items: stretch; gap: clamp(0.75rem, 2vw, 1.75rem); list-style: none; margin: 0; padding: 0; }
+/* Die Menuepunkte reichen bis an die Unterkante der Kopfzeile. Ohne das bleibt
+   zwischen Menuepunkt und Klappflaeche ein Streifen ohne Hover, und das Menue
+   schliesst wieder, sobald die Maus langsam nach unten wandert. */
+.site-header__nav { align-self: stretch; }
+.main-nav__item { position: relative; display: flex; align-items: center; }
 .main-nav__link {
   display: inline-flex;
   align-items: center;
@@ -2581,6 +2585,12 @@ body:not(.template-index) .main-content {
 .main-nav__item:hover > .mega,
 .main-nav__item:focus-within > .mega { opacity: 1; visibility: visible; transform: translateY(0); }
 
+/* Unsichtbare Bruecke oberhalb der Klappflaeche. Faengt den letzten Pixel
+   zwischen Kopfzeile und Panel ab. Wirkt nur im offenen Zustand, geschlossen
+   ist das Panel visibility: hidden und damit nicht anfassbar. */
+.sub-nav::before,
+.mega::before { content: ""; position: absolute; inset-inline: 0; bottom: 100%; height: 6px; }
+
 .sub-nav__list {
   list-style: none;
   margin: 0;
@@ -2611,7 +2621,7 @@ body:not(.template-index) .main-content {
 .sub-nav__nested {
   list-style: none;
   margin: 0 0 0.3rem;
-  padding: 0 0 0 0.7rem;
+  padding: 0 0 0 1.15rem;
   border-left: 1px solid var(--color-border, rgba(0, 0, 0, 0.12));
   margin-left: 0.7rem;
 }
@@ -2668,7 +2678,7 @@ body:not(.template-index) .main-content {
 .drawer-nav__summary svg { width: 0.8em; height: 0.8em; transition: transform 0.2s ease; flex: none; }
 .drawer-nav__group[open] > .drawer-nav__summary svg { transform: rotate(180deg); }
 .drawer-nav__sub {
-  padding-left: 0.9rem;
+  padding-left: 1.35rem;
   margin-bottom: 0.4rem;
   border-left: 1px solid var(--color-border, rgba(0, 0, 0, 0.12));
 }
@@ -2702,3 +2712,21 @@ body:not(.template-index) .main-content {
   /* Damit das erste und letzte Vorschaubild nicht unter den Pfeilen klebt. */
   .product-gallery--left .product-gallery__thumbs { scroll-padding-block: 30px; }
 }
+
+/* ==========================================================================
+   Kategoriebild und Versandarten
+   ========================================================================== */
+
+/* Shopify erlaubt je Kategorie ein Bild. Das Theme hat es bisher nie
+   ausgegeben, deshalb blieb die Kategorieseite ohne Motiv. */
+.collection-banner { margin-bottom: clamp(0.9rem, 2vw, 1.5rem); border-radius: var(--radius, 8px); overflow: hidden; }
+.collection-banner img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 5; object-fit: cover; }
+@media (max-width: 749px) { .collection-banner img { aspect-ratio: 16 / 9; } }
+
+/* Versandarten in der Fusszeile, links unter dem Logo. */
+.site-footer__shipping-title,
+.footer__shipping-title { display: block; margin-top: 1.1rem; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.7; }
+.site-footer__shipping,
+.footer__shipping { display: flex; gap: 0.4rem; flex-wrap: wrap; align-items: center; margin-top: 0.5rem; }
+.site-footer__shipping img,
+.footer__shipping img { height: 26px; width: auto; border-radius: min(5px, var(--radius, 5px)); background: #fff; padding: 2px 4px; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12); }
